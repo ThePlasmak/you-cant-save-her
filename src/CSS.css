@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,200;1,6..72,300;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700;1,6..72,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
 
 html {
   height: 100%;
@@ -31,7 +32,7 @@ a {
 }
 
 body {
-  background: #fdf9f2;
+  background: #310001;
   margin: 0 auto;
   position: relative;
   font-family: "Newsreader", serif;
@@ -53,6 +54,16 @@ p {
   padding: 0;
 }
 
+a {
+  color: rgb(204 0 0);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(255, 79, 79);
+  text-decoration: none;
+}
+
 ul {
   margin: 1.5em 0;
 }
@@ -64,112 +75,31 @@ p:first-of-type {
 div.title {
   font-size: 1.8em;
   font-weight: 700;
+  text-align: center;
 }
 
 div.subtitle {
   font-size: 1.2em;
-  font-style: italic;
+  font-weight: 600;
+  text-align: center;
 }
 
-body.morning {
-  background: #3eb47b;
-}
-
-body.midday {
-  background: #3eb45f;
-}
-
-body.afternoon {
-  background: #44b43e;
+body.letter {
+  background-color: #ffffff;
 }
 
 body.evening {
-  background: #1b3f4e;
+  background-color: #000247;
 }
 
-body.black {
-  background: #000000;
-  transition: 0s;
+/* Not working */
+#passages[data-tags~="letter"] {
+  background-color: transparent !important;
 }
 
-body.quickmorning {
-  background: #3eb47b;
-  transition: 0s;
-}
-
-body.pink,
-body.dream {
-  background: #ff8080;
-}
-
-body.card,
-body.white {
-  background: #dcdcdc;
-}
-
-#passage.quickmorning {
-  transition: 0s;
-}
-
-#passage.black {
-  background-color: transparent;
-  color: white;
-  transition: 0s;
-}
-
-#passage.white {
-  background-color: transparent;
-  transition: 0s;
-}
-
-#passage.dream {
-  background-color: rgba(255, 205, 180, 0.9) !important;
-}
-
-#passage.card {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-}
-
-#passage.pink {
-  background-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-a {
-  color: #4562ba;
-}
-
-a:hover {
-  color: #00bfff;
-}
-
-.pink a {
-  color: white;
-}
-
-.pink a:hover {
-  color: #ffcdb4;
-}
-
-.black a {
-  color: white;
-}
-
-.black a:hover {
-  color: gray;
-}
-
-.dream a {
-  color: #cf1020;
-}
-
-.dream a:hover {
-  color: #e25822;
+span.bea_handwriting {
+  font-family: "Great Vibes", serif;
+  font-size: 1.8em;
 }
 
 .title-image {
@@ -279,7 +209,7 @@ input:not(:disabled):hover {
   text-align: center;
   font-size: 18pt;
   width: 100%;
-  color: white;
+  color: rgb(204 0 0);
   margin-top: 1.5em;
 }
 
@@ -290,17 +220,17 @@ input:not(:disabled):hover {
 }
 
 #menu a {
-  color: white;
+  color: rgb(204 0 0);
 }
 
 #menu a:hover {
-  color: #ffcdb4;
+  color: rgb(255, 79, 79);
 }
 
 #undobar {
   position: relative;
-  top: -1em;
-  left: 0.3em;
+  top: 0em;
+  left: 1em;
   height: 0;
   width: 0;
   font-size: 32pt;
@@ -310,12 +240,20 @@ input:not(:disabled):hover {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  display: none;
+  /* display: none; */
 }
 
 #undobar a {
   transition: color 0.5s;
   color: rgba(255, 250, 210, 0.9);
+}
+
+body.no-undo #undobar a {
+  display: none !important;
+}
+
+body.letter #undobar a {
+  display: none !important;
 }
 
 body.white #undobar a,

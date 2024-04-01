@@ -1,7 +1,7 @@
-:: StoryTitle {"position":"0,1075"}
+:: StoryTitle {"position":"1100,125"}
 Skincare for Vampires
 
-:: StoryData {"position":"0,1200"}
+:: StoryData {"position":"1100,250"}
 {
 	"ifid": "C757EEB2-9439-4CC1-A2B0-F66ACF2C927F",
 	"format": "SugarCube",
@@ -9,4 +9,104 @@ Skincare for Vampires
 	"start": "Start"
 }
 
-:: Start {"position":"0,0"}
+:: StoryInit {"position":"1100,0"}
+<<set $seen_bed_text = false >>
+
+:: Start [no-undo] {"position":"150,50"}
+<div class="title">Skincare for Vampires</div>\
+<div class="subtitle handwriting">(WIP)</div>\
+<div id="menu">[[Start->intro_letter]]</div>\
+
+:: intro_letter [letter] {"position":"275,50"}
+
+//Dear Mal,
+
+You are cordially invited to the 148th East Shenzhou Company's Grand Blood Moon Ball.
+
+Date: 17th April 1897
+Time: 8 PM to 4:30 AM
+Location: Shenzhou Company Headquarters, Aberdeen Road, Xingang 414321
+Dress code: Formal
+
+You are welcome to bring an additional guest to share in the evening's festivities.
+
+Upon your arrival, be prepared to present this [[invitation->intro_1]] to the Obsidian Guard.//
+
+:: intro_1 {"position":"400,50"}
+
+The envelope simply states:
+
+<span class="bea_handwriting">From <<linkreplace "▒▒▒" t8n>>[[Bea->intro_2]]<</linkreplace>></span>
+
+:: intro_2 {"position":"525,50"}
+
+You don't know why <<linkreplace "your ex" t8n>>she<</linkreplace>> sent you an [[invitation->intro_3]].
+
+:: intro_3 {"position":"650,50"}
+
+But you know that you have five days to prepare <<linkreplace "to meet her" t8n>>for [[this ball->home_1]]<</linkreplace>>.
+
+:: home_1 [evening] {"position":"150,200"}
+
+<b>Evening, Day 1. Your Flat.</b>
+
+Your flat is a mess, as always. You don't spend a lot of time here anyway.
+
+There is a [[magic mirror->magic_mirror]] in front of you, and your half-broken [[bed->bed]] is lying in the corner.
+
+:: magic_mirror [evening] {"position":"150,325"}
+
+You look into the magic mirror, but you cannot see your reflection.
+
+Your old adventuring companion, Princess Philomena the Third, gifted you this magic mirror. However, she did not know, or did not remember, that vampires cannot see themselves in mirrors.
+
+Nevertheless, this magic mirror may still be useful to you.
+* <<link "<q>Mirror mirror on the wall, explain, in detail, what a skincare routine is.</q>" "mirror_no_rhyme">><</link>>
+* <<link "<q>Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?</q>" "mirror_rhyme">><</link>>
+
+:: bed [evening] {"position":"275,200"}
+<<if visited("magic_mirror") > 0 and $seen_bed_text is false >>When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
+
+Thankfully, you leaped just in time to catch the mirror, so your half-broken bed isn't a fully-broken bed.
+<<set $seen_bed_text = true >>\
+
+* [[(You don't think you should sleep, because you need to talk to the magic mirror.)->home_1]]
+<<else>>\
+* [[(You don't think you should sleep, because you need to talk to the magic mirror.)->home_1]]\
+<</if>>\
+
+:: mirror_no_rhyme [evening] {"position":"150,450"}
+
+Suddenly, a fog of green vapour whirls within the mirror's depths, and the face of a white woman swirls into view. She glares at you.
+
+Perhaps the mirror is dissatisfied with your rhyming abilities, or perhaps simply with you as a person.
+
+The face answers in a grating musical voice:
+
+"I could tell you how to perfect your skin,
+or how your true beauty lies deep within.
+But your nose is too small, and your chin is too weak,
+please don't go to the ball, with your lacking physique."
+
+You consider punching the mirror, but getting angry with it would be like getting angry with a scroll printer.
+
+:: mirror_rhyme [evening] {"position":"275,450"}
+
+Suddenly, a fog of green vapour whirls within the mirror's depths, and the face of a white woman with blond hair swirls into view. She glares at you.
+
+Even though you constructed a successful rhyme, the mirror is still dissatisfied with you. Perhaps it simply dislikes you as a person.
+
+The face answers in a grating musical voice: /* Improve this later */
+
+"I could tell you how to perfect your skin,
+or how your true beauty lies deep within.
+Since your nose is too small, and your chin is too weak,
+please don't go to the ball, with your lacking physique."
+
+You consider punching the mirror, but getting angry with it would be like getting angry with a scroll printer.
+
+:: dump {"position":"925,0"}
+
+"I've never seen a plight so dire,
+I've never seen an uglier vampire."
+

@@ -1,1 +1,1 @@
-call tweego -d test.html -o src/test.tw
+call tweego -d BIRDLAND.html -o src/BIRDLAND.tw

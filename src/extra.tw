@@ -1,33 +1,19 @@
-:: StoryInit {"position":"0,950"}
+:: StoryBanner {"position":"1225,250"}
 
-:: StoryBanner {"position":"125,1200"}
-<<if tags().includes("front")>><img src="flower.png" style="width: 250px"><</if>>
+:: StorySubtitle {"position":"1350,250"}
 
-:: StorySubtitle {"position":"250,1200"}
-<<if tags().includes("front")>>To Space we go!<<else>>Open, Code and Compile !<</if>>
-
-:: StoryAuthor {"position":"0,1325"}
+:: StoryAuthor {"position":"1100,375"}
 by Sarah Mak
 
-:: StoryCaption {"position":"250,950"}
-<<if tags().includes("front")>>Some more text can be added here
-or you can have some [[links]]<</if>>
+:: StoryCaption {"position":"1350,0"}
 
-:: StoryMenu {"position":"0,1575"}
-[[Credits]]
-<<if tags().includes("front")>>
-[[Styling]]
-[[Basic Macros]]
-[[Stats]]<</if>>
+:: StoryMenu {"position":"1100,625"}
 
-:: PassageFooter {"position":"125,950"}
+:: PassageFooter {"position":"1225,0"}
+/* <br><<if not tags().includes("no_header")>><<back "←">><</if>> */
+:: PassageHeader {"position":"1225,125"}
 
-:: PassageHeader {"position":"125,1075"}
-<<if tags().includes("tags")>>Here is the Header
-It will only appear with passages with the tag ''tags''
-<hr><</if>>
-
-:: Styling [twine] {"position":"0,1450"}
+:: Styling [twine] {"position":"1100,500"}
 <h1>Heading 1</h1>\
 <h2>Heading 2</h2>\
 <h3>Heading 3</h3>\
@@ -68,7 +54,7 @@ It will only appear with passages with the tag ''tags''
 //With Div://
 <div class="choice">[[Basic Macros]]</div>
 
-:: Basic Macros [twine] {"position":"125,1575"}
+:: Basic Macros [twine] {"position":"1225,625"}
 <h2>Textbox</h2>\
 <<textbox "_test" 2>>
 
@@ -106,10 +92,10 @@ What's your favorite pie?
 <h2>Button</h2>\
 <<button "I do not do anything">><</button>>
 
-:: Stats {"position":"0,1700"}
+:: Stats {"position":"1100,750"}
 This is an empty passage.
 
-:: Widget [widget nobr] {"position":"250,1075"}
+:: Widget [widget nobr] {"position":"1350,125"}
 <<widget "code">>
     /*
         The code below should technically be in the StyleSheet instead of a Widget (but this way you can just delete this file instead of looking for CSS code to delete).
