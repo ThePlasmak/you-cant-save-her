@@ -1,0 +1,60 @@
+========*READY-to-USE TWEEGO*========
+
+To use this, copy the folder somewhere else so the Story Map doesn't show other projects.
+
+To open the Story Map, go to T3LT (in the left sidebar of VS Code), and click on the Story Map button.
+
+========Thanks!
+Thank you for downloading this TWEEGO Folder! I hope it can be useful!
+If you found use with it, please consider:
+- Rating it on the asset page
+- Leaving a comment
+- Sharing the asset pack with others (from itch directly or through my Tumblr posts)
+
+========Credits:
+Tweego is a free (gratis and libre) command line compiler for Twine/Twee story formats, written in Go, created by TME (https://github.com/tmedwards/tweego). The Ready-to-Use folder is based on the one put together by Sjoerd (https://github.com/SjoerdHekking/).
+
+The Folder and Guide are under a CC-0 license. Please consider crediting at least TME if you use it, as he created the compiler in the first place.
+
+========This Folder includes:
+- A Ready-to-Code Project
+- The Minimal Base needed.
+	A JavaScript file for script code (currently empty).
+	A CSS file for stylesheets (currently empty).
+	A file with extra Special Passages, basic HTML styling, and base macros.
+	A Tweego Explanation File.
+	A compiled example HTML file  (visible here) and its debug version.
+- Relevant Tweego Files (v2.1.1-Twee 3) for a SugarCube project.
+- An Easy-to-Use Compiler with a cheat sheet.
+
+========Template made by manonamora with Sugarcube (v 2.36.1).
+A New IFID should be generated before using the template. See the *How to Change IFID* file.
+
+========Notes:
+This is only a basic guide on installing and using Tweego for a SugarCube project. It can obviously be used with other formats.
+
+If you have any questions about or any issue with the template, send me an ask over on Tumblr or comment on the asset page.
+
+========Links
+Tumblr:
+	https://manonamora-if.tumblr.com/
+Itch:
+	https://manonamora.itch.io/
+Asset Page:
+	https://manonamora.itch.io/twine-sugarcube-templates
+SugarCube Guide:
+	https://manonamora.itch.io/twine-sugarcube-guide
+
+Twinery (Twine):
+	https://twinery.org/
+Tweego:
+	https://github.com/tmedwards/tweego
+Sugarcube 2 Documentation:
+	https://www.motoslave.net/sugarcube/2/docs/
+Twine Resources:
+	https://www.tumblr.com/manonamora-if/700577877042888704/interactive-fiction-twine-resource-megalist
+W3 School:
+	https://www.w3schools.com/css/default.asp
+	https://www.w3schools.com/cssref/default.asp
+(MDN)Mozilla Developer:
+	https://developer.mozilla.org/en-US/

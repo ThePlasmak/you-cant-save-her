@@ -1,0 +1,12 @@
+:: StoryTitle {"position":"0,1075"}
+Skincare for Vampires
+
+:: StoryData {"position":"0,1200"}
+{
+	"ifid": "C757EEB2-9439-4CC1-A2B0-F66ACF2C927F",
+	"format": "SugarCube",
+	"format-version": "2.36.1",
+	"start": "Start"
+}
+
+:: Start {"position":"0,0"}

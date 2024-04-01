@@ -1,0 +1,34 @@
+{
+    "twee3LanguageTools.storyformat.current": "sugarcube-2",
+    "grammarly.selectors": [
+        {
+            "language": "twee3-sugarcube-2",
+            "scheme": "file"
+        },
+    ],
+    "multiCommand.commands": [
+        {
+            "command": "multiCommand.callBuild",
+            "sequence": [
+                {
+                    "command": "workbench.action.terminal.sendSequence",
+                    "args": {
+                        "text": ".\\build.bat\u000D"
+                    }
+                }
+            ]
+        },
+        {
+            "command": "multiCommand.callDebug",
+            "sequence": [
+                {
+                    "command": "workbench.action.terminal.sendSequence",
+                    "args": {
+                        "text": ".\\debug.bat\u000D"
+                    }
+                }
+            ]
+        },
+    ],
+    "twee3LanguageTools.passage.list": true
+}
