@@ -3,18 +3,21 @@ Skincare for Vampires
 
 :: StoryData {"position":"1100,250"}
 {
-	"ifid": "C757EEB2-9439-4CC1-A2B0-F66ACF2C927F",
+	"ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
 	"format": "SugarCube",
 	"format-version": "2.36.1",
-	"start": "Start"
+	"start": "Start",
+	"zoom": 1
 }
 
 :: StoryInit {"position":"1100,0"}
-<<set $seen_bed_text = false >>
+<<set $seen_bed_text to false >>
+<<set $routine_count to 0 >>
+<<set $canape_count to 0 >>
 
 :: Start [no-undo] {"position":"150,50"}
 <div class="title">Skincare for Vampires</div>\
-<div class="subtitle handwriting">(WIP)</div>\
+<div class="subtitle handwriting">(Workshop Edition)</div>\
 <div id="menu">[[Start->intro_letter]]</div>\
 
 :: intro_letter [letter] {"position":"275,50"}
@@ -72,41 +75,175 @@ Thankfully, you leaped just in time to catch the mirror, so your half-broken bed
 
 * [[(You don't think you should sleep, because you need to talk to the magic mirror.)->home_1]]
 <<else>>\
-* [[(You don't think you should sleep, because you need to talk to the magic mirror.)->home_1]]\
+* [[(You don't think you should sleep, because you need to talk to the magic mirror.)->home_1]]
 <</if>>\
 
-:: mirror_no_rhyme [evening] {"position":"150,450"}
+:: mirror_no_rhyme [evening] {"position":"75,450"}
 
-Suddenly, a fog of green vapour whirls within the mirror's depths, and the face of a white woman swirls into view. She glares at you.
+Gradually, you see a fog of green vapour whirling within the mirror's depths, and the face of a white woman swirls into view. She glares at you.
 
 Perhaps the mirror is dissatisfied with your rhyming abilities, or perhaps simply with you as a person.
 
-The face answers in a grating musical voice:
+The face answers in a sickeningly sweet voice:
 
-"I could tell you how to perfect your skin,
+<q>I could tell you how to perfect your skin,
 or how your true beauty lies deep within.
 But your nose is too small, and your chin is too weak,
-please don't go to the ball, with your lacking physique."
+please don't go to the ball, with your lacking physique.</q>
 
-You consider punching the mirror, but getting angry with it would be like getting angry with a scroll printer.
+<<include mirror_bottleneck >>
 
-:: mirror_rhyme [evening] {"position":"275,450"}
+:: mirror_rhyme [evening] {"position":"225,450"}
 
-Suddenly, a fog of green vapour whirls within the mirror's depths, and the face of a white woman with blond hair swirls into view. She glares at you.
+Gradually, you see a fog of green vapour whirling within the mirror's depths, and the face of a white woman swirls into view. She glares at you.
 
 Even though you constructed a successful rhyme, the mirror is still dissatisfied with you. Perhaps it simply dislikes you as a person.
 
-The face answers in a grating musical voice: /* Improve this later */
+The face answers in a sickeningly sweet voice: /* Improve this later */
 
-"I could tell you how to perfect your skin,
-or how your true beauty lies deep within.
-Since your nose is too small, and your chin is too weak,
-please don't go to the ball, with your lacking physique."
+<q>You could follow my advice,
+but your effort wouldn't suffice.
+Your nose is too small, and your chin is too weak,
+don't go to the ball, with your lacking physique.</q>
 
-You consider punching the mirror, but getting angry with it would be like getting angry with a scroll printer.
+<<include mirror_bottleneck >>
+
+:: mirror_bottleneck {"position":"150,575"}
+
+You consider punching the mirror, but getting angry with it would be like getting angry with a printer.
+
+It's better to extract some sort of knowledge from this senile magical device.
+
+* <<link "<q>Explain to me clearly, in simple language, <i>without rhyming</i>, what I need to do prepare for this ball.</q>" "mirror_skincare">><</link>>
+* <<link "<q>What you just said was not useful at all. Simply explain how to prepare for this ball!</q>" "mirror_skincare_rhyme">><</link>>
+* <<link "<q>Can you just show me what I look like?</q>" "mirror_reflection_attempt">><</link>>
+
+:: mirror_skincare_rhyme {"position":"150,750"}
+<<if visited("magic_mirror") == 1 >>\
+Maybe the device would give a more coherent response if you continued rhyming.
+<<else>>\
+Maybe the device responds better to rhymes, though you find it grating.
+<</if>>\
+
+<<include mirror_skincare >>
+
+:: mirror_skincare {"position":"150,875"}
+The mirror recites in a grating musical voice:
+
+<q>First, buy a cleanser to purge your loathsome oils,
+then a toner to soothe before your next toils.
+Get an essence, a serum, an ampoule, and a soothing lotion,
+or you could simply purchase a more expensive emulsion.
+Next, an eye cream, a mask, then a moisturising cream,
+and don't forget to acquire a strong sunscreen!</q>
+
+The mirror smiles.
+
+It seems that the magic mirror forgot that you are a vampire, who cannot go out in the sun without burning to a vampire-flavoured crisp, no matter how much sunscreen you put on. But maybe the mirror is being sarcastic.
+
+You also wonder if the magic mirror company was sponsored by a skincare company, because skincare shouldn't be this complicated.
+
+[[Right?->temp_hub]]
+
+:: mirror_reflection_attempt {"position":"275,650"}
+
+The face disappears from view, and the wisps of green vapours writhe like snakes. You watch the mirror expectantly for half a minute, but nothing interesting happens. Suddenly, grey and rainbow lines streak across the mirror, and it makes a horrible screeching sound. The mirror is glitching out.
+
+As you consider finding a way to switch this mirror off and on again, the mirror screen turns completely black.
+
+Then, a small carrot pops onto the screen. The carrot follows your movements, albeit imperfectly.
+
+The face appears again, just covering the carrot.<q>The magic of your curse is just too strong./I tried casting your reflection, but it came out wrong,</q> it intones smugly.
+
+* <<link "<q>Okay, since I can't even see what I look like, explain how I can prepare for this ball.</q>" "mirror_skincare">><</link>>
+* <<link "<q>This was not useful at all. Explain how I'm supposed to prepare for this ball!</q>" "mirror_skincare_rhyme">><</link>>
+
+:: temp_hub {"position":"700,875"}
+
+(So sorry this is so short! I only have a few other very short scenes:)
+
+* [[Time travel to the gala, and eat some snacks.->gala_snacks]]
+* <<link "Time travel to do a <q>morning</q> routine!" "morning_routine">><</link>>
+
+:: gala_snacks {"position":"625,1000"}
+
+<q>Since you haven't had your dinner...</q> you tell Ian, <q>maybe you could eat some of the canapes?</q>
+
+You lower your voice. <q>Just eat as much as you want. The Company is rich, anyway.</q>
+
+Unfortunately, when you reach the canapes table, you only see various blood-based or blood-flavoured canapes, and a very small platter of egg tarts. Ian makes a whining sound, like a sad dog.
+
+<q>Well, you can eat the egg tarts, at least. They probably engaged one of the best bakeries in the city,</q> you say to Ian.
+
+Ian pauses for a moment, looking even more dejected. <q>I'm... sorry... I'm... vegetarian...</q>
+
+<q>Oh,</q> you say. Ian gulps. <q>I guess I'll look for an entrance first...</q>
+
+<q>Are you sure you'll be okay?</q> You ask.
+
+<q>I'll be...</q> Ian gulps again. <q>Okay...</q> He runs off.
+
+You're not sure if he will be okay, but you could always eat some of these snacks first before checking on him.
+
+The canapes include:
+<<if $canape_count <= 10>>\
+* [[Blood biscuit layered with pigeon milk cream, garnished with spring onions and a sprinkle of pixie roe.->blood_biscuit]]
+* [[Blood bird’s nest double-boiled with a dragon blood reduction, served in phyllo cups.->birds_nest]]
+* [[Blood custard tartlets, Xingang-style, glazed with sweetened siren tears and topped with bamboo charcoal feuilletine.->custard_tarts]]
+<<else>>\
+* [[You are too embarrassed to eat more canapes. Time to time travel back to the hub.->temp_hub]]
+<</if>>\
+* [[Time travel back to the hub.->temp_hub]]
+
+:: blood_biscuit {"position":"500,1125"}
+<<set $canape_count += 1>>
+As you chew the blood biscuit, you taste... blood, as you expected. The pigeon milk cream just tastes like a really rich cream, and the roe bursts one by one in your mouth, releasing yolks of earthy, umami flavour with subtle strawberry undertones.
+\
+<<if $canape_count > 2>>
+<<include waiter_judge>>
+<</if>>\
+
+* [[You could eat another canape...->gala_snacks]]
+
+:: birds_nest {"position":"625,1125"}
+<<set $canape_count += 1>>
+Contrary to popular belief, blood bird’s nest does not contain any blood, although it is still made of saliva that poor parent swiftlets have coughed up. Blood bird’s nest is red as it has absorbed minerals in cave walls. Nevertheless, this hors d'oeuvre contains blood, as it has been cooked with (Western) dragon blood.
+\
+<<if $canape_count > 2>>
+<<include waiter_judge>>
+<</if>>\
+
+* [[You could eat another canape...->gala_snacks]]
+
+:: custard_tarts {"position":"750,1125"}
+<<set $canape_count += 1>>
+Given that it's made of blood, it's definitely not authentically-made, but you are still filled with a sense of nostalgia and longing.
+\
+<<if $canape_count > 2>>
+<<include waiter_judge>>
+<</if>>\
+
+* [[You could eat another canape...->gala_snacks]]
+
+:: waiter_judge
+
+One of the waiters is side-eyeing you judgmentally.
+
+:: morning_routine {"position":"825,875"}
+
+<<linkreplace "Wash your face with the cleanser." t8n>>Your face feels clean.<<set $routine_count = $routine_count + 1>><<if $routine_count is 3>>\
+<<timed 3s t8n>><<goto "temp_hub">><</timed>>\
+<</if>>\<</linkreplace>>
+
+<<linkreplace "Rub some toner into your skin." t8n>>You are not sure if this works, but at least you feel better about yourself.<<set $routine_count = $routine_count + 1>><<if $routine_count is 3>>\
+<<timed 3s t8n>><<goto "temp_hub">><</timed>>\
+<</if>>\<</linkreplace>>
+
+<<linkreplace "Apply a layer of sunscreen." t8n>>Better be safe. Although you only go out in the evening, there is still some sunlight that can damage your skin.<<set $routine_count = $routine_count + 1>><<if $routine_count is 3>>\
+<<timed 3s t8n>><<goto "temp_hub">><</timed>>\
+<</if>>\<</linkreplace>>
 
 :: dump {"position":"925,0"}
 
-"I've never seen a plight so dire,
-I've never seen an uglier vampire."
-
+<q>I've never seen a plight so dire,
+I've never seen an uglier vampire.</q>

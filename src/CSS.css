@@ -89,7 +89,7 @@ body.letter {
 }
 
 body.evening {
-  background-color: #000247;
+  background-color: #001a40;
 }
 
 /* Not working */
@@ -245,7 +245,7 @@ input:not(:disabled):hover {
 
 #undobar a {
   transition: color 0.5s;
-  color: rgba(255, 250, 210, 0.9);
+  color: #ffffff;
 }
 
 body.no-undo #undobar a {
@@ -266,7 +266,7 @@ body.midday #undobar a,
 body.afternoon #undobar a,
 body.evening #undobar a,
 body.quickmorning #undobar a {
-  color: rgba(255, 250, 210, 0.9);
+  color: #ffffff;
 }
 
 body.quickmorning #undobar a {
