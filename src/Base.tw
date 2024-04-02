@@ -3,24 +3,41 @@ Skincare for Vampires
 
 :: StoryData {"position":"1100,250"}
 {
-	"ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
-	"format": "SugarCube",
-	"format-version": "2.36.1",
-	"start": "Start",
-	"zoom": 1
+    "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
+    "format": "SugarCube",
+    "format-version": "2.36.1",
+    "start": "Start",
+    "zoom": 1
 }
 
 :: StoryInit {"position":"1100,0"}
+<<set $enable_undo to true >>
+
 <<set $seen_bed_text to false >>
 <<set $routine_count to 0 >>
 <<set $canape_count to 0 >>
 
 :: Start [no-undo] {"position":"150,50"}
 <div class="title">Skincare for Vampires</div>\
-<div class="subtitle handwriting">(Workshop Edition)</div>\
-<div id="menu">[[Start->intro_letter]]</div>\
+<div class="subtitle">(Workshop Edition)</div>\
+<div style="font-size:30%;" class="subtitle">(this is very short, sorry)</div>\
+<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · [[Restart->pre_intro_letter]] <<else>>[[Start->pre_intro_letter]]<</if>> · [[Options->options]]</div>
 
-:: intro_letter [letter] {"position":"275,50"}
+:: options [no-undo] {"position":"25,50"}
+<span class="subtitle">''Options''</span> <span class="close">[[✖->Start]]</span>
+
+<<if $enable_undo>>\
+    ''Enable Undo'' is currently <<link "ON">><<run $enable_undo = false>><<goto `passage()`>><</link>>.
+<<else>>\
+    ''Enable Undo'' is currently <<link "OFF">><<run $enable_undo = true>><<goto `passage()`>><</link>>.
+<</if>>\
+
+When this option is ''ON'', an undo button will appear above the game window.
+
+:: pre_intro_letter [letter no-undo] {"position":"275,50"}
+<<timed 1s>><<goto "intro_letter">><</timed>>
+
+:: intro_letter [letter no-undo] {"position":"375,50"}
 
 //Dear Mal,
 
@@ -35,24 +52,23 @@ You are welcome to bring an additional guest to share in the evening's festiviti
 
 Upon your arrival, be prepared to present this [[invitation->intro_1]] to the Obsidian Guard.//
 
-:: intro_1 {"position":"400,50"}
+:: intro_1 {"position":"500,50"}
 
 The envelope simply states:
 
 <span class="bea_handwriting">From <<linkreplace "▒▒▒" t8n>>[[Bea->intro_2]]<</linkreplace>></span>
 
-:: intro_2 {"position":"525,50"}
+:: intro_2 {"position":"625,50"}
 
 You don't know why <<linkreplace "your ex" t8n>>she<</linkreplace>> sent you an [[invitation->intro_3]].
 
-:: intro_3 {"position":"650,50"}
+:: intro_3 {"position":"750,50"}
 
 But you know that you have five days to prepare <<linkreplace "to meet her" t8n>>for [[this ball->home_1]]<</linkreplace>>.
 
 :: home_1 [evening] {"position":"150,200"}
 
-<b>Evening, Day 1. Your Flat.</b>
-
+<h4 class="evening">Evening, Day 1. Your Flat.</h4>
 Your flat is a mess, as always. You don't spend a lot of time here anyway.
 
 There is a [[magic mirror->magic_mirror]] in front of you, and your half-broken [[bed->bed]] is lying in the corner.
@@ -68,17 +84,16 @@ Nevertheless, this magic mirror may still be useful to you.
 * <<link "<q>Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?</q>" "mirror_rhyme">><</link>>
 
 :: bed [evening] {"position":"275,200"}
-<<if visited("magic_mirror") > 0 and $seen_bed_text is false >>When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
+<<if visited("magic_mirror") > 0 and visited("bed_backstory") == 0 >>When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
 
 Thankfully, you leaped just in time to catch the mirror, so your half-broken bed isn't a fully-broken bed.
-<<set $seen_bed_text = true >>\
-
-* [[(You don't think you should sleep, because you need to talk to the magic mirror.)->home_1]]
 <<else>>\
 * [[(You don't think you should sleep, because you need to talk to the magic mirror.)->home_1]]
 <</if>>\
 
-:: mirror_no_rhyme [evening] {"position":"75,450"}
+:: bed_backstory {"position":"400,200"}
+
+:: mirror_no_rhyme [evening] {"position":"75,425"}
 
 Gradually, you see a fog of green vapour whirling within the mirror's depths, and the face of a white woman swirls into view. She glares at you.
 
@@ -93,7 +108,7 @@ please don't go to the ball, with your lacking physique.</q>
 
 <<include mirror_bottleneck >>
 
-:: mirror_rhyme [evening] {"position":"225,450"}
+:: mirror_rhyme [evening] {"position":"225,425"}
 
 Gradually, you see a fog of green vapour whirling within the mirror's depths, and the face of a white woman swirls into view. She glares at you.
 
@@ -108,7 +123,7 @@ don't go to the ball, with your lacking physique.</q>
 
 <<include mirror_bottleneck >>
 
-:: mirror_bottleneck {"position":"150,575"}
+:: mirror_bottleneck {"position":"150,525"}
 
 You consider punching the mirror, but getting angry with it would be like getting angry with a printer.
 
@@ -118,7 +133,7 @@ It's better to extract some sort of knowledge from this senile magical device.
 * <<link "<q>What you just said was not useful at all. Simply explain how to prepare for this ball!</q>" "mirror_skincare_rhyme">><</link>>
 * <<link "<q>Can you just show me what I look like?</q>" "mirror_reflection_attempt">><</link>>
 
-:: mirror_skincare_rhyme {"position":"150,750"}
+:: mirror_skincare_rhyme {"position":"150,650"}
 <<if visited("magic_mirror") == 1 >>\
 Maybe the device would give a more coherent response if you continued rhyming.
 <<else>>\
@@ -127,7 +142,7 @@ Maybe the device responds better to rhymes, though you find it grating.
 
 <<include mirror_skincare >>
 
-:: mirror_skincare {"position":"150,875"}
+:: mirror_skincare {"position":"150,750"}
 The mirror recites in a grating musical voice:
 
 <q>First, buy a cleanser to purge your loathsome oils,
@@ -145,7 +160,7 @@ You also wonder if the magic mirror company was sponsored by a skincare company,
 
 [[Right?->temp_hub]]
 
-:: mirror_reflection_attempt {"position":"275,650"}
+:: mirror_reflection_attempt {"position":"250,575"}
 
 The face disappears from view, and the wisps of green vapours writhe like snakes. You watch the mirror expectantly for half a minute, but nothing interesting happens. Suddenly, grey and rainbow lines streak across the mirror, and it makes a horrible screeching sound. The mirror is glitching out.
 
@@ -158,15 +173,15 @@ The face appears again, just covering the carrot.<q>The magic of your curse is j
 * <<link "<q>Okay, since I can't even see what I look like, explain how I can prepare for this ball.</q>" "mirror_skincare">><</link>>
 * <<link "<q>This was not useful at all. Explain how I'm supposed to prepare for this ball!</q>" "mirror_skincare_rhyme">><</link>>
 
-:: temp_hub {"position":"700,875"}
+:: temp_hub {"position":"700,825"}
 
 (So sorry this is so short! I only have a few other very short scenes:)
 
 * [[Time travel to the gala, and eat some snacks.->gala_snacks]]
 * <<link "Time travel to do a <q>morning</q> routine!" "morning_routine">><</link>>
 
-:: gala_snacks {"position":"625,1000"}
-
+:: gala_snacks {"position":"625,950"}
+<<if $canape_count < 1>>\
 <q>Since you haven't had your dinner...</q> you tell Ian, <q>maybe you could eat some of the canapes?</q>
 
 You lower your voice. <q>Just eat as much as you want. The Company is rich, anyway.</q>
@@ -184,6 +199,8 @@ Ian pauses for a moment, looking even more dejected. <q>I'm... sorry... I'm... v
 <q>I'll be...</q> Ian gulps again. <q>Okay...</q> He runs off.
 
 You're not sure if he will be okay, but you could always eat some of these snacks first before checking on him.
+<</if>>\
+Vampires aren’t supposed to eat solid food, but the ingredients in these hors d'oeuvres are rather soft and/or grainy, so throwing them up shouldn’t be too much of a hassle.
 
 The canapes include:
 <<if $canape_count <= 10>>\
@@ -195,7 +212,7 @@ The canapes include:
 <</if>>\
 * [[Time travel back to the hub.->temp_hub]]
 
-:: blood_biscuit {"position":"500,1125"}
+:: blood_biscuit {"position":"500,1075"}
 <<set $canape_count += 1>>
 As you chew the blood biscuit, you taste... blood, as you expected. The pigeon milk cream just tastes like a really rich cream, and the roe bursts one by one in your mouth, releasing yolks of earthy, umami flavour with subtle strawberry undertones.
 \
@@ -205,7 +222,7 @@ As you chew the blood biscuit, you taste... blood, as you expected. The pigeon m
 
 * [[You could eat another canape...->gala_snacks]]
 
-:: birds_nest {"position":"625,1125"}
+:: birds_nest {"position":"625,1075"}
 <<set $canape_count += 1>>
 Contrary to popular belief, blood bird’s nest does not contain any blood, although it is still made of saliva that poor parent swiftlets have coughed up. Blood bird’s nest is red as it has absorbed minerals in cave walls. Nevertheless, this hors d'oeuvre contains blood, as it has been cooked with (Western) dragon blood.
 \
@@ -215,7 +232,7 @@ Contrary to popular belief, blood bird’s nest does not contain any blood, alth
 
 * [[You could eat another canape...->gala_snacks]]
 
-:: custard_tarts {"position":"750,1125"}
+:: custard_tarts {"position":"750,1075"}
 <<set $canape_count += 1>>
 Given that it's made of blood, it's definitely not authentically-made, but you are still filled with a sense of nostalgia and longing.
 \
@@ -225,11 +242,11 @@ Given that it's made of blood, it's definitely not authentically-made, but you a
 
 * [[You could eat another canape...->gala_snacks]]
 
-:: waiter_judge
+:: waiter_judge {"position":"875,1075"}
 
 One of the waiters is side-eyeing you judgmentally.
 
-:: morning_routine {"position":"825,875"}
+:: morning_routine {"position":"825,825"}
 
 <<linkreplace "Wash your face with the cleanser." t8n>>Your face feels clean.<<set $routine_count = $routine_count + 1>><<if $routine_count is 3>>\
 <<timed 3s t8n>><<goto "temp_hub">><</timed>>\

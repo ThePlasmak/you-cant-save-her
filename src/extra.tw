@@ -10,7 +10,7 @@ by Sarah Mak
 :: StoryMenu {"position":"1100,625"}
 
 :: PassageFooter {"position":"1225,0"}
-/* <br><<if not tags().includes("no_header")>><<back "←">><</if>> */
+
 :: PassageHeader {"position":"1225,125"}
 
 :: Styling [twine] {"position":"1100,500"}
