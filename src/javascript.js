@@ -47,14 +47,14 @@ function updateUndoButton() {
   }
 }
 
-// Initialize the undo button based on the current state
+// Initialize the undo button on passage render
 $(document).on(":passagerender", updateUndoButton);
 
 // AUTOSAVE
 $(document).on(":passagerender", function () {
   // Check if the current passage is neither "Start" nor "options"
   if (State.passage !== "Start" && State.passage !== "options") {
-    Save.slots.save(1); // Automatically save to slot 1
+    Save.slots.save(1); // Automatically save to slot 1 whenever you enter a new passage
   }
 });
 

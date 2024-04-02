@@ -187,7 +187,7 @@ The face appears again, just covering the carrot.<q>The magic of your curse is j
 * [[Talk to a store associate!->clerk_test]]
 * <<link "Time travel to do a <q>morning</q> routine!" "morning_routine">><</link>>
 
-:: clerk_test
+:: clerk_test {"position":"750,675"}
 
 <q>Are you sure being a store associate for a cosmetics store is the best way to get back into heaven?</q> You ask.
 
@@ -197,7 +197,7 @@ She rolls her eyes. <q>I'm sure when I get back, my colleagues will still be dri
 * <<link "<q>They take years to drink tea?</q>" "clerk_test_tea">><</link>>
 * <<link "<q>Why don't you go on a quest? That's how a couple of immortals earned the right to re-enter heaven.</q>" "clerk_test_quest">><</link>>
 
-:: clerk_test_tea
+:: clerk_test_tea {"position":"675,550"}
 
 <q>No, dummy. Time passes more slowly in heaven, compared to this dimension. //Everyone// knows that.</q>
 
@@ -206,7 +206,7 @@ You are starting to think that she was banished for reasons other than cracking 
 * <<link "<q>Why don't you go on a quest? That's how a couple of immortals reentered heaven.</q>" "clerk_test_quest">><</link>>
 * <<link "Go back to the hub!" "temp_hub">><</link>>
 
-:: clerk_test_quest
+:: clerk_test_quest {"position":"800,550"}
 
 She sighs. <q>Ugh, no way. I'm mortal now. I don't want to actually die.</q>
 
