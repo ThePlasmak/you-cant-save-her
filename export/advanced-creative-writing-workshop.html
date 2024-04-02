@@ -643,21 +643,25 @@ $(document).on(":passagerender", function (ev) {
   }
 });
 
+// GO TO START ON REFRESH
+// Set the reload flag before the page unloads
 window.onbeforeunload = function () {
   window.sessionStorage.setItem("twine-reload-flag", "true");
 };
 
-postdisplay["refresh-taker"] = function (t) {
-  delete postdisplay[t];
+// Use the :passagedisplay event to check the flag and redirect if necessary
+$(document).on(":passagedisplay", function () {
   var refresh = sessionStorage.getItem("twine-reload-flag");
 
-  if (refresh === "true" && passage() !== "Start") {
-    // your starting passage here
+  // Clear the flag immediately after retrieving it to prevent unintended behavior
+  sessionStorage.removeItem("twine-reload-flag");
 
-    Engine.play("Start"); // passage to forward player to
+  if (refresh === "true" && passage() !== "Start") {
+    // Ensure to only redirect if not on the 'Start' passage to avoid loops
+    Engine.play("Start"); // Replace 'somePassage' with your target passage
   }
-};
-</script><tw-passagedata pid="1" name="StoryInit" tags="" position="1100,0" size="100,100">&lt;&lt;set $seen_bed_text to false &gt;&gt;
+});
+</script><tw-passagedata pid="1" name="StoryInit" tags="" position="1450,0" size="100,100">&lt;&lt;set $seen_bed_text to false &gt;&gt;
 &lt;&lt;set $routine_count to 0 &gt;&gt;
 &lt;&lt;set $canape_count to 0 &gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Start" tags="no-undo" position="150,50" size="100,100">&lt;div class=&quot;title&quot;&gt;Skincare for Vampires&lt;/div&gt;\
 &lt;div class=&quot;subtitle&quot;&gt;(Workshop Edition)&lt;/div&gt;\
@@ -690,12 +694,12 @@ Your old adventuring companion, Princess Philomena the Third, gifted you this ma
 
 Nevertheless, this magic mirror may still be useful to you.
 * &lt;&lt;link &quot;&lt;q&gt;Mirror mirror on the wall, explain, in detail, what a skincare routine is.&lt;/q&gt;&quot; &quot;mirror_no_rhyme&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-* &lt;&lt;link &quot;&lt;q&gt;Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?&lt;/q&gt;&quot; &quot;mirror_rhyme&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="bed" tags="evening" position="275,200" size="100,100">&lt;&lt;if visited(&quot;magic_mirror&quot;) &gt; 0 and visited(&quot;bed_backstory&quot;) == 0 &gt;&gt;When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
+* &lt;&lt;link &quot;&lt;q&gt;Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?&lt;/q&gt;&quot; &quot;mirror_rhyme&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="bed" tags="evening" position="300,250" size="100,100">&lt;&lt;if visited(&quot;magic_mirror&quot;) &gt; 0 and visited(&quot;bed_backstory&quot;) == 0 &gt;&gt;When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
 
 Thankfully, you leaped just in time to catch the mirror, so your half-broken bed isn&#39;t a fully-broken bed.
 &lt;&lt;else&gt;&gt;\
 * [[(You don&#39;t think you should sleep, because you need to talk to the magic mirror.)-&gt;home_1]]
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="12" name="bed_backstory" tags="" position="400,200" size="100,100"></tw-passagedata><tw-passagedata pid="13" name="mirror_no_rhyme" tags="evening" position="75,425" size="100,100">Gradually, you see a fog of green vapour whirling within the mirror&#39;s depths, and the face of a white woman swirls into view. She glares at you.
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="12" name="bed_backstory" tags="" position="400,250" size="100,100"></tw-passagedata><tw-passagedata pid="13" name="mirror_no_rhyme" tags="evening" position="75,425" size="100,100">Gradually, you see a fog of green vapour whirling within the mirror&#39;s depths, and the face of a white woman swirls into view. She glares at you.
 
 Perhaps the mirror is dissatisfied with your rhyming abilities, or perhaps simply with you as a person.
 
@@ -816,8 +820,8 @@ Given that it&#39;s made of blood, it&#39;s definitely not authentically-made, b
 
 &lt;&lt;linkreplace &quot;Apply a layer of sunscreen.&quot; t8n&gt;&gt;Better be safe. Although you only go out in the evening, there is still some sunlight that can damage your skin.&lt;&lt;set $routine_count = $routine_count + 1&gt;&gt;&lt;&lt;if $routine_count is 3&gt;&gt;\
 &lt;&lt;timed 3s t8n&gt;&gt;&lt;&lt;goto &quot;temp_hub&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="dump" tags="" position="925,0" size="100,100">&lt;q&gt;I&#39;ve never seen a plight so dire,
-I&#39;ve never seen an uglier vampire.&lt;/q&gt;</tw-passagedata><tw-passagedata pid="27" name="StoryBanner" tags="" position="1225,250" size="100,100"></tw-passagedata><tw-passagedata pid="28" name="StorySubtitle" tags="" position="1350,250" size="100,100"></tw-passagedata><tw-passagedata pid="29" name="StoryAuthor" tags="" position="1100,375" size="100,100">by Sarah Mak</tw-passagedata><tw-passagedata pid="30" name="StoryCaption" tags="" position="1350,0" size="100,100"></tw-passagedata><tw-passagedata pid="31" name="StoryMenu" tags="" position="1100,625" size="100,100"></tw-passagedata><tw-passagedata pid="32" name="PassageFooter" tags="" position="1225,0" size="100,100"></tw-passagedata><tw-passagedata pid="33" name="PassageHeader" tags="" position="1225,125" size="100,100"></tw-passagedata><tw-passagedata pid="34" name="Styling" tags="twine" position="1100,500" size="100,100">&lt;h1&gt;Heading 1&lt;/h1&gt;\
+&lt;&lt;/if&gt;&gt;\&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="dump" tags="" position="1300,0" size="100,100">&lt;q&gt;I&#39;ve never seen a plight so dire,
+I&#39;ve never seen an uglier vampire.&lt;/q&gt;</tw-passagedata><tw-passagedata pid="27" name="StoryBanner" tags="" position="1575,250" size="100,100"></tw-passagedata><tw-passagedata pid="28" name="StorySubtitle" tags="" position="1700,250" size="100,100"></tw-passagedata><tw-passagedata pid="29" name="StoryAuthor" tags="" position="1450,375" size="100,100">by Sarah Mak</tw-passagedata><tw-passagedata pid="30" name="StoryCaption" tags="" position="1700,0" size="100,100"></tw-passagedata><tw-passagedata pid="31" name="StoryMenu" tags="" position="1450,625" size="100,100"></tw-passagedata><tw-passagedata pid="32" name="PassageFooter" tags="" position="1575,0" size="100,100"></tw-passagedata><tw-passagedata pid="33" name="PassageHeader" tags="" position="1575,125" size="100,100"></tw-passagedata><tw-passagedata pid="34" name="Styling" tags="twine" position="1450,500" size="100,100">&lt;h1&gt;Heading 1&lt;/h1&gt;\
 &lt;h2&gt;Heading 2&lt;/h2&gt;\
 &lt;h3&gt;Heading 3&lt;/h3&gt;\
 &lt;h4&gt;Heading 4&lt;/h4&gt;\
@@ -855,7 +859,7 @@ I&#39;ve never seen an uglier vampire.&lt;/q&gt;</tw-passagedata><tw-passagedata
 //As a list://
 * [[Basic Macros]]
 //With Div://
-&lt;div class=&quot;choice&quot;&gt;[[Basic Macros]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="35" name="Basic Macros" tags="twine" position="1225,625" size="100,100">&lt;h2&gt;Textbox&lt;/h2&gt;\
+&lt;div class=&quot;choice&quot;&gt;[[Basic Macros]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="35" name="Basic Macros" tags="twine" position="1575,625" size="100,100">&lt;h2&gt;Textbox&lt;/h2&gt;\
 &lt;&lt;textbox &quot;_test&quot; 2&gt;&gt;
 
 &lt;h2&gt;Text Area&lt;/h2&gt;\
@@ -890,7 +894,7 @@ What&#39;s your favorite pie?
 &lt;&lt;checkbox &quot;_pieCoconutCream&quot; false true autocheck&gt;&gt; Option 3
 
 &lt;h2&gt;Button&lt;/h2&gt;\
-&lt;&lt;button &quot;I do not do anything&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Stats" tags="" position="1100,750" size="100,100">This is an empty passage.</tw-passagedata><tw-passagedata pid="37" name="Widget" tags="widget nobr" position="1350,125" size="100,100">&lt;&lt;widget &quot;code&quot;&gt;&gt;
+&lt;&lt;button &quot;I do not do anything&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Stats" tags="" position="1450,750" size="100,100">This is an empty passage.</tw-passagedata><tw-passagedata pid="37" name="Widget" tags="widget nobr" position="1700,125" size="100,100">&lt;&lt;widget &quot;code&quot;&gt;&gt;
     /*
         The code below should technically be in the StyleSheet instead of a Widget (but this way you can just delete this file instead of looking for CSS code to delete).
         This code is meant to help showcase the displayed code better in the Guide passages.

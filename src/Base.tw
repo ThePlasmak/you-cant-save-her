@@ -1,7 +1,7 @@
-:: StoryTitle {"position":"1100,125"}
+:: StoryTitle {"position":"1450,125"}
 Skincare for Vampires
 
-:: StoryData {"position":"1100,250"}
+:: StoryData {"position":"1450,250"}
 {
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
@@ -10,7 +10,7 @@ Skincare for Vampires
     "zoom": 1
 }
 
-:: StoryInit {"position":"1100,0"}
+:: StoryInit {"position":"1450,0"}
 <<set $seen_bed_text to false >>
 <<set $routine_count to 0 >>
 <<set $canape_count to 0 >>
@@ -79,7 +79,7 @@ Nevertheless, this magic mirror may still be useful to you.
 * <<link "<q>Mirror mirror on the wall, explain, in detail, what a skincare routine is.</q>" "mirror_no_rhyme">><</link>>
 * <<link "<q>Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?</q>" "mirror_rhyme">><</link>>
 
-:: bed [evening] {"position":"275,200"}
+:: bed [evening] {"position":"300,250"}
 <<if visited("magic_mirror") > 0 and visited("bed_backstory") == 0 >>When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
 
 Thankfully, you leaped just in time to catch the mirror, so your half-broken bed isn't a fully-broken bed.
@@ -87,7 +87,7 @@ Thankfully, you leaped just in time to catch the mirror, so your half-broken bed
 * [[(You don't think you should sleep, because you need to talk to the magic mirror.)->home_1]]
 <</if>>\
 
-:: bed_backstory {"position":"400,200"}
+:: bed_backstory {"position":"400,250"}
 
 :: mirror_no_rhyme [evening] {"position":"75,425"}
 
@@ -256,7 +256,7 @@ One of the waiters is side-eyeing you judgmentally.
 <<timed 3s t8n>><<goto "temp_hub">><</timed>>\
 <</if>>\<</linkreplace>>
 
-:: dump {"position":"925,0"}
+:: dump {"position":"1300,0"}
 
 <q>I've never seen a plight so dire,
 I've never seen an uglier vampire.</q>
