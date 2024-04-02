@@ -661,7 +661,8 @@ $(document).on(":passagedisplay", function () {
     Engine.play("Start"); // Replace 'somePassage' with your target passage
   }
 });
-</script><tw-passagedata pid="1" name="StoryInit" tags="" position="1450,0" size="100,100">&lt;&lt;set $seen_bed_text to false &gt;&gt;
+</script><tw-passagedata pid="1" name="StoryInit" tags="" position="1450,0" size="100,100">&lt;&lt;set $bed_backstory_seen to false &gt;&gt;
+&lt;&lt;set $blood_sated == 1&gt;&gt;
 &lt;&lt;set $routine_count to 0 &gt;&gt;
 &lt;&lt;set $canape_count to 0 &gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Start" tags="no-undo" position="150,50" size="100,100">&lt;div class=&quot;title&quot;&gt;Skincare for Vampires&lt;/div&gt;\
 &lt;div class=&quot;subtitle&quot;&gt;(Workshop Edition)&lt;/div&gt;\
@@ -688,18 +689,27 @@ Upon your arrival, be prepared to present this [[invitation-&gt;intro_1]] to the
 &lt;span class=&quot;bea_handwriting&quot;&gt;From &lt;&lt;linkreplace &quot;▒▒▒&quot; t8n&gt;&gt;[[Bea-&gt;intro_2]]&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="7" name="intro_2" tags="" position="625,50" size="100,100">You don&#39;t know why &lt;&lt;linkreplace &quot;your ex&quot; t8n&gt;&gt;she&lt;&lt;/linkreplace&gt;&gt; sent you an [[invitation-&gt;intro_3]].</tw-passagedata><tw-passagedata pid="8" name="intro_3" tags="" position="750,50" size="100,100">But you know that you have five days to prepare &lt;&lt;linkreplace &quot;to meet her&quot; t8n&gt;&gt;for [[this ball-&gt;home_1]]&lt;&lt;/linkreplace&gt;&gt;.</tw-passagedata><tw-passagedata pid="9" name="home_1" tags="evening" position="150,200" size="100,100">&lt;h4 class=&quot;evening&quot;&gt;Evening, Day 1. Your Flat.&lt;/h4&gt;
 Your flat is a mess, as always. You don&#39;t spend a lot of time here anyway.
 
-There is a [[magic mirror-&gt;magic_mirror]] in front of you, and your half-broken [[bed-&gt;bed]] is lying in the corner.</tw-passagedata><tw-passagedata pid="10" name="magic_mirror" tags="evening" position="150,325" size="100,100">You look into the magic mirror, but you cannot see your reflection.
+There is a [[magic mirror-&gt;magic_mirror]] in front of you. Your half-broken [[bed-&gt;bed]] is lying in the corner, and a [[makeshift fridge-&gt;fridge]] is next to it.</tw-passagedata><tw-passagedata pid="10" name="magic_mirror" tags="evening" position="150,325" size="100,100">You look into the magic mirror, but you cannot see your reflection.
 
 Your old adventuring companion, Princess Philomena the Third, gifted you this magic mirror. However, she did not know, or did not remember, that vampires cannot see themselves in mirrors.
 
 Nevertheless, this magic mirror may still be useful to you.
 * &lt;&lt;link &quot;&lt;q&gt;Mirror mirror on the wall, explain, in detail, what a skincare routine is.&lt;/q&gt;&quot; &quot;mirror_no_rhyme&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-* &lt;&lt;link &quot;&lt;q&gt;Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?&lt;/q&gt;&quot; &quot;mirror_rhyme&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="bed" tags="evening" position="300,250" size="100,100">&lt;&lt;if visited(&quot;magic_mirror&quot;) &gt; 0 and visited(&quot;bed_backstory&quot;) == 0 &gt;&gt;When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
+* &lt;&lt;link &quot;&lt;q&gt;Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?&lt;/q&gt;&quot; &quot;mirror_rhyme&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="bed" tags="evening" position="350,200" size="100,100">&lt;&lt;if visited(&quot;magic_mirror&quot;) &gt; 0 and bed_backstory_seen == false &gt;&gt;
+When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
 
 Thankfully, you leaped just in time to catch the mirror, so your half-broken bed isn&#39;t a fully-broken bed.
-&lt;&lt;else&gt;&gt;\
-* [[(You don&#39;t think you should sleep, because you need to talk to the magic mirror.)-&gt;home_1]]
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="12" name="bed_backstory" tags="" position="400,250" size="100,100"></tw-passagedata><tw-passagedata pid="13" name="mirror_no_rhyme" tags="evening" position="75,425" size="100,100">Gradually, you see a fog of green vapour whirling within the mirror&#39;s depths, and the face of a white woman swirls into view. She glares at you.
+&lt;&lt;set bed_backstory_seen to true&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\
+* [[You don&#39;t think you should sleep, because you need to talk to the magic mirror.-&gt;home_1]]</tw-passagedata><tw-passagedata pid="12" name="fridge" tags="" position="350,325" size="100,100">&lt;&lt;if visited(&quot;fridge&quot;) == 1&gt;&gt;\
+Your rune-based fridge, which stores your blood supply, has long since broken. The runes expired decades ago, and you could never quite figure out how the Northern rune system worked. Thankfully, on the way to battle a frost lich, you collected a few bricks of ice that were enchanted to never melt, so by placing a few of them strategically around the inside of the fridge, your blood supply will always stay cold.
+
+These bottles of blood are arranged neatly in rows. Each bottle is labelled with a date.
+&lt;&lt;else&gt;&gt;
+Small bottles of blood arranged neatly in rows. Each bottle is labelled with a date.
+&lt;&lt;/if&gt;&gt;\
+* &lt;&lt;linkreplace &quot;Drink today&#39;s bottle of blood.&quot; t8n&gt;&gt;Having been left out for days, it tastes stale and disgusting, but you&#39;re used to it. You&#39;re used to living like a rat.&lt;&lt;set $blood_sated == 1&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
+* [[Close the fridge.-&gt;home_1]]</tw-passagedata><tw-passagedata pid="13" name="mirror_no_rhyme" tags="evening" position="75,425" size="100,100">Gradually, you see a fog of green vapour whirling within the mirror&#39;s depths, and the face of a white woman swirls into view. She glares at you.
 
 Perhaps the mirror is dissatisfied with your rhyming abilities, or perhaps simply with you as a person.
 
@@ -758,9 +768,22 @@ The face appears again, just covering the carrot.&lt;q&gt;The magic of your curs
 
 * &lt;&lt;link &quot;&lt;q&gt;Okay, since I can&#39;t even see what I look like, explain how I can prepare for this ball.&lt;/q&gt;&quot; &quot;mirror_skincare&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 * &lt;&lt;link &quot;&lt;q&gt;This was not useful at all. Explain how I&#39;m supposed to prepare for this ball!&lt;/q&gt;&quot; &quot;mirror_skincare_rhyme&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="temp_hub" tags="" position="700,825" size="100,100">(So sorry this is so short! I only have a few other very short scenes:)
-
 * [[Time travel to the gala, and eat some snacks.-&gt;gala_snacks]]
-* &lt;&lt;link &quot;Time travel to do a &lt;q&gt;morning&lt;/q&gt; routine!&quot; &quot;morning_routine&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="gala_snacks" tags="" position="625,950" size="100,100">&lt;&lt;if $canape_count &lt; 1&gt;&gt;\
+* [[Talk to a store associate!-&gt;clerk_test]]
+* &lt;&lt;link &quot;Time travel to do a &lt;q&gt;morning&lt;/q&gt; routine!&quot; &quot;morning_routine&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="clerk_test" tags="" position="1225,225" size="100,100">&lt;q&gt;Are you sure being a store associate for a cosmetics store is the best way to get back into heaven?&lt;/q&gt; You ask.
+
+&lt;q&gt;Well, I&#39;m helping people right? So I&#39;m getting //some// good karma, or something, or... whatever points system they&#39;re using nowadays.&lt;/q&gt;
+
+She rolls her eyes. &lt;q&gt;I&#39;m sure when I get back, my colleagues will still be drinking tea. Their tea breaks take //forever//.&lt;/q&gt;
+* &lt;&lt;link &quot;&lt;q&gt;They take years to drink tea?&lt;/q&gt;&quot; &quot;clerk_test_tea&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+* &lt;&lt;link &quot;&lt;q&gt;Why don&#39;t you go on a quest? That&#39;s how a couple of immortals earned the right to re-enter heaven.&lt;/q&gt;&quot; &quot;clerk_test_quest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="clerk_test_tea" tags="" position="100,350" size="100,100">&lt;q&gt;No, dummy. Time passes more slowly in heaven, compared to this dimension. //Everyone// knows that.&lt;/q&gt;
+
+You are starting to think that she was banished for reasons other than cracking a vase.
+
+* &lt;&lt;link &quot;&lt;q&gt;Why don&#39;t you go on a quest? That&#39;s how a couple of immortals reentered heaven.&lt;/q&gt;&quot; &quot;clerk_test_quest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+* &lt;&lt;link &quot;Go back to the hub!&quot; &quot;temp_hub&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="clerk_test_quest" tags="" position="225,350" size="100,100">She sighs. &lt;q&gt;Ugh, no way. I&#39;m mortal now. I don&#39;t want to actually die.&lt;/q&gt;
+
+* &lt;&lt;link &quot;Go back to the hub!&quot; &quot;temp_hub&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="gala_snacks" tags="" position="625,950" size="100,100">&lt;&lt;if $canape_count &lt; 1&gt;&gt;\
 &lt;q&gt;Since you haven&#39;t had your dinner...&lt;/q&gt; you tell Ian, &lt;q&gt;maybe you could eat some of the canapes?&lt;/q&gt;
 
 You lower your voice. &lt;q&gt;Just eat as much as you want. The Company is rich, anyway.&lt;/q&gt;
@@ -789,28 +812,28 @@ The canapes include:
 &lt;&lt;else&gt;&gt;\
 * [[You are too embarrassed to eat more canapes. Time to time travel back to the hub.-&gt;temp_hub]]
 &lt;&lt;/if&gt;&gt;\
-* [[Time travel back to the hub.-&gt;temp_hub]]</tw-passagedata><tw-passagedata pid="21" name="blood_biscuit" tags="" position="500,1075" size="100,100">&lt;&lt;set $canape_count += 1&gt;&gt;
+* [[Time travel back to the hub.-&gt;temp_hub]]</tw-passagedata><tw-passagedata pid="24" name="blood_biscuit" tags="" position="500,1075" size="100,100">&lt;&lt;set $canape_count += 1&gt;&gt;
 As you chew the blood biscuit, you taste... blood, as you expected. The pigeon milk cream just tastes like a really rich cream, and the roe bursts one by one in your mouth, releasing yolks of earthy, umami flavour with subtle strawberry undertones.
 \
 &lt;&lt;if $canape_count &gt; 2&gt;&gt;
 &lt;&lt;include waiter_judge&gt;&gt;
 &lt;&lt;/if&gt;&gt;\
 
-* [[You could eat another canape...-&gt;gala_snacks]]</tw-passagedata><tw-passagedata pid="22" name="birds_nest" tags="" position="625,1075" size="100,100">&lt;&lt;set $canape_count += 1&gt;&gt;
+* [[You could eat another canape...-&gt;gala_snacks]]</tw-passagedata><tw-passagedata pid="25" name="birds_nest" tags="" position="625,1075" size="100,100">&lt;&lt;set $canape_count += 1&gt;&gt;
 Contrary to popular belief, blood bird’s nest does not contain any blood, although it is still made of saliva that poor parent swiftlets have coughed up. Blood bird’s nest is red as it has absorbed minerals in cave walls. Nevertheless, this hors d&#39;oeuvre contains blood, as it has been cooked with (Western) dragon blood.
 \
 &lt;&lt;if $canape_count &gt; 2&gt;&gt;
 &lt;&lt;include waiter_judge&gt;&gt;
 &lt;&lt;/if&gt;&gt;\
 
-* [[You could eat another canape...-&gt;gala_snacks]]</tw-passagedata><tw-passagedata pid="23" name="custard_tarts" tags="" position="750,1075" size="100,100">&lt;&lt;set $canape_count += 1&gt;&gt;
+* [[You could eat another canape...-&gt;gala_snacks]]</tw-passagedata><tw-passagedata pid="26" name="custard_tarts" tags="" position="750,1075" size="100,100">&lt;&lt;set $canape_count += 1&gt;&gt;
 Given that it&#39;s made of blood, it&#39;s definitely not authentically-made, but you are still filled with a sense of nostalgia and longing.
 \
 &lt;&lt;if $canape_count &gt; 2&gt;&gt;
 &lt;&lt;include waiter_judge&gt;&gt;
 &lt;&lt;/if&gt;&gt;\
 
-* [[You could eat another canape...-&gt;gala_snacks]]</tw-passagedata><tw-passagedata pid="24" name="waiter_judge" tags="" position="875,1075" size="100,100">One of the waiters is side-eyeing you judgmentally.</tw-passagedata><tw-passagedata pid="25" name="morning_routine" tags="" position="825,825" size="100,100">&lt;&lt;linkreplace &quot;Wash your face with the cleanser.&quot; t8n&gt;&gt;Your face feels clean.&lt;&lt;set $routine_count = $routine_count + 1&gt;&gt;&lt;&lt;if $routine_count is 3&gt;&gt;\
+* [[You could eat another canape...-&gt;gala_snacks]]</tw-passagedata><tw-passagedata pid="27" name="waiter_judge" tags="" position="875,1075" size="100,100">One of the waiters is side-eyeing you judgmentally.</tw-passagedata><tw-passagedata pid="28" name="morning_routine" tags="" position="825,825" size="100,100">&lt;&lt;linkreplace &quot;Wash your face with the cleanser.&quot; t8n&gt;&gt;Your face feels clean.&lt;&lt;set $routine_count = $routine_count + 1&gt;&gt;&lt;&lt;if $routine_count is 3&gt;&gt;\
 &lt;&lt;timed 3s t8n&gt;&gt;&lt;&lt;goto &quot;temp_hub&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\&lt;&lt;/linkreplace&gt;&gt;
 
@@ -820,8 +843,8 @@ Given that it&#39;s made of blood, it&#39;s definitely not authentically-made, b
 
 &lt;&lt;linkreplace &quot;Apply a layer of sunscreen.&quot; t8n&gt;&gt;Better be safe. Although you only go out in the evening, there is still some sunlight that can damage your skin.&lt;&lt;set $routine_count = $routine_count + 1&gt;&gt;&lt;&lt;if $routine_count is 3&gt;&gt;\
 &lt;&lt;timed 3s t8n&gt;&gt;&lt;&lt;goto &quot;temp_hub&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="dump" tags="" position="1300,0" size="100,100">&lt;q&gt;I&#39;ve never seen a plight so dire,
-I&#39;ve never seen an uglier vampire.&lt;/q&gt;</tw-passagedata><tw-passagedata pid="27" name="StoryBanner" tags="" position="1575,250" size="100,100"></tw-passagedata><tw-passagedata pid="28" name="StorySubtitle" tags="" position="1700,250" size="100,100"></tw-passagedata><tw-passagedata pid="29" name="StoryAuthor" tags="" position="1450,375" size="100,100">by Sarah Mak</tw-passagedata><tw-passagedata pid="30" name="StoryCaption" tags="" position="1700,0" size="100,100"></tw-passagedata><tw-passagedata pid="31" name="StoryMenu" tags="" position="1450,625" size="100,100"></tw-passagedata><tw-passagedata pid="32" name="PassageFooter" tags="" position="1575,0" size="100,100"></tw-passagedata><tw-passagedata pid="33" name="PassageHeader" tags="" position="1575,125" size="100,100"></tw-passagedata><tw-passagedata pid="34" name="Styling" tags="twine" position="1450,500" size="100,100">&lt;h1&gt;Heading 1&lt;/h1&gt;\
+&lt;&lt;/if&gt;&gt;\&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="dump" tags="" position="1300,0" size="100,100">&lt;q&gt;I&#39;ve never seen a plight so dire,
+I&#39;ve never seen an uglier vampire.&lt;/q&gt;</tw-passagedata><tw-passagedata pid="30" name="StoryBanner" tags="" position="1575,250" size="100,100"></tw-passagedata><tw-passagedata pid="31" name="StorySubtitle" tags="" position="1700,250" size="100,100"></tw-passagedata><tw-passagedata pid="32" name="StoryAuthor" tags="" position="1450,375" size="100,100">by Sarah Mak</tw-passagedata><tw-passagedata pid="33" name="StoryCaption" tags="" position="1700,0" size="100,100"></tw-passagedata><tw-passagedata pid="34" name="StoryMenu" tags="" position="1450,625" size="100,100"></tw-passagedata><tw-passagedata pid="35" name="PassageFooter" tags="" position="1575,0" size="100,100"></tw-passagedata><tw-passagedata pid="36" name="PassageHeader" tags="" position="1575,125" size="100,100"></tw-passagedata><tw-passagedata pid="37" name="Styling" tags="twine" position="1450,500" size="100,100">&lt;h1&gt;Heading 1&lt;/h1&gt;\
 &lt;h2&gt;Heading 2&lt;/h2&gt;\
 &lt;h3&gt;Heading 3&lt;/h3&gt;\
 &lt;h4&gt;Heading 4&lt;/h4&gt;\
@@ -859,7 +882,7 @@ I&#39;ve never seen an uglier vampire.&lt;/q&gt;</tw-passagedata><tw-passagedata
 //As a list://
 * [[Basic Macros]]
 //With Div://
-&lt;div class=&quot;choice&quot;&gt;[[Basic Macros]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="35" name="Basic Macros" tags="twine" position="1575,625" size="100,100">&lt;h2&gt;Textbox&lt;/h2&gt;\
+&lt;div class=&quot;choice&quot;&gt;[[Basic Macros]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="38" name="Basic Macros" tags="twine" position="1575,625" size="100,100">&lt;h2&gt;Textbox&lt;/h2&gt;\
 &lt;&lt;textbox &quot;_test&quot; 2&gt;&gt;
 
 &lt;h2&gt;Text Area&lt;/h2&gt;\
@@ -894,7 +917,7 @@ What&#39;s your favorite pie?
 &lt;&lt;checkbox &quot;_pieCoconutCream&quot; false true autocheck&gt;&gt; Option 3
 
 &lt;h2&gt;Button&lt;/h2&gt;\
-&lt;&lt;button &quot;I do not do anything&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Stats" tags="" position="1450,750" size="100,100">This is an empty passage.</tw-passagedata><tw-passagedata pid="37" name="Widget" tags="widget nobr" position="1700,125" size="100,100">&lt;&lt;widget &quot;code&quot;&gt;&gt;
+&lt;&lt;button &quot;I do not do anything&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="Stats" tags="" position="1450,750" size="100,100">This is an empty passage.</tw-passagedata><tw-passagedata pid="40" name="Widget" tags="widget nobr" position="1700,125" size="100,100">&lt;&lt;widget &quot;code&quot;&gt;&gt;
     /*
         The code below should technically be in the StyleSheet instead of a Widget (but this way you can just delete this file instead of looking for CSS code to delete).
         This code is meant to help showcase the displayed code better in the Guide passages.

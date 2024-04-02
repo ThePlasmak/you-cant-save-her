@@ -11,7 +11,8 @@ Skincare for Vampires
 }
 
 :: StoryInit {"position":"1450,0"}
-<<set $seen_bed_text to false >>
+<<set $bed_backstory_seen to false >>
+<<set $blood_sated == 1>>
 <<set $routine_count to 0 >>
 <<set $canape_count to 0 >>
 
@@ -67,7 +68,7 @@ But you know that you have five days to prepare <<linkreplace "to meet her" t8n>
 <h4 class="evening">Evening, Day 1. Your Flat.</h4>
 Your flat is a mess, as always. You don't spend a lot of time here anyway.
 
-There is a [[magic mirror->magic_mirror]] in front of you, and your half-broken [[bed->bed]] is lying in the corner.
+There is a [[magic mirror->magic_mirror]] in front of you. Your half-broken [[bed->bed]] is lying in the corner, and a [[makeshift fridge->fridge]] is next to it.
 
 :: magic_mirror [evening] {"position":"150,325"}
 
@@ -79,15 +80,25 @@ Nevertheless, this magic mirror may still be useful to you.
 * <<link "<q>Mirror mirror on the wall, explain, in detail, what a skincare routine is.</q>" "mirror_no_rhyme">><</link>>
 * <<link "<q>Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?</q>" "mirror_rhyme">><</link>>
 
-:: bed [evening] {"position":"300,250"}
-<<if visited("magic_mirror") > 0 and visited("bed_backstory") == 0 >>When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
+:: bed [evening] {"position":"350,200"}
+<<if visited("magic_mirror") > 0 and bed_backstory_seen == false >>
+When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
 
 Thankfully, you leaped just in time to catch the mirror, so your half-broken bed isn't a fully-broken bed.
-<<else>>\
-* [[(You don't think you should sleep, because you need to talk to the magic mirror.)->home_1]]
+<<set bed_backstory_seen to true>>\
 <</if>>\
+* [[You don't think you should sleep, because you need to talk to the magic mirror.->home_1]]
 
-:: bed_backstory {"position":"400,250"}
+:: fridge {"position":"350,325"}
+<<if visited("fridge") == 1>>\
+Your rune-based fridge, which stores your blood supply, has long since broken. The runes expired decades ago, and you could never quite figure out how the Northern rune system worked. Thankfully, on the way to battle a frost lich, you collected a few bricks of ice that were enchanted to never melt, so by placing a few of them strategically around the inside of the fridge, your blood supply will always stay cold.
+
+These bottles of blood are arranged neatly in rows. Each bottle is labelled with a date.
+<<else>>
+Small bottles of blood arranged neatly in rows. Each bottle is labelled with a date.
+<</if>>\
+* <<linkreplace "Drink today's bottle of blood." t8n>>Having been left out for days, it tastes stale and disgusting, but you're used to it. You're used to living like a rat.<<set $blood_sated == 1>><</linkreplace>>
+* [[Close the fridge.->home_1]]
 
 :: mirror_no_rhyme [evening] {"position":"75,425"}
 
@@ -172,9 +183,34 @@ The face appears again, just covering the carrot.<q>The magic of your curse is j
 :: temp_hub {"position":"700,825"}
 
 (So sorry this is so short! I only have a few other very short scenes:)
-
 * [[Time travel to the gala, and eat some snacks.->gala_snacks]]
+* [[Talk to a store associate!->clerk_test]]
 * <<link "Time travel to do a <q>morning</q> routine!" "morning_routine">><</link>>
+
+:: clerk_test
+
+<q>Are you sure being a store associate for a cosmetics store is the best way to get back into heaven?</q> You ask.
+
+<q>Well, I'm helping people right? So I'm getting //some// good karma, or something, or... whatever points system they're using nowadays.</q>
+
+She rolls her eyes. <q>I'm sure when I get back, my colleagues will still be drinking tea. Their tea breaks take //forever//.</q>
+* <<link "<q>They take years to drink tea?</q>" "clerk_test_tea">><</link>>
+* <<link "<q>Why don't you go on a quest? That's how a couple of immortals earned the right to re-enter heaven.</q>" "clerk_test_quest">><</link>>
+
+:: clerk_test_tea
+
+<q>No, dummy. Time passes more slowly in heaven, compared to this dimension. //Everyone// knows that.</q>
+
+You are starting to think that she was banished for reasons other than cracking a vase.
+
+* <<link "<q>Why don't you go on a quest? That's how a couple of immortals reentered heaven.</q>" "clerk_test_quest">><</link>>
+* <<link "Go back to the hub!" "temp_hub">><</link>>
+
+:: clerk_test_quest
+
+She sighs. <q>Ugh, no way. I'm mortal now. I don't want to actually die.</q>
+
+* <<link "Go back to the hub!" "temp_hub">><</link>>
 
 :: gala_snacks {"position":"625,950"}
 <<if $canape_count < 1>>\
