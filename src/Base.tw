@@ -11,8 +11,6 @@ Skincare for Vampires
 }
 
 :: StoryInit {"position":"1100,0"}
-<<set $enable_undo to true >>
-
 <<set $seen_bed_text to false >>
 <<set $routine_count to 0 >>
 <<set $canape_count to 0 >>
@@ -25,13 +23,11 @@ Skincare for Vampires
 
 :: options [no-undo] {"position":"25,50"}
 <span class="subtitle">''Options''</span> <span class="close">[[✖->Start]]</span>
-
-<<if $enable_undo>>\
-    ''Enable Undo'' is currently <<link "ON">><<run $enable_undo = false>><<goto `passage()`>><</link>>.
-<<else>>\
-    ''Enable Undo'' is currently <<link "OFF">><<run $enable_undo = true>><<goto `passage()`>><</link>>.
-<</if>>\
-
+<<if setup.enableUndo.get()>>
+    ''Enable Undo'' is currently <<link "ON">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>.
+<<else>>
+    ''Enable Undo'' is currently <<link "OFF">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>.
+<</if>>
 When this option is ''ON'', an undo button will appear above the game window.
 
 :: pre_intro_letter [letter no-undo] {"position":"275,50"}

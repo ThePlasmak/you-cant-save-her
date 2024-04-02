@@ -566,12 +566,40 @@ body.card #undobar a {
 UIBar.destroy();
 
 // UNDO BUTTON
-function updateUndoButton() {
-  // Remove existing undo button if it exists
-  $("#undobar").remove();
+// Simplify the initial check and setting of the enableUndo variable
+$(document).on(":start", function () {
+  // Correctly set State variable based on localStorage, with a fallback to true if not set
+  State.variables.enableUndo =
+    localStorage.getItem("enableUndo") !== null
+      ? localStorage.getItem("enableUndo") === "true"
+      : true;
+});
 
-  // Add the undo button if $enable_undo is true
-  if (State.variables.enable_undo) {
+setup.enableUndo = {
+  // Retrieves the current undo state from localStorage, correctly handling "true" and "false" strings
+  get: function () {
+    var value = localStorage.getItem("enableUndo");
+    return value === "true"; // Correctly returns false if value is "false"
+  },
+
+  // Toggles the undo state and saves the new state to localStorage
+  toggle: function () {
+    var currentState = this.get();
+    localStorage.setItem("enableUndo", !currentState);
+
+    // Ensure the state variable is also updated
+    State.variables.enableUndo = !currentState;
+
+    // Optionally, refresh the current passage to reflect the change immediately
+    Engine.play(passage());
+  },
+};
+
+function updateUndoButton() {
+  $("#undobar").remove(); // Remove existing Undo button, if any.
+
+  if (setup.enableUndo.get()) {
+    // Use the setup object's method for consistency.
     $("body").prepend(
       "<div id='undobar'><a href='#' id='undoButton'>←</a></div>"
     );
@@ -583,14 +611,13 @@ function updateUndoButton() {
   }
 }
 
-// Run the update function on each passage render
-$(document).on(":passagerender", function () {
-  updateUndoButton();
-});
+// Initialize the undo button based on the current state
+$(document).on(":passagerender", updateUndoButton);
 
 // AUTOSAVE
 $(document).on(":passagerender", function () {
-  if (State.passage !== "Start") {
+  // Check if the current passage is neither "Start" nor "options"
+  if (State.passage !== "Start" && State.passage !== "options") {
     Save.slots.save(1); // Automatically save to slot 1
   }
 });
@@ -615,22 +642,33 @@ $(document).on(":passagerender", function (ev) {
     });
   }
 });
-</script><tw-passagedata pid="1" name="StoryInit" tags="" position="1100,0" size="100,100">&lt;&lt;set $enable_undo to true &gt;&gt;
 
-&lt;&lt;set $seen_bed_text to false &gt;&gt;
+window.onbeforeunload = function () {
+  window.sessionStorage.setItem("twine-reload-flag", "true");
+};
+
+postdisplay["refresh-taker"] = function (t) {
+  delete postdisplay[t];
+  var refresh = sessionStorage.getItem("twine-reload-flag");
+
+  if (refresh === "true" && passage() !== "Start") {
+    // your starting passage here
+
+    Engine.play("Start"); // passage to forward player to
+  }
+};
+</script><tw-passagedata pid="1" name="StoryInit" tags="" position="1100,0" size="100,100">&lt;&lt;set $seen_bed_text to false &gt;&gt;
 &lt;&lt;set $routine_count to 0 &gt;&gt;
 &lt;&lt;set $canape_count to 0 &gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Start" tags="no-undo" position="150,50" size="100,100">&lt;div class=&quot;title&quot;&gt;Skincare for Vampires&lt;/div&gt;\
 &lt;div class=&quot;subtitle&quot;&gt;(Workshop Edition)&lt;/div&gt;\
 &lt;div style=&quot;font-size:30%;&quot; class=&quot;subtitle&quot;&gt;(this is very short, sorry)&lt;/div&gt;\
 &lt;div id=&quot;menu&quot;&gt;&lt;&lt;if Save.slots.has(1)&gt;&gt;&lt;&lt;link &quot;Continue&quot;&gt;&gt;&lt;&lt;run Save.slots.load(1)&gt;&gt;&lt;&lt;/link&gt;&gt; · [[Restart-&gt;pre_intro_letter]] &lt;&lt;else&gt;&gt;[[Start-&gt;pre_intro_letter]]&lt;&lt;/if&gt;&gt; · [[Options-&gt;options]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="options" tags="no-undo" position="25,50" size="100,100">&lt;span class=&quot;subtitle&quot;&gt;&#39;&#39;Options&#39;&#39;&lt;/span&gt; &lt;span class=&quot;close&quot;&gt;[[✖-&gt;Start]]&lt;/span&gt;
-
-&lt;&lt;if $enable_undo&gt;&gt;\
-    &#39;&#39;Enable Undo&#39;&#39; is currently &lt;&lt;link &quot;ON&quot;&gt;&gt;&lt;&lt;run $enable_undo = false&gt;&gt;&lt;&lt;goto `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;.
-&lt;&lt;else&gt;&gt;\
-    &#39;&#39;Enable Undo&#39;&#39; is currently &lt;&lt;link &quot;OFF&quot;&gt;&gt;&lt;&lt;run $enable_undo = true&gt;&gt;&lt;&lt;goto `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;.
-&lt;&lt;/if&gt;&gt;\
-
-When this option is &#39;&#39;ON&#39;&#39;, an undo button will appear above the game window.</tw-passagedata><tw-passagedata pid="4" name="pre_intro_letter" tags="letter no-undo" position="475,100" size="100,100">&lt;&lt;timed 1s&gt;&gt;&lt;&lt;goto &quot;intro_letter&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="intro_letter" tags="letter no-undo" position="275,50" size="100,100">//Dear Mal,
+&lt;&lt;if setup.enableUndo.get()&gt;&gt;
+    &#39;&#39;Enable Undo&#39;&#39; is currently &lt;&lt;link &quot;ON&quot;&gt;&gt;&lt;&lt;run setup.enableUndo.toggle()&gt;&gt;&lt;&lt;run Engine.play(passage())&gt;&gt;&lt;&lt;/link&gt;&gt;.
+&lt;&lt;else&gt;&gt;
+    &#39;&#39;Enable Undo&#39;&#39; is currently &lt;&lt;link &quot;OFF&quot;&gt;&gt;&lt;&lt;run setup.enableUndo.toggle()&gt;&gt;&lt;&lt;run Engine.play(passage())&gt;&gt;&lt;&lt;/link&gt;&gt;.
+&lt;&lt;/if&gt;&gt;
+When this option is &#39;&#39;ON&#39;&#39;, an undo button will appear above the game window.</tw-passagedata><tw-passagedata pid="4" name="pre_intro_letter" tags="letter no-undo" position="275,50" size="100,100">&lt;&lt;timed 1s&gt;&gt;&lt;&lt;goto &quot;intro_letter&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="intro_letter" tags="letter no-undo" position="375,50" size="100,100">//Dear Mal,
 
 You are cordially invited to the 148th East Shenzhou Company&#39;s Grand Blood Moon Ball.
 
@@ -641,9 +679,9 @@ Dress code: Formal
 
 You are welcome to bring an additional guest to share in the evening&#39;s festivities.
 
-Upon your arrival, be prepared to present this [[invitation-&gt;intro_1]] to the Obsidian Guard.//</tw-passagedata><tw-passagedata pid="6" name="intro_1" tags="" position="400,50" size="100,100">The envelope simply states:
+Upon your arrival, be prepared to present this [[invitation-&gt;intro_1]] to the Obsidian Guard.//</tw-passagedata><tw-passagedata pid="6" name="intro_1" tags="" position="500,50" size="100,100">The envelope simply states:
 
-&lt;span class=&quot;bea_handwriting&quot;&gt;From &lt;&lt;linkreplace &quot;▒▒▒&quot; t8n&gt;&gt;[[Bea-&gt;intro_2]]&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="7" name="intro_2" tags="" position="525,50" size="100,100">You don&#39;t know why &lt;&lt;linkreplace &quot;your ex&quot; t8n&gt;&gt;she&lt;&lt;/linkreplace&gt;&gt; sent you an [[invitation-&gt;intro_3]].</tw-passagedata><tw-passagedata pid="8" name="intro_3" tags="" position="650,50" size="100,100">But you know that you have five days to prepare &lt;&lt;linkreplace &quot;to meet her&quot; t8n&gt;&gt;for [[this ball-&gt;home_1]]&lt;&lt;/linkreplace&gt;&gt;.</tw-passagedata><tw-passagedata pid="9" name="home_1" tags="evening" position="150,200" size="100,100">&lt;h4 class=&quot;evening&quot;&gt;Evening, Day 1. Your Flat.&lt;/h4&gt;
+&lt;span class=&quot;bea_handwriting&quot;&gt;From &lt;&lt;linkreplace &quot;▒▒▒&quot; t8n&gt;&gt;[[Bea-&gt;intro_2]]&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="7" name="intro_2" tags="" position="625,50" size="100,100">You don&#39;t know why &lt;&lt;linkreplace &quot;your ex&quot; t8n&gt;&gt;she&lt;&lt;/linkreplace&gt;&gt; sent you an [[invitation-&gt;intro_3]].</tw-passagedata><tw-passagedata pid="8" name="intro_3" tags="" position="750,50" size="100,100">But you know that you have five days to prepare &lt;&lt;linkreplace &quot;to meet her&quot; t8n&gt;&gt;for [[this ball-&gt;home_1]]&lt;&lt;/linkreplace&gt;&gt;.</tw-passagedata><tw-passagedata pid="9" name="home_1" tags="evening" position="150,200" size="100,100">&lt;h4 class=&quot;evening&quot;&gt;Evening, Day 1. Your Flat.&lt;/h4&gt;
 Your flat is a mess, as always. You don&#39;t spend a lot of time here anyway.
 
 There is a [[magic mirror-&gt;magic_mirror]] in front of you, and your half-broken [[bed-&gt;bed]] is lying in the corner.</tw-passagedata><tw-passagedata pid="10" name="magic_mirror" tags="evening" position="150,325" size="100,100">You look into the magic mirror, but you cannot see your reflection.
