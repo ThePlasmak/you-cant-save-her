@@ -12,7 +12,7 @@ Skincare for Vampires
 
 :: StoryInit {"position":"1450,0"}
 <<set $bed_backstory_seen to false >>
-<<set $blood_sated == 1>>
+<<set $blood_sated to 1>>
 <<set $routine_count to 0 >>
 <<set $canape_count to 0 >>
 
