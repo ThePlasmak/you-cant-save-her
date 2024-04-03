@@ -2,7 +2,6 @@
 UIBar.destroy();
 
 // UNDO BUTTON
-// Simplify the initial check and setting of the enableUndo variable
 $(document).on(":start", function () {
   // Correctly set State variable based on localStorage, with a fallback to true if not set
   State.variables.enableUndo =
