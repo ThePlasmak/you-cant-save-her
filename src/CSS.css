@@ -278,7 +278,6 @@ input:not(:disabled):hover {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  /* display: none; */
 }
 
 #undobar a {
