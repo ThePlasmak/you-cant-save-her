@@ -3,29 +3,31 @@ UIBar.destroy();
 
 // UNDO BUTTON
 $(document).on(":start", function () {
-  // Correctly set State variable based on localStorage, with a fallback to true if not set
-  State.variables.enableUndo =
-    localStorage.getItem("enableUndo") !== null
-      ? localStorage.getItem("enableUndo") === "true"
-      : true;
+  // Check if 'enableUndo' is stored in localStorage, set it to 'false' if not.
+  if (localStorage.getItem("enableUndo") === null) {
+    localStorage.setItem("enableUndo", "false"); // Set default to false if not present
+  }
+
+  // Load the enableUndo state from localStorage
+  State.variables.enableUndo = localStorage.getItem("enableUndo") === "true";
+
+  // Update the undo button based on the current state.
+  updateUndoButton();
 });
 
 setup.enableUndo = {
-  // Retrieves the current undo state from localStorage, correctly handling "true" and "false" strings
+  // Retrieves the current undo state from localStorage, defaulting to false
   get: function () {
-    var value = localStorage.getItem("enableUndo");
-    return value === "true"; // Correctly returns false if value is "false"
+    return localStorage.getItem("enableUndo") === "true";
   },
 
   // Toggles the undo state and saves the new state to localStorage
   toggle: function () {
     var currentState = this.get();
     localStorage.setItem("enableUndo", !currentState);
-
-    // Ensure the state variable is also updated
     State.variables.enableUndo = !currentState;
 
-    // Optionally, refresh the current passage to reflect the change immediately
+    // Refresh the current passage to reflect the change immediately
     Engine.play(passage());
   },
 };
@@ -34,7 +36,7 @@ function updateUndoButton() {
   $("#undobar").remove(); // Remove existing Undo button, if any.
 
   if (setup.enableUndo.get()) {
-    // Use the setup object's method for consistency.
+    // Show the undo button
     $("body").prepend(
       "<div id='undobar'><a href='#' id='undoButton'>←</a></div>"
     );
@@ -45,6 +47,8 @@ function updateUndoButton() {
     });
   }
 }
+
+// Attached to :passagerender event to initialize on passage render
 
 // Initialize the undo button on passage render
 $(document).on(":passagerender", updateUndoButton);
