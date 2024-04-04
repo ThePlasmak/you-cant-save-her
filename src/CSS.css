@@ -373,6 +373,17 @@ body.card #undobar a {
   opacity: 0.5;
 }
 
+@media screen and (max-width: 1136px) {
+  #story {
+    margin-right: 0.8em;
+    margin-left: 0.8em;
+  }
+
+  #undobar {
+    margin-left: -0.7em;
+  }
+}
+
 @media screen and (max-width: 920px) {
   body {
     font-size: 13pt;
