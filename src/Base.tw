@@ -1,7 +1,7 @@
-:: StoryTitle {"position":"1450,125"}
+:: StoryTitle {"position":"1900,175"}
 Skincare for Vampires
 
-:: StoryData {"position":"1450,250"}
+:: StoryData {"position":"1900,300"}
 {
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
@@ -10,7 +10,7 @@ Skincare for Vampires
     "zoom": 1
 }
 
-:: StoryInit {"position":"1450,0"}
+:: StoryInit {"position":"1900,50"}
 <<set $bed_backstory_seen to false >>
 <<set $blood_sated to 1>>
 <<set $routine_count to 0 >>
@@ -34,7 +34,7 @@ When this option is ''ON'', an undo button will appear above the game window.
 :: pre_intro_letter [letter no-undo] {"position":"275,50"}
 <<timed 1s>><<goto "intro_letter">><</timed>>
 
-:: intro_letter [letter no-undo] {"position":"375,50"}
+:: intro_letter [letter no-undo] {"position":"400,50"}
 
 //Dear Mal,
 
@@ -49,17 +49,17 @@ You are welcome to bring an additional guest to share in the evening's festiviti
 
 Upon your arrival, be prepared to present this [[invitation->intro_1]] to the Obsidian Guard.//
 
-:: intro_1 {"position":"500,50"}
+:: intro_1 {"position":"525,50"}
 
 The envelope simply states:
 
 <span class="bea_handwriting">From <<linkreplace "▒▒▒" t8n>>[[Bea->intro_2]]<</linkreplace>></span>
 
-:: intro_2 {"position":"625,50"}
+:: intro_2 {"position":"650,50"}
 
 You don't know why <<linkreplace "your ex" t8n>>she<</linkreplace>> sent you an [[invitation->intro_3]].
 
-:: intro_3 {"position":"750,50"}
+:: intro_3 {"position":"775,50"}
 
 But you know that you have five days to prepare <<linkreplace "to meet her" t8n>>for [[this ball->home_1]]<</linkreplace>>.
 
@@ -292,7 +292,7 @@ One of the waiters is side-eyeing you judgmentally.
 <<timed 3s t8n>><<goto "temp_hub">><</timed>>\
 <</if>>\<</linkreplace>>
 
-:: dump {"position":"1300,0"}
+:: dump {"position":"1225,50"}
 
 <q>I've never seen a plight so dire,
 I've never seen an uglier vampire.</q>

@@ -223,18 +223,41 @@ div#preload {
   opacity: 0 !important;
 }
 
-.macro-textbox {
+.macro-textbox,
+textarea {
   background-color: #ffffff;
   color: #000000;
 }
 
-input {
+textarea:not(:disabled):focus,
+textarea:not(:disabled):hover {
+  background-color: #ffffff;
+  border-color: #000000;
+}
+
+input,
+select {
   border-radius: 0.25em;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 input:not(:disabled):focus,
 input:not(:disabled):hover {
   background-color: #ffffff;
+  border-color: #000000;
+}
+
+button {
+  border: 1px solid #000000;
+  border-radius: 0.25em;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+button:not(:disabled):focus,
+button:not(:disabled):hover {
+  background-color: #ededed;
   border-color: #000000;
 }
 
