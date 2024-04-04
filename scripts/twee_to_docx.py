@@ -36,4 +36,4 @@ def twee_to_word(twee_filename, word_filename):
 
 
 twee_to_word(twee_filename, word_filename)
-print(f"\nSuccessfully exported {twee_filename} to {word_filename}")
+print(f"DOCX exported successfully.")
