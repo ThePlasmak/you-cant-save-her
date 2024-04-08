@@ -11,16 +11,15 @@ Skincare for Vampires
 }
 
 :: StoryInit {"position":"1900,50"}
-<<set $bed_backstory_seen to false >>
-<<set $blood_sated to 1>>
-<<set $routine_count to 0 >>
-<<set $canape_count to 0 >>
 
 :: Start [no-undo] {"position":"150,50"}
 <div class="title">Skincare for Vampires</div>\
-<div class="subtitle">(Workshop Edition)</div>\
-<div style="font-size:30%;" class="subtitle">(this is very short, sorry)</div>\
-<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · [[Restart->pre_intro_letter]] <<else>>[[Start->pre_intro_letter]]<</if>> · [[Options->options]]</div>
+<div class="subtitle">by Sarah Mak</div>\
+<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · <<nobr>><<link 'Restart'>>
+    <<for _key, _val range State.variables>><<run delete State.variables[_key]>><</for>>
+    <<set State.expired.length = 0>>
+    <<goto pre_intro_letter>>
+<</link>><</nobr>><<else>>[[Start->pre_intro_letter]]<</if>> · [[Options->options]]</div>
 
 :: options [no-undo] {"position":"25,50"}
 <span class="subtitle">''Options''</span> <span class="close">[[✖->Start]]</span>
@@ -29,10 +28,16 @@ Skincare for Vampires
 <<else>>
     ''Enable Undo'' is currently <<link "OFF">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>.
 <</if>>
-When this option is ''ON'', an undo button will appear above the game window.
+When this option is ''ON'', an undo button will appear at the top of the game window.
 
 :: pre_intro_letter [letter no-undo] {"position":"275,50"}
+<<nobr>>
 <<timed 1s>><<goto "intro_letter">><</timed>>
+<<set $bed_backstory_seen to false >>
+<<set $blood_sated to 1>>
+<<set $routine_count to 0 >>
+<<set $canape_count to 0 >>
+<</nobr>>
 
 :: intro_letter [letter no-undo] {"position":"400,50"}
 

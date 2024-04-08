@@ -42,6 +42,7 @@ html {
 a {
   border: none;
   font-weight: bold;
+  cursor: pointer;
 }
 
 #passages {
@@ -60,7 +61,7 @@ a {
 }
 
 body {
-  background: #310001;
+  background: #490001;
   margin: 0 auto;
   position: relative;
   font-family: "Newsreader", serif;
