@@ -330,8 +330,7 @@ body.quickmorning #undobar a {
   transition: 0s;
 }
 
-body.black #undobar a,
-body.dream #undobar a {
+body.black #undobar a {
   color: #ffffff;
 }
 
