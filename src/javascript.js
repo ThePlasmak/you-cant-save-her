@@ -67,7 +67,7 @@ $(document).on(":passagerender", function (ev) {
   var currentTags = tags();
 
   // Check if tag is included
-  if (currentTags.includes("flashback")) {
+  if (currentTags.includes("pre-letter")) {
     // Apply styles for passages with the tag
     $("#passages").css({
       "background-color": "transparent",
