@@ -6,7 +6,7 @@ SKINCARE FOR VAMPIRES
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
     "format-version": "2.36.1",
-    "start": "magic_mirror_ridiculous",
+    "start": "Start",
     "zoom": 1
 }
 
@@ -46,8 +46,8 @@ When this option is ''ON'', an undo button will appear at the top of the game wi
 
 :: pre_intro_letter [pre-letter no-undo] {"position":"325,400"}
 <<nobr>>
-<<timed 1s>><<goto "intro_letter">><</timed>>
 <<include variable_setup>>
+<<timed 1s>><<goto "intro_letter">><</timed>>
 <</nobr>>
 
 :: intro_letter [letter no-undo] {"position":"450,400"}
@@ -96,9 +96,35 @@ But maybe this mirror can [[still be useful to you->magic_mirror]].
 The mirror is covered in dust, and there are black spots scattered along its bottom edge.
 
 Your old adventuring companion, Princess Philomena the Third, gifted you this magic mirror a few decades ago. Maybe she forgot that vampires can't see themselves in mirrors, but at least there is a magical intelligence inside this.
+* <<link "“Mirror mirror on the wall, explain, in detail, how I should prepare for a formal event.”" "magic_mirror_no_rhyme">><</link>>
+* <<link "“Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?”" "magic_mirror_rhyme">><</link>>
 
-* <<link "<q>Mirror mirror on the wall, explain, in detail, how I should prepare for a formal event.</q>" "magic_mirror_no_rhyme">><</link>>
-* <<link "<q>Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?</q>" "magic_mirror_rhyme">><</link>>
+:: magic_mirror_rhyme {"position":"350,825"}
+Suddenly, a vortex of green vapour whirls within the mirror's depths. At the centre of the vortex, the face of a middle-aged woman swirls into view.
+
+Then, she forces an uncomfortably wide grin.
+
+“I do not know what you mean by a Blood Moon Ball,
+but similar events may involve human sacrifices or alcohol.
+Before making any dangerous decision,
+please consult a haemomancer, or a physician.”
+* <<link "“That was useless!”" "magic_mirror_useless">><</link>>
+* <<link "“The Blood Moon Ball is just some formal event! So how do I prepare for it?”" "magic_mirror_prepare">><</link>>
+
+:: magic_mirror_useless
+“I'm sorry to hear that this did not answer your question.
+But could you rephrase your query with a little less aggression?”
+
+You groan, and consider slapping the mirror, but getting angry with it would be like getting angry with a printer. “So how do I prepare for the Blood Moon Ball, which is a //formal event//?”
+
+The magic mirror answers in a musical voice.
+
+<<include magic_mirror_rhyme_bottleneck>>
+
+:: magic_mirror_prepare
+The magic mirror continues to answer in a musical voice.
+
+<<include magic_mirror_rhyme_bottleneck>>
 
 :: magic_mirror_no_rhyme {"position":"475,825"}
 Suddenly, a vortex of green vapour whirls within the mirror's depths. At the centre of the vortex, the face of a middle-aged woman swirls into view.
@@ -107,39 +133,51 @@ She looks annoyed. Maybe the mirror is annoyed by <<linkreplace "your lack of rh
 
 Then, she forces an uncomfortably wide grin.
 
+<<include magic_mirror_rhyme_bottleneck>>
+
+:: magic_mirror_rhyme_bottleneck
 “<<linkappend "First, you must improve your skin,\nso this is the routine you should begin:" t8n>><<linkappend "\nUse a cleanser to purge your loathsome oils,\nthen a toner to soothe before your next toils." t8n>><<linkappend "\nGet an essence, a serum, an ampoule, and a lotion,\nor you could use an all-in-one emulsion." t8n>>
 Next, an eye cream, a mask, then a moisturising cream,
 and don't forget to acquire a strong <<link "sunscreen">><<replace "#1" t8n>>The mirror simply smiles at you.
 
 It seems that the magic mirror forgot that you are a vampire, who cannot go out in the sun without burning to a vampire-flavoured crisp. Also, you think that the number of skincare products that exist is ridiculous.
-* <<link "<q>This is ridiculous.</q>" "magic_mirror_ridiculous">><</link>>
-* <<link "<q>Which skincare products do I <i>really</i> need?</q>" "magic_mirror_need">><</link>>
+* <<link "“This is ridiculous.”" "magic_mirror_ridiculous">><</link>>
+* <<link "“Which skincare products do I <i>really</i> need?”" "magic_mirror_need">><</link>>
 <</replace>><</link>>!”
 <</linkappend>><</linkappend>><</linkappend>>
 <span id="1"></span>
 
-:: magic_mirror_rhyme {"position":"350,825"}
-
-
 :: magic_mirror_ridiculous
-She chimes, “there are no ugly women, there are only lazy ones.
-Why don't you care about this as your guns?” You didn't know this mirror was awake when you were working on your pistols. /* May want to improve this */
+She chimes, “there are no ugly women, only lazy ones.
+Why don't you care about this as much your guns?”
 
-“Okay, I care now! Just tell me what I need to do!”
+You didn't know this mirror was awake when you were working on your pistols. /* May want to improve this */
+
+“Okay, I care now! Just tell me what I need to do!” You shout.
 
 The mirror answers in a musical tone:
 <<include magic_mirror_need>>
 
 :: magic_mirror_need
-<q>Cleansers, moisturisers, and sunscreens are the vital three,
-So you should purchase them on your next shopping spree.
-And unless you consider your trench coat formal attire,
-a dressier outfit is another item you must acquire.</q>
+“Cleansers, moisturisers, and sunscreens are the vital three,
+So you should purchase them on your next shopping spree,” it says.
 
-[[You know what you need now.->tutorial_start]]
+The mirror's eyes narrow, and it adds,
+“And unless you consider your trench coat formal attire,
+a dressier outfit is another item you must acquire.”
+
+You think your trench coat looks very dapper, and you stubbornly insist on wearing it even in Xingang's subtropical weather, but the mirror is right. You can't go to the ball wearing this.
+
+[[So, you know what you need now.->tutorial_1]]
+
+:: tutorial_1
+[[You need to go out, and shop for some supplies.->tutorial_2]]
+
+:: tutorial_2
+[[It is time to prepare for this upcoming battle.->day_1_explore]]
 
 :: bed {"position":"200,700"}
-<<if $mirror_visited == false and $bed_text_seen == false >>\
+<<if $mirror_visited == true and $bed_text_seen == false >>\
 <<set $bed_text_seen to true>>\
 When Princess Philomena wanted to transport the mirror to you, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
 
@@ -151,7 +189,7 @@ Your bed is still half-broken. There is a gaping horizontal split along its unde
 
 :: sleep {"position":"200,825"}
 /* WIP */
-You don't need to sleep, but you try to sleep every day, as it does make you feel more rested. <<if $mirror_visited == true>>Plus, you read in a magazine that sleeping is good for your skin.<</if>>
+You don't need to sleep, but you try to sleep every day, as it does make you feel more rested. It's probably more psychological than physical. <<if $mirror_visited == true>>Plus, you read in a magazine that sleeping is good for your skin.<</if>>
 
 <<if $shop_done == true>>\
 /* WIP: this will have lots of nested ifs for each day */
@@ -168,11 +206,16 @@ Inside your fridge, bottles of blood are arranged neatly in rows. You labelled e
 
 :: drink_blood {"position":"75,825"}
 <<if $blood_sated is false and $blood_text_seen is false>>\
+<<set $blood_text_seen to true>>\
+<<set $blood_sated to true>>\
 You drink today's bottle of blood. It has a grainy texture and it tastes like stale iron, but you're used to this.
 
 You're used to [[living like a rat->fridge]].
 <<elseif $blood_sated is false and $blood_text_seen is true>>\
+<<set $blood_sated to true>>\
 You drink today's bottle of blood. As you expected, it tastes [[awful->fridge]].
 <<else>>\
 According to your calculations, [[you don't need to drink blood now->fridge]].
 <</if>>\
+
+:: day_1_explore
