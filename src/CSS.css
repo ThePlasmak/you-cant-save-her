@@ -4,6 +4,7 @@
 :root {
   /* Shadows */
   /*Go to https://www.joshwcomeau.com/shadow-palette/ to generate the shadow palette */
+
   --shadow-color: 0deg 0% 0%;
   --shadow-elevation-low:
     0px 0.3px 0.3px hsl(var(--shadow-color) / 0.22),
@@ -26,6 +27,29 @@
     0.1px 25.5px 25.1px -2.7px hsl(var(--shadow-color) / 0.1),
     0.2px 36px 35.4px -3.1px hsl(var(--shadow-color) / 0.09),
     0.2px 49.5px 48.6px -3.4px hsl(var(--shadow-color) / 0.08);
+
+  --shadow-letter-color: 0deg 0% 56%;
+  --shadow-letter-elevation-low:
+    0px 0.1px 0.1px hsl(var(--shadow-letter-color) / 0.51),
+    0px 0.2px 0.2px -1.8px hsl(var(--shadow-letter-color) / 0.4),
+    0px 0.4px 0.4px -3.7px hsl(var(--shadow-letter-color) / 0.29);
+  --shadow-letter-elevation-medium:
+    0px 0.1px 0.1px hsl(var(--shadow-letter-color) / 0.43),
+    0px 0.2px 0.2px -0.9px hsl(var(--shadow-letter-color) / 0.37),
+    0px 0.5px 0.5px -1.8px hsl(var(--shadow-letter-color) / 0.32),
+    0px 1.1px 1px -2.8px hsl(var(--shadow-letter-color) / 0.26),
+    0px 2.2px 2.1px -3.7px hsl(var(--shadow-letter-color) / 0.21);
+  --shadow-letter-elevation-high:
+    0px 0.1px 0.1px hsl(var(--shadow-color) / 0.24),
+    0px 0.2px 0.2px -0.4px hsl(var(--shadow-color) / 0.23),
+    0px 0.3px 0.3px -0.8px hsl(var(--shadow-color) / 0.21),
+    0px 0.4px 0.4px -1.2px hsl(var(--shadow-color) / 0.19),
+    0px 0.6px 0.6px -1.6px hsl(var(--shadow-color) / 0.18),
+    0px 1px 0.9px -2.1px hsl(var(--shadow-color) / 0.16),
+    0px 1.5px 1.4px -2.5px hsl(var(--shadow-color) / 0.15),
+    0px 2.2px 2.1px -2.9px hsl(var(--shadow-color) / 0.13),
+    -0.1px 3.1px 2.9px -3.3px hsl(var(--shadow-color) / 0.12),
+    -0.1px 4.3px 4.1px -3.7px hsl(var(--shadow-color) / 0.1);
 }
 
 html {
@@ -113,24 +137,6 @@ p:first-of-type {
   text-align: center;
 }
 
-body.letter {
-  background-color: #ffffff;
-}
-
-body.evening {
-  background-color: #001a40;
-}
-
-/* Not working */
-#passages[data-tags~="letter"] {
-  background-color: transparent !important;
-}
-
-span.bea_handwriting {
-  font-family: "Great Vibes", serif;
-  font-size: 1.8em;
-}
-
 .title-image {
   text-align: center;
   line-height: 125%;
@@ -168,6 +174,27 @@ span.bea_handwriting {
 
 #preload {
   opacity: 0;
+}
+
+body.letter {
+  background-color: #e4e4e4;
+}
+
+div[data-tags~="letter"] a {
+  color: rgb(13 131 215);
+}
+
+div[data-tags~="letter"] a:hover {
+  color: rgb(74, 166, 224)
+}
+
+body.evening {
+  background-color: #001a40;
+}
+
+span.bea-handwriting {
+  font-family: "Great Vibes", serif;
+  font-size: 1.8em;
 }
 
 .freestat {

@@ -1,5 +1,5 @@
 :: StoryTitle {"position":"1900,175"}
-Skincare for Vampires
+SKINCARE FOR VAMPIRES
 
 :: StoryData {"position":"1900,300"}
 {
@@ -10,10 +10,8 @@ Skincare for Vampires
     "zoom": 1
 }
 
-:: StoryInit {"position":"1900,50"}
-
 :: Start [no-undo] {"position":"150,50"}
-<div class="title">Skincare for Vampires</div>\
+<div class="title">SKINCARE FOR VAMPIRES</div>\
 <div class="subtitle">by Sarah Mak</div>\
 <div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · <<nobr>><<link 'Restart'>>
     <<for _key, _val range State.variables>><<run delete State.variables[_key]>><</for>>
@@ -33,271 +31,28 @@ When this option is ''ON'', an undo button will appear at the top of the game wi
 :: pre_intro_letter [letter no-undo] {"position":"275,50"}
 <<nobr>>
 <<timed 1s>><<goto "intro_letter">><</timed>>
-<<set $bed_backstory_seen to false >>
-<<set $blood_sated to 1>>
-<<set $routine_count to 0 >>
-<<set $canape_count to 0 >>
 <</nobr>>
 
 :: intro_letter [letter no-undo] {"position":"400,50"}
 
-//Dear Mal,
+Dear Ms Mal,
 
-You are cordially invited to the 148th East Shenzhou Company's Grand Blood Moon Ball.
-
-Date: 17th April 1897
-Time: 8 PM to 4:30 AM
-Location: Shenzhou Company Headquarters, Aberdeen Road, Xingang 414321
-Dress code: Formal
+You are cordially invited to the 148th East Shenzhou Company's Grand Blood Moon Ball at the Company Headquarters.
 
 You are welcome to bring an additional guest to share in the evening's festivities.
+* [[You turn the letter over.->intro_1]]
 
-Upon your arrival, be prepared to present this [[invitation->intro_1]] to the Obsidian Guard.//
+:: intro_1
 
-:: intro_1 {"position":"525,50"}
+From: <<linkreplace "(the person you would rather forget)" t8n>><<linkreplace "(the person who still infiltrates your dreams)" t8n>><<linkreplace "(your ex)" t8n>>[[Bea->intro_2]]<</linkreplace>><</linkreplace>><</linkreplace>>
 
-The envelope simply states:
+:: intro_2
 
-<span class="bea_handwriting">From <<linkreplace "▒▒▒" t8n>>[[Bea->intro_2]]<</linkreplace>></span>
+[[You just arrived home, after another adventure.->intro_3]]
 
-:: intro_2 {"position":"650,50"}
+:: intro_3
 
-You don't know why <<linkreplace "your ex" t8n>>she<</linkreplace>> sent you an [[invitation->intro_3]].
+[[But you spotted this letter lying on the floor of your flat...->intro_4]]
 
-:: intro_3 {"position":"775,50"}
+:: intro_4
 
-But you know that you have five days to prepare <<linkreplace "to meet her" t8n>>for [[this ball->home_1]]<</linkreplace>>.
-
-:: home_1 [evening] {"position":"150,200"}
-
-<h4 class="evening">Evening, Day 1. Your Flat.</h4>
-Your flat is a mess, as always. You don't spend a lot of time here anyway.
-
-There is a [[magic mirror->magic_mirror]] in front of you. Your half-broken [[bed->bed]] is lying in the corner, and a [[makeshift fridge->fridge]] is next to it.
-
-:: magic_mirror [evening] {"position":"150,325"}
-
-You look into the magic mirror, but you cannot see your reflection.
-
-Your old adventuring companion, Princess Philomena the Third, gifted you this magic mirror. However, she did not know, or did not remember, that vampires cannot see themselves in mirrors.
-
-Nevertheless, this magic mirror may still be useful to you.
-* <<link "<q>Mirror mirror on the wall, explain, in detail, what a skincare routine is.</q>" "mirror_no_rhyme">><</link>>
-* <<link "<q>Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?</q>" "mirror_rhyme">><</link>>
-
-:: bed [evening] {"position":"350,200"}
-<<if visited("magic_mirror") > 0 and bed_backstory_seen == false >>
-When Princess Philomena wanted to transport the mirror to you with a teleportation spell, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
-
-Thankfully, you leaped just in time to catch the mirror, so your half-broken bed isn't a fully-broken bed.
-<<set bed_backstory_seen to true>>\
-<</if>>\
-* [[You don't think you should sleep, because you need to talk to the magic mirror.->home_1]]
-
-:: fridge {"position":"350,325"}
-<<if visited("fridge") == 1>>\
-Your rune-based fridge, which stores your blood supply, has long since broken. The runes expired decades ago, and you could never quite figure out how the Northern rune system worked. Thankfully, on the way to battle a frost lich, you collected a few bricks of ice that were enchanted to never melt, so by placing a few of them strategically around the inside of the fridge, your blood supply will always stay cold.
-
-These bottles of blood are arranged neatly in rows. Each bottle is labelled with a date.
-<<else>>
-Small bottles of blood arranged neatly in rows. Each bottle is labelled with a date.
-<</if>>\
-* <<linkreplace "Drink today's bottle of blood." t8n>>Having been left out for days, it tastes stale and disgusting, but you're used to it. You're used to living like a rat.<<set $blood_sated == 1>><</linkreplace>>
-* [[Close the fridge.->home_1]]
-
-:: mirror_no_rhyme [evening] {"position":"75,425"}
-
-Gradually, you see a fog of green vapour whirling within the mirror's depths, and the face of a white woman swirls into view. She glares at you.
-
-Perhaps the mirror is dissatisfied with your rhyming abilities, or perhaps simply with you as a person.
-
-The face answers in a sickeningly sweet voice:
-
-<q>I could tell you how to perfect your skin,
-or how your true beauty lies deep within.
-But your nose is too small, and your chin is too weak,
-please don't go to the ball, with your lacking physique.</q>
-
-<<include mirror_bottleneck >>
-
-:: mirror_rhyme [evening] {"position":"225,425"}
-
-Gradually, you see a fog of green vapour whirling within the mirror's depths, and the face of a white woman swirls into view. She glares at you.
-
-Even though you constructed a successful rhyme, the mirror is still dissatisfied with you. Perhaps it simply dislikes you as a person.
-
-The face answers in a sickeningly sweet voice: /* Improve this later */
-
-<q>You could follow my advice,
-but your effort wouldn't suffice.
-Your nose is too small, and your chin is too weak,
-don't go to the ball, with your lacking physique.</q>
-
-<<include mirror_bottleneck >>
-
-:: mirror_bottleneck {"position":"150,525"}
-
-You consider punching the mirror, but getting angry with it would be like getting angry with a printer.
-
-It's better to extract some sort of knowledge from this senile magical device.
-
-* <<link "<q>Explain to me clearly, in simple language, <i>without rhyming</i>, what I need to do prepare for this ball.</q>" "mirror_skincare">><</link>>
-* <<link "<q>What you just said was not useful at all. Simply explain how to prepare for this ball!</q>" "mirror_skincare_rhyme">><</link>>
-* <<link "<q>Can you just show me what I look like?</q>" "mirror_reflection_attempt">><</link>>
-
-:: mirror_skincare_rhyme {"position":"150,650"}
-<<if visited("magic_mirror") == 1 >>\
-Maybe the device would give a more coherent response if you continued rhyming.
-<<else>>\
-Maybe the device responds better to rhymes, though you find it grating.
-<</if>>\
-
-<<include mirror_skincare >>
-
-:: mirror_skincare {"position":"150,750"}
-The mirror recites in a grating musical voice:
-
-<q>First, buy a cleanser to purge your loathsome oils,
-then a toner to soothe before your next toils.
-Get an essence, a serum, an ampoule, and a soothing lotion,
-or you could simply purchase a more expensive emulsion.
-Next, an eye cream, a mask, then a moisturising cream,
-and don't forget to acquire a strong sunscreen!</q>
-
-The mirror smiles.
-
-It seems that the magic mirror forgot that you are a vampire, who cannot go out in the sun without burning to a vampire-flavoured crisp, no matter how much sunscreen you put on. But maybe the mirror is being sarcastic.
-
-You also wonder if the magic mirror company was sponsored by a skincare company, because skincare shouldn't be this complicated.
-
-[[Right?->temp_hub]]
-
-:: mirror_reflection_attempt {"position":"250,575"}
-
-The face disappears from view, and the wisps of green vapours writhe like snakes. You watch the mirror expectantly for half a minute, but nothing interesting happens. Suddenly, grey and rainbow lines streak across the mirror, and it makes a horrible screeching sound. The mirror is glitching out.
-
-As you consider finding a way to switch this mirror off and on again, the mirror screen turns completely black.
-
-Then, a small carrot pops onto the screen. The carrot follows your movements, albeit imperfectly.
-
-The face appears again, just covering the carrot.<q>The magic of your curse is just too strong./I tried casting your reflection, but it came out wrong,</q> it intones smugly.
-
-* <<link "<q>Okay, since I can't even see what I look like, explain how I can prepare for this ball.</q>" "mirror_skincare">><</link>>
-* <<link "<q>This was not useful at all. Explain how I'm supposed to prepare for this ball!</q>" "mirror_skincare_rhyme">><</link>>
-
-:: temp_hub {"position":"700,825"}
-
-(So sorry this is so short! I only have a few other very short scenes:)
-* [[Time travel to the gala, and eat some snacks.->gala_snacks]]
-* [[Talk to a store associate!->clerk_test]]
-* <<link "Time travel to do a <q>morning</q> routine!" "morning_routine">><</link>>
-
-:: clerk_test {"position":"750,675"}
-
-<q>Are you sure being a store associate for a cosmetics store is the best way to get back into heaven?</q> You ask.
-
-<q>Well, I'm helping people right? So I'm getting //some// good karma, or something, or... whatever points system they're using nowadays.</q>
-
-She rolls her eyes. <q>I'm sure when I get back, my colleagues will still be drinking tea. Their tea breaks take //forever//.</q>
-* <<link "<q>They take years to drink tea?</q>" "clerk_test_tea">><</link>>
-* <<link "<q>Why don't you go on a quest? That's how a couple of immortals earned the right to re-enter heaven.</q>" "clerk_test_quest">><</link>>
-
-:: clerk_test_tea {"position":"675,550"}
-
-<q>No, dummy. Time passes more slowly in heaven, compared to this dimension. //Everyone// knows that.</q>
-
-You are starting to think that she was banished for reasons other than cracking a vase.
-
-* <<link "<q>Why don't you go on a quest? That's how a couple of immortals reentered heaven.</q>" "clerk_test_quest">><</link>>
-* <<link "Go back to the hub!" "temp_hub">><</link>>
-
-:: clerk_test_quest {"position":"800,550"}
-
-She sighs. <q>Ugh, no way. I'm mortal now. I don't want to actually die.</q>
-
-* <<link "Go back to the hub!" "temp_hub">><</link>>
-
-:: gala_snacks {"position":"625,950"}
-<<if $canape_count < 1>>\
-<q>Since you haven't had your dinner...</q> you tell Ian, <q>maybe you could eat some of the canapes?</q>
-
-You lower your voice. <q>Just eat as much as you want. The Company is rich, anyway.</q>
-
-Unfortunately, when you reach the canapes table, you only see various blood-based or blood-flavoured canapes, and a very small platter of egg tarts. Ian makes a whining sound, like a sad dog.
-
-<q>Well, you can eat the egg tarts, at least. They probably engaged one of the best bakeries in the city,</q> you say to Ian.
-
-Ian pauses for a moment, looking even more dejected. <q>I'm... sorry... I'm... vegan...</q>
-
-<q>Oh,</q> you say. Ian gulps. <q>I guess I'll look for an entrance first...</q>
-
-<q>Are you sure you'll be okay?</q> You ask.
-
-<q>I'll be...</q> Ian gulps again. <q>Okay...</q> He runs off.
-
-You're not sure if he will be okay, but you could always eat some of these snacks first before checking on him.
-<</if>>\
-Vampires aren’t supposed to eat solid food, but the ingredients in these hors d'oeuvres are rather soft and/or grainy, so throwing them up shouldn’t be too much of a hassle.
-
-The canapes include:
-<<if $canape_count <= 10>>\
-* [[Blood biscuit layered with pigeon milk cream, garnished with spring onions and a sprinkle of pixie roe.->blood_biscuit]]
-* [[Blood bird’s nest double-boiled with a dragon blood reduction, served in phyllo cups.->birds_nest]]
-* [[Blood custard tartlets, Xingang-style, glazed with sweetened siren tears and topped with bamboo charcoal feuilletine.->custard_tarts]]
-<<else>>\
-* [[You are too embarrassed to eat more canapes. Time to time travel back to the hub.->temp_hub]]
-<</if>>\
-* [[Time travel back to the hub.->temp_hub]]
-
-:: blood_biscuit {"position":"500,1075"}
-<<set $canape_count += 1>>
-As you chew the blood biscuit, you taste... blood, as you expected. The pigeon milk cream just tastes like a really rich cream, and the roe bursts one by one in your mouth, releasing yolks of earthy, umami flavour with subtle strawberry undertones.
-\
-<<if $canape_count > 2>>
-<<include waiter_judge>>
-<</if>>\
-
-* [[You could eat another canape...->gala_snacks]]
-
-:: birds_nest {"position":"625,1075"}
-<<set $canape_count += 1>>
-Contrary to popular belief, blood bird’s nest does not contain any blood, although it is still made of saliva that poor parent swiftlets have coughed up. Blood bird’s nest is red as it has absorbed minerals in cave walls. Nevertheless, this hors d'oeuvre contains blood, as it has been cooked with (Western) dragon blood.
-\
-<<if $canape_count > 2>>
-<<include waiter_judge>>
-<</if>>\
-
-* [[You could eat another canape...->gala_snacks]]
-
-:: custard_tarts {"position":"750,1075"}
-<<set $canape_count += 1>>
-Given that it's made of blood, it's definitely not authentically-made, but you are still filled with a sense of nostalgia and longing.
-\
-<<if $canape_count > 2>>
-<<include waiter_judge>>
-<</if>>\
-
-* [[You could eat another canape...->gala_snacks]]
-
-:: waiter_judge {"position":"875,1075"}
-
-One of the waiters is side-eyeing you judgmentally.
-
-:: morning_routine {"position":"825,825"}
-
-<<linkreplace "Wash your face with the cleanser." t8n>>Your face feels clean.<<set $routine_count = $routine_count + 1>><<if $routine_count is 3>>\
-<<timed 3s t8n>><<goto "temp_hub">><</timed>>\
-<</if>>\<</linkreplace>>
-
-<<linkreplace "Rub some toner into your skin." t8n>>You are not sure if this works, but at least you feel better about yourself.<<set $routine_count = $routine_count + 1>><<if $routine_count is 3>>\
-<<timed 3s t8n>><<goto "temp_hub">><</timed>>\
-<</if>>\<</linkreplace>>
-
-<<linkreplace "Apply a layer of sunscreen." t8n>>Better be safe. Although you only go out in the evening, there is still some sunlight that can damage your skin.<<set $routine_count = $routine_count + 1>><<if $routine_count is 3>>\
-<<timed 3s t8n>><<goto "temp_hub">><</timed>>\
-<</if>>\<</linkreplace>>
-
-:: dump {"position":"1225,50"}
-
-<q>I've never seen a plight so dire,
-I've never seen an uglier vampire.</q>

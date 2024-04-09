@@ -61,17 +61,23 @@ $(document).on(":passagerender", function () {
   }
 });
 
-// CSS CHANGES
+// CSS CHANGES FOR #PASSAGES
 $(document).on(":passagerender", function (ev) {
   // Get the current passage's tags
   var currentTags = tags();
 
-  // Check if the "letter" tag is included
-  if (currentTags.includes("letter")) {
-    // Apply styles for passages with the "letter" tag
+  // Check if tag is included
+  if (currentTags.includes("flashback")) {
+    // Apply styles for passages with the tag
     $("#passages").css({
       "background-color": "transparent",
       "box-shadow": "none",
+    });
+  } else if (currentTags.includes("letter")) {
+    // Apply styles for passages with the tag
+    $("#passages").css({
+      "background-color": "#fff",
+      "box-shadow": "var(--shadow-letter-elevation-high)",
     });
   } else {
     // Reset styles for passages without certain tags
