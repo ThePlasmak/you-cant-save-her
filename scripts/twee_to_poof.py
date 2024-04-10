@@ -60,7 +60,7 @@ with open(base_tw_path, "w", encoding="utf-8") as file:
     file.write(base_content)
 
 # Export to Poof format
-os.system('call tweego -l -o "export/Script in Poof (Sarah Mak).html" poof_temp')
+os.system('call tweego -l -o "export/Script from Poof (Sarah Mak).html" poof_temp')
 os.system(
     'call tweego -l -o "C:/Users/Sarah/Documents/GitHub/theplasmak.github.io/private/ACW_Poof.html" poof_temp'
 )
