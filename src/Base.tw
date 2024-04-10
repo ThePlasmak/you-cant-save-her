@@ -429,13 +429,16 @@ From the store directory, you think you could visit:
 <<linkappend "“WELCOME TO SPECIALO!”" t8n>> [[shouts a storekeeper->specialo_5]].<</linkappend>>
 
 :: specialo_5 {"position":"1525,1900"}
-The Specialo storekeepers are trained to do that. This is why vampires often shop at [[Specialo->specialo]].
+This is why vampires often shop at [[Specialo->specialo]].
 
 :: specialo {"position":"1525,2025"}
-<<set $specialo_visited to += 1>>
+<<set $specialo_visited += 1>>\
 <h4>$time, Day $day. Specialo, Emporium Shopping Centre Branch.</h4>
-<<if >>
+<<if $specialo_visited is 1>>\
 Still, you wonder why this shop is called Specialo, when there is nothing special about its clothes. In fact, the clothes are the very opposite of special—they are designed to be as <<include "cycling_specialo">> as possible.
+<<else>>\
+You wonder why this shop is called Specialo, when there is nothing special about its clothes. In fact, the clothes are the very opposite of special—they are designed to be as <<include "cycling_specialo">> as possible.
+<</if>>\
 
 A mannequin in front of the store is wearing the [[Specialo Airism Oversized Tunic->airism]]. Every few seconds, it moves to change its pose.
 
@@ -459,4 +462,4 @@ The [[uniform->specialo]] of men in Xingang.
 
 <<set $cyclingResult_specialo to $choices_specialo[$choicesCount_specialo]>>
 <</silently>>
-\<<linkreplace $choices_specialo[$choicesCount_specialo] t8n>><<include "cyclingspecialo">><</linkreplace>>
+\<<linkreplace $choices_specialo[$choicesCount_specialo] t8n>><<include "cycling_specialo">><</linkreplace>>
