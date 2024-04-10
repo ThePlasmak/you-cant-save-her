@@ -726,6 +726,7 @@ When this option is &#39;&#39;ON&#39;&#39;, an undo button will appear at the to
 /* TRACK VISITS */
 &lt;&lt;set $mirror_visited to false&gt;&gt;
 &lt;&lt;set $bookshop_1_visited to false&gt;&gt;
+&lt;&lt;set $thrift_shop_visited to 0&gt;&gt;
 &lt;&lt;set $$specialo_visited to 0&gt;&gt;
 
 /* OVERRIDE FOR TESTING */
@@ -757,7 +758,7 @@ All this trash accumulates in your flat like dust.
 * &lt;&lt;if $mirror_fail_seen == false&gt;&gt;[[You have an idea. “Mirror mirror on the wall, can you show me my reflection?”-&gt;magic_mirror_reflection_1]]&lt;&lt;else&gt;&gt;[[“Mirror mirror on the wall, can you show me my reflection?”-&gt;magic_mirror_fail]]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="magic_mirror_reflection_1" tags="" position="425,1000" size="100,100">&lt;&lt;set $mirror_fail_seen to true&gt;&gt;\
 The wisps of green vapour appear again, and you see the magic mirror&#39;s face. “So you can better your complexion,/Let me show you your reflection!”
 
-The face and vapours disappear, and briefly, the magic mirror is in complete darkness. Then, vertical rainbow-coloured streaks dance across the mirror, and you realise that it must be glitching out. Just as you consider switching this mirror off and on again, the mirror screen turns [[completely black-&gt;magic_mirror_reflection_2]].</tw-passagedata><tw-passagedata pid="19" name="magic_mirror_reflection_2" tags="" position="425,1125" size="100,100">A small, misshapen, carrot pops onto the screen. It follows your every movement in an odd way, like a hyperactive balloon.
+The face and vapours disappear, and briefly, the magic mirror is in complete darkness. Then, vertical rainbow-coloured streaks dance across the mirror, and you realise that it must be glitching out. Just as you step forward to switch this mirror off and on again, the mirror screen turns [[completely black-&gt;magic_mirror_reflection_2]].</tw-passagedata><tw-passagedata pid="19" name="magic_mirror_reflection_2" tags="" position="425,1125" size="100,100">A small, misshapen, carrot pops onto the screen. It follows your every movement in an odd way, like a hyperactive balloon.
 
 “The magic of your curse is just too strong./I tried showing your reflection, but it came out wrong,” the mirror says. It looks disappointed.
 
@@ -894,10 +895,13 @@ $canal_item
 
 &lt;&lt;set $cyclingResult_canal_cycle to $choices_canal_cycle[$choicesCount_canal_cycle]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_canal_cycle[$choicesCount_canal_cycle] t8n&gt;&gt;&lt;&lt;include &quot;canal_cycle&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="thrift_shop_pre" tags="" position="1600,1325" size="100,100">[[You jog over to the thrift shop before it closes...-&gt;thrift_shop]]</tw-passagedata><tw-passagedata pid="49" name="thrift_shop" tags="" position="1600,1450" size="100,100">&lt;h4&gt;$time, Day $day. The Phoenix.&lt;/h4&gt;
+\&lt;&lt;linkreplace $choices_canal_cycle[$choicesCount_canal_cycle] t8n&gt;&gt;&lt;&lt;include &quot;canal_cycle&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="thrift_shop_pre" tags="" position="1600,1325" size="100,100">[[You jog over to the thrift shop before it closes...-&gt;thrift_shop]]</tw-passagedata><tw-passagedata pid="49" name="thrift_shop" tags="" position="1600,1450" size="100,100">&lt;&lt;set $thrift_shop_visited += 1&gt;&gt;\
+&lt;h4&gt;$time, Day $day. The Phoenix.&lt;/h4&gt;
 This thrift shop is named “The Phoenix”, presumably because [[phoenixes-&gt;phoenix]] are reborn from their ashes when they die, and this shop helps to give clothes a second chance. The shopkeeper is a young man with scribbly, cartoony tattoos that move across his skin. You think it looks kind of neat.
+&lt;&lt;if $thrift_shop_visited is 1&gt;&gt;\
 
 He invites you inside, after you stand awkwardly at the entrance for a minute.
+&lt;&lt;/if&gt;&gt;\
 
 &lt;&lt;if $clothing_type is &quot;&quot;&gt;&gt;\
 The selection is an eclectic mix of clothing from different eras, but the sheer diversity of choices is stressing you. Plus, as much as you want to safe the planet, some of these clothes have probably been cursed.
@@ -905,7 +909,7 @@ The selection is an eclectic mix of clothing from different eras, but the sheer 
 * [[Look through the women&#39;s section.-&gt;thrift_shop_women]]
 * &lt;&lt;link &quot;Return home.&quot; $explore_passage&gt;&gt;&lt;&lt;set $time to &quot;Night&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;elseif $inv.has(&quot;thrift_dress&quot;)&gt;&gt;\
-You already bought a dress here.
+You have bought a dress here.
 * [[Look through the men&#39;s section.-&gt;thrift_shop_men]]
 * &lt;&lt;link &quot;Return home.&quot; $explore_passage&gt;&gt;&lt;&lt;set $time to &quot;Night&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;\
@@ -929,10 +933,7 @@ You have &lt;&lt;print $money&gt;&gt;c left in your [[budget-&gt;money_info]].
 * [[Consider buying something else.-&gt;thrift_shop]]</tw-passagedata><tw-passagedata pid="52" name="phoenix" tags="" position="1475,1450" size="100,100">The “phoenixes” from this country have no such power—they are just very rare and pretty birds. The imprecision of language [[always annoyed you-&gt;thrift_shop]].</tw-passagedata><tw-passagedata pid="53" name="money_info" tags="" position="1350,1100" size="100,100">According to your calculations, your budget for this month is &lt;&lt;print $money_start&gt;&gt;c, minus your blood budget. If you exceed this budget, you will probably need to drink less blood next month, which would be &lt;&lt;return &quot;uncomfortable&quot;&gt;&gt;.</tw-passagedata><tw-passagedata pid="54" name="shopping_centre_pre" tags="" position="1250,1500" size="100,100">[[You jog over to the shopping centre before it closes...-&gt;shopping_centre]]</tw-passagedata><tw-passagedata pid="55" name="shopping_centre" tags="" position="1250,1625" size="100,100">&lt;h4&gt;$time, Day $day. Emporium Shopping Centre.&lt;/h4&gt;
 The shopping centre feels like a foreign country. You&#39;re not used to how clean, white, and bright this place is—if you visited here as a newborn, the sheer brightness could have turned you into a pile of ash.
 
-From the store directory, you think you could visit:
-* [[Specialo, a fast-fashion store.-&gt;specialo_1]]
-* [[Holmes, a health and beauty chain store.-&gt;holmes]]
-* [[LAVISH, an odd cosmetics store.-&gt;lavish]]</tw-passagedata><tw-passagedata pid="56" name="holmes" tags="" position="1400,1625" size="100,100"></tw-passagedata><tw-passagedata pid="57" name="lavish" tags="" position="1450,1750" size="100,100"></tw-passagedata><tw-passagedata pid="58" name="specialo_1" tags="" position="1025,1900" size="100,100">[[You wait outside the entrance of Specialo.-&gt;specialo_2]]</tw-passagedata><tw-passagedata pid="59" name="specialo_2" tags="" position="1150,1900" size="100,100">[[You notice that a few other vampires are waiting alongside you.-&gt;specialo_3]]</tw-passagedata><tw-passagedata pid="60" name="specialo_3" tags="" position="1275,1900" size="100,100">[[All of you wait, until...-&gt;specialo_4]]</tw-passagedata><tw-passagedata pid="61" name="specialo_4" tags="" position="1400,1900" size="100,100">&lt;&lt;linkappend &quot;“WELCOME TO SPECIALO!”&quot; t8n&gt;&gt; [[shouts a storekeeper-&gt;specialo_5]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="specialo_5" tags="" position="1525,1900" size="100,100">This is why vampires often shop at [[Specialo-&gt;specialo]].</tw-passagedata><tw-passagedata pid="63" name="specialo" tags="" position="1525,2025" size="100,100">&lt;&lt;set $specialo_visited += 1&gt;&gt;\
+&lt;&lt;if $specialo_visited is 0&gt;&gt;[[Specialo-&gt;specialo_1]]&lt;&lt;else&gt;&gt;[[Specialo-&gt;specialo]]&lt;&lt;/if&gt;&gt;, a fast-fashion store, is located in the east wing, while [[LAVISH-&gt;lavish]], a cosmetics store, is in the west wing. [[Holmes-&gt;holmes]], a beauty chain store, is a few steps to the north of the shopping centre entrance.</tw-passagedata><tw-passagedata pid="56" name="holmes" tags="" position="1400,1625" size="100,100"></tw-passagedata><tw-passagedata pid="57" name="lavish" tags="" position="1450,1750" size="100,100"></tw-passagedata><tw-passagedata pid="58" name="specialo_1" tags="" position="1025,1900" size="100,100">[[You wait outside the entrance of Specialo.-&gt;specialo_2]]</tw-passagedata><tw-passagedata pid="59" name="specialo_2" tags="" position="1150,1900" size="100,100">[[You notice that a few other vampires are waiting alongside you.-&gt;specialo_3]]</tw-passagedata><tw-passagedata pid="60" name="specialo_3" tags="" position="1275,1900" size="100,100">[[All of you wait, until...-&gt;specialo_4]]</tw-passagedata><tw-passagedata pid="61" name="specialo_4" tags="" position="1400,1900" size="100,100">&lt;&lt;linkappend &quot;“WELCOME TO SPECIALO!”&quot; t8n&gt;&gt; [[shouts a storekeeper-&gt;specialo_5]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="specialo_5" tags="" position="1525,1900" size="100,100">[[You have all been invited in.-&gt;specialo_6]]</tw-passagedata><tw-passagedata pid="63" name="specialo_6" tags="" position="1650,1900" size="100,100">This is why vampires often shop at [[Specialo-&gt;specialo]].</tw-passagedata><tw-passagedata pid="64" name="specialo" tags="" position="1525,2025" size="100,100">&lt;&lt;set $specialo_visited += 1&gt;&gt;\
 &lt;h4&gt;$time, Day $day. Specialo, Emporium Shopping Centre Branch.&lt;/h4&gt;
 &lt;&lt;if $specialo_visited is 1&gt;&gt;\
 Still, you wonder why this shop is called Specialo, when there is nothing special about its clothes. In fact, the clothes are the very opposite of special—they are designed to be as &lt;&lt;include &quot;cycling_specialo&quot;&gt;&gt; as possible.
@@ -942,7 +943,9 @@ You wonder why this shop is called Specialo, when there is nothing special about
 
 A mannequin in front of the store is wearing the [[Specialo Airism Oversized Tunic-&gt;airism]]. Every few seconds, it moves to change its pose.
 
-/* TODO */</tw-passagedata><tw-passagedata pid="64" name="airism" tags="" position="1400,2025" size="100,100">The [[uniform-&gt;specialo]] of men in Xingang.</tw-passagedata><tw-passagedata pid="65" name="cycling_specialo" tags="" position="1625,2025" size="100,100">&lt;&lt;silently&gt;&gt;
+Bea told you that Specialo clothes were expensive in her home country, which you thought was odd, because Specialo clothes are considered to be affordable here.
+
+/* TODO */</tw-passagedata><tw-passagedata pid="65" name="airism" tags="" position="1400,2025" size="100,100">The [[uniform-&gt;specialo]] of men in Xingang.</tw-passagedata><tw-passagedata pid="66" name="cycling_specialo" tags="" position="1625,2025" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_specialo&gt;&gt;
   &lt;&lt;set $choicesCount_specialo to -1&gt;&gt;
   &lt;&lt;set $choices_specialo to [&quot;simple&quot;, &quot;timeless&quot;, &quot;basic&quot;]&gt;&gt;

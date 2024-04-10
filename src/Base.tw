@@ -51,6 +51,7 @@ When this option is ''ON'', an undo button will appear at the top of the game wi
 /* TRACK VISITS */
 <<set $mirror_visited to false>>
 <<set $bookshop_1_visited to false>>
+<<set $thrift_shop_visited to 0>>
 <<set $$specialo_visited to 0>>
 
 /* OVERRIDE FOR TESTING */
@@ -124,7 +125,7 @@ As you expected, you don't see your reflection in the mirror. You don't see the 
 <<set $mirror_fail_seen to true>>\
 The wisps of green vapour appear again, and you see the magic mirror's face. “So you can better your complexion,/Let me show you your reflection!”
 
-The face and vapours disappear, and briefly, the magic mirror is in complete darkness. Then, vertical rainbow-coloured streaks dance across the mirror, and you realise that it must be glitching out. Just as you consider switching this mirror off and on again, the mirror screen turns [[completely black->magic_mirror_reflection_2]].
+The face and vapours disappear, and briefly, the magic mirror is in complete darkness. Then, vertical rainbow-coloured streaks dance across the mirror, and you realise that it must be glitching out. Just as you step forward to switch this mirror off and on again, the mirror screen turns [[completely black->magic_mirror_reflection_2]].
 
 :: magic_mirror_reflection_2 {"position":"425,1125"}
 A small, misshapen, carrot pops onto the screen. It follows your every movement in an odd way, like a hyperactive balloon.
@@ -354,10 +355,13 @@ $canal_item
 [[You jog over to the thrift shop before it closes...->thrift_shop]]
 
 :: thrift_shop {"position":"1600,1450"}
+<<set $thrift_shop_visited += 1>>\
 <h4>$time, Day $day. The Phoenix.</h4>
 This thrift shop is named “The Phoenix”, presumably because [[phoenixes->phoenix]] are reborn from their ashes when they die, and this shop helps to give clothes a second chance. The shopkeeper is a young man with scribbly, cartoony tattoos that move across his skin. You think it looks kind of neat.
+<<if $thrift_shop_visited is 1>>\
 
 He invites you inside, after you stand awkwardly at the entrance for a minute.
+<</if>>\
 
 <<if $clothing_type is "">>\
 The selection is an eclectic mix of clothing from different eras, but the sheer diversity of choices is stressing you. Plus, as much as you want to safe the planet, some of these clothes have probably been cursed.
@@ -365,7 +369,7 @@ The selection is an eclectic mix of clothing from different eras, but the sheer 
 * [[Look through the women's section.->thrift_shop_women]]
 * <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
 <<elseif $inv.has("thrift_dress")>>\
-You already bought a dress here.
+You have bought a dress here.
 * [[Look through the men's section.->thrift_shop_men]]
 * <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
 <<else>>\
@@ -407,10 +411,7 @@ According to your calculations, your budget for this month is <<print $money_sta
 <h4>$time, Day $day. Emporium Shopping Centre.</h4>
 The shopping centre feels like a foreign country. You're not used to how clean, white, and bright this place is—if you visited here as a newborn, the sheer brightness could have turned you into a pile of ash.
 
-From the store directory, you think you could visit:
-* [[Specialo, a fast-fashion store.->specialo_1]]
-* [[Holmes, a health and beauty chain store.->holmes]]
-* [[LAVISH, an odd cosmetics store.->lavish]]
+<<if $specialo_visited is 0>>[[Specialo->specialo_1]]<<else>>[[Specialo->specialo]]<</if>>, a fast-fashion store, is located in the east wing, while [[LAVISH->lavish]], a cosmetics store, is in the west wing. [[Holmes->holmes]], a beauty chain store, is a few steps to the north of the shopping centre entrance.
 
 :: holmes {"position":"1400,1625"}
 
@@ -429,6 +430,9 @@ From the store directory, you think you could visit:
 <<linkappend "“WELCOME TO SPECIALO!”" t8n>> [[shouts a storekeeper->specialo_5]].<</linkappend>>
 
 :: specialo_5 {"position":"1525,1900"}
+[[You have all been invited in.->specialo_6]]
+
+:: specialo_6 {"position":"1650,1900"}
 This is why vampires often shop at [[Specialo->specialo]].
 
 :: specialo {"position":"1525,2025"}
@@ -441,6 +445,8 @@ You wonder why this shop is called Specialo, when there is nothing special about
 <</if>>\
 
 A mannequin in front of the store is wearing the [[Specialo Airism Oversized Tunic->airism]]. Every few seconds, it moves to change its pose.
+
+Bea told you that Specialo clothes were expensive in her home country, which you thought was odd, because Specialo clothes are considered to be affordable here.
 
 /* TODO */
 
