@@ -16,8 +16,8 @@ SKINCARE FOR VAMPIRES
 <div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · <<nobr>><<link 'Restart'>>
     <<for _key, _val range State.variables>><<run delete State.variables[_key]>><</for>>
     <<set State.expired.length = 0>>
-    <<goto pre_intro_letter>>
-<</link>><</nobr>><<else>>[[Start->pre_intro_letter]]<</if>> · [[Options->options]]</div>
+    <<goto intro_letter_pre>>
+<</link>><</nobr>><<else>>[[Start->intro_letter_pre]]<</if>> · [[Options->options]]</div>
 
 :: options [no-undo] {"position":"75,400"}
 <span class="subtitle">''Options''</span> <span class="close">[[✖->Start]]</span>
@@ -28,25 +28,43 @@ SKINCARE FOR VAMPIRES
 <</if>>
 When this option is ''ON'', an undo button will appear at the top of the game window.
 
-:: variable_setup {"position":"200,225"}
+:: variable_setup {"position":"200,275"}
 /* STORY */
+/* May need to change during testing */
 <<set $day to 1>>
+<<set $time to "Evening">>
+<<set $home_passage to "day_1_start">>
+<<set $explore_passage to "day_1_explore">>
+/* Unlikely to change during testing */
 <<set $blood_sated to false>>
-<<set $shop_done to false>>
+<<set $clothing to "">>
+<<set $clothing_type to "">>
+<<set $money to 503>>
+<<set $money_start to 503>>
+<<newinv $inv>>
 
 /* TRACK SEEN TEXT */
 <<set $bed_text_seen to false>>
 <<set $blood_text_seen to false>>
+<<set $mirror_fail_seen to false>>
 
 /* TRACK VISITS */
 <<set $mirror_visited to false>>
+<<set $bookshop_1_visited to false>>
+<<set $$specialo_visited to 0>>
 
-:: StoryInit {"position":"75,225"}
-<<include variable_setup>>
+/* OVERRIDE FOR TESTING */
+/* <<set $day to 1>>
+<<set $time to "Evening">>
+<<set $home_passage to "day_1_start">>
+<<set $explore_passage to "day_1_explore">> */
 
-:: pre_intro_letter [pre-letter no-undo] {"position":"325,400"}
+:: StoryInit {"position":"75,275"}
+<<include "variable_setup">>
+
+:: intro_letter_pre [pre-letter no-undo] {"position":"325,400"}
 <<nobr>>
-<<include variable_setup>>
+<<include "variable_setup">>
 <<timed 1s>><<goto "intro_letter">><</timed>>
 <</nobr>>
 
@@ -59,8 +77,6 @@ You are welcome to bring an additional guest to share in the evening's festiviti
 * [[You turn over the letter.->intro_1]]
 
 :: intro_1 {"position":"575,400"}
-It says:
-
 //From:// <<linkreplace "(the person you would rather forget)" t8n>><<linkreplace "(the person who still infiltrates your dreams)" t8n>><<linkreplace "(your ex)" t8n>><<link "<i>Bea</i>" "intro_2" >><</link>><</linkreplace>><</linkreplace>><</linkreplace>>
 
 :: intro_2 {"position":"700,400"}
@@ -70,36 +86,78 @@ It says:
 [[But you spotted this letter lying on the floor of your flat...->intro_4]]
 
 :: intro_4 {"position":"950,400"}
-[[So, now, you can't take a break from fighting yet.->intro_5]]
+[[So, now, you can't take a break yet.->intro_5]]
 
 :: intro_5 {"position":"1075,400"}
 You have five days left to prepare <<linkreplace "for this ball" t8n>>[[to meet her->day_1_start]]<</linkreplace>>.
 
 :: day_1_start {"position":"200,575"}
 <<set $day to 1>>\
+<<set $home_passage to passage()>>\
 <h4>Evening, Day 1. Your Flat.</h4>
-Your flat is a cube of magical loot and trash. You don't have the energy to clean it up, and you don't spend a lot of time here anyway.
+Your flat is a cube of [[magical loot->magical_loot]] and [[trash]]. You don't have the energy to clean this up, and you don't spend a lot of time here anyway.
 
-You consider talking to the <<if $mirror_visited is false>>[[magic mirror->magic_mirror_1]]<<else>>[[magic mirror->magic_mirror]]<</if>> in front of you, in the form of rhyming couplets. Your [[half-broken bed->bed]] is behind you, and a [[broken fridge->fridge]] is next to it.
+You consider talking to the <<if $mirror_visited == false>>[[magic mirror->magic_mirror_1]]<<elseif $mirror_visited == true and $mirror_fail_seen == false>>[[magic mirror->magic_mirror]]<<else>>[[magic mirror->magic_mirror_fail]]<</if>> in front of you<<if $mirror_visited is false>>, in the form of rhyming couplets<</if>>. Your [[half-broken bed->bed]] is to your left, and a [[broken fridge->fridge]] is next to it. There is a [[gunsmithing bench->gunsmithing_tools]] behind you.
 
-:: magic_mirror_1 {"position":"375,575"}
+:: magical_loot {"position":"425,650"}
+Weapons, monster parts, all the assorted loot from your adventures that you couldn't sell.
+
+Some of it is probably cursed.
+* [[Look away.->$home_passage]]
+
+:: trash {"position":"425,750"}
+Yellowed paper, stripped screws, and bottles encrusted with dried blood.
+
+All this trash accumulates in your flat like dust.
+* [[Look away.->$home_passage]]
+
+:: gunsmithing_tools {"position":"425,850"}
+One of the only places in your flat you keep clean. You have a toolbox with several screwdriver bits and punch sets, a couple of calipers and files, and a few dental picks to clean your gear.
+* [[Look back.->$home_passage]]
+
+:: magic_mirror {"position":"300,825"}
+As you expected, you don't see your reflection in the mirror. You don't see the magical intelligence, either.
+* [[Look back.->$home_passage]]
+* <<if $mirror_fail_seen == false>>[[You have an idea. “Mirror mirror on the wall, can you show me my reflection?”->magic_mirror_reflection_1]]<<else>>[[“Mirror mirror on the wall, can you show me my reflection?”->magic_mirror_fail]]<</if>>
+
+:: magic_mirror_reflection_1 {"position":"425,1000"}
+<<set $mirror_fail_seen to true>>\
+The wisps of green vapour appear again, and you see the magic mirror's face. “So you can better your complexion,/Let me show you your reflection!”
+
+The face and vapours disappear, and briefly, the magic mirror is in complete darkness. Then, vertical rainbow-coloured streaks dance across the mirror, and you realise that it must be glitching out. Just as you consider switching this mirror off and on again, the mirror screen turns [[completely black->magic_mirror_reflection_2]].
+
+:: magic_mirror_reflection_2 {"position":"425,1125"}
+A small, misshapen, carrot pops onto the screen. It follows your every movement in an odd way, like a hyperactive balloon.
+
+“The magic of your curse is just too strong./I tried showing your reflection, but it came out wrong,” the mirror says. It looks disappointed.
+
+This is just another one of those little annoyances [[you have to live with->$home_passage]].
+
+:: magic_mirror_fail {"position":"275,1050"}
+<<set $mirror_items = ["a misshapen carrot", "a half-eaten grilled fish", "a lumpy roll of bread", "a little flower pot", "a stack of books without any titles"]>>\
+<<set $mirror_item_now = $mirror_items.filter(e => e !== $mirror_item_now).random()>>\
+Now, $mirror_item_now is on the mirror's screen, following your every movement.
+
+[[At least it's trying its best.->$home_passage]]
+
+:: magic_mirror_1 {"position":"550,575"}
 [[You look at the magic mirror->magic_mirror_2]].
 
-:: magic_mirror_2 {"position":"500,575"}
+:: magic_mirror_2 {"position":"675,575"}
 You do not see your reflection, because you are a [[vampire->magic_mirror_3]].
 
-:: magic_mirror_3 {"position":"625,575"}
-But maybe this mirror can [[still be useful to you->magic_mirror]].
+:: magic_mirror_3 {"position":"800,575"}
+But maybe this mirror can [[still be useful to you->magic_mirror_start]].
 
-:: magic_mirror {"position":"400,700"}
+:: magic_mirror_start {"position":"950,575"}
 <<set $mirror_visited to true>>\
 The mirror is covered in dust, and there are black spots scattered along its bottom edge.
 
 Your old adventuring companion, Princess Philomena the Third, gifted you this magic mirror a few decades ago. Maybe she forgot that vampires can't see themselves in mirrors, but at least there is a magical intelligence inside this.
-* <<link "“Mirror mirror on the wall, explain, in detail, how I should prepare for a formal event.”" "magic_mirror_no_rhyme">><</link>>
-* <<link "“Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?”" "magic_mirror_rhyme">><</link>>
+* [[“Mirror mirror on the wall, explain, in detail, how I should prepare for a formal event.”->magic_mirror_no_rhyme]]
+* [[“Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?”->magic_mirror_rhyme]]
 
-:: magic_mirror_rhyme {"position":"350,825"}
+:: magic_mirror_rhyme {"position":"900,700"}
 Suddenly, a vortex of green vapour whirls within the mirror's depths. At the centre of the vortex, the face of a middle-aged woman swirls into view.
 
 Then, she forces an uncomfortably wide grin.
@@ -108,34 +166,33 @@ Then, she forces an uncomfortably wide grin.
 but similar events may involve human sacrifices or alcohol.
 Before making any dangerous decision,
 please consult a haemomancer, or a physician.”
-* <<link "“That was useless!”" "magic_mirror_useless">><</link>>
-* <<link "“The Blood Moon Ball is just some formal event! So how do I prepare for it?”" "magic_mirror_prepare">><</link>>
+* [[“That was completely useless.”->magic_mirror_useless]]
+* [[“The Blood Moon Ball is just some formal event! So how do I prepare for it?”->magic_mirror_prepare]]
 
-:: magic_mirror_useless
-“I'm sorry to hear that this did not answer your question.
-But could you rephrase your query with a little less aggression?”
+:: magic_mirror_useless {"position":"825,850"}
+The mirror widens its eyes, feigning shock. “I'm sorry to hear that this did not answer your question./But could you rephrase your query with a little less aggression?”
 
-You groan, and consider slapping the mirror, but getting angry with it would be like getting angry with a printer. “So how do I prepare for the Blood Moon Ball, which is a //formal event//?”
+You let out a loud groan, but you know that getting angry with the mirror would be like getting angry with a printer. “So how do I prepare for the Blood Moon Ball, which is a //formal event//?”
 
 The magic mirror answers in a musical voice.
 
-<<include magic_mirror_rhyme_bottleneck>>
+<<include "magic_mirror_rhyme_bottleneck">>
 
-:: magic_mirror_prepare
+:: magic_mirror_prepare {"position":"950,850"}
 The magic mirror continues to answer in a musical voice.
 
-<<include magic_mirror_rhyme_bottleneck>>
+<<include "magic_mirror_rhyme_bottleneck">>
 
-:: magic_mirror_no_rhyme {"position":"475,825"}
+:: magic_mirror_no_rhyme {"position":"1025,700"}
 Suddenly, a vortex of green vapour whirls within the mirror's depths. At the centre of the vortex, the face of a middle-aged woman swirls into view.
 
 She looks annoyed. Maybe the mirror is annoyed by <<linkreplace "your lack of rhyming abilities" t8n>>your lack of rhyming abilities, or simply with you as a person<</linkreplace>>.
 
 Then, she forces an uncomfortably wide grin.
 
-<<include magic_mirror_rhyme_bottleneck>>
+<<include "magic_mirror_rhyme_bottleneck">>
 
-:: magic_mirror_rhyme_bottleneck
+:: magic_mirror_rhyme_bottleneck {"position":"1075,850"}
 “<<linkappend "First, you must improve your skin,\nso this is the routine you should begin:" t8n>><<linkappend "\nUse a cleanser to purge your loathsome oils,\nthen a toner to soothe before your next toils." t8n>><<linkappend "\nGet an essence, a serum, an ampoule, and a lotion,\nor you could use an all-in-one emulsion." t8n>>
 Next, an eye cream, a mask, then a moisturising cream,
 and don't forget to acquire a strong <<link "sunscreen">><<replace "#1" t8n>>The mirror simply smiles at you.
@@ -147,36 +204,34 @@ It seems that the magic mirror forgot that you are a vampire, who cannot go out 
 <</linkappend>><</linkappend>><</linkappend>>
 <span id="1"></span>
 
-:: magic_mirror_ridiculous
+:: magic_mirror_ridiculous {"position":"1200,975"}
 She chimes, “there are no ugly women, only lazy ones.
 Why don't you care about this as much your guns?”
 
-You didn't know this mirror was awake when you were working on your pistols. /* May want to improve this */
+You didn't know this mirror was awake when you were working on your pistols. /* TODO: May want to improve this */
 
 “Okay, I care now! Just tell me what I need to do!” You shout.
 
 The mirror answers in a musical tone:
-<<include magic_mirror_need>>
+<<include "magic_mirror_need">>
 
-:: magic_mirror_need
+:: magic_mirror_need {"position":"1075,975"}
 “Cleansers, moisturisers, and sunscreens are the vital three,
 So you should purchase them on your next shopping spree,” it says.
 
-The mirror's eyes narrow, and it adds,
-“And unless you consider your trench coat formal attire,
-a dressier outfit is another item you must acquire.”
+The mirror's eyes narrow, and it adds, “unless you consider your trench coat formal attire,/a dressier outfit is one you must acquire.”
 
-You think your trench coat looks very dapper, and you stubbornly insist on wearing it even in Xingang's subtropical weather, but the mirror is right. You can't go to the ball wearing this.
+You think your trench coat makes you look cool, and you stubbornly insist on wearing it even in Xingang's subtropical weather, but the mirror is right. You can't go to the ball wearing this.
 
 [[So, you know what you need now.->tutorial_1]]
 
-:: tutorial_1
+:: tutorial_1 {"position":"1075,1100"}
 [[You need to go out, and shop for some supplies.->tutorial_2]]
 
-:: tutorial_2
+:: tutorial_2 {"position":"1200,1100"}
 [[It is time to prepare for this upcoming battle.->day_1_explore]]
 
-:: bed {"position":"200,700"}
+:: bed {"position":"175,700"}
 <<if $mirror_visited == true and $bed_text_seen == false >>\
 <<set $bed_text_seen to true>>\
 When Princess Philomena wanted to transport the mirror to you, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
@@ -185,26 +240,29 @@ Thankfully, you leaped just in time to catch the mirror, so your half-broken bed
 <<else>>\
 Your bed is still half-broken. There is a gaping horizontal split along its underside, but it has not completely broken into two. You can still [[sleep]] on it comfortably, somewhat.
 <</if>>\
-* [[Look back.->day_1_start]]
+* [[Look back.->$home_passage]]
 
-:: sleep {"position":"200,825"}
-/* WIP */
+:: sleep {"position":"175,825"}
 You don't need to sleep, but you try to sleep every day, as it does make you feel more rested. It's probably more psychological than physical. <<if $mirror_visited == true>>Plus, you read in a magazine that sleeping is good for your skin.<</if>>
 
-<<if $shop_done == true>>\
-/* WIP: this will have lots of nested ifs for each day */
+<<if $time is "Night">>\
+/* TODO: this will have lots of nested ifs for each day */
+<<elseif $mirror_visited == false>>\
+As much as you wish to sleep, you feel that you should talk to the mirror first.
+* [[Look back.->$home_passage]]
 <<else>>\
-
 <</if>>\
 
-:: fridge {"position":"75,700"}
-
-This broken fridge also functions as your bedside table. While the fridge has long since broken, you filled it with bricks of ice enchanted to never melt, so it will stay cold for the rest of your unlife.
+:: fridge {"position":"50,700"}
+This fridge also functions as your bedside table. While the fridge has long since broken, you filled it with [[bricks of ice->bricks_of_ice]] that were enchanted to never melt, so it will stay cold for the rest of your unlife.
 
 Inside your fridge, bottles of blood are arranged neatly in rows. You labelled each bottle with the date you planned to [[drink it->drink_blood]].
-* [[Look back.->day_1_start]]
+* [[Look back.->$home_passage]]
 
-:: drink_blood {"position":"75,825"}
+:: bricks_of_ice {"position":"50,575"}
+Stolen from Frost Lich Belierond's castle. It took many months for your hands to heal from the magically-enhanced frostbite, but at least your [[refrigeration needs->fridge]] are forever covered.
+
+:: drink_blood {"position":"50,825"}
 <<if $blood_sated is false and $blood_text_seen is false>>\
 <<set $blood_text_seen to true>>\
 <<set $blood_sated to true>>\
@@ -215,7 +273,190 @@ You're used to [[living like a rat->fridge]].
 <<set $blood_sated to true>>\
 You drink today's bottle of blood. As you expected, it tastes [[awful->fridge]].
 <<else>>\
-According to your calculations, [[you don't need to drink blood now->fridge]].
+According to your calculations, you don't need to drink blood now. And with the tight budget you have, [[you shouldn't->fridge]].
 <</if>>\
 
-:: day_1_explore
+:: day_1_explore {"position":"1200,1225"}
+<<set $explore_passage to passage()>>\
+<h4>Evening, Day 1. The Street Below Your Flat.</h4>
+Ash clings to every surface here, staining the buildings a deep grey. There are a few shops along the street, including a [[bookshop]] you often frequent. There is a [[canal]] to the east, a few blocks away.
+
+Before the shops close, you should make your way eastward to the [[neighbourhood shopping centre->shopping_centre_pre]], or northward to a [[thrift shop->thrift_shop_pre]]. You can also take a tram to the [[shopping district->shopping_district_pre]] in the south of the city.
+
+:: bookshop {"position":"700,1375"}
+The [[shopkeeper->bookshop_shopkeeper]] hollers to welcome you. You appreciate this, because you can't enter a <<linkappend "space" t8n>> (that most people consider private)<</linkappend>> without being invited in.
+<<if $bookshop_1_visited == false>>\
+* [[Look around.->bookshop_1]]
+* [[Leave.->$explore_passage]]
+<<else>>\
+* [[Leave.->$explore_passage]]
+<</if>>\
+
+:: bookshop_1 {"position":"775,1500"}
+<<set $bookshop_1_visited to true>>\
+<h4>$time, Day $day. The Bookshop Opposite Your Flat.</h4>
+Deep inside the shop's shelves, a few book titles catch your eye: “A Comprehensive History of the East Shenzhou Company”, “POLITICAL BOOK TITLE”, “POLITICAL BOOK TITLE”... /* TODO */
+
+“These just came in!” the shopkeeper says cheerfully.
+* [[“Shouldn't these be banned?”->bookshop_2]]
+* [[“Are you sure it's safe to keep these?”->bookshop_3]]
+
+:: bookshop_2 {"position":"700,1625"}
+The shopkeeper shrugs. You're sure that they must have been banned.
+
+“I'm sure no one will snitch,” he says. “The people in this neighbourhood //definitely// won't do that.”
+
+He winks at you.
+* [[You nod slowly.->bookshop]]
+* [[“If you say so...”->bookshop]]
+
+:: bookshop_3 {"position":"625,1500"}
+“It's safe, as long as no one snitches,” he replies. “And I'm sure the people in this neighbourhood won't do that.”
+
+He winks at you.
+* [[You nod slowly.->bookshop]]
+* [[“If you say so...”->bookshop]]
+
+:: bookshop_shopkeeper {"position":"575,1375"}
+You've seen him around the neighbourhood since he was a little boy, and now he must be pushing seventy. He is one of the recurring background characters in your life, [[but you don't know his name->bookshop]].
+
+:: canal {"position":"950,1375"}
+<h4>$time, Day $day. Canal.</h4>
+You can smell the canal before you can see it. The canal is <<include "canal_cycle">> of this city's unwanted things.
+* [[Watch the canal.->canal_watch]]
+* [[Walk back.->$explore_passage]]
+
+:: canal_watch {"position":"950,1500"}
+<<set $canal_items = ["A stray dire wolf bends down to lap up the water. Its fur is as mangy as an old coat.", "Multicoloured scraps of polyslime bags float across, like jellyfish.", "A crocodile gar leaps out of the water, snatching a pigeon in its jaws.", "Liquified rainbows swirl on the water's surface.", "Black tentacles undulate under the water, occasionally catching stray trash.", "A clutch of glowing eggs drifts across the canal. A lanternfish must have spawned, somewhere."]>>\
+<<set $canal_item = $canal_items.filter(e => e !== $canal_item).random()>>\
+$canal_item
+* [[Keep watching.->canal_watch]]
+* [[Look away.->canal]]
+
+:: canal_cycle {"position":"850,1375"}
+<<silently>>
+<<if not $choices_canal_cycle>>
+  <<set $choicesCount_canal_cycle to -1>>
+  <<set $choices_canal_cycle to ["a repository", "a museum", "an archive"]>>
+<</if>>
+
+<<set $choicesCount_canal_cycle to $choicesCount_canal_cycle + 1>>
+
+<<if $choicesCount_canal_cycle >= $choices_canal_cycle.length>>
+   <<set $choicesCount_canal_cycle to 0>>
+<</if>>
+
+<<set $cyclingResult_canal_cycle to $choices_canal_cycle[$choicesCount_canal_cycle]>>
+<</silently>>
+\<<linkreplace $choices_canal_cycle[$choicesCount_canal_cycle] t8n>><<include "canal_cycle">><</linkreplace>>
+
+:: thrift_shop_pre {"position":"1600,1325"}
+[[You jog over to the thrift shop before it closes...->thrift_shop]]
+
+:: thrift_shop {"position":"1600,1450"}
+<h4>$time, Day $day. The Phoenix.</h4>
+This thrift shop is named “The Phoenix”, presumably because [[phoenixes->phoenix]] are reborn from their ashes when they die, and this shop helps to give clothes a second chance. The shopkeeper is a young man with scribbly, cartoony tattoos that move across his skin. You think it looks kind of neat.
+
+He invites you inside, after you stand awkwardly at the entrance for a minute.
+
+<<if $clothing_type is "">>\
+The selection is an eclectic mix of clothing from different eras, but the sheer diversity of choices is stressing you. Plus, as much as you want to safe the planet, some of these clothes have probably been cursed.
+* [[Look through the men's section.->thrift_shop_men]]
+* [[Look through the women's section.->thrift_shop_women]]
+* <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
+<<elseif $inv.has("thrift_dress")>>\
+You already bought a dress here.
+* [[Look through the men's section.->thrift_shop_men]]
+* <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
+<<else>>\
+The selection is an eclectic mix of clothing from different eras, but the sheer diversity of choices is stressing you.
+
+You already bought a $clothing_type, but you could buy another outfit, if you think you have enough budget for it, and if you aren't confident in your shopping choices.
+
+* [[Look through the men's section.->thrift_shop_men]]
+* [[Look through the women's section.->thrift_shop_women]]
+* <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
+<</if>>\
+
+:: thrift_shop_men {"position":"1675,1575"}
+You like some of the suits, but they are all, obviously, too big for you. Unfortunately, your vampire physiology prevents you from growing taller, but even if you were still human, you would never be able to grow into [[these sizes->thrift_shop]].
+
+:: thrift_shop_women {"position":"1550,1575"}
+Most of the vintage dresses are frilly, and you would rather die again than wear them. The only dress you can tolerate is a simple black dress, which is at the pleasantly low price of 55c.
+
+“Oh sorry,” the shopkeeper says. “I think that dress may be cursed.”
+
+“Blood curse. It's makes you... uh... crave blood.”
+
+“I'm already a vampire, so I don't think that affects me.”
+
+You have <<print $money>>c left in your [[budget->money_info]].
+* <<link "Buy the vintage dress, which may be cursed, for 55c." "thrift_shop">><<pickup $inv "thrift_dress" 1>><<set $clothing_type to "dress">><<set $money -= 55>><</link>>
+* [[Consider buying something else.->thrift_shop]]
+
+:: phoenix {"position":"1475,1450"}
+The “phoenixes” from this country have no such power—they are just very rare and pretty birds. The imprecision of language [[always annoyed you->thrift_shop]].
+
+:: money_info {"position":"1350,1100"}
+According to your calculations, your budget for this month is <<print $money_start>>c, minus your blood budget. If you exceed this budget, you will probably need to drink less blood next month, which would be <<return "uncomfortable">>.
+
+:: shopping_centre_pre {"position":"1250,1500"}
+[[You jog over to the shopping centre before it closes...->shopping_centre]]
+
+:: shopping_centre {"position":"1250,1625"}
+<h4>$time, Day $day. Emporium Shopping Centre.</h4>
+The shopping centre feels like a foreign country. You're not used to how clean, white, and bright this place is—if you visited here as a newborn, the sheer brightness could have turned you into a pile of ash.
+
+From the store directory, you think you could visit:
+* [[Specialo, a fast-fashion store.->specialo_1]]
+* [[Holmes, a health and beauty chain store.->holmes]]
+* [[LAVISH, an odd cosmetics store.->lavish]]
+
+:: holmes {"position":"1400,1625"}
+
+:: lavish {"position":"1450,1750"}
+
+:: specialo_1 {"position":"1025,1900"}
+[[You wait outside the entrance of Specialo.->specialo_2]]
+
+:: specialo_2 {"position":"1150,1900"}
+[[You notice that a few other vampires are waiting alongside you.->specialo_3]]
+
+:: specialo_3 {"position":"1275,1900"}
+[[All of you wait, until...->specialo_4]]
+
+:: specialo_4 {"position":"1400,1900"}
+<<linkappend "“WELCOME TO SPECIALO!”" t8n>> [[shouts a storekeeper->specialo_5]].<</linkappend>>
+
+:: specialo_5 {"position":"1525,1900"}
+The Specialo storekeepers are trained to do that. This is why vampires often shop at [[Specialo->specialo]].
+
+:: specialo {"position":"1525,2025"}
+<<set $specialo_visited to += 1>>
+<h4>$time, Day $day. Specialo, Emporium Shopping Centre Branch.</h4>
+<<if >>
+Still, you wonder why this shop is called Specialo, when there is nothing special about its clothes. In fact, the clothes are the very opposite of special—they are designed to be as <<include "cycling_specialo">> as possible.
+
+A mannequin in front of the store is wearing the [[Specialo Airism Oversized Tunic->airism]]. Every few seconds, it moves to change its pose.
+
+/* TODO */
+
+:: airism {"position":"1400,2025"}
+The [[uniform->specialo]] of men in Xingang.
+
+:: cycling_specialo {"position":"1625,2025"}
+<<silently>>
+<<if not $choices_specialo>>
+  <<set $choicesCount_specialo to -1>>
+  <<set $choices_specialo to ["simple", "timeless", "basic"]>>
+<</if>>
+
+<<set $choicesCount_specialo to $choicesCount_specialo + 1>>
+
+<<if $choicesCount_specialo >= $choices_specialo.length>>
+   <<set $choicesCount_specialo to 0>>
+<</if>>
+
+<<set $cyclingResult_specialo to $choices_specialo[$choicesCount_specialo]>>
+<</silently>>
+\<<linkreplace $choices_specialo[$choicesCount_specialo] t8n>><<include "cyclingspecialo">><</linkreplace>>

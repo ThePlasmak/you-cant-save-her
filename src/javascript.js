@@ -55,7 +55,7 @@ $(document).on(":passagerender", updateUndoButton);
 
 // AUTOSAVE
 $(document).on(":passagerender", function () {
-  // Check if the current passage is neither "Start" nor "options"
+  // Check if the current passage is not a certain passage
   if (State.passage !== "Start" && State.passage !== "options") {
     Save.slots.save(1); // Automatically save to slot 1 whenever you enter a new passage
   }
@@ -72,6 +72,12 @@ $(document).on(":passagerender", function (ev) {
     $("#passages").css({
       "background-color": "transparent",
       "box-shadow": "none",
+    });
+  } else if (currentTags.includes("flash-black")) {
+    // Apply styles for passages with the tag
+    $("#passages").css({
+      "background-color": "#000",
+      "box-shadow": "var(--shadow-letter-elevation-high)",
     });
   } else if (currentTags.includes("letter")) {
     // Apply styles for passages with the tag

@@ -68,11 +68,15 @@ a {
   cursor: pointer;
 }
 
+.passage {
+  transition: opacity 0.5s ease-in-out;
+}
+
 #passages {
   position: relative;
   background-color: #fffef0;
   color: black;
-  transition: color 0.5s, background-color 0.5s;
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
   padding: 1em 1em 1em 1em;
   border-radius: 0.25em;
   margin: 0;
@@ -93,7 +97,7 @@ body {
   min-width: 300px;
   height: 100%;
   overflow-y: scroll;
-  transition: color 0.5s, background-color 0.5s;
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 #footer {
@@ -114,10 +118,14 @@ a {
 a:hover {
   color: rgb(255, 79, 79);
   text-decoration: none;
+  transition: 0.3s;
 }
 
 ul {
-  margin: 1.5em 0;
+  margin-top: 1.5em;
+  margin-right: 0px;
+  margin-bottom: 0em;
+  margin-left: 0px;
 }
 
 p:first-of-type {
@@ -189,6 +197,15 @@ div[data-tags~="letter"] a {
 
 div[data-tags~="letter"] a:hover {
   color: rgb(74, 166, 224)
+}
+
+body.flash-black {
+  background-color: #000000;
+}
+
+div.flash-black {
+  background-color: #000000;
+  color: #ffffff;
 }
 
 body.evening {
@@ -343,7 +360,7 @@ button:not(:disabled):hover {
 }
 
 #undobar a {
-  transition: color 0.5s;
+  transition: color 0.5s ease-in-out;
   color: #fffef0;
   opacity: 70%;
 }
@@ -357,6 +374,10 @@ body.pink #undobar a {
   display: none !important;
 }
 
+body.flash-black #undobar a {
+  color: #ababab;
+}
+
 body.morning #undobar a,
 body.midday #undobar a,
 body.afternoon #undobar a,
@@ -366,7 +387,7 @@ body.quickmorning #undobar a {
 }
 
 body.quickmorning #undobar a {
-  transition: 0s;
+  transition: 0s ease-in-out;
 }
 
 body.black #undobar a {
