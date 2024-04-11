@@ -56,12 +56,18 @@ $(document).on(":passagerender", updateUndoButton);
 // AUTOSAVE
 $(document).on(":passagerender", function () {
   // Check if the current passage is not a certain passage
-  if (State.passage !== "Start" && State.passage !== "options") {
+  if (
+    State.passage !== "Start" &&
+    State.passage !== "options" &&
+    State.passage !== "content_warning" &&
+    State.passage !== "its_okay"
+  ) {
     Save.slots.save(1); // Automatically save to slot 1 whenever you enter a new passage
   }
 });
 
 // CSS CHANGES FOR #PASSAGES
+// I can't change the #passages sections with Twine tags alone
 $(document).on(":passagerender", function (ev) {
   // Get the current passage's tags
   var currentTags = tags();
@@ -91,6 +97,25 @@ $(document).on(":passagerender", function (ev) {
       "background-color": "",
       "box-shadow": "",
     });
+  }
+});
+
+// CSS CHANGES FOR BODY
+// Need this for time changes for passages tagged "outside"
+$(document).on(":passagerender", function (ev) {
+  // Check if the current passage has the "outside" tag
+  if (tags().includes("outside")) {
+    // Check if the time is "Night"
+    if (State.variables.time === "Night") {
+      // Apply the night theme
+      $("body").removeClass("evening").addClass("night");
+    } else {
+      // Otherwise, apply the evening theme
+      $("body").removeClass("night").addClass("evening");
+    }
+  } else {
+    // For passages without the "outside" tag, ensure the default theme
+    $("body").removeClass("night").removeClass("evening");
   }
 });
 

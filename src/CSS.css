@@ -183,6 +183,11 @@ p:first-of-type {
   opacity: 0;
 }
 
+/* Special CSS */
+[data-tags~="center"].passage {
+  text-align: center;
+}
+
 body.pre-letter {
   background-color: #e4e4e4;
 }
@@ -208,8 +213,25 @@ div.flash-black {
   color: #ffffff;
 }
 
-body.evening {
-  background-color: #001a40;
+.evening {
+  background-color: #00184b;
+}
+
+.night {
+  background-color: #1a0040;
+}
+
+.inhale {
+  transition: opacity 7s ease-in-out;
+}
+
+.exhale {
+  transition: opacity 11s ease-in-out;
+}
+
+.blocked-link {
+  color: #888888;
+  text-decoration: line-through;
 }
 
 .freestat {
@@ -225,15 +247,11 @@ body.evening {
   border-bottom: 4px solid #ffff74;
 }
 
-.blockedstat {
+.blocked-stat {
   background-color: #dfdfdf;
   padding: 0 0.3333em;
-}
-
-.blockedlink {
-  color: #888888;
-  font-style: italic;
-  text-decoration: line-through;
+  /* background-color: #dfdfdf;
+  padding: 0.43em 0.3333em 0.2em 0.3333em; */
 }
 
 .noshow {
@@ -250,7 +268,7 @@ h2 {
 
 h4 {
   margin-block-start: 0em;
-  margin-block-end: 0em;
+  margin-block-end: 1em;
   border-bottom: 2px solid;
 }
 
