@@ -6,7 +6,7 @@ SKINCARE FOR VAMPIRES
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
     "format-version": "2.36.1",
-    "start": "bed",
+    "start": "day_1_start",
     "zoom": 1
 }
 
@@ -27,6 +27,23 @@ SKINCARE FOR VAMPIRES
     ''Enable Undo'' is currently <<link "OFF">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>.
 <</if>>
 When this option is ''ON'', an undo button will appear at the top of the game window.
+
+:: cycling_1
+<<silently>>
+<<if not $choices_1>>
+  <<set $choicesCount_1 to -1>>
+  <<set $choices_1 to ["grass", "fjilsdkjflsd sklfsdj fklsjdlf jsdklfj klsdjfklsdj fsdkj fls"]>>
+<</if>>
+
+<<set $choicesCount_1 to $choicesCount_1 + 1>>
+
+<<if $choicesCount_1 >= $choices_1.length>>
+   <<set $choicesCount_1 to 0>>
+<</if>>
+
+<<set $cyclingResult_1 to $choices_1[$choicesCount_1]>>
+<</silently>>
+\<<linkreplace $choices_1[$choicesCount_1] t8n>><<include "cycling_1">><</linkreplace>>
 
 :: variable_setup {"position":"200,200"}
 /* STORY */
