@@ -54,15 +54,17 @@ function updateUndoButton() {
 $(document).on(":passagerender", updateUndoButton);
 
 // AUTOSAVE
+// Autosaves whenever you enter a new passage
 $(document).on(":passagerender", function () {
   // Check if the current passage is not a certain passage
   if (
     State.passage !== "Start" &&
     State.passage !== "options" &&
     State.passage !== "content_warning" &&
-    State.passage !== "its_okay"
+    State.passage !== "its_okay" &&
+    State.passage !== "restart"
   ) {
-    Save.slots.save(1); // Automatically save to slot 1 whenever you enter a new passage
+    Save.slots.save(1); // Automatically save to slot 1
   }
 });
 
@@ -73,29 +75,24 @@ $(document).on(":passagerender", function (ev) {
   var currentTags = tags();
 
   // Check if tag is included
-  if (currentTags.includes("pre-letter")) {
+  if (currentTags.includes("flashback")) {
     // Apply styles for passages with the tag
     $("#passages").css({
       "background-color": "transparent",
       "box-shadow": "none",
+      color: "black",
     });
-  } else if (currentTags.includes("flash-black")) {
-    // Apply styles for passages with the tag
+  } else if (currentTags.includes("options")) {
     $("#passages").css({
-      "background-color": "#000",
-      "box-shadow": "var(--shadow-letter-elevation-high)",
-    });
-  } else if (currentTags.includes("letter")) {
-    // Apply styles for passages with the tag
-    $("#passages").css({
-      "background-color": "#fff",
-      "box-shadow": "var(--shadow-letter-elevation-high)",
+      "background-color": "rgb(27 27 27)",
+      "box-shadow": "var(--shadow-elevation-high)",
     });
   } else {
     // Reset styles for passages without certain tags
     $("#passages").css({
       "background-color": "",
       "box-shadow": "",
+      color: "",
     });
   }
 });

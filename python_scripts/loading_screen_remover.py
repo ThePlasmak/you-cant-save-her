@@ -1,7 +1,7 @@
 import sys
 import re
 
-loading_background_color = "#310001"
+loading_background_color = "#030303"
 
 
 def modify_html_file(file_path):

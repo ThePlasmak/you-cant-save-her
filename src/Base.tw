@@ -1,25 +1,21 @@
 :: StoryTitle {"position":"1900,175"}
-SKINCARE FOR VAMPIRES
+You Cannot Save Her
 
 :: StoryData {"position":"1900,300"}
 {
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
     "format-version": "2.36.1",
-    "start": "day_1_start",
+    "start": "mc_fight_3",
     "zoom": 1
 }
 
 :: Start [no-undo] {"position":"200,400"}
-<div class="title">SKINCARE FOR VAMPIRES</div>\
+<div class="title">You Cannot Save Her</div>\
 <div class="subtitle">by Sarah Mak</div>\
-<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · <<nobr>><<link 'Restart'>>
-    <<for _key, _val range State.variables>><<run delete State.variables[_key]>><</for>>
-    <<set State.expired.length = 0>>
-    <<goto intro_letter_pre>>
-<</link>><</nobr>><<else>>[[Start->content_warning]]<</if>> · [[Options->options]]</div>
+<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · <<link 'Restart' 'restart'>><</link>><<else>>[[Start->content_warning]]<</if>> · [[Options->options]]</div>
 
-:: options [no-undo] {"position":"75,400"}
+:: options [no-undo  options] {"position":"75,400"}
 <span class="subtitle">''Options''</span> <span class="close">[[✖->Start]]</span>
 <<if setup.enableUndo.get()>>
     ''Enable Undo'' is currently <<link "ON">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>.
@@ -28,893 +24,291 @@ SKINCARE FOR VAMPIRES
 <</if>>
 When this option is ''ON'', an undo button will appear at the top of the game window.
 
-:: cycling_1
-<<silently>>
-<<if not $choices_1>>
-  <<set $choicesCount_1 to -1>>
-  <<set $choices_1 to ["grass", "fjilsdkjflsd sklfsdj fklsjdlf jsdklfj klsdjfklsdj fsdkj fls"]>>
-<</if>>
+:: content_warning [no-undo center options] {"position":"350,400"}
+<span class="subtitle">''Content Warning''</span>
+This story contains violence and horror.
+Are you okay with continuing this story?
 
-<<set $choicesCount_1 to $choicesCount_1 + 1>>
+[[Yes.->pre_intro]]
+[[No.->its_okay]]
 
-<<if $choicesCount_1 >= $choices_1.length>>
-   <<set $choicesCount_1 to 0>>
-<</if>>
-
-<<set $cyclingResult_1 to $choices_1[$choicesCount_1]>>
-<</silently>>
-\<<linkreplace $choices_1[$choicesCount_1] t8n>><<include "cycling_1">><</linkreplace>>
+:: restart [center no-undo]
+<<nobr>><<link 'It will always end the same way.'>>
+    <<for _key, _val range State.variables>><<run delete State.variables[_key]>><</for>>
+    <<set State.expired.length = 0>>
+    <<goto pre_intro>>
+<</link>><</nobr>>
 
 :: variable_setup {"position":"200,200"}
+<nobr>
 /* STORY */
-/* May need to change during testing */
-<<set $day to 1>>
-<<set $time to "Evening">>
-<<set $home_passage to "day_1_start">>
-<<set $explore_passage to "day_1_explore">>
-<<set $shop_passage to "specialo">>
-/* Unlikely to change during testing */
-<<set $blood_sated to false>>
-
-<<set $money to 503>>
-<<set $money_start to 503>>
-
-<<newinv $clothing_inv>>
-<<set $clothing to "">>
-<<set $clothing_des to "">>
-
-<<newinv $sc_inv>>
-<<set $sc_c to false>>
-<<set $sc_m to false>>
-<<set $sc_s to false>>
+<<set $direction_choice to "north">>
+<<set $weapon to "greatsword">>
+<<set $cyclingResult_shoot_again to "Shoot her again.">>
+<<set $cyclingResult_strike_again to "Shoot her.">>
 
 /* TRACK SEEN TEXT */
-<<set $bed_text_seen to false>>
-<<set $blood_text_seen to false>>
-<<set $mirror_fail_seen to false>>
-<<set $blood_bar_visited_riot to false>>
-<<set $de_laeu_price_seen to 0>>
 
 /* TRACK VISITS */
-<<set $mirror_visited to false>>
-<<set $bookshop_1_visited to false>>
-<<set $thrift_shop_visited to 0>>
-<<set $specialo_visited to 0>>
-<<set $grass_patch_visited to 0>>
-<<set $blood_bar_visited to 0>>
-<<set $blood_bar_sample_v to 0>>\
-<<set $blood_bar_fail to false>>
-<<set $lavish_c_v to false>>
-<<set $lavish_m_v to false>>
-<<set $lavish_s_v to false>>
-<<set $tutorial_2_v to false>>
-
-/* TRACK DAY OF VISIT */
-<<set $grass_patch_first_visited_day to 1>>
 
 /* OVERRIDE FOR TESTING */
-<<set $mirror_visited to true>>
+</nobr>
 
 :: StoryInit {"position":"75,200"}
 <<include "variable_setup">>
 
-:: content_warning [no-undo center] {"position":"350,400"}
-<span class="subtitle">''Content Warning''</span>
-This story contains scenes with mild horror and violence.
-
-[[I am okay with that.->intro_letter_pre]]
-[[I am not okay with that.->its_okay]]
-
-:: its_okay [no-undo] {"position":"350,275"}
+:: its_okay [no-undo center] {"position":"350,275"}
 [[It's okay.->Start]]
 
-:: intro_letter_pre [pre-letter no-undo] {"position":"475,400"}
-<<nobr>>
+:: pre_intro [no-undo]
 <<include "variable_setup">>
-<<timed 2.3s>><<goto "intro_letter">><</timed>>
-<</nobr>>
+<<timed 2s t8n>><<goto "intro_1">><</timed>>
 
-:: intro_letter [letter no-undo] {"position":"600,400"}
-//Dear Ms Mal,
+:: intro_1 [no-undo]
+[[You cannot save her.->intro_2]]
 
-You are officially notified of this most cordial invitation to the 148th East Shenzhou Company's Grand Blood Moon Ball at the Company Headquarters on the 17th of Aueril.
+:: intro_2
+[[This is what the nuns told you.->intro_3]]
 
-You are welcome to bring an additional guest to share in the evening's festivities.//
-* [[You turn over the letter.->intro_1]]
+:: intro_3
+[[And this is what you tell yourself.->weapon_1]]
 
-:: intro_1 {"position":"725,400"}
-//From:// <<linkreplace "(the person you would rather forget)" t8n>><<linkreplace "(the person who still infiltrates your dreams)" t8n>><<linkreplace "(your ex)" t8n>><<link "<i>Bea</i>" "intro_2" >><</link>><</linkreplace>><</linkreplace>><</linkreplace>>
+:: intro_4
+When the children at the monastery come of age, they must complete a test. Each test is [[personal->intro_5]] to them.
 
-:: intro_2 {"position":"850,400"}
-[[You just arrived home, after another adventure.->intro_3]]
+:: intro_5
+When she left, you feared what your test would be.
 
-:: intro_3 {"position":"975,400"}
-[[But you spotted this letter lying on the floor of your flat...->intro_4]]
+[[Your fears came true->intro_6]].
 
-:: intro_4 {"position":"1100,400"}
-[[So, now, you can't take a break yet.->intro_5]]
+:: intro_6
+The nuns told you that you must [[kill her->weapon_1]], for she had fallen sway to the other god.
 
-:: intro_5 {"position":"1225,400"}
-You have five days left to prepare <<linkreplace "for this ball" t8n>>[[to meet her->day_1_start]]<</linkreplace>>.
+:: weapon_1 [center]
+So you prepare your weapon:
+<<include "cycling_weapon_1">>
 
-:: day_1_start {"position":"200,575"}
-<<set $day to 1>>\
-<<set $home_passage to passage()>>\
-<h4>Evening, Day 1. Your Flat.</h4>Your flat is a cube of [[magical loot->magical_loot]] and [[trash]]. You don't have the energy to clean this up, and you don't spend a lot of time here anyway.
+[[Just so->etching]].
 
-You consider talking to the <<if $mirror_visited == false>>[[magic mirror->magic_mirror_1]]<<elseif $mirror_visited == true and $mirror_fail_seen == false>>[[magic mirror->magic_mirror]]<<else>>[[magic mirror->magic_mirror_fail]]<</if>> in front of you<<if $mirror_visited is false>>, in the form of rhyming couplets<</if>>. Your [[half-broken bed->bed]] is to your left, and a [[broken fridge->fridge]] is next to it. Your [[gunsmithing bench->gunsmithing_tools]] is behind you.
-<<if $tutorial_2_v is true and $blood_sated is true>>\
-
-You could make your way [[downstairs->day_1_explore]].
-<<elseif $tutorial_2_v is true and $blood_sated is false>>\
-
-You could make your way [[downstairs->blood_forgot]].
-<</if>>\
-
-:: blood_forgot {"position":"325,525"}
-You realise that you should drink today's bottle of blood first, unless you want to kill [[a few innocent homeless people->day_1_start]].
-
-:: magical_loot {"position":"425,650"}
-Weapons, monster parts, all the assorted loot from your adventures that you couldn't sell.
-
-Some of it is probably cursed.
-* [[Look away.->$home_passage]]
-
-:: trash {"position":"425,750"}
-Yellowed paper, stripped screws, and bottles encrusted with dried blood.
-
-All this trash accumulates in your flat like dust.
-* [[Look away.->$home_passage]]
-
-:: gunsmithing_tools {"position":"425,850"}
-One of the only places in your flat you keep clean. You have a toolbox with several screwdriver bits and punch sets, a couple of calipers and files, and a few dental picks to clean your gear.
-* [[Look back.->$home_passage]]
-
-:: magic_mirror {"position":"300,825"}
-As you expected, you don't see your reflection in the mirror. You don't see the magical intelligence, either.
-* [[Look back.->$home_passage]]
-* <<if $mirror_fail_seen == false>>[[You have an idea. “Mirror mirror on the wall, can you show me my reflection?”->magic_mirror_reflection_1]]<<else>>[[“Mirror mirror on the wall, can you show me my reflection?”->magic_mirror_fail]]<</if>>
-
-:: magic_mirror_reflection_1 {"position":"425,1000"}
-<<set $mirror_fail_seen to true>>\
-The wisps of green vapour appear again, and you see the magic mirror's face. “So you can better your complexion,/Let me show you your reflection!”
-
-The face and vapours disappear, and briefly, the magic mirror is in complete darkness. Then, vertical rainbow-coloured streaks dance across the mirror, and you realise that it must be glitching out. Just as you step forward to switch this mirror off and on again, the mirror screen turns [[completely black->magic_mirror_reflection_2]].
-
-:: magic_mirror_reflection_2 {"position":"425,1125"}
-A small, misshapen, carrot pops onto the screen. It follows your every movement in an odd way, like a hyperactive balloon.
-
-“The magic of your curse is just too strong./I tried showing your reflection, but it came out wrong,” the mirror says. It looks disappointed.
-
-This is just another one of those little annoyances [[you have to live with->$home_passage]].
-
-:: magic_mirror_fail {"position":"275,1050"}
-<<set $mirror_items = ["a misshapen carrot", "a half-eaten grilled fish", "a lumpy roll of bread", "a little flower pot", "a stack of books without any titles"]>>\
-<<set $mirror_item_now = $mirror_items.filter(e => e !== $mirror_item_now).random()>>\
-Now, $mirror_item_now is on the mirror's screen, following your every movement.
-
-[[At least it's trying its best.->$home_passage]]
-
-:: magic_mirror_1 {"position":"550,575"}
-[[You look at the magic mirror->magic_mirror_2]].
-
-:: magic_mirror_2 {"position":"675,575"}
-You do not see your reflection, because you are a [[vampire->magic_mirror_3]].
-
-:: magic_mirror_3 {"position":"800,575"}
-But maybe this mirror can [[still be useful to you->magic_mirror_start]].
-
-:: magic_mirror_start {"position":"950,575"}
-<<set $mirror_visited to true>>\
-The mirror is covered in dust, and there are black spots scattered along its bottom edge.
-
-Your old adventuring companion, Princess Philomena the Third, gifted you this magic mirror a few decades ago. Maybe she forgot that vampires can't see themselves in mirrors, but at least there is a magical intelligence inside this.
-* [[“Mirror mirror on the wall, explain, in detail, how I should prepare for a formal event.”->magic_mirror_no_rhyme]]
-* [[“Mirror mirror on the wall, how do I prepare for the Blood Moon Ball?”->magic_mirror_rhyme]]
-
-:: magic_mirror_rhyme {"position":"900,700"}
-Suddenly, a vortex of green vapour whirls within the mirror's depths. At the centre of the vortex, the face of a middle-aged woman swirls into view.
-
-Then, she forces an uncomfortably wide grin.
-
-“I do not know what you mean by a Blood Moon Ball,
-but similar events may involve human sacrifices or alcohol.
-Before making any dangerous decision,
-please consult a haemomancer, or a physician.”
-* [[“That was completely useless.”->magic_mirror_useless]]
-* [[“The Blood Moon Ball is just some formal event! So how do I prepare for it?”->magic_mirror_prepare]]
-
-:: magic_mirror_useless {"position":"825,850"}
-The mirror widens its eyes, feigning shock. “I'm sorry to hear that this did not answer your question./But could you rephrase your query with a little less aggression?”
-
-You let out a loud groan, but you know that getting angry with the mirror would be like getting angry with a printer. “So how do I prepare for the Blood Moon Ball, which is a //formal event//?”
-
-The magic mirror answers in a musical voice.
-
-<<include "magic_mirror_rhyme_bottleneck">>
-
-:: magic_mirror_prepare {"position":"950,850"}
-The magic mirror continues to answer in a musical voice.
-
-<<include "magic_mirror_rhyme_bottleneck">>
-
-:: magic_mirror_no_rhyme {"position":"1025,700"}
-Suddenly, a vortex of green vapour whirls within the mirror's depths. At the centre of the vortex, the face of a middle-aged woman swirls into view.
-
-She looks annoyed. Maybe the mirror is annoyed by <<linkreplace "your lack of rhyming abilities" t8n>>your lack of rhyming abilities, or simply with you as a person<</linkreplace>>.
-
-Then, she forces an uncomfortably wide grin.
-
-<<include "magic_mirror_rhyme_bottleneck">>
-
-:: magic_mirror_rhyme_bottleneck {"position":"1075,850"}
-“<<linkappend "First, you must improve your skin,\nso this is the routine you should begin:" t8n>><<linkappend "\nUse a cleanser to purge your loathsome oils,\nthen a toner to soothe before your next toils." t8n>><<linkappend "\nGet an essence, a serum, an ampoule, and a lotion,\nor you could use an all-in-one emulsion." t8n>>
-Next, an eye cream, a mask, then a moisturising cream,
-and don't forget to acquire a strong <<link "sunscreen">><<replace "#1" t8n>>The mirror simply smiles at you.
-
-It seems that the magic mirror forgot that you are a vampire, who cannot go out in the sun without burning to a vampire-flavoured crisp. Also, you think that the number of skincare products that exist is ridiculous.
-* <<link "“This is ridiculous.”" "magic_mirror_ridiculous">><</link>>
-* <<link "“Which skincare products do I <i>really</i> need?”" "magic_mirror_need">><</link>>
-<</replace>><</link>>!”
-<</linkappend>><</linkappend>><</linkappend>>
-<span id="1"></span>
-
-:: magic_mirror_ridiculous {"position":"1200,975"}
-She chimes, “there are no ugly women, only lazy ones.
-Why don't you care about this as much your guns?”
-
-You didn't know this mirror was awake when you were working on your pistols. How long has the mirror been awake? The possible invasion of your privacy makes you feel uncomfortable.
-
-“Okay, I care now! Just tell me what I need to do!” You shout.
-
-The mirror answers in a musical tone:
-<<include "magic_mirror_need">>
-
-:: magic_mirror_need {"position":"1075,975"}
-“Cleansers, moisturisers, and sunscreens are the vital three,
-So you should purchase them on your next shopping spree,” it says.
-
-The mirror's eyes narrow, and it adds, “unless you consider your trench coat formal attire,/a dressier outfit is another you must acquire.”
-
-You think your trench coat makes you look cool, and you stubbornly insist on wearing it even in Xingang's subtropical weather, but the mirror is right. You can't go to the ball wearing this.
-
-[[So, you know what you need now.->tutorial_1]]
-
-:: tutorial_1 {"position":"1075,1100"}
-[[You need to go out, and shop for some supplies.->tutorial_2]]
-
-:: tutorial_2 {"position":"1200,1100"}
-<<set $tutorial_2_v to true>>\
-[[It is time to prepare for this upcoming battle.->day_1_start]]
-
-:: bed {"position":"175,700"}
-<<if $mirror_visited == true and $bed_text_seen == false >>\
-<<set $bed_text_seen to true>>\
-When Princess Philomena wanted to transport the mirror to you, she rounded the coordinates you gave her to the nearest twenty-five decimal places, instead of the nearest twenty-seven decimal places, so the magic mirror teleported onto your bed instead of a more sensible location.
-
-Thankfully, you leaped just in time to catch the mirror, so your half-broken bed isn't a fully-broken bed.
-<<else>>\
-Your bed is still half-broken. There is a gaping horizontal split along its underside, but it has not completely broken into two. You can still sleep on it comfortably, somewhat.
-<</if>>\
-<<if $mirror_visited == false>>\
-
-Although you wish to sleep, you feel that [[you should talk to the mirror first->$home_passage]].
-<<elseif $time == "Evening">>\
-
-While it is evening, you could sleep now.
-* <<include dream_redirect>>
-* [[Look back.->$home_passage]]
-<<elseif $time == "Night">>\
-
-The sun will rise soon, and strive to destroy the night's creatures with its hatred.
-* <<include dream_redirect>>
-* [[Look back.->$home_passage]]
-<</if>>\
-
-:: dream_redirect {"position":"50,1000"}
-<<nobr>>
-<<if $day is 1>>
-[[Sleep.->dream_day_1]]
-<<elseif $day is 2>>
-[[Sleep.->dream_day_2]]
-<<elseif $day is 3>>
-[[Sleep.->dream_day_3]]
-<<elseif $day is 4>>
-[[Sleep.->dream_day_4]]
-<<elseif $day is 5>>
-[[Sleep.->dream_day_5]]
-<</if>>
-<</nobr>>
-
-:: fridge {"position":"50,700"}
-This fridge also functions as your bedside table. While the fridge has long since broken, you filled it with [[bricks of ice->bricks_of_ice]] that were enchanted to never melt, so it will stay cold for the rest of your unlife.
-
-Inside your fridge, bottles of blood are arranged neatly in rows. You labelled each bottle with the date you planned to [[drink it->drink_blood]].
-* [[Look back.->$home_passage]]
-
-:: bricks_of_ice {"position":"50,575"}
-Stolen from Frost Lich Belierond's castle. It took many months for your hands to heal from the magically-enhanced frostbite, but at least your [[refrigeration needs->fridge]] are forever covered.
-
-:: drink_blood {"position":"50,825"}
-<<if $blood_sated is false and $blood_text_seen is false>>\
-<<set $blood_text_seen to true>>\
-<<set $blood_sated to true>>\
-You drink today's bottle of blood. It has a grainy texture and it tastes like stale iron, but you're [[used to this]].
-<<elseif $blood_sated is false and $blood_text_seen is true>>\
-<<set $blood_sated to true>>\
-You drink today's bottle of blood. As you expected, it tastes [[awful->fridge]].
-<<else>>\
-According to your calculations, you don't need to drink blood now.
-
-And with the tight budget you have, [[you shouldn't->fridge]].
-<</if>>\
-
-:: day_1_explore [outside] {"position":"1200,1225"}
-<<set $explore_passage to passage()>>\
-<<if $time is "Evening">>\
-<<include "evening_explore">>
-<<else>>\
-<h4>$time, Day $day. The Street Below Your Flat.</h4>Ash clings to every surface here, staining the buildings a deep grey. There are a few shops along the street, including a [[bookshop]] you used to visit more often. There is a [[canal]] to the east, and a [[blood bar->blood_bar]] to the west.
-
-The shops have closed.
-
-[[Your flat->day_1_night_cc_1]] is right behind you, a few flights upstairs.
-<</if>>\
-
-:: evening_explore {"position":"750,1125"}
-<h4>$time, Day $day. The Street Below Your Flat.</h4>Ash clings to every surface here, staining the buildings a deep grey. There are a few shops along the street, including a [[bookshop]] you used to visit more often. There is a [[canal]] to the east, and a [[blood bar->blood_bar]] to the west.
-
-Before the shops close, you should make your way eastward to the [[neighbourhood shopping centre->shopping_centre_pre]], or northward to a [[thrift shop->thrift_shop_pre]]. You can also take a tram to the [[shopping district->shopping_district_pre]] in the south of the city.
-
-[[Your flat->$home_passage]] is right behind you, a few flights upstairs.
-
-:: blood_bar [outside] {"position":"575,1800"}
-<<set $blood_bar_visited += 1>>\
-<<if $day is 4>>\
-<<set $blood_bar_visited_riot to true>>\
-<h4>$time, Day $day. Blood Bar Near Your Flat.</h4>The windows of the blood bar are broken, and the furniture inside has been thrown about. A fight must have broken out during the day. A few vampires in uniform are cleaning up the mess, and one vampire is guarding the entrance.
-
-<<if $blood_bar_visited > 1>>You notice that the soul signature alarm on the doorway has been smashed.<<else>>You notice that a soul signature alarm on the doorway has been smashed.<</if>>
-
-* [[Go back.->$explore_passage]]
-<<elseif $day is 5>>\
-<<if $blood_bar_visited_riot is true>>The broken furniture has been replaced—other than the broken windows, the blood bar looks as good as new.<<else>>The storefront is nightmare black, and the lights inside are [[a bright red->blood_bar_decor]]. You notice that windows of the blood bar have been broken, so a fight must have broken out recently.<</if>>
-
-<<if $blood_bar_visited > 1>>\
-The soul signature alarm on the doorway is still broken.
-<<else>>\
-A soul signature alarm on the doorway has been broken.
-<</if>>\
-* [[Enter the blood bar.->blood_bar_success]]
-* [[Go back.->$explore_passage]]
-<<else>>\
-<h4>$time, Day $day. Blood Bar Near Your Flat.</h4>The storefront is nightmare black, and the lights inside are [[a bright red->blood_bar_decor]].
-
-<<if $blood_bar_fail is false>>\
-A vampire in uniform is guarding the entrance.
-* [[Enter the blood bar.->blood_bar_fail]]
-* [[Go back.->$explore_passage]]
-<<else>>\
-A vampire in uniform is blocking the entrance, eyeing you warily. He knows who you must be: one of those who walked away.
-* [[Walk back.->$explore_passage]]
-<</if>>\
-<</if>>
-
-:: blood_bar_success {"position":"650,2100"}
-<h4>$time, Day $day. Blood Bar Near Your Flat.</h4>Bassy music pumps through the room. It smells of alcohol and blood, but the blood smells sweet and rich—nothing like the near-expired blood you ethically sourced from haemomancers.
-
-There are a few vampires inside the blood bar, but you don't recognise anyone.
-* <<if $blood_bar_sample_v > 4>><span class="blocked-link">Ask the bartender for a free sample.</span><<else>>[[Ask the bartender for a free sample.->blood_bar_sample]]<</if>>
-* [[Leave->blood_bar]]
-
-:: blood_bar_sample {"position":"650,2225"}
-<<set $blood_bar_sample_v += 1>>\
-<<set $bb_ani_items = ["siren", "dire wolf", "cow", "pig", "chicken", "goat", "crocodile"]>>\
-<<set $bb_ani_item = $bb_ani_items.filter(e => e !== $bb_ani_item).random()>>\
-<<set $bb_f_items = ["tart", "rich", "buttery", "sweet", "smoky", "earthy"]>>\
-<<set $bb_f_item = $bb_f_items.filter(e => e !== $bb_f_item).random()>>\
-<<set $bb_after_items = ["acidic", "sharp", "minty", "peppery", "smooth", "bitter", "gingery", "musky"]>>\
-<<set $bb_after_item = $bb_after_items.filter(e => e !== $bb_after_item).random()>>\
-This sample contains a hint of $bb_ani_item blood. It has a $bb_f_item flavour, and a $bb_after_item aftertaste.
-<<if $blood_bar_sample_v > 4>>\
-
-The bartender tells you that the bar has run out of samples. You don't have the budget to buy blood here, and you don't want to.
-<</if>>\
-* <<if $blood_bar_sample_v > 4>><span class="blocked-link">Ask for another sample.</span><<else>>[[Ask for another sample.->blood_bar_sample]]<</if>>
-* [[Look around.->blood_bar_success]]
-
-:: blood_bar_fail [outside] {"position":"700,1925"}
-<<set $blood_bar_fail to true>>\
-As you approach the entrance, an alarm blares. You look up at the doorway: a soul signature alarm.
-
-The guard walks over to block the entrance.
-* [[You back off.->blood_bar]]
-
-:: blood_bar_decor [outside] {"position":"700,1800"}
-The Company was never very creative with its choices of decor, even though they [[claim to be modern->blood_bar]].
-
-:: bookshop {"position":"700,1375"}
-<h4>$time, Day $day. The Bookshop Opposite Your Flat.</h4>The [[shopkeeper->bookshop_shopkeeper]] hollers to welcome you. You appreciate this, because you can't enter a <<linkappend "space" t8n>> (that most people consider private)<</linkappend>> without being invited in.
-
-The bookshop is cramped. The shelves are packed with books you hope to read someday, but you don't have the time to read them.
-<<if $bookshop_1_visited == false>>\
-* [[Look around.->bookshop_1]]
-* [[Leave.->$explore_passage]]
-<<else>>\
-* [[Leave.->$explore_passage]]
-<</if>>\
-
-:: bookshop_1 {"position":"775,1500"}
-<<set $bookshop_1_visited to true>>\
-At the back of the bookshop, you spot history books and student magazines.
-* [[Look away.->bookshop_2]]
-
-:: bookshop_shopkeeper {"position":"575,1375"}
-You've seen him around the neighbourhood since he was a little boy, and now he must be pushing seventy. He is one of the recurring background characters in your life, [[but you don't know his name->bookshop]].
-
-:: canal [outside] {"position":"950,1375"}
-<h4>$time, Day $day. Canal.</h4>You can smell the canal before you can see it. The canal is <<include "canal_cycle">> of this city's unwanted things.
-* [[Watch the canal.->canal_watch]]
-* [[Go back.->$explore_passage]]
-
-:: canal_watch [outside] {"position":"950,1500"}
-<<set $canal_items = ["A stray dire wolf bends down to lap up the water. Its fur is as mangy as an old coat.", "Multicoloured polyslime bags float across, like jellyfish.", "A crocodile gar leaps out, snatching a pigeon in its jaws.", "Liquified rainbows swirl on the water's surface.", "Black tentacles undulate under the water, catching stray trash.", "A clutch of glowing orange eggs drifts across the canal. A lanternfish must have spawned, somewhere."]>>\
-<<set $canal_item = $canal_items.filter(e => e !== $canal_item).random()>>\
-$canal_item
-* [[Keep watching.->canal_watch]]
-* [[Look away.->canal]]
-
-:: canal_cycle [outside] {"position":"850,1375"}
+:: cycling_weapon_1
 <<silently>>
-<<if not $choices_canal_cycle>>
-  <<set $choicesCount_canal_cycle to -1>>
-  <<set $choices_canal_cycle to ["a repository", "a museum", "an archive"]>>
+<<if not $choices_weapon_1>>
+  <<set $choicesCount_weapon_1 to -1>>
+  <<set $choices_weapon_1 to ["A greatsword forged from soulsteel", "A sabre carved from angel bone", "A rapier shaped from dreamsilver"]>>
 <</if>>
 
-<<set $choicesCount_canal_cycle to $choicesCount_canal_cycle + 1>>
+<<set $choicesCount_weapon_1 to $choicesCount_weapon_1 + 1>>
 
-<<if $choicesCount_canal_cycle >= $choices_canal_cycle.length>>
-   <<set $choicesCount_canal_cycle to 0>>
+<<if $choicesCount_weapon_1 >= $choices_weapon_1.length>>
+   <<set $choicesCount_weapon_1 to 0>>
 <</if>>
 
-<<set $cyclingResult_canal_cycle to $choices_canal_cycle[$choicesCount_canal_cycle]>>
+<<set $cyclingResult_weapon_1 to $choices_weapon_1[$choicesCount_weapon_1]>>
 <</silently>>
-\<<linkreplace $choices_canal_cycle[$choicesCount_canal_cycle] t8n>><<include "canal_cycle">><</linkreplace>>
+\<<linkreplace $choices_weapon_1[$choicesCount_weapon_1] t8n>><<include "cycling_weapon_1">><</linkreplace>>
 
-:: thrift_shop_pre [outside] {"position":"1600,1325"}
-[[You jog over to the thrift shop before it closes...->thrift_shop]]
-
-:: thrift_shop {"position":"1600,1450"}
-<<set $thrift_shop_visited += 1>>\
-<<set $shop_passage to passage()>>\
-<h4>$time, Day $day. The Phoenix.</h4>This thrift shop is named “The Phoenix”, presumably because [[phoenixes->phoenix]] are reborn from their ashes when they die, and this shop helps to give clothes a second chance. The shopkeeper is a young man with scribbly, cartoony tattoos that move across his skin. You think it looks kind of neat.
-<<if $thrift_shop_visited is 1>>\
-
-He invites you inside, after you stand awkwardly at the entrance for a minute.
-<</if>>\
-
-The selection is an eclectic mix of clothing from different eras, but the sheer diversity of choices is stressing you. Plus, as much as you want to save the planet, some of these clothes have probably been cursed.
-<<if $clothing_inv.length > 0>>\
-
-So far, you have bought <<include "clothing_des_calc">>, but you could buy another outfit if you aren't confident in your shopping choices.
-<</if>>\
-* [[Look through the men's section.->thrift_shop_men]]
-* <<if not $clothing_inv.has("dress from The Phoenix")>>[[Look through the women's section.->thrift_shop_women]]<<else>><span class="blocked-link">Look through the women's section.</span><</if>>
-* <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
-
-
-:: thrift_shop_men {"position":"1600,1575"}
-You like some of the suits, but they are all, obviously, too big for you. Unfortunately, your vampire physiology prevents you from growing taller, but even if you were still human, you would never be able to grow into [[these sizes->thrift_shop]].
-
-:: thrift_shop_women {"position":"1800,1575"}
-Most of the vintage dresses are frilly, and you would rather die again than wear them. The only dress you can tolerate is a simple [[black dress->black_dress]], which is at the pleasantly low price of 55c.
-
-“Oh sorry,” the shopkeeper says. “I think that dress may be cursed.”
-
-“Blood curse. It's makes you... uh... crave blood.”
-
-“I'm already a vampire, so I don't think that affects me.”
-
-<<include budget_des_calc>>
-* <<link "Buy the vintage dress, which may be cursed, for 55c." "clothing_bought">><<pickup $clothing_inv "dress from The Phoenix" 1>><<set $money -= 55>><</link>>
-* [[Consider buying something else.->thrift_shop]]
-
-:: black_dress {"position":"1925,1575"}
-The kind of dress you wear to the funeral of a colleague who [[you don’t even like very much->thrift_shop_women]].
-
-:: phoenix {"position":"1475,1450"}
-The “phoenixes” from this country have no such power—they are just very rare and pretty birds. The imprecision of language [[always annoyed you->thrift_shop]].
-
-:: money_info {"position":"1350,1100"}
-According to your calculations, your budget for this month is <<print $money_start>>c, minus your blood budget. If you exceed this budget, you will probably need to drink less blood next month, which would be <<return "uncomfortable">>.
-
-:: shopping_centre_pre [outside] {"position":"1250,1500"}
-[[You jog over to the shopping centre before it closes...->shopping_centre]]
-
-:: shopping_centre {"position":"1250,1625"}
-<h4>$time, Day $day. Emporium Shopping Centre.</h4>The shopping centre feels like a foreign country. You're not used to how clean, white, and bright this place is—if you visited here as a newborn, the sheer brightness could have turned you into a pile of ash.
-
-<<if $specialo_visited is 0>>[[Specialo->specialo_1]]<<else>>[[Specialo->specialo]]<</if>>, a fast-fashion store, is located in the east wing, while [[LAVISH->lavish]], a cosmetics store, is in the west wing. [[Holmes->holmes]], a beauty chain store, is a few steps to the north of the building entrance. To the south of the shopping centre is an empty [[grass patch->grass_patch]].
-
-:: grass_patch [outside] {"position":"1125,1625"}
-<<set $grass_patch_visited += 1>>\
-<<if $grass_patch_visited == 1>><<set $grass_patch_first_visited_day to $day>><</if>>\
-<<if $grass_patch_first_visited_day is $day>>\
-<h4>$time, Day $day. Grass Patch Near Emporium Shopping Centre.</h4>The grasses grow tall and wild here, and unlike most of the city, the air smells fresh. Red dragonflies dart about, leaving trails of soulfire in their wake.
-
-This must be a piece of government land that hasn't been developed yet.
-
-You forgot how green the city could be.
-* [[Breathe.->breathe]]
-* [[Return to the shopping centre.->shopping_centre]]
-<<elseif $day > $grass_patch_first_visited_day>>\
-<h4>$time, Day $day. Grass Patch Near Emporium Shopping Centre.</h4>The grass patch has been cordoned off with glowing yellow tape. There are no more dragonflies.
-* [[Return to the shopping centre.->shopping_centre]]
-<<else>>\
-<h4>$time, Day $day. Grass Patch Near Emporium Shopping Centre.</h4>The grasses grow tall and wild here, and unlike most of the city, the air smells fresh. Red dragonflies dart about, leaving trails of soulfire in their wake.
-
-This must be a piece of government land that hasn't been developed yet.
-
-You forgot how green the city could be.
-* [[Breathe.->breathe]]
-* [[Return to the shopping centre.->shopping_centre]]
-<</if>>\
-
-:: breathe [outside] {"position":"1000,1625"}
-Inhale.
-<<timed 1s t8n>>.<</timed>>
-<<timed 2s t8n>>.<</timed>>
-<<timed 3s t8n>>.<</timed>>
-<<timed 4s t8n>>.<</timed>>
-<<timed 5s t8n>>.<</timed>>
-<<timed 6s t8n>>.<</timed>>
-<<timed 7s t8n>>[[Exhale->grass_patch]].<</timed>>
-
-:: specialo_1 {"position":"1025,1900"}
-[[You wait outside the entrance of Specialo.->specialo_2]]
-
-:: specialo_2 {"position":"1150,1900"}
-[[You notice that a few other vampires are waiting alongside you.->specialo_3]]
-
-:: specialo_3 {"position":"1275,1900"}
-[[All of you wait, until...->specialo_4]]
-
-:: specialo_4 {"position":"1400,1900"}
-<<linkappend "“WELCOME TO SPECIALO!”" t8n>> [[shouts a storekeeper->specialo_5]].<</linkappend>>
-
-:: specialo_5 {"position":"1525,1900"}
-[[You have all been invited in.->specialo_6]]
-
-:: specialo_6 {"position":"1650,1900"}
-This is why vampires often shop at [[Specialo->specialo]].
-
-:: specialo {"position":"1525,2025"}
-<<set $specialo_visited += 1>>\
-<<set $shop_passage to passage()>>\
-<<if $specialo_visited is 1>>\
-<h4>$time, Day $day. Specialo, Emporium Shopping Centre Branch.</h4>Still, you wonder why this shop is called Specialo, when there is nothing special about its clothes. In fact, the clothes are the very opposite of special—they are designed to be as <<include "cycling_specialo">> as possible.
-<<else>>\
-<h4>$time, Day $day. Specialo, Emporium Shopping Centre Branch.</h4>You wonder why this shop is called Specialo, when there is nothing special about its clothes. In fact, the clothes are the very opposite of special—they are designed to be as <<include "cycling_specialo">> as possible.
-<</if>>\
-
-A mannequin in front of the store is wearing the [[Specialo Aerate Oversized Tunic->airism]]. Every few seconds, it moves to change its pose.
-
-Bea told you that Specialo clothes were expensive in her home country, which you thought was odd, because Specialo clothes are considered to be affordable here.
-<<if $clothing_inv.length > 0>>\
-
-So far, you have bought <<include "clothing_des_calc">>, but you could buy another outfit if you aren't confident in your shopping choices.
-<</if>>\
-* <<if not $clothing_inv.has("suit from Specialo")>>[[Look through the men's section.->specialo_men]]<<else>><span class="blocked-link">Look through the men's section.</span><</if>>
-* [[Look through the women's section.->specialo_women]]
-* <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
-
-:: airism {"position":"1400,2025"}
-Air elemental hair confers this tunic cooling properties. This is the [[uniform of men in Xingang->specialo]].
-
-:: cycling_specialo {"position":"1625,2025"}
-<<silently>>
-<<if not $choices_specialo>>
-  <<set $choicesCount_specialo to -1>>
-  <<set $choices_specialo to ["simple", "timeless", "basic"]>>
-<</if>>
-
-<<set $choicesCount_specialo to $choicesCount_specialo + 1>>
-
-<<if $choicesCount_specialo >= $choices_specialo.length>>
-   <<set $choicesCount_specialo to 0>>
-<</if>>
-
-<<set $cyclingResult_specialo to $choices_specialo[$choicesCount_specialo]>>
-<</silently>>
-\<<linkreplace $choices_specialo[$choicesCount_specialo] t8n>><<include "cycling_specialo">><</linkreplace>>
-
-:: specialo_men {"position":"1475,2150"}
-You are the only female person in the men's section, which makes you feel self-conscious. However, most of the customers are in the Aerate Tunic section instead of the suit section, so you feel a little more at ease.
-
-The suits, with their clean-cut design, seem to be catered more for a boardroom rather than a ballroom. They look average, but with your natural vampire charm, even average clothes would appear attractive.
-
-<<include budget_des_calc>>
-* <<link "Buy the suit for 99c." "clothing_bought">><<pickup $clothing_inv "suit from Specialo" 1>><<set $money -= 99>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: specialo_women {"position":"1600,2150"}
-None of the dresses here qualify as formalwear, and you have a strong desire to leave the women's section as fast as possible. Is it that you dislike <<include "cycling_spec_women">>?
-* [[Go back.->$shop_passage]]
-
-:: cycling_spec_women {"position":"1700,2150"}
-<<silently>>
-<<if not $choices_spec_women>>
-  <<set $choicesCount_spec_women to -1>>
-  <<set $choices_spec_women to ["looking feminine", "being feminine", "being seen as female", "being female", "female people", "women"]>>
-<</if>>
-
-<<set $choicesCount_spec_women to $choicesCount_spec_women + 1>>
-
-<<if $choicesCount_spec_women >= $choices_spec_women.length>>
-   <<set $choicesCount_spec_women to 0>>
-<</if>>
-
-<<set $cyclingResult_spec_women to $choices_spec_women[$choicesCount_spec_women]>>
-<</silently>>
-\<<linkreplace $choices_spec_women[$choicesCount_spec_women] t8n>><<include "cycling_spec_women">><</linkreplace>>
-
-:: clothing_bought {"position":"1475,2275"}
-<<if $money >= 0>>\
-You have obtained a <<print $clothing_inv.list[$clothing_inv.list.length - 1]>>!
-
-<<link "You feel a sense of accomplishment.">><<goto $shop_passage>><</link>>
-<<else>>\
-You have obtained a <<print $clothing_inv.list[$clothing_inv.list.length - 1]>>, but you have exceeded your budget.
-
-<<link "You need to drink less blood next month unless you want to kill a few innocent homeless people.">><<goto $shop_passage>><</link>>
-<</if>>\
-
-:: clothing_des_calc {"position":"1600,1100"}
+:: weapon_des_calc
 <<nobr>>
-<<if $clothing_inv.length is 1>>
-  <<if $clothing_inv.has('suit from Specialo')>>
-      <<set $clothing_des to "a suit from Specialo">>
-  <<elseif $clothing_inv.has('suit from The Phoenix')>>
-      <<set $clothing_des to "a suit">>
-  <<elseif $clothing_inv.has('dress from The Lancier')>>
-      <<set $clothing_des to "a dress">>
-  <<elseif $clothing_inv.has('dress from The Phoenix')>>
-      <<set $clothing_des to "a dress from a thrift shop">>
-  <</if>>
-<<elseif $clothing_inv.length is 2>>
-  <<set $clothing_des to "two pieces of clothing">>
-<<elseif $clothing_inv.length > 2>>
-  <<set $clothing_des to "a few pieces of clothing">>
-<</if>>
-$clothing_des
-<</nobr>>
-
-:: budget_des_calc {"position":"1475,1100"}
-<<nobr>>
-<<if $money > 0>>
-You have <<print $money>>c left in your [[budget->money_info]].
+<<if $cyclingResult_weapon_1 is "a greatsword forged from soulsteel">>
+    <<set $weapon to "greatsword">>
+<<elseif $cyclingResult_weapon_1 is "a sabre carved from angel bone">>
+    <<set $weapon to "sabre">>
+<<elseif $cyclingResult_weapon_1 is "a rapier shaped from dreamsilver">>
+    <<set $weapon to "rapier">>
 <<else>>
-You have exceeded your [[budget->money_info]] by <<print Math.abs($money)>>c.
+    <<set $weapon to "sword">>
 <</if>>
 <</nobr>>
 
-:: shopping_district_pre [outside] {"position":"400,1525"}
-[[You race to the tram stop, so you can reach the shopping district before the shops close...->shopping_district]]
+:: etching [center]
+<<include "weapon_des_calc">>\
+And you:
+<<include "cycling_etching">>
 
-:: shopping_district [outside] {"position":"400,1650"}
-<h4>Evening, Day 1. Eadweard Street.</h4>The shopping district is even brighter than before, thanks to the newly installed lamp posts. You can see that these lights have a constant flicker, indicating that they are powered by electricity.
+[[You believe in this->weapon_3]].
 
-However, most of the lights are still magical [[fairy lights->fairy_light]]. This network of fairy lights connects each lamp post and building. Towering light sculptures and arches pulse as people walk past them.
-
-If you had more time, you could stop to appreciate this.
-
-[[De L'eau->de_laeu]], a luxury skincare shop, is further to the south.
-
-:: fairy_light [outside] {"position":"275,1650"}
-Fairies are trapped in [[every bulb->shopping_district]].
-
-:: lancier {"position":"400,1825"}
-/* TODO: Not finishing this for now */
-<<set $shop_passage to passage()>>\
-<h4>$time, Day $day. Lancier, Eadweard Street Branch.</h4>When Bea told you about this store, you were disappointed that it did not sell any lances.
-
-Visiting it in-person has disappointed you even more—the store smells like thick cologne, and every garment looks expensive and pretentious.
-
-You don't feel like you belong here.
-<<if $clothing_inv.length > 0>>\
-
-So far, you have bought <<include "clothing_des_calc">>, but you could buy another outfit if you aren't confident in your shopping choices.
-<</if>>\
-* [[Look through the men's section.->lancier_men]]
-* [[Look through the women's section.->lancier_women]]
-* <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
-<<elseif $clothing_inv.has('suit from Lancier') and $clothing_inv.has('dress from Lancier')>>
-
-:: lancier_men {"position":"525,1950"}
-
-:: lancier_women {"position":"400,1950"}
-
-:: de_laeu {"position":"250,1825"}
-<<set $shop_passage to passage()>>\
-<h4>$time, Day $day. De L'eau, Eadweard Street Branch.</h4>This brand seems to love the word “natural”, as if all natural things are good for you. TODO
-
-Bea told you that “De L'eau” just means “some water”, which is considerably less impressive than it sounds.
-
-<<include "sc_progress">>
-* <<if not $sc_inv.has("TODO1")>>[[Look for a cleanser.->de_leau_c]]<<else>><span class="blocked-link">Look for a cleanser.</span><</if>>
-* <<if not $sc_inv.has("TODO2")>>[[Look for a moisturiser.->de_leau_m]]<<else>><span class="blocked-link">Look for a moisturiser.</span><</if>>
-* <<if not $sc_inv.has("TODO3")>>[[Look for a sunscreen.->de_leau_s]]<<else>><span class="blocked-link">Look for a sunscreen.</span><</if>>
-* <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
-
-:: de_leau_c {"position":"25,1950"}
-<<set $de_laeu_price_seen += 1>>\
-TODO
-
-<<include "de_laeu_price">>
-* <<link "Buy the TODO for 179c." "sc_bought">><<pickup $sc_inv "TODO1" 1>><<set $money -= 179>><<set $sc_c to true>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: de_leau_m {"position":"150,1950"}
-<<set $de_laeu_price_seen += 1>>\
-TODO
-
-<<include "de_laeu_price">>
-* <<link "Buy the TODO for 199c." "sc_bought">><<pickup $sc_inv "TODO2" 1>><<set $money -= 199>><<set $sc_m to true>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: de_leau_s {"position":"275,1950"}
-<<set $de_laeu_price_seen += 1>>\
-TODO
-
-<<include "de_laeu_price">>
-* <<link "Buy the TODO for 189c." "sc_bought">><<pickup $sc_inv "TODO3" 1>><<set $money -= 189>><<set $sc_s to true>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: de_laeu_price {"position":"125,1825"}
-<<if $de_laeu_price_seen is 1>>The price makes you gag.<<elseif $de_laeu_price_seen is 2>>As you look at the price, you wonder if this is the price one must pay to be beautiful.<<elseif $de_laeu_price_seen > 2>>The prices in this store still shock you.<<else>>The price makes you gag.<</if>>
-
-:: holmes {"position":"1400,1625"}
-<h4>$time, Day $day. Holmes, Emporium Shopping Centre Branch.</h4>This is your regular health and beauty chain store. Every section is clearly labelled "Skincare", "Haircare", "Cursecare" and so forth, so this shop is easy to navigate. /*TODO */
-
-You are comforted by how simple and direct this shop is.
-
-<<include "sc_progress">>
-* <<if not $sc_inv.has("TODO4")>>[[Look for a cleanser.->holmes_c]]<<else>><span class="blocked-link">Look for a cleanser.</span><</if>>
-* <<if not $sc_inv.has("TODO5")>>[[Look for a moisturiser.->holmes_m]]<<else>><span class="blocked-link">Look for a moisturiser.</span><</if>>
-* <<if not $sc_inv.has("TODO6")>>[[Look for a sunscreen.->holmes_s]]<<else>><span class="blocked-link">Look for a sunscreen.</span><</if>>
-* <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
-
-:: holmes_c {"position":"1400,1750"}
-TODO
-
-* <<link "Buy the TODO4 for 59c." "sc_bought">><<pickup $sc_inv "TODO3" 1>><<set $money -= 59>><<set $sc_s to true>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: holmes_m {"position":"1525,1750"}
-TODO
-
-* <<link "Buy the TODO5 for 69c." "sc_bought">><<pickup $sc_inv "TODO3" 1>><<set $money -= 69>><<set $sc_s to true>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: holmes_s {"position":"1650,1750"}
-TODO
-
-* <<link "Buy the TODO6 for 59c." "sc_bought">><<pickup $sc_inv "TODO3" 1>><<set $money -= 59>><<set $sc_s to true>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: lavish {"position":"1950,1875"}
-<h4>$time, Day $day. LAVISH, Emporium Shopping Centre Branch.</h4>TODO
-
-<<include "sc_progress">>
-* <<if not $sc_inv.has("TODO7")>>[[Look for a cleanser.->lavish_c]]<<else>><span class="blocked-link">Look for a cleanser.</span><</if>>
-* <<if not $sc_inv.has("TODO8")>>[[Look for a moisturiser.->lavish_m]]<<else>><span class="blocked-link">Look for a moisturiser.</span><</if>>
-* <<if not $sc_inv.has("TODO9")>>[[Look for a sunscreen.->lavish_s]]<<else>><span class="blocked-link">Look for a sunscreen.</span><</if>>
-* <<link "Return home." $explore_passage>><<set $time to "Night">><</link>>
-
-:: lavish_c {"position":"1950,2000"}
-<<set $lavish_c_v to true>>\
-TODO
-
-The packaging says that it was made by Dave.
-* <<link "Buy the TODO7 for 119c." "sc_bought">><<pickup $sc_inv "TODO7" 1>><<set $money -= 119>><<set $sc_s to true>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: lavish_m {"position":"2075,2000"}
-<<set $lavish_m_v to true>>\
-TODO
-
-<<if $lavish_c_v is true>>From the packaging, this was also made by Dave.<</if>>
-* <<link "Buy the TODO8 for 129c." "sc_bought">><<pickup $sc_inv "TODO8" 1>><<set $money -= 129>><<set $sc_s to true>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: lavish_s {"position":"2200,2000"}
-<<set $lavish_s_v to true>>\
-TODO
-
-<<if $lavish_c_v is true and $lavish_m_v is true>>This was also made by Dave. He must be very a productive worker.<</if>>
-* <<link "Buy the TODO9 for 119c." "sc_bought">><<pickup $sc_inv "TODO9" 1>><<set $money -= 119>><<set $sc_s to true>><</link>>
-* [[Consider buying something else.->$shop_passage]]
-
-:: sc_bought {"position":"1850,1100"}
-<<if $money >= 0>>\
-You have obtained the <<print $sc_inv.list[$sc_inv.list.length - 1]>>!
-
-<<link "You feel a slight sense of accomplishment.">><<goto $shop_passage>><</link>>
-<<else>>\
-You have obtained the <<print $sc_inv.list[$sc_inv.list.length - 1]>>, but you have exceeded your budget.
-
-<<link "You need to drink less blood next month, unless you want to kill a few innocent homeless people.">><<goto $shop_passage>><</link>>
-<</if>>\
-
-:: sc_progress {"position":"1725,1100"}
-<<nobr>>
-<<if $sc_inv.length is 0>>
-So far, you have not bought any skincare products.
-<<elseif $sc_c is true and $sc_m is true and $sc_s is true>>
-So far, you have a cleanser, a moisturiser, and a sunscreen.
-<<elseif $sc_m is true and $sc_s is true>>
-So far, you have a moisturiser and a sunscreen. You still need a cleanser.
-<<elseif $sc_c is true and $sc_s is true>>
-So far, you have a cleanser and a sunscreen. You still need a moisturiser.
-<<elseif $sc_c is true and $sc_m is true>>
-So far, you have a cleanser and a moisturiser. You still need a sunscreen.
-<<elseif $sc_c is true>>
-So far, you have a cleanser.
-<<elseif $sc_m is true>>
-So far, you have a moisturiser.
-<<elseif $sc_s is true>>
-So far, you have a sunscreen.
-<</if>>
-<</nobr>>
-
-:: day_1_night_cc_1 {"position":"100,2900"}
-[[You feel like you are being watched.->day_1_night_cc_2]]
-
-:: day_1_night_cc_2 {"position":"225,2900"}
-* [[Look around.->day_1_night_cc_3]]
-* [[Run as fast as you can to catch whoever is watching you.->day_1_night_cc_4]]
-
-:: day_1_night_cc_3 {"position":"325,3025"}
-You walk a few steps back, [[until—->day_1_night_cc_5]]
-
-:: day_1_night_cc_4 {"position":"325,2775"}
-[[It's as if time has slowed to a crawl.->day_1_night_cc_9]]
-
-:: day_1_night_cc_5 {"position":"450,3025"}
-You smell <<linkreplace "garlic" t8n>><<linkreplace "gArLIc" t8n>><<linkreplace "gARliC" t8n>><<linkreplace "GARlic" t8n>>[[GARLIC->day_1_night_cc_6]]<</linkreplace>><</linkreplace>><</linkreplace>><</linkreplace>>
-
-:: day_1_night_cc_6 {"position":"575,3025"}
-GARLIC IS IN YOUR <<include "cycling_day_1_night_cc_6">>
-<<timed 7s>><<goto "day_1_night_cc_7">><</timed>>\
-
-:: cycling_day_1_night_cc_6 {"position":"1300,2125"}
+:: cycling_etching
 <<silently>>
-<<if not $choices_day_1_night_cc_6>>
-  <<set $choicesCount_day_1_night_cc_6 to -1>>
-  <<set $choices_day_1_night_cc_6 to ["EYES", "NOSE", "THROAT"]>>
+<<if not $choices_etching>>
+  <<set $choicesCount_etching to -1>>
+  <<set $choices_etching to ["machine it with sigils of faith", "etch it with invocations of death", "imbue it with dreams of martyrdom"]>>
 <</if>>
 
-<<set $choicesCount_day_1_night_cc_6 to $choicesCount_day_1_night_cc_6 + 1>>
+<<set $choicesCount_etching to $choicesCount_etching + 1>>
 
-<<if $choicesCount_day_1_night_cc_6 >= $choices_day_1_night_cc_6.length>>
-   <<set $choicesCount_day_1_night_cc_6 to 0>>
+<<if $choicesCount_etching >= $choices_etching.length>>
+   <<set $choicesCount_etching to 0>>
 <</if>>
 
-<<set $cyclingResult_day_1_night_cc_6 to $choices_day_1_night_cc_6[$choicesCount_day_1_night_cc_6]>>
+<<set $cyclingResult_etching to $choices_etching[$choicesCount_etching]>>
 <</silently>>
-\<<linkreplace $choices_day_1_night_cc_6[$choicesCount_day_1_night_cc_6] t8n>><<include "cycling_day_1_night_cc_6">><</linkreplace>>
+\<<linkreplace $choices_etching[$choicesCount_etching] t8n>><<include "cycling_etching">><</linkreplace>>
 
-:: day_1_night_cc_7 {"position":"700,3025"}
-[[That bastard threw down some kind of garlic bomb.->day_1_night_cc_8]]
+:: weapon_3
+[[You put yourself into your work->weapon_4]].
 
-:: day_1_night_cc_8 {"position":"825,3025"}
-[[And you don't know who they are.->day_1_start]]
+:: weapon_4
+You put yourself into your work, [[in the way that faith demands sacrifice->weapon_5]].
 
-:: day_1_night_cc_9 {"position":"450,2775"}
-[[You run around the street, looking for whoever is watching you.->day_1_night_cc_10]]
+:: weapon_5
+And you take a blazegun.
 
-:: day_1_night_cc_10 {"position":"575,2775"}
-[[The only person you spot... is a teenage girl, looking at where you were standing, with a pair of binoculars.->day_1_night_cc_11]]
+[[Even though she called it a coward's weapon->mc_travel_1]].
 
-:: day_1_night_cc_11 {"position":"700,2775"}
-[[TODO PLOT->day_1_start]]
+:: mc_travel_1 [moon]
+The pale desert of this moon curves towards an empty horizon.
+
+She is to the [[north->mc_travel_2]].
+
+:: mc_travel_2 [moon]
+Clouds of grey dust swirl in your wake.
+
+The wind is howling a language that you do not understand.
+
+She is to the [[north->mc_travel_3]].
+
+:: mc_travel_3 [moon]
+A stone building rises in the distance. This is the cathedral where she is waiting.
+
+She is to the [[north->mc_travel_4]].
+
+:: mc_travel_4 [moon]
+The cathedral pierces the sky like a stalagmite.
+
+She is to the [[north->mc_travel_5]].
+
+:: mc_travel_5 [moon]
+The sculptures have weathered away. Their faces are blank, and the folds of their clothing are fading dunes of stone.
+
+She is to the [[north->mc_travel_6]].
+
+:: mc_travel_6
+She is waiting in the north of the cathedral, in front of the altar.
+
+A dark silhouette cloaked in [[moonlight->mc_travel_7]].
+
+:: mc_travel_7
+Moonlight is shining through the stained glass window, painting a rose of rainbows on the floor.
+
+She is still waiting.
+
+<<include "cycling_mc_travel_7">>
+<<timed 19s>><<goto "mc_fight_1">><</timed>>\
+
+:: cycling_mc_travel_7
+<<silently>>
+<<if not $choices_mc_travel_7>>
+  <<set $choicesCount_mc_travel_7 to -1>>
+  <<set $choices_mc_travel_7 to ["Shoot her.", "Strike her."]>>
+<</if>>
+
+<<set $choicesCount_mc_travel_7 to $choicesCount_mc_travel_7 + 1>>
+
+<<if $choicesCount_mc_travel_7 >= $choices_mc_travel_7.length>>
+   <<set $choicesCount_mc_travel_7 to 0>>
+<</if>>
+
+<<set $cyclingResult_mc_travel_7 to $choices_mc_travel_7[$choicesCount_mc_travel_7]>>
+<</silently>>
+\<<linkreplace $choices_mc_travel_7[$choicesCount_mc_travel_7] t8n>><<include "cycling_mc_travel_7">><</linkreplace>>
+
+:: mc_pre_fight
+<<if $cyclingResult_mc_travel_7 is "Shoot her.">>\
+You shoot in her direction, but the bullets simply rain against the stone walls.
+<<else>>\
+You rush forward to strike her, but you only slice vacant air, scattering the dance of dust motes.
+<</if>>\
+
+She has disappeared. You ready your <<if $cyclingResult_mc_travel_7 is "Shoot her.">>blazegun<<else>>$weapon<</if>>.
+
+She could be to the <<link "north" "mc_fight_1">><<set $direction_choice to "north">><</link>>,  <<link "north by east" "mc_fight_1">><<set $direction_choice to "north by east">><</link>>,  <<link "north-northeast" "mc_fight_1">><<set $direction_choice to "north-northeast">><</link>>,  <<link "northeast by north" "mc_fight_1">><<set $direction_choice to "northeast by north">><</link>>,  <<link "northeast" "mc_fight_1">><<set $direction_choice to "northeast">><</link>>,  <<link "northeast by east" "mc_fight_1">><<set $direction_choice to "northeast by east">><</link>>,  <<link "east-northeast" "mc_fight_1">><<set $direction_choice to "east-northeast">><</link>>,  <<link "east by north" "mc_fight_1">><<set $direction_choice to "east by north">><</link>>,  <<link "east" "mc_fight_1">><<set $direction_choice to "east">><</link>>,  <<link "east by south" "mc_fight_1">><<set $direction_choice to "east by south">><</link>>,  <<link "east-southeast" "mc_fight_1">><<set $direction_choice to "east-southeast">><</link>>,  <<link "southeast by east" "mc_fight_1">><<set $direction_choice to "southeast by east">><</link>>,  <<link "southeast" "mc_fight_1">><<set $direction_choice to "southeast">><</link>>,  <<link "southeast by south" "mc_fight_1">><<set $direction_choice to "southeast by south">><</link>>,  <<link "south-southeast" "mc_fight_1">><<set $direction_choice to "south-southeast">><</link>>,  <<link "south by east" "mc_fight_1">><<set $direction_choice to "south by east">><</link>>,  <<link "south" "mc_fight_1">><<set $direction_choice to "south">><</link>>,  <<link "south by west" "mc_fight_1">><<set $direction_choice to "south by west">><</link>>,  <<link "south-southwest" "mc_fight_1">><<set $direction_choice to "south-southwest">><</link>>,  <<link "southwest by south" "mc_fight_1">><<set $direction_choice to "southwest by south">><</link>>,  <<link "southwest" "mc_fight_1">><<set $direction_choice to "southwest">><</link>>,  <<link "southwest by west" "mc_fight_1">><<set $direction_choice to "southwest by west">><</link>>,  <<link "west-southwest" "mc_fight_1">><<set $direction_choice to "west-southwest">><</link>>,  <<link "west by south" "mc_fight_1">><<set $direction_choice to "west by south">><</link>>,  <<link "west" "mc_fight_1">><<set $direction_choice to "west">><</link>>,  <<link "west by north" "mc_fight_1">><<set $direction_choice to "west by north">><</link>>,  <<link "west-northwest" "mc_fight_1">><<set $direction_choice to "west-northwest">><</link>>,  <<link "northwest by west" "mc_fight_1">><<set $direction_choice to "northwest by west">><</link>>,  <<link "northwest" "mc_fight_1">><<set $direction_choice to "northwest">><</link>>,  <<link "northwest by north" "mc_fight_1">><<set $direction_choice to "northwest by north">><</link>>,  <<link "north-northwest" "mc_fight_1">><<set $direction_choice to "north-northwest">><</link>>,  <<link "north by west" "mc_fight_1">><<set $direction_choice to "north by west">><</link>>.
+
+:: mc_fight_1
+[[One second.->mc_fight_2]]
+
+:: mc_fight_2
+<<if $direction_choice is "north">>\
+Now, she isn't to the north. You swerve around—she is to your south.
+<<elseif $direction_choice is "south">>\
+She has reappeared to your south, but she still dodges your <<if $cyclingResult_mc_travel_7 is "Shoot her.">>shots<<else>>attacks<</if>>.
+<<else>>\
+She isn't to the $direction_choice. You swerve around—she is to your south.
+<</if>>\
+
+<<if $cyclingResult_mc_travel_7 is "Shoot her.">><<include "cycling_shoot_again">><<else>><<include "cycling_strike_again">><</if>>
+
+[[Two seconds.]]
+
+:: mc_fight_3
+<<nobr>><<if $cyclingResult_shoot_again is "Shoot her again." or $cyclingResult_strike_again is "Shoot her.">>
+She casually sidesteps your shots
+<<elseif $cyclingResult_strike_again is "Strike her again." or $cyclingResult_shoot_again is "Strike her.">>
+She casually sidesteps your attacks
+<<else>>
+She casually sidesteps your attacks
+<</if>>
+ and laughs, in the way that one would laugh at the antics of [[a small child->flashback_1]].<</nobr>>
+
+:: cycling_shoot_again
+<<silently>>
+<<if not $choices_shoot_again>>
+  <<set $choicesCount_shoot_again to -1>>
+  <<set $choices_shoot_again to ["Shoot her again.", "Strike her."]>>
+<</if>>
+
+<<set $choicesCount_shoot_again to $choicesCount_shoot_again + 1>>
+
+<<if $choicesCount_shoot_again >= $choices_shoot_again.length>>
+   <<set $choicesCount_shoot_again to 0>>
+<</if>>
+
+<<set $cyclingResult_shoot_again to $choices_shoot_again[$choicesCount_shoot_again]>>
+<</silently>>
+\<<linkreplace $choices_shoot_again[$choicesCount_shoot_again] t8n>><<include "cycling_shoot_again">><</linkreplace>>
+
+:: cycling_strike_again
+<<silently>>
+<<if not $choices_strike_again>>
+  <<set $choicesCount_strike_again to -1>>
+  <<set $choices_strike_again to ["Strike her again.", "Shoot her."]>>
+<</if>>
+
+<<set $choicesCount_strike_again to $choicesCount_strike_again + 1>>
+
+<<if $choicesCount_strike_again >= $choices_strike_again.length>>
+   <<set $choicesCount_strike_again to 0>>
+<</if>>
+
+<<set $cyclingResult_strike_again to $choices_strike_again[$choicesCount_strike_again]>>
+<</silently>>
+\<<linkreplace $choices_strike_again[$choicesCount_strike_again] t8n>><<include "cycling_strike_again">><</linkreplace>>
+
+:: flashback_1 [flashback]
+She casually sidesteps your attacks, again and again.
+
+You are children at the monastery, and you are training to fight. She was always better at anything physical—your form is far clumsier than hers.
+
+The sunlight is prickling your skin, and you are trying your best to ignore it. Frustration is burning in your chest.
+
+She is still laughing.
+
+<<include "cycling_flashback_1">>
+
+One second.
+
+:: cycling_flashback_1
+<<silently>>
+<<if not $choices_flashback_1>>
+  <<set $choicesCount_flashback_1 to -1>>
+  <<set $choices_flashback_1 to ["Slash at her with all your strength.", "A."]>>
+<</if>>
+
+<<set $choicesCount_flashback_1 to $choicesCount_flashback_1 + 1>>
+
+<<if $choicesCount_flashback_1 >= $choices_flashback_1.length>>
+   <<set $choicesCount_flashback_1 to 0>>
+<</if>>
+
+<<set $cyclingResult_flashback_1 to $choices_flashback_1[$choicesCount_flashback_1]>>
+<</silently>>
+\<<linkreplace $choices_flashback_1[$choicesCount_flashback_1] t8n>><<include "cycling_flashback_1">><</linkreplace>>
