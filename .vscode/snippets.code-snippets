@@ -1,0 +1,62 @@
+{
+  // Place your advanced-creative-writing workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"scope": "javascript,typescript",
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+
+  "cycling": {
+    "prefix": ":cycling-t8n",
+    "scope": "twee3-sugarcube-2",
+    "body": [
+      "<<include \"cycling_1\">>",
+      "",
+      ":: cycling_1",
+      "<<silently>>",
+      "<<if not $choices_1>>",
+      "  <<set $choicesCount_1 to -1>>",
+      "  <<set $choices_1 to [\"1\", \"2\", \"3\"]>>",
+      "<</if>>",
+      "",
+      "<<set $choicesCount_1 to $choicesCount_1 + 1>>",
+      "",
+      "<<if $choicesCount_1 >= $choices_1.length>>",
+      "   <<set $choicesCount_1 to 0>>",
+      "<</if>>",
+      "",
+      "<<set $cyclingResult_1 to $choices_1[$choicesCount_1]>>",
+      "<</silently>>",
+      "\\<<linkreplace $choices_1[$choicesCount_1] t8n>><<include \"cycling_1\">><</linkreplace>>"
+    ],
+    "description": "Cycling with transitions."
+  },
+  "linkappend t8n": {
+    "prefix": ":linkappend-t8n",
+    "scope": "twee3-sugarcube-2",
+    "body": ["<<linkappend \"linktext\" t8n>>content<</linkappend>>"],
+    "description": "Linkappend with transition."
+  },
+  "linkreplace t8n": {
+    "prefix": ":linkreplace-t8n",
+    "scope": "twee3-sugarcube-2",
+    "body": ["<<linkreplace \"linktext\" t8n>>content<</linkreplace>>"],
+    "description": "Linkreplace with transition."
+  },
+  "linkprepend t8n": {
+    "prefix": ":linkprepend-t8n",
+    "scope": "twee3-sugarcube-2",
+    "body": ["<<linkprepend \"linktext\" t8n>>content<</linkprepend>>"],
+    "description": "Linkprepend with transition."
+  }
+}
