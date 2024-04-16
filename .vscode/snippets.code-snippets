@@ -20,43 +20,43 @@
     "prefix": ":cycling-t8n",
     "scope": "twee3-sugarcube-2",
     "body": [
-      "<<include \"cycling_1\">>",
+      "<<include \"cycling$_1\">>",
       "",
-      ":: cycling_1",
+      ":: cycling$_1",
       "<<silently>>",
-      "<<if not $$choices_1>>",
-      "  <<set $$choicesCount_1 to -1>>",
-      "  <<set $$choices_1 to [\"1\", \"2\", \"3\"]>>",
+      "<<if not \\$choices$_1>>",
+      "  <<set \\$choicesCount$_1 to -1>>",
+      "  <<set \\$choices$_1 to [\"1\", \"2\", \"3\"]>>",
       "<</if>>",
       "",
-      "<<set $$choicesCount_1 to $$choicesCount_1 + 1>>",
+      "<<set \\$choicesCount$_1 to \\$choicesCount$_1 + 1>>",
       "",
-      "<<if $$choicesCount_1 >= $$choices_1.length>>",
-      "   <<set $$choicesCount_1 to 0>>",
+      "<<if \\$choicesCount$_1 >= \\$choices$_1.length>>",
+      "   <<set \\$choicesCount$_1 to 0>>",
       "<</if>>",
       "",
-      "<<set $$cyclingResult_1 to $$choices_1[$$choicesCount_1]>>",
+      "<<set \\$cyclingResult$_1 to \\$choices$_1[\\$choicesCount$_1]>>",
       "<</silently>>",
-      "\\<<linkreplace $$choices_1[$$choicesCount_1] t8n>><<include \"cycling_1\">><</linkreplace>>"
+      "\\<<linkreplace \\$choices$_1[\\$choicesCount$_1] t8n>><<include \"cycling$_1\">><</linkreplace>>"
     ],
     "description": "Cycling with transitions."
   },
   "linkappend t8n": {
     "prefix": ":linkappend-t8n",
     "scope": "twee3-sugarcube-2",
-    "body": ["<<linkappend \"linktext\" t8n>>content<</linkappend>>"],
+    "body": ["<<linkappend \"$linktext\" t8n>>$content<</linkappend>>"],
     "description": "Linkappend with transition."
   },
   "linkreplace t8n": {
     "prefix": ":linkreplace-t8n",
     "scope": "twee3-sugarcube-2",
-    "body": ["<<linkreplace \"linktext\" t8n>>content<</linkreplace>>"],
+    "body": ["<<linkreplace \"$linktext\" t8n>>$content<</linkreplace>>"],
     "description": "Linkreplace with transition."
   },
   "linkprepend t8n": {
     "prefix": ":linkprepend-t8n",
     "scope": "twee3-sugarcube-2",
-    "body": ["<<linkprepend \"linktext\" t8n>>content<</linkprepend>>"],
+    "body": ["<<linkprepend \"$linktext\" t8n>>$content<</linkprepend>>"],
     "description": "Linkprepend with transition."
   }
 }
