@@ -1,21 +1,21 @@
-:: StoryTitle {"position":"1900,175"}
-You Cannot Save Her
+:: StoryTitle {"position":"1000,125"}
+You Can't Save Her
 
-:: StoryData {"position":"1900,300"}
+:: StoryData {"position":"1000,250"}
 {
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
     "format-version": "2.36.1",
-    "start": "mc_fight_3",
+    "start": "choiceless_fight_6",
     "zoom": 1
 }
 
 :: Start [no-undo] {"position":"200,400"}
-<div class="title">You Cannot Save Her</div>\
+<div class="title">You Can't Save Her</div>\
 <div class="subtitle">by Sarah Mak</div>\
 <div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · <<link 'Restart' 'restart'>><</link>><<else>>[[Start->content_warning]]<</if>> · [[Options->options]]</div>
 
-:: options [no-undo  options] {"position":"75,400"}
+:: options [no-undo options] {"position":"75,400"}
 <span class="subtitle">''Options''</span> <span class="close">[[✖->Start]]</span>
 <<if setup.enableUndo.get()>>
     ''Enable Undo'' is currently <<link "ON">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>.
@@ -26,13 +26,13 @@ When this option is ''ON'', an undo button will appear at the top of the game wi
 
 :: content_warning [no-undo center options] {"position":"350,400"}
 <span class="subtitle">''Content Warning''</span>
-This story contains violence and horror.
+This story contains depictions of violence, horror, and mild gore.
 Are you okay with continuing this story?
 
 [[Yes.->pre_intro]]
 [[No.->its_okay]]
 
-:: restart [center no-undo]
+:: restart [center no-undo] {"position":"350,150"}
 <<nobr>><<link 'It will always end the same way.'>>
     <<for _key, _val range State.variables>><<run delete State.variables[_key]>><</for>>
     <<set State.expired.length = 0>>
@@ -42,12 +42,23 @@ Are you okay with continuing this story?
 :: variable_setup {"position":"200,200"}
 <nobr>
 /* STORY */
-<<set $direction_choice to "north">>
+<<set $dir to "north">>
 <<set $weapon to "greatsword">>
-<<set $cyclingResult_shoot_again to "Shoot her again.">>
-<<set $cyclingResult_strike_again to "Shoot her.">>
+<<set $cyclingResult_weapon_1 to "a greatsword forged from soulsteel">>
+<<set $face_friend to 0>>
+<<set $face_mc to 0>>
+<<set $gen_dir_desc to "in front of her">>
+
+<<set $shot_friend_1 to false>>
+<<set $shot_friend_2 to false>>
+<<set $shot_friend_3 to false>>
+
+<<set $friend_dodge_1 to "step into a fold in space and reappear in front of her">>
+<<set $friend_dodge_2 to "sidestep">>
 
 /* TRACK SEEN TEXT */
+<<set $goddess_freedom_seen to false>>
+<<set $wound_heal_seen to false>>
 
 /* TRACK VISITS */
 
@@ -60,37 +71,41 @@ Are you okay with continuing this story?
 :: its_okay [no-undo center] {"position":"350,275"}
 [[It's okay.->Start]]
 
-:: pre_intro [no-undo]
+:: pre_intro [no-undo] {"position":"300,550"}
 <<include "variable_setup">>
 <<timed 2s t8n>><<goto "intro_1">><</timed>>
 
-:: intro_1 [no-undo]
-[[You cannot save her.->intro_2]]
+:: intro_1 [no-undo] {"position":"425,550"}
+[[You can't save her->intro_2]].
 
-:: intro_2
-[[This is what the nuns told you.->intro_3]]
+:: intro_2 {"position":"550,550"}
+[[This is what they told you->intro_3]].
 
-:: intro_3
-[[And this is what you tell yourself.->weapon_1]]
+:: intro_3 {"position":"675,550"}
+[[And this is what you tell yourself->chapter_1]].
 
-:: intro_4
-When the children at the monastery come of age, they must complete a test. Each test is [[personal->intro_5]] to them.
+:: chapter_1 [center] {"position":"0,950","size":"200,100"}
+<span class="number-heading">[[I->intro_4]]</span>
 
-:: intro_5
-When she left, you feared what your test would be.
+:: intro_4 [no-undo] {"position":"825,950"}
+/* TODO: may want to reuse these three */
+When the children at the monastery come of age, they must complete a test.
+
+:: intro_5 {"position":"950,950"}
+When your friend left, you feared what your test would be.
 
 [[Your fears came true->intro_6]].
 
-:: intro_6
+:: intro_6 {"position":"1075,950"}
 The nuns told you that you must [[kill her->weapon_1]], for she had fallen sway to the other god.
 
-:: weapon_1 [center]
-So you prepare your weapon:
+:: weapon_1 [center] {"position":"300,1125"}
+So you start by preparing your weapon:
 <<include "cycling_weapon_1">>
 
-[[Just so->etching]].
+You pray that you are [[prepared->etching]].
 
-:: cycling_weapon_1
+:: cycling_weapon_1 {"position":"200,1125"}
 <<silently>>
 <<if not $choices_weapon_1>>
   <<set $choicesCount_weapon_1 to -1>>
@@ -107,8 +122,9 @@ So you prepare your weapon:
 <</silently>>
 \<<linkreplace $choices_weapon_1[$choicesCount_weapon_1] t8n>><<include "cycling_weapon_1">><</linkreplace>>
 
-:: weapon_des_calc
+:: weapon_des_calc {"position":"575,100"}
 <<nobr>>
+<<set $cyclingResult_weapon_1 to $cyclingResult_weapon_1.toLowerCase()>>
 <<if $cyclingResult_weapon_1 is "a greatsword forged from soulsteel">>
     <<set $weapon to "greatsword">>
 <<elseif $cyclingResult_weapon_1 is "a sabre carved from angel bone">>
@@ -120,18 +136,18 @@ So you prepare your weapon:
 <</if>>
 <</nobr>>
 
-:: etching [center]
+:: etching [center] {"position":"425,1125"}
 <<include "weapon_des_calc">>\
 And you:
 <<include "cycling_etching">>
 
-[[You believe in this->weapon_3]].
+This is what you [[believe->weapon_3]] in.
 
-:: cycling_etching
+:: cycling_etching {"position":"525,1125"}
 <<silently>>
 <<if not $choices_etching>>
   <<set $choicesCount_etching to -1>>
-  <<set $choices_etching to ["machine it with sigils of faith", "etch it with invocations of death", "imbue it with dreams of martyrdom"]>>
+  <<set $choices_etching to ["machine it with sigils of faith", "etch it with invocations of death", "anodise it with dreams of martyrdom"]>>
 <</if>>
 
 <<set $choicesCount_etching to $choicesCount_etching + 1>>
@@ -144,62 +160,83 @@ And you:
 <</silently>>
 \<<linkreplace $choices_etching[$choicesCount_etching] t8n>><<include "cycling_etching">><</linkreplace>>
 
-:: weapon_3
+:: weapon_3 {"position":"675,1125"}
 [[You put yourself into your work->weapon_4]].
 
-:: weapon_4
+:: weapon_4 {"position":"800,1125"}
 You put yourself into your work, [[in the way that faith demands sacrifice->weapon_5]].
 
-:: weapon_5
-And you take a blazegun.
+:: weapon_5 {"position":"925,1125"}
+And you bring a blazegun.
 
 [[Even though she called it a coward's weapon->mc_travel_1]].
 
-:: mc_travel_1 [moon]
-The pale desert of this moon curves towards an empty horizon.
+:: mc_travel_1 [moon] {"position":"375,1325"}
+<<timed 2s t8n>>The pale desert of this moon curves towards an empty horizon.
 
 She is to the [[north->mc_travel_2]].
+<</timed>>\
 
-:: mc_travel_2 [moon]
+:: mc_travel_2 [moon] {"position":"500,1325"}
 Clouds of grey dust swirl in your wake.
 
 The wind is howling a language that you do not understand.
 
 She is to the [[north->mc_travel_3]].
 
-:: mc_travel_3 [moon]
-A stone building rises in the distance. This is the cathedral where she is waiting.
+:: mc_travel_3 [moon] {"position":"625,1325"}
+A building rises in the distance. This is the cathedral where she is waiting.
+
+You hear a rumble inside the cathedral.
 
 She is to the [[north->mc_travel_4]].
 
-:: mc_travel_4 [moon]
+:: mc_travel_4 [moon] {"position":"750,1325"}
 The cathedral pierces the sky like a stalagmite.
 
 She is to the [[north->mc_travel_5]].
 
-:: mc_travel_5 [moon]
-The sculptures have weathered away. Their faces are blank, and the folds of their clothing are fading dunes of stone.
+:: mc_travel_5 [moon] {"position":"875,1325"}
+The sculptures have weathered away.
+
+Their faces are blank, and the folds of their clothing are fading dunes of stone.
 
 She is to the [[north->mc_travel_6]].
 
-:: mc_travel_6
+:: mc_travel_6 {"position":"1000,1325"}
 She is waiting in the north of the cathedral, in front of the altar.
 
-A dark silhouette cloaked in [[moonlight->mc_travel_7]].
+It is covered in red stains.
 
-:: mc_travel_7
+The arches and walls are scarred with gashes. From the depth of the grooves, you know that they must be recent.
+
+You look to the north. She is a silhouette cloaked in [[moonlight->mc_travel_7]].
+
+:: mc_travel_7 {"position":"1125,1325"}
 Moonlight is shining through the stained glass window, painting a rose of rainbows on the floor.
 
 She is still waiting.
 
-<<include "cycling_mc_travel_7">>
-<<timed 19s>><<goto "mc_fight_1">><</timed>>\
+You take [[a better look at her->mc_travel_8]].
 
-:: cycling_mc_travel_7
+:: mc_travel_8 {"position":"1250,1325"}
+Her <<linkappend "face" t8n>> is a palette of scars.<<set $face_friend += 1>><<if $face_friend is 3>><<timed 6s t8n>><<goto "mc_travel_9">><</timed>><</if>><</linkappend>>
+
+Her <<linkappend "eyes" t8n>> glow bright pink.<<set $face_friend += 1>><<if $face_friend is 3>><<timed 6s t8n>><<goto "mc_travel_9">><</timed>><</if>><</linkappend>>
+
+Her <<linkappend "hair" t8n>> barely conceals the nubs of her antlers, which look like buds emerging out of soil.<<set $face_friend += 1>><<if $face_friend is 3>><<timed 6s t8n>><<goto "mc_travel_9">><</timed>><</if>><</linkappend>>
+
+:: mc_travel_9 {"position":"1375,1325"}
+This is worse than you feared.
+
+<<include "cycling_mc_travel_7">>.
+<<timed 9s>><<goto "mc_pre_fight">><</timed>>\
+
+:: cycling_mc_travel_7 {"position":"1125,1425"}
 <<silently>>
 <<if not $choices_mc_travel_7>>
   <<set $choicesCount_mc_travel_7 to -1>>
-  <<set $choices_mc_travel_7 to ["Shoot her.", "Strike her."]>>
+  <<set $choices_mc_travel_7 to ["Shoot her", "Strike her"]>>
 <</if>>
 
 <<set $choicesCount_mc_travel_7 to $choicesCount_mc_travel_7 + 1>>
@@ -212,48 +249,104 @@ She is still waiting.
 <</silently>>
 \<<linkreplace $choices_mc_travel_7[$choicesCount_mc_travel_7] t8n>><<include "cycling_mc_travel_7">><</linkreplace>>
 
-:: mc_pre_fight
-<<if $cyclingResult_mc_travel_7 is "Shoot her.">>\
-You shoot in her direction, but the bullets simply rain against the stone walls.
+:: mc_pre_fight {"position":"300,1475"}
+<<if $cyclingResult_mc_travel_7 is "Shoot her">>\
+<<set $shot_friend_1 to true>>\
+You fumble with your blazegun for a moment, but you steady yourself, and you shoot in her direction.
+
+The bullets simply rain against the stone walls.
 <<else>>\
-You rush forward to strike her, but you only slice vacant air, scattering the dance of dust motes.
+You fumble with your $weapon for a moment, but you steady yourself.
+
+You rush forward to strike her, you only slice vacant air, and scatter a dance of dust motes.
 <</if>>\
 
-She has disappeared. You ready your <<if $cyclingResult_mc_travel_7 is "Shoot her.">>blazegun<<else>>$weapon<</if>>.
+She has disappeared. You ready your <<if $cyclingResult_mc_travel_7 is "Shoot her">>blazegun<<else>>$weapon<</if>>.
 
-She could be to the <<link "north" "mc_fight_1">><<set $direction_choice to "north">><</link>>,  <<link "north by east" "mc_fight_1">><<set $direction_choice to "north by east">><</link>>,  <<link "north-northeast" "mc_fight_1">><<set $direction_choice to "north-northeast">><</link>>,  <<link "northeast by north" "mc_fight_1">><<set $direction_choice to "northeast by north">><</link>>,  <<link "northeast" "mc_fight_1">><<set $direction_choice to "northeast">><</link>>,  <<link "northeast by east" "mc_fight_1">><<set $direction_choice to "northeast by east">><</link>>,  <<link "east-northeast" "mc_fight_1">><<set $direction_choice to "east-northeast">><</link>>,  <<link "east by north" "mc_fight_1">><<set $direction_choice to "east by north">><</link>>,  <<link "east" "mc_fight_1">><<set $direction_choice to "east">><</link>>,  <<link "east by south" "mc_fight_1">><<set $direction_choice to "east by south">><</link>>,  <<link "east-southeast" "mc_fight_1">><<set $direction_choice to "east-southeast">><</link>>,  <<link "southeast by east" "mc_fight_1">><<set $direction_choice to "southeast by east">><</link>>,  <<link "southeast" "mc_fight_1">><<set $direction_choice to "southeast">><</link>>,  <<link "southeast by south" "mc_fight_1">><<set $direction_choice to "southeast by south">><</link>>,  <<link "south-southeast" "mc_fight_1">><<set $direction_choice to "south-southeast">><</link>>,  <<link "south by east" "mc_fight_1">><<set $direction_choice to "south by east">><</link>>,  <<link "south" "mc_fight_1">><<set $direction_choice to "south">><</link>>,  <<link "south by west" "mc_fight_1">><<set $direction_choice to "south by west">><</link>>,  <<link "south-southwest" "mc_fight_1">><<set $direction_choice to "south-southwest">><</link>>,  <<link "southwest by south" "mc_fight_1">><<set $direction_choice to "southwest by south">><</link>>,  <<link "southwest" "mc_fight_1">><<set $direction_choice to "southwest">><</link>>,  <<link "southwest by west" "mc_fight_1">><<set $direction_choice to "southwest by west">><</link>>,  <<link "west-southwest" "mc_fight_1">><<set $direction_choice to "west-southwest">><</link>>,  <<link "west by south" "mc_fight_1">><<set $direction_choice to "west by south">><</link>>,  <<link "west" "mc_fight_1">><<set $direction_choice to "west">><</link>>,  <<link "west by north" "mc_fight_1">><<set $direction_choice to "west by north">><</link>>,  <<link "west-northwest" "mc_fight_1">><<set $direction_choice to "west-northwest">><</link>>,  <<link "northwest by west" "mc_fight_1">><<set $direction_choice to "northwest by west">><</link>>,  <<link "northwest" "mc_fight_1">><<set $direction_choice to "northwest">><</link>>,  <<link "northwest by north" "mc_fight_1">><<set $direction_choice to "northwest by north">><</link>>,  <<link "north-northwest" "mc_fight_1">><<set $direction_choice to "north-northwest">><</link>>,  <<link "north by west" "mc_fight_1">><<set $direction_choice to "north by west">><</link>>.
+She could be to the <<link "north" "mc_fight_1">><<set $dir to "north">><</link>>,  <<link "north by east" "mc_fight_1">><<set $dir to "north by east">><</link>>,  <<link "north-northeast" "mc_fight_1">><<set $dir to "north-northeast">><</link>>,  <<link "northeast by north" "mc_fight_1">><<set $dir to "northeast by north">><</link>>,  <<link "northeast" "mc_fight_1">><<set $dir to "northeast">><</link>>,  <<link "northeast by east" "mc_fight_1">><<set $dir to "northeast by east">><</link>>,  <<link "east-northeast" "mc_fight_1">><<set $dir to "east-northeast">><</link>>,  <<link "east by north" "mc_fight_1">><<set $dir to "east by north">><</link>>,  <<link "east" "mc_fight_1">><<set $dir to "east">><</link>>,  <<link "east by south" "mc_fight_1">><<set $dir to "east by south">><</link>>,  <<link "east-southeast" "mc_fight_1">><<set $dir to "east-southeast">><</link>>,  <<link "southeast by east" "mc_fight_1">><<set $dir to "southeast by east">><</link>>,  <<link "southeast" "mc_fight_1">><<set $dir to "southeast">><</link>>,  <<link "southeast by south" "mc_fight_1">><<set $dir to "southeast by south">><</link>>,  <<link "south-southeast" "mc_fight_1">><<set $dir to "south-southeast">><</link>>,  <<link "south by east" "mc_fight_1">><<set $dir to "south by east">><</link>>,  <<link "south" "mc_fight_1">><<set $dir to "south">><</link>>,  <<link "south by west" "mc_fight_1">><<set $dir to "south by west">><</link>>,  <<link "south-southwest" "mc_fight_1">><<set $dir to "south-southwest">><</link>>,  <<link "southwest by south" "mc_fight_1">><<set $dir to "southwest by south">><</link>>,  <<link "southwest" "mc_fight_1">><<set $dir to "southwest">><</link>>,  <<link "southwest by west" "mc_fight_1">><<set $dir to "southwest by west">><</link>>,  <<link "west-southwest" "mc_fight_1">><<set $dir to "west-southwest">><</link>>,  <<link "west by south" "mc_fight_1">><<set $dir to "west by south">><</link>>,  <<link "west" "mc_fight_1">><<set $dir to "west">><</link>>,  <<link "west by north" "mc_fight_1">><<set $dir to "west by north">><</link>>,  <<link "west-northwest" "mc_fight_1">><<set $dir to "west-northwest">><</link>>,  <<link "northwest by west" "mc_fight_1">><<set $dir to "northwest by west">><</link>>,  <<link "northwest" "mc_fight_1">><<set $dir to "northwest">><</link>>,  <<link "northwest by north" "mc_fight_1">><<set $dir to "northwest by north">><</link>>,  <<link "north-northwest" "mc_fight_1">><<set $dir to "north-northwest">><</link>>, or <<link "north by west" "mc_fight_1">><<set $dir to "north by west">><</link>>.
 
-:: mc_fight_1
-[[One second.->mc_fight_2]]
+:: mc_fight_1 {"position":"425,1475"}
+<<nobr>><<if $dir is "north-northwest" or $dir is "north" or $dir is "north-northeast">>
+    <<set $gen_dir_desc to "in front of her">>
 
-:: mc_fight_2
-<<if $direction_choice is "north">>\
-Now, she isn't to the north. You swerve around—she is to your south.
-<<elseif $direction_choice is "south">>\
-She has reappeared to your south, but she still dodges your <<if $cyclingResult_mc_travel_7 is "Shoot her.">>shots<<else>>attacks<</if>>.
+<<elseif $dir is "northeast by north" or $dir is "northeast" or $dir is "northeast by east" or $dir is "east-northeast" or $dir is "east by north" or $dir is "east" or $dir is "east by south" or $dir is "east-southeast" or $dir is "southeast by east" or $dir is "southeast" or $dir is "southeast by south" or $dir is "north by west" or $dir is "north by east">>
+    <<set $gen_dir_desc to "to her right">>
+
+<<elseif $dir is "south-southeast" or $dir is "south" or $dir is "south by west">>
+    <<set $gen_dir_desc to "behind her">>
+
+<<elseif $dir is "south by east" or $dir is "southwest by south" or $dir is "southwest" or $dir is "southwest by west" or $dir is "west-southwest" or $dir is "west by south" or $dir is "west" or $dir is "west by north" or $dir is "west-northwest" or $dir is "northwest by west" or $dir is "northwest" or $dir is "northwest by north" or $dir is "south-southwest">>
+    <<set $gen_dir_desc to "to her left">>
+
+<</if>><</nobr>>\
+[[One second->mc_fight_2]].
+
+:: mc_fight_2 {"position":"550,1475"}
+<<if $dir is "north">>\
+Now, she isn't to the north. You miss again.
+
+You swerve around, and spot her behind you.
+<<elseif $dir is "south">>\
+She has reappeared to your south, but she still dodges your <<if $cyclingResult_mc_travel_7 is "Shoot her">>shots<<else>>attacks<</if>>.
 <<else>>\
-She isn't to the $direction_choice. You swerve around—she is to your south.
+She isn't to the $dir. You swerve around, and spot her behind you.
 <</if>>\
 
-<<if $cyclingResult_mc_travel_7 is "Shoot her.">><<include "cycling_shoot_again">><<else>><<include "cycling_strike_again">><</if>>
+<<if $cyclingResult_mc_travel_7 is "Shoot her">><<include "cycling_shoot_again">>.<<else>><<include "cycling_strike_again">>.<</if>>
 
-[[Two seconds.]]
+[[Two seconds->mc_fight_3]].
 
-:: mc_fight_3
-<<nobr>><<if $cyclingResult_shoot_again is "Shoot her again." or $cyclingResult_strike_again is "Shoot her.">>
+:: mc_fight_3 {"position":"675,1475"}
+<<if $cyclingResult_shoot_again is "Strike her">><<set $shot_friend_2 to true>><</if>>\
+<<if $cyclingResult_strike_again is "Shoot her">><<set $shot_friend_2 to true>><</if>>\
+<<nobr>><<if $shot_friend_2 is true>>
 She casually sidesteps your shots
-<<elseif $cyclingResult_strike_again is "Strike her again." or $cyclingResult_shoot_again is "Strike her.">>
-She casually sidesteps your attacks
 <<else>>
-She casually sidesteps your attacks
+She casually sidesteps your $weapon
 <</if>>
- and laughs, in the way that one would laugh at the antics of [[a small child->flashback_1]].<</nobr>>
+ and laughs, in the way she always did.<</nobr>>
 
-:: cycling_shoot_again
+You stop to catch your breath. You consider your [[options->options_comment]]:
+
+<<include "cycling_mc_fight_3">>.
+
+[[Three seconds->mc_fight_4]].
+
+:: cycling_mc_fight_3 {"position":"675,1575"}
+<<silently>>
+<<if not $choices_mc_fight_3>>
+  <<set $choicesCount_mc_fight_3 to -1>>
+  <<set $choices_mc_fight_3 to ["Thrust your $weapon forward", "Steady your aim, charge the shot, and shoot"]>>
+<</if>>
+
+<<set $choicesCount_mc_fight_3 to $choicesCount_mc_fight_3 + 1>>
+
+<<if $choicesCount_mc_fight_3 >= $choices_mc_fight_3.length>>
+   <<set $choicesCount_mc_fight_3 to 0>>
+<</if>>
+
+<<set $cyclingResult_mc_fight_3 to $choices_mc_fight_3[$choicesCount_mc_fight_3]>>
+<</silently>>
+\<<linkreplace $choices_mc_fight_3[$choicesCount_mc_fight_3] t8n>><<include "cycling_mc_fight_3">><</linkreplace>>
+
+:: mc_fight_4 {"position":"800,1475"}
+<<if $cyclingResult_mc_fight_3 is "Steady your aim and shoot">>\
+<<set $shot_friend_3 to true>>\
+She smirks as she slices the bolt of fire midair with her $weapon.
+
+The other god's power.
+<<else>>\
+<<set $shot_friend_3 to false>>\
+She smirks as she parries your thrust with such strength, you let your $weapon go. It flies off to the other side of the room, and clatters on the floor, the sound echoing throughout this hollow space.
+<</if>>\
+
+She starts laughing harder, laughing in the way that one would laugh at the antics of [[a small child->flashback_1]].
+
+:: cycling_shoot_again {"position":"575,325"}
 <<silently>>
 <<if not $choices_shoot_again>>
   <<set $choicesCount_shoot_again to -1>>
-  <<set $choices_shoot_again to ["Shoot her again.", "Strike her."]>>
+  <<set $choices_shoot_again to ["Shoot her again", "Strike her"]>>
 <</if>>
 
 <<set $choicesCount_shoot_again to $choicesCount_shoot_again + 1>>
@@ -266,11 +359,11 @@ She casually sidesteps your attacks
 <</silently>>
 \<<linkreplace $choices_shoot_again[$choicesCount_shoot_again] t8n>><<include "cycling_shoot_again">><</linkreplace>>
 
-:: cycling_strike_again
+:: cycling_strike_again {"position":"575,225"}
 <<silently>>
 <<if not $choices_strike_again>>
   <<set $choicesCount_strike_again to -1>>
-  <<set $choices_strike_again to ["Strike her again.", "Shoot her."]>>
+  <<set $choices_strike_again to ["Strike her", "Shoot her"]>>
 <</if>>
 
 <<set $choicesCount_strike_again to $choicesCount_strike_again + 1>>
@@ -283,8 +376,9 @@ She casually sidesteps your attacks
 <</silently>>
 \<<linkreplace $choices_strike_again[$choicesCount_strike_again] t8n>><<include "cycling_strike_again">><</linkreplace>>
 
-:: flashback_1 [flashback]
-She casually sidesteps your attacks, again and again.
+:: flashback_1 [flashback long-t8n] {"position":"800,1750"}
+<<timed 2.5s t8n>>\
+She smirks as she sidesteps your sword, again and again.
 
 You are children at the monastery, and you are training to fight. She was always better at anything physical—your form is far clumsier than hers.
 
@@ -294,13 +388,14 @@ She is still laughing.
 
 <<include "cycling_flashback_1">>
 
-One second.
+[[One second.->flashback_2]]
+<</timed>>\
 
-:: cycling_flashback_1
+:: cycling_flashback_1 {"position":"800,1650"}
 <<silently>>
 <<if not $choices_flashback_1>>
   <<set $choicesCount_flashback_1 to -1>>
-  <<set $choices_flashback_1 to ["Slash at her with all your strength.", "A."]>>
+  <<set $choices_flashback_1 to ["Slash at her with all your strength.", "Hit her with the pommel of your sword."]>>
 <</if>>
 
 <<set $choicesCount_flashback_1 to $choicesCount_flashback_1 + 1>>
@@ -312,3 +407,481 @@ One second.
 <<set $cyclingResult_flashback_1 to $choices_flashback_1[$choicesCount_flashback_1]>>
 <</silently>>
 \<<linkreplace $choices_flashback_1[$choicesCount_flashback_1] t8n>><<include "cycling_flashback_1">><</linkreplace>>
+
+:: flashback_2 [flashback] {"position":"925,1750"}
+You hit her, hard. Too hard. She grimaces as she falls, clutching her chest.
+
+[[Two seconds.->flashback_2_1]]
+
+:: flashback_2_1 [flashback] {"position":"1050,1750"}
+You watch her fall.
+
+[[Three seconds.->flashback_2_2]]
+
+:: flashback_2_2 [flashback] {"position":"1175,1750"}
+I'm sorry! You say, as you run over to pick her up. She groans, but she says it doesn't hurt.
+
+The nun jogs over to bring her to the infirmary, and you insist on [[following her->flashback_3]].
+
+:: flashback_3 [flashback] {"position":"1300,1750"}
+The nun tells you that you can return to class, but you continue to apologise, <<linkreplace "I'm sorry" t8n>>I'm sorry, <<linkreplace "I'm sorry" t8n>>I'm sorry, <<linkreplace "I'm sorry" t8n>>I'm sorry<</linkreplace>><</linkreplace>><</linkreplace>>.
+
+She tells you it's okay, [[you didn't mean it->flashback_4]].
+
+:: flashback_4 [flashback] {"position":"1425,1750"}
+Still, after class, you continue to tell her how sorry you are, you just tell her <span id="apology"></span><span id="sorry-link"><<link "I'm sorry,">>
+    <<append "#apology" t8n>>I'm sorry, <</append>>
+    <<replace "#sorry-link">><<link "I'm sorry,">><<append "#apology" t8n>>I'm sorry, <</append>><</link>><</replace>>
+<</link>></span>
+<<timed 9s>><<goto "flashback_5">><</timed>>\
+
+:: flashback_5 [flashback] {"position":"1550,1750"}
+You tell her, I'm sorry, once again, and you say that maybe you can give her something to make up for this—
+
+She tells you no, it's okay, and laughs, maybe we should practice later instead. You should work on your technique, you could hit even harder.
+
+[[Just meet me outside->chapter_2]].
+
+:: chapter_2 [center pink] {"position":"0,2100","size":"200,100"}
+<span class="number-heading">[[II->friend_fight_1]]</span>
+
+:: friend_fight_1 [pink] {"position":"250,2100"}
+[[Your goddess has granted you a vision->friend_fight_2]].
+
+:: friend_fight_2 [pink] {"position":"375,2100"}
+[[Your old friend will visit you, in the hope that you can be saved->friend_fight_3]].
+
+:: friend_fight_3 [pink] {"position":"500,2100"}
+[[But she is wrong->friend_fight_4]].
+
+:: friend_fight_4 [pink] {"position":"625,2100"}
+You know that she will bring $cyclingResult_weapon_1, and so you <<linkappend "pick the same weapon" t8n>>, prying it from the hands of one of the acolytes they sent [[to hunt you->etching_friend]].<</linkappend>>
+
+:: etching_friend [pink center] {"position":"750,2100"}
+And you:
+<<include "cycling_etching_friend">>
+
+This is what you [[believe->friend_fight_5]] in.
+
+:: cycling_etching_friend [pink] {"position":"525,1125"}
+<<silently>>
+<<if not $choices_etching_friend>>
+  <<set $choicesCount_etching_friend to -1>>
+  <<set $choices_etching_friend to ["imbue it with runes of faith", "infuse it with an aura of death", "empower it with dreams of martyrdom"]>>
+<</if>>
+
+<<set $choicesCount_etching_friend to $choicesCount_etching_friend + 1>>
+
+<<if $choicesCount_etching_friend >= $choices_etching_friend.length>>
+   <<set $choicesCount_etching_friend to 0>>
+<</if>>
+
+<<set $cyclingResult_etching_friend to $choices_etching_friend[$choicesCount_etching_friend]>>
+<</silently>>
+\<<linkreplace $choices_etching_friend[$choicesCount_etching_friend] t8n>><<include "cycling_etching_friend">><</linkreplace>>
+
+:: friend_fight_5 [pink] {"position":"875,2100"}
+[[You put yourself into your work->friend_fight_6]].
+
+:: friend_fight_6 [pink] {"position":"1000,2100"}
+You put yourself into your work, [[in the way that faith demands sacrifice->friend_fight_7]].
+
+:: friend_fight_7 [pink] {"position":"1125,2100"}
+And even without your goddess's vision, you know that she will also bring a blazegun.
+
+She was always a bit of a [[coward->friend_fight_8]].
+
+:: friend_fight_8 [pink] {"position":"1250,2100"}
+<<timed 2s t8n>>You are in the cathedral, [[waiting->friend_fight_9]] for her.
+<</timed>>
+
+:: friend_fight_9 [pink] {"position":"1375,2100"}
+You observe how the arches are carved in perfect curves, with mathematical precision.
+
+You are [[tired->friend_fight_10]] of this worship of symmetry.
+
+:: friend_fight_10 [pink] {"position":"1500,2100"}
+<<link "There">><<replace "#1" t8n>> You leap up to leave your mark on this building, <<if $weapon is "rapier">>scraping<<else>>slashing<</if>> your $weapon against an arch.<</replace>><</link>>.<span id="1"></span>
+<<timed 10s>><<goto "friend_fight_11">><</timed>>\
+
+:: friend_fight_11 [pink] {"position":"1625,2100"}
+The cathedral walls are now a patchwork of grooves. They look like scratches on an old toy.
+
+You put your $weapon down.
+
+You are [[tired of waiting->friend_fight_12]].
+
+:: friend_fight_12 [pink] {"position":"1750,2100"}
+But you hear the rhythm of boots against sand, then marble.
+
+She is [[here->friend_fight_13]].
+
+:: friend_fight_13 [pink] {"position":"1875,2100"}
+You are wearing the [[moonlight->friend_fight_14]] like a cloak.
+
+:: friend_fight_14 [pink] {"position":"2000,2100"}
+Moonlight is shining through the stained glass window, painting a rose of rainbows on the floor.
+
+She is walking towards you.
+
+You take [[a better look at her->friend_fight_15]].
+
+:: friend_fight_15 [pink] {"position":"2125,2100"}
+Her <<linkappend "face" t8n>> is as stony as ever.<<set $face_mc += 1>><<if $face_mc is 3>><<timed 6s t8n>><<goto "friend_fight_16">><</timed>><</if>><</linkappend>>
+
+Her <<linkappend "eyes" t8n>> burn with determination.<<set $face_mc += 1>><<if $face_mc is 3>><<timed 6s t8n>><<goto "friend_fight_16">><</timed>><</if>><</linkappend>>
+
+Her <<linkappend "hair" t8n>> is combed perfectly, like a statue of a hero.<<set $face_mc += 1>><<if $face_mc is 3>><<timed 6s t8n>><<goto "friend_fight_16">><</timed>><</if>><</linkappend>>
+
+:: friend_fight_16 [pink] {"position":"2250,2100"}
+Exactly as you expected.
+
+And she is <<if $shot_friend_1 is true>>raising her blazegun, her finger on the trigger<<else>>raising her $weapon, ready to strike<</if>>, you—
+
+<<timed 1s t8n>><<link "<span class='ina-bullet'>*</span> Sidestep to the left." "friend_fight_17">><<set $friend_dodge_1 to "sidestep to the left">><</link>><</timed>>
+<<timed 1.5s t8n>><<link "<span class='ina-bullet'>*</span> Sidestep to the right." "friend_fight_17">><<set $friend_dodge_1 to "sidestep to the right">><</link>><</timed>>
+<<timed 2s t8n>><<link "<span class='ina-bullet'>*</span> Duck and roll forward." "friend_fight_17">><<set $friend_dodge_1 to "Duck and roll forward">><</link>><</timed>>
+<<timed 2.5s t8n>><<link "<span class='ina-bullet'>*</span> Duck and roll backward." "friend_fight_17">><<set $friend_dodge_1 to "Duck and roll backward">><</link>><</timed>>
+<<timed 3s t8n>><<link "<span class='ina-bullet'>*</span> Stay still." "friend_fight_17">><<set $friend_dodge_1 to "stay still">><</link>><</timed>>
+
+<<timed 3.5s t8n>>Or step into a fold in space, and:<</timed>>
+
+<<timed 4s t8n>><<link "<span class='ina-bullet'>*</span> Reappear to her left." "friend_fight_17">><<set $friend_dodge_1 to "step into a fold in space and reappear to her left">><</link>><</timed>>
+<<timed 4.5s t8n>><<link "<span class='ina-bullet'>*</span> Reappear to her right." "friend_fight_17">><<set $friend_dodge_1 to "step into a fold in space and reappear to her right">><</link>><</timed>>
+<<timed 5s t8n>><span class='goddess-vision'><<link "<span class='ina-bullet'>*</span> Reappear behind her." "friend_fight_17">><<set $friend_dodge_1 to "step into a fold in space and reappear behind her">><</link>></span><</timed>>
+<<timed 5.5s t8n>><<link "<span class='ina-bullet'>*</span> Reappear in front of her." "friend_fight_17">><<set $friend_dodge_1 to "step into a fold in space and reappear in front of her">><</link>><</timed>>
+
+:: friend_fight_17 [pink] {"position":"2375,2100"}
+<<set $friend_dodge_1 to $friend_dodge_1.toLowerCase()>>\
+<<if $friend_dodge_1 is "step into a fold in space and reappear behind her">>\
+  You step into the fold in space and reappear behind her, as you saw in the vision.
+  <<if $dir is "south">>\
+
+    She shoots in your direction, but you simply turn to the side, dodging her <<if $shot_friend_1 is true>>shots<<else>>attacks<</if>>.
+
+    You can hear <<if $shot_friend_1 is true>>the bullets patter against the wall<<else>>the $weapon slice through the air<</if>>, and you can hear her heartbeat race faster.
+  <<elseif $dir is "north">>\
+
+    She is still <<if $shot_friend_1 is true>>shooting in front of her<<else>>slashing the air right in front of her<</if>>.
+
+    You can hear <<if $shot_friend_1 is true>>the bullets patter against the wall<<else>>the $weapon slice through the air<</if>>, and you can hear her heartbeat race faster.
+  <<else>>\
+
+    She <<if $shot_friend_1 is true>>shoots $gen_dir_desc<<else>>slashes $gen_dir_desc<</if>>, missing you completely.
+
+    You can hear <<if $shot_friend_1 is true>>the bullets patter against the wall<<else>>the $weapon slice through the air<</if>>, and you can hear her heartbeat race faster.
+  <</if>>\
+<<else>>\
+  <<set $goddess_freedom_seen to true>>\
+  The goddess gave you the freedom to make your own mistakes. You defy her vision, just to prove to yourself that you do not need it.
+
+    <<if ($friend_dodge_1 is "sidestep to the left" and $dir is "north-northeast") or ($friend_dodge_1 is "sidestep to the right" and $dir is "north-northwest") or ($friend_dodge_1 is "step into a fold in space and reappear to her left" and $dir is "west") or ($friend_dodge_1 is "step into a fold in space and reappear to her right" and $dir is "east") or ($friend_dodge_1 is "step into a fold in space and reappear to her in front of her" and $dir is "north")>>\
+      <<if $friend_dodge_1 is "step into a fold in space and reappear in front of her">>You $friend_dodge_1, and yet, she still completely misses.<<else>>You $friend_dodge_1, and she completely misses.<</if>>
+
+      <<if $shot_friend_1 is true>>One of her flame bullets grazes your shoulder, a brief sear of pain<<else>>Her blade scrapes your chest<</if>>, but you can already feel the wound healing, your flesh reweaving itself.
+      <<set $wound_heal_seen to true>>\
+
+      You hear her heartbeat race faster.
+    <<elseif $friend_dodge_1 is "stay still">>\
+      You stay still, and you feel <<if $shot_friend_1 is true>>the bullets pierce your chest like hail<<else>>the $weapon tear through your chest<</if>>.
+
+      But you can already feel the wound healing, your flesh reweaving itself.
+      <<set $wound_heal_seen to true>>\
+    <<else>>\
+      <<if $friend_dodge_1 is "step into a fold in space and reappear in front of her">>You $friend_dodge_1, and yet, she still completely misses.<<else>>You $friend_dodge_1, and she completely misses.<</if>>
+
+      You can hear <<if $shot_friend_1 is true>>the bullets patter against the wall<<else>>the $weapon slice through the air<</if>>, and you can hear her heartbeat race faster.
+  <</if>>\
+<</if>>\
+
+You try not to laugh. What an idiot.
+
+<<timed 1s t8n>><<link "<span class='ina-bullet'>*</span> Sidestep to the left." "friend_fight_18">><<set $friend_dodge_2 to "sidestep to the left">><</link>><</timed>>
+<<timed 1.5s t8n>><span class='goddess-vision'><<link "<span class='ina-bullet'>*</span> Sidestep to the right." "friend_fight_18">><<set $friend_dodge_2 to "sidestep to the right">><</link>></span><</timed>>
+<<timed 2s t8n>><<link "<span class='ina-bullet'>*</span> Duck and roll forward." "friend_fight_18">><<set $friend_dodge_2 to "duck and roll forward">><</link>><</timed>>
+<<timed 2.5s t8n>><<link "<span class='ina-bullet'>*</span> Duck and roll backward." "friend_fight_18">><<set $friend_dodge_2 to "duck and roll backward">><</link>><</timed>>
+<<timed 3s t8n>><<link "<span class='ina-bullet'>*</span> Stay still." "friend_fight_18">><<set $friend_dodge_2 to "stay still">><</link>><</timed>>
+
+:: friend_fight_18 [pink] {"position":"2500,2100"}
+<<if $friend_dodge_2 is "sidestep to the right">>\
+  Just like in the vision, you dodge her attack, watching the <<if $shot_friend_2 is true>>bullets fly by<<else>>blade whoosh by<</if>>.
+<<else>>\
+  <<if $goddess_freedom_seen is false>>\
+    The goddess gave you the freedom to make your own mistakes. You defy her vision, just to prove to yourself that you do not need it.
+
+  <</if>>\
+  <<if $shot_friend_2 is true>>The bullets pierce your chest, and you can feel the blood blooming across the fabric of your padded clothing.<<else>>The $weapon <<if $weapon is "rapier">>pierces through<<else>>rakes<</if>> your chest<</if>>.
+  <<if $wound_heal_seen is true>>\
+    <<if $shot_friend_2 is true>>\
+      You can feel the pleasant tickling sensation of your wounds healing, feeling how the bullets push out of your skin.
+    <<else>>\
+      You can feel the pleasant tickling sensation of your wounds healing, feeling how the gash in your skin is folding over itself.
+    <</if>>\
+  <<else>>\
+    <<if $shot_friend_2 is true>>\
+      You can already feel the wounds healing, your flesh reweaving itself.
+    <<else>>\
+      You can already feel the wound healing, your flesh reweaving itself.
+    <</if>>\
+  <</if>>\
+<</if>>\
+
+So, you can't hold in your laughter much longer. You let out a peal of laughter, and your old friend stops in her tracks.
+
+She draws deep, labored breaths, then she meets your gaze. Assessing her [[options->options_comment_2]].
+
+You know what to expect, and you [[wait->friend_fight_19]] for her next move.
+
+:: friend_fight_19 [pink] {"position":"2625,2100"}
+Maybe this would finally scare her away.
+
+<<if $shot_friend_3 to true>>\
+It is as if time has slowed down to a quarter of a second. You slice the bolt of fire midair, and it tears into two.
+<<else>>\
+You tighten your grip on the $weapon, and parry her attack. To your surprise, she lets the weapon go. It flies off to the other side of the room, and clatters on the floor, so you hear a ghastly echo.
+<</if>>\
+
+You compose yourself, then you laugh again. This is the first time you have seen your friend [[in years->tween_flashback_1]], and her first reaction is to try to kill you?
+
+:: tween_flashback_1 [flashback long-t8n pink] {"position":"275,2300"}
+<<timed 2.5s t8n>>\
+Maybe she is still too scared.
+
+You are teenagers at the monastery, and you heard that the nuns are  <<linkreplace "burning books" t8n>>[[ritually destroying heretic texts->tween_flashback_2]]<</linkreplace>> today.
+<</timed>>\
+
+:: tween_flashback_1_1
+Most of them were stolen, but some were confiscated from an acolyte in the monastery.
+
+She has been locked away, to be [[reeducated->tween_flashback_2]]. /* TODO: may want to improve this */
+
+:: tween_flashback_2 [flashback pink] {"position":"400,2300"}
+But that does not stem your curiosity.
+
+You are young, and <<include "cycling_tween_flashback_2">>. You want to steal one of these texts before they are destroyed.
+
+And your friend is refusing to help you. They are banned for a reason, she says.
+
+They're dangerous. It's best not to read them in the first place.
+
+But you tell her, don't you want to know what's out there? There must be worlds other than the one we know.
+
+She pauses. Okay, she says, but how?
+
+It's not that difficult, you answer. Just sneak into the library storage room [[during the assistant's break->tween_flashback_3]].
+
+:: cycling_tween_flashback_2 {"position":"400,2400"}
+<<silently>>
+<<if not choices_tween_flashback_2>>
+  <<set choicesCount_tween_flashback_2 to -1>>
+  <<set choices_tween_flashback_2 to ["foolish", "naive", "curious"]>>
+<</if>>
+
+<<set choicesCount_tween_flashback_2 to choicesCount_tween_flashback_2 + 1>>
+
+<<if choicesCount_tween_flashback_2 >= choices_tween_flashback_2.length>>
+   <<set choicesCount_tween_flashback_2 to 0>>
+<</if>>
+
+<<set cyclingResult_tween_flashback_2 to choices_tween_flashback_2[choicesCount_tween_flashback_2]>>
+<</silently>>
+\<<linkreplace choices_tween_flashback_2[choicesCount_tween_flashback_2] t8n>><<include "cycling_tween_flashback_2">><</linkreplace>>
+
+:: tween_flashback_3 [flashback pink] {"position":"525,2300"}
+So you waited with her in the library, waiting for the assistant to leave.
+
+The assistant steps out, and the both of you [[sneak in->tween_flashback_4]].
+
+:: tween_flashback_4 [flashback pink] {"position":"650,2300"}
+Inside, you see piles of thick, yellowed books and loose paper. The books do not look very different from the books in the library. You feel a little disappointed.
+
+Your friend is telling you to leave. Let's go now, please.
+
+Just as you turn around, you notice that one of the books is [[glowing pink->tween_flashback_5]].
+
+:: tween_flashback_5 [flashback pink] {"position":"775,2300"}
+You don't remember picking it up, but you remember your friend telling you to put it down.
+
+She says, it must be cursed, please leave it here.
+
+That makes you want to [[read it more->tween_flashback_6]].
+
+:: tween_flashback_6 [flashback pink] {"position":"900,2300"}
+[[You are on your bed, reading the book->tween_flashback_7]].
+
+:: tween_flashback_7 [flashback pink] {"position":"1025,2300"}
+[[You learn about the other god->tween_flashback_8]].
+
+:: tween_flashback_8 [flashback pink] {"position":"1150,2300"}
+You spend your nights reading the book, and your time burns away.
+
+A few days later, you tell your friend, please read it, there is another way we can live. A way beyond these walls.
+
+Your friend says, I don't <<include "cycling_tween_flashback_8">> to know. But you insist. You ask her, don't you trust me?
+
+She trusted you, because <<linkappend "you were her friend" t8n>>she didn't have the strength to [[fight back->tween_flashback_9]]<</linkappend>>.
+
+:: tween_flashback_9 [flashback pink] {"position":"1275,2300"}
+She opens the book to a page in the middle.
+
+Your friend seems transfixed, as she flips to the next page, then the next, ignoring you, and everything around her.
+
+Then, she stops, and [[throws the book down->tween_flashback_10]].
+
+:: tween_flashback_10 [flashback pink] {"position":"1400,2300"}
+She tells you, you should be reported for keeping this. You ask her, are you really going to?
+
+She doesn't look at you.
+
+No, she answers. Of course she can't.
+
+She was always a [[coward->tween_flashback_11]].
+
+:: tween_flashback_11 [flashback pink] {"position":"1525,2300"}
+After that, she doesn't strike as hard during training sessions, doesn't answer as many questions in class, and doesn't talk to you as often.
+
+She lives [[like a ghost->tween_flashback_12]].
+
+:: tween_flashback_12 [flashback pink] {"position":"1650,2300"}
+You don't apologise to her, but you tell her that you won't force her to do anything again. You know that this sickness is your fault.
+
+Maybe she read something which was too dangerous for her. Maybe the very idea of other paths and choices was too dangerous for her.
+
+Ideas are the most dangerous things in the universe.
+
+You wonder if reading the book broke her, somehow. You wonder if you are the reason why she has lost her [[faith->chapter_3]].
+
+:: cycling_tween_flashback_8 {"position":"1150,2400"}
+<<silently>>
+<<if not choices_tween_flashback_8>>
+  <<set choicesCount_tween_flashback_8 to -1>>
+  <<set choices_tween_flashback_8 to ["need", "want"]>>
+<</if>>
+
+<<set choicesCount_tween_flashback_8 to choicesCount_tween_flashback_8 + 1>>
+
+<<if choicesCount_tween_flashback_8 >= choices_tween_flashback_8.length>>
+   <<set choicesCount_tween_flashback_8 to 0>>
+<</if>>
+
+<<set cyclingResult_tween_flashback_8 to choices_tween_flashback_8[choicesCount_tween_flashback_8]>>
+<</silently>>
+\<<linkreplace choices_tween_flashback_8[choicesCount_tween_flashback_8] t8n>><<include "cycling_tween_flashback_8">><</linkreplace>>
+
+:: chapter_3 [center purple] {"position":"0,2775","size":"200,100"}
+<span class="number-heading">[[III->choiceless_fight_1]]</span>
+
+:: choiceless_fight_1 {"position":"500,2775"}
+[[The sacred algorithms have made their predictions->choiceless_fight_2]].
+
+:: choiceless_fight_2 {"position":"625,2775"}
+They have predicted how <<linkappend "she will fight you">>you [[must->choiceless_fight_2_1]] fight her<</linkappend>>.
+
+:: choiceless_fight_2_1 {"position":"750,2775"}
+[[You must simply follow their instructions->choiceless_fight_2_2]].
+
+:: choiceless_fight_2_2 {"position":"875,2775"}
+[[She can't be saved->choiceless_fight_3]].
+
+:: choiceless_fight_3 {"position":"1000,2775"}
+You walk into the cathedral at a speed of 1.64 metres per second. 13.67 seconds later, she will disappear, and after 0.58 seconds, she will reappear 183.24 degrees clockwise from the north.
+
+Hence, you mustn't shoot yet.
+
+<<link "Stay still">><</link>>.
+
+[[One second->choiceless_fight_5]].
+
+:: choiceless_fight_5 {"position":"1125,2775"}
+She has reappeared 183.24 degrees clockwise from the north.
+
+<<link "Shoot three shots charged at 58.31% power, 197.53 degrees clockwise from the north">><</link>>.
+
+[[Two seconds->choiceless_fight_6]].
+
+:: choiceless_fight_6 {"position":"1250,2775"}
+She deflects the first shot, and dodges the second, but the third shot hits her squarely in the stomach. The fire eats away her armor, then her padded clothing, then—
+
+You look away. You don't need to see her to follow the algorithms' instructions.
+
+<<link "Shoot one shot charged at 99.98% power, 197.41 degrees clockwise from the north">><</link>>.
+
+<<linkreplace "Three seconds" t8n>><<linkreplace "Three seconds" t8n>><<linkreplace "Three seconds" t8n>>[[You want better choices->teen_flashback_1]]<</linkreplace>><</linkreplace>><</linkreplace>>.
+
+:: teen_flashback_1 [long-t8n flashback pink] {"position":"500,2925"}
+<<timed 2.5s t8n>>\
+  She deflects your question.
+
+  You ask her again, what did you read from [[the book->teen_flashback_2]]?
+<</timed>>\
+
+:: teen_flashback_2 [pink]
+I can't explain it, she says. Just [[stop reading that book->teen_flashback_3]].
+
+:: teen_flashback_3 [pink]
+[[You continue reading the book->teen_flashback_4]].
+
+:: teen_flashback_4 [pink]
+You learn how this goddess bestows gifts to her followers, while the god you <<linkreplace "believe" t8n>>believed<</linkreplace>> does not.
+
+He only cares about maintaining [[structure and order->teen_flashback_5]].
+
+:: teen_flashback_5
+So you understand why the nuns chose your friend to lead, instead of you.
+
+They chose her, even though both of you know that you are the better fighter. They even say that she will, one day, become another <<include "cycling_teen_flashback_5">>.
+
+Well, of course they chose [[her->teen_flashback_6]].
+
+:: teen_flashback_6
+<<linkappend "She follows their every instruction." t8n>>
+
+<<linkappend "She thinks in binaries." t8n>>
+
+<<link "And yet, she believes that the only choice she has is to fight" "teen_flashback_7">><</link>>.<</linkappend>><</linkappend>>
+
+:: teen_flashback_7
+So you understand why she believes in fighting <<linkreplace "heretics" t8n>>those so-called heretics<</linkreplace>>.
+
+You think they should be [[left alone->teen_flashback_8]], at least.
+
+:: teen_flashback_8
+
+
+You are left alone
+
+:: cycling_teen_flashback_5
+<<silently>>
+<<if not choices_teen_flashback_5>>
+  <<set choicesCount_teen_flashback_5 to -1>>
+  <<set choices_teen_flashback_5 to ["legend", "hero"]>>
+<</if>>
+
+<<set choicesCount_teen_flashback_5 to choicesCount_teen_flashback_5 + 1>>
+
+<<if choicesCount_teen_flashback_5 >= choices_teen_flashback_5.length>>
+   <<set choicesCount_teen_flashback_5 to 0>>
+<</if>>
+
+<<set cyclingResult_teen_flashback_5 to choices_teen_flashback_5[choicesCount_teen_flashback_5]>>
+<</silently>>
+\<<linkreplace choices_teen_flashback_5[choicesCount_teen_flashback_5] t8n>><<include "cycling_teen_flashback_5">><</linkreplace>>
+
+:: chapter_4 [center purple] {"position":"0,3475","size":"200,100"}
+<span class="number-heading">[[𓂘]]</span>
+
+:: options_comment {"position":"550,1625"}
+<<if setup.enableUndo.get()>>\
+Even if you could undo your decisions, maybe you would have made the same <<return "mistakes">>.
+<<else>>\
+You can't undo your decisions. You can't undo your <<return "mistakes">>.
+<</if>>\
+
+:: options_comment_2 {"position":"2500,1975"}
+<<if setup.enableUndo.get()>>\
+She thinks that her only option is to fight. Even if you could undo her decisions, she would have made the same <<return "mistakes">>.
+<<else>>\
+She thinks that her only option is to fight, yet again.
+
+She can't undo what she did. She can't undo her <<return "mistakes">>.
+<</if>>\

@@ -68,7 +68,7 @@ $(document).on(":passagerender", function () {
   }
 });
 
-// CSS CHANGES FOR #PASSAGES
+// CSS CHANGES FOR #PASSAGES AND LINKS
 // I can't change the #passages sections with Twine tags alone
 $(document).on(":passagerender", function (ev) {
   // Get the current passage's tags
