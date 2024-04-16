@@ -65,6 +65,10 @@ html {
   transition: opacity 1s ease-in-out;
 }
 
+.no-t8n.passage {
+  transition: none;
+}
+
 #passages {
   position: relative;
   color: rgb(255, 255, 255);
@@ -200,6 +204,17 @@ p:first-of-type {
 /* Special CSS */
 [data-tags~="center"].passage {
   text-align: center;
+}
+
+body.full-text {
+  margin: 0;
+  max-width: max-content;
+  margin: 0;
+  padding: 0;
+}
+
+body.no-t8n {
+  transition: none !important
 }
 
 .pink span a {

@@ -87,12 +87,18 @@ $(document).on(":passagerender", function (ev) {
       "background-color": "rgb(27 27 27)",
       "box-shadow": "var(--shadow-elevation-high)",
     });
+  } else if (currentTags.includes("full-text")) {
+    $("#passages").css({
+      padding: "0",
+    });
   } else {
     // Reset styles for passages without certain tags
     $("#passages").css({
       "background-color": "",
       "box-shadow": "",
       color: "",
+      padding: "",
+      transition: "",
     });
   }
 });
