@@ -76,7 +76,7 @@ Are you okay with continuing this story?
 <<timed 2s t8n>><<goto "intro_1">><</timed>>
 
 :: intro_1 [no-undo] {"position":"425,550"}
-[[You can't save her->intro_2]].
+[[You can't save her->intro_2]].  /* TODO: may want to adjust intro */
 
 :: intro_2 {"position":"550,550"}
 [[This is what they told you->intro_3]].
@@ -88,7 +88,6 @@ Are you okay with continuing this story?
 <span class="number-heading">[[I->intro_4]]</span>
 
 :: intro_4 [no-undo] {"position":"825,950"}
-/* TODO: may want to reuse these three */
 When the children at the monastery come of age, they must complete a [[test->intro_5]].
 
 :: intro_5 {"position":"950,950"}
