@@ -38,7 +38,7 @@
   --pink-hover: rgb(252, 157, 255);
 
   --purple: #b56fff;
-  --purple-hover: rgb(197, 143, 255);
+  --purple-hover: rgb(223, 192, 255);
 }
 
 html {
@@ -204,6 +204,27 @@ p:first-of-type {
 /* Special CSS */
 [data-tags~="center"].passage {
   text-align: center;
+}
+
+#chapter_4 {
+  cursor: pointer;
+  fill: var(--purple);
+  pointer-events: all;
+  transition: fill 0.3s ease;
+  /* Smooth transition for color change */
+}
+
+#chapter_4 path {
+  transition: fill 0.3s ease;
+  fill: var(--purple);
+  pointer-events: all;
+  /* Smooth transition for color change */
+}
+
+#chapter_4 svg:hover path {
+  fill: var(--purple-hover);
+  pointer-events: all;
+  /* Change this to your desired hover color */
 }
 
 body.full-text {
