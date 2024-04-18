@@ -62,6 +62,7 @@ $(document).on(":passagerender", function () {
     State.passage !== "options" &&
     State.passage !== "content_warning" &&
     State.passage !== "its_okay" &&
+    State.passage !== "credits" &&
     State.passage !== "restart"
   ) {
     Save.slots.save(1); // Automatically save to slot 1
