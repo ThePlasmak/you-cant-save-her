@@ -63,7 +63,7 @@ with open(base_tw_path, "w", encoding="utf-8") as file:
 # Export to Poof format
 os.system(f'call tweego -l -o "export/{export_name}.html" poof_temp')
 os.system(
-    'call tweego -l -o "C:/Users/Sarah/Documents/GitHub/theplasmak.github.io/private/ACW_Poof.html" poof_temp'
+    f'call tweego -l -o "C:/Users/Sarah/Documents/GitHub/theplasmak.github.io/private/{export_name}.html" poof_temp'
 )
 
 # Check if the poof_temp directory exists and delete it
