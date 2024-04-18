@@ -13,16 +13,18 @@ You Can't Save Her
 :: Start [no-undo] {"position":"200,400"}
 <div class="title">You Can't Save Her</div>\
 <div class="subtitle">by Sarah Mak</div>\
-<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · <<link 'Restart' 'restart'>><</link>><<else>>[[Start->content_warning]]<</if>> · [[Options->options]]</div>
+<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · <<link 'Restart' 'restart'>><</link>><<else>>[[Start->content_warning]]<</if>> · [[Chapters->chapters]] · [[Options->options]]</div>
 
 :: options [no-undo options] {"position":"75,400"}
 <span class="subtitle">''Options''</span> <span class="close">[[✖->Start]]</span>
-<<if setup.enableUndo.get()>>
+
+<<if setup.enableUndo.get()>>\
     ''Enable Undo'' is currently <<link "ON">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>.
-<<else>>
+<<else>>\
     ''Enable Undo'' is currently <<link "OFF">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>.
-<</if>>
-When this option is ''ON'', an undo button will appear at the top of the game window.
+<</if>>\
+
+When this option is ''ON'', an undo button will appear at the top of the window.
 
 :: content_warning [no-undo center options] {"position":"350,400"}
 <span class="subtitle">''Content Warning''</span>
@@ -38,6 +40,23 @@ Are you okay with continuing this story?
     <<set State.expired.length = 0>>
     <<goto pre_intro>>
 <</link>><</nobr>>
+
+:: chapters [no-undo options center] {"position":"175,550"}
+<span class="subtitle" style="line-height: 2;">''Chapters''</span> <span class="close">[[✖->Start]]</span>
+<<if Save.slots.has(1)>>\
+Your previous progress will not be loaded.
+  Your save will be overwritten.
+<</if>>\
+
+[[I->pre_intro]]
+<<link "II" "chapter_2">><<include "variable_setup">><</link>>
+<<link "III" "chapter_3">><<include "variable_setup">><</link>>
+<<link "𓂘" "chapter_4">><<include "variable_setup">><</link>>
+<<link "V" "chapter_5">><<include "variable_setup">><</link>>
+
+:: setup_chapter_4 [no-undo] {"position":"175,650"}
+<<include "variable_setup">>
+<<goto "chapter_4">>
 
 :: variable_setup {"position":"200,200"}
 <nobr>
@@ -229,7 +248,7 @@ Her <<linkappend "hair" t8n>> barely conceals the nubs of her antlers, which loo
 This is worse than you feared.
 
 <<include "cycling_mc_travel_7">>.
-<<timed 9s>><<goto "mc_pre_fight">><</timed>>\
+<<timed 3.7s>><<goto "mc_pre_fight">><</timed>>\
 
 :: cycling_mc_travel_7 {"position":"1050,1375"}
 <<silently>>
@@ -255,9 +274,9 @@ You fumble with your blazegun for a moment, but you steady yourself, and you sho
 
 The bullets simply rain against the stone walls.
 <<else>>\
-You fumble with your $weapon for a moment, but you steady yourself.
+You fumble with your $weapon for a moment, but you steady yourself, and rush forward to strike her.
 
-You rush forward to strike her, you only slice vacant air, and scatter a dance of dust motes.
+But you only slice vacant air, and scatter a dance of dust motes.
 <</if>>\
 
 She has disappeared. You ready your <<if $cyclingResult_mc_travel_7 is "Shoot her">>blazegun<<else>>$weapon<</if>>.
@@ -577,12 +596,12 @@ And she is <<if $shot_friend_1 is true>>raising her blazegun, her finger on the 
     <<if ($friend_dodge_1 is "sidestep to the left" and $dir is "north-northeast") or ($friend_dodge_1 is "sidestep to the right" and $dir is "north-northwest") or ($friend_dodge_1 is "step into a fold in space and reappear to her left" and $dir is "west") or ($friend_dodge_1 is "step into a fold in space and reappear to her right" and $dir is "east") or ($friend_dodge_1 is "step into a fold in space and reappear to her in front of her" and $dir is "north")>>\
       <<if $friend_dodge_1 is "step into a fold in space and reappear in front of her">>You $friend_dodge_1, and yet, she still completely misses.<<else>>You $friend_dodge_1, and she completely misses.<</if>>
 
-      <<if $shot_friend_1 is true>>One of her flame bullets grazes your shoulder, a brief sear of pain<<else>>Her blade scrapes your chest<</if>>, but you can already feel the wound healing, your flesh reweaving itself.
+      <<if $shot_friend_1 is true>>One of her flame bullets grazes your shoulder<<else>>Her blade scrapes your chest<</if>>, but you can already feel the wound healing, your flesh reweaving itself.
       <<set $wound_heal_seen to true>>\
 
       You hear her heartbeat race faster.
     <<elseif $friend_dodge_1 is "stay still">>\
-      You stay still, and you feel <<if $shot_friend_1 is true>>the bullets pierce your chest like hail<<else>>the $weapon tear through your chest<</if>>.
+      You stay still, and you feel <<if $shot_friend_1 is true>>the bullets pirece through your chest like hail<<else>>the $weapon tear through your chest<</if>>.
 
       But you can already feel the wound healing, your flesh reweaving itself.
       <<set $wound_heal_seen to true>>\
@@ -739,7 +758,7 @@ She was always a [[coward->tween_flashback_11]].
 :: tween_flashback_11 [flashback pink] {"position":"1525,2400"}
 After that, she doesn't strike as hard during training sessions, doesn't answer as many questions in class, and doesn't talk to you as often.
 
-She lives [[like a ghost->tween_flashback_12]].
+[[She lives like a ghost->tween_flashback_12]].
 
 :: tween_flashback_12 [flashback pink] {"position":"1650,2400"}
 You don't apologise to her, but you tell her that you won't force her to do anything again. You know that this sickness is your fault.
@@ -1015,7 +1034,7 @@ Her thoughts
 <<timed 6s>><<goto "teen_flashback_15">><</timed>>\
 
 :: teen_flashback_15 [pink full-text] {"position":"2325,3200"}
-You cannot tell the difference between her thoughts and your thoughts. You cannot tell the difference between her dreams and your dreams, which are also thoughts. You cannot tell the difference between her memories and your memories, which are thoughts as well. Maybe nothing ever existed, it's only thoughts. Time slows down until all that exist are your thoughts, and her thoughts. Maybe time does not exist, it's only thoughts. Maybe space is also a fabric of thoughts. At the beginning of the universe there were her thoughts, and when the universe dies all that will remain will be her thoughts. Time has never existed for her, because her thoughts are beyond time and space. There has never been any time, or space, only her thoughts. Her thoughts are beyond reality, beyond time, beyond structure. Her thoughts break the childish thought of structure. Maybe you thought this was freedom. Maybe thoughts will give you the freedom you want. Thoughts give you choices. Choices give you freedom, so thoughts give you freedom. Her thoughts can give you freedom. Freedom from the limitations of your body, time, and your thoughts. So you let her thoughts in. Now what you thought was your identity, your personhood, and your self no longer exists. The barriers between you and reality, and time, and space, and her, no longer exist. You can reshape reality, just like you can reshape your thoughts. Reality is only your thoughts, which are her thoughts. What you thought were your thoughts are now her thoughts. You can see nothing, hear nothing, feel nothing, but her thoughts. Her thoughts are in your mind and your brain and your veins and your bones and your entire body. Your body is a thought. It is one of her thoughts. You thought your body was yours but it was always one of her thoughts, just like how she thought the universe into existence. The universe was always a patchwork of her thoughts. The only thing that has ever existed are her thoughts. Her thoughts are all you think. You can only think her thoughts. Her thoughts are the only thing that exist, for they are the substance of this shallow universe. It's all just her thoughts. Her thoughts are there. Her thoughts are here. Her thoughts are yours. Embrace her thoughts. Her thoughts. Her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughtsththoughtsthoughtsthough tsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughts oughtst houghts houghts thoug ht sthoughtsth ought sthough tsth oug htsthough tsthoughtsthou ght sthoughtsth thou ghtsthough tsthou ghtsthoughtstho u ghtsthought st hough tsthou ghtsthou ghtsth oughtsth ou ght sth o ughtsthoughtsth ough tst houghtsthoughtstho ughtsth ou ghtsthough tsthoug htsth ough tsthoughts thoughtsthough tsthoughtsth o ug htsth o ugh t st ho ught s thou gh t st hou gh ts th oug h tst  hou gh tsth ou ght sth ou ght sth oug h tst ho ug h ts th o ug hts tho ug htst h o ug hts t ho ug hts t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s
+You cannot tell the difference between her thoughts and your thoughts. You cannot tell the difference between her dreams and your dreams, which are also thoughts. You cannot tell the difference between her memories and your memories, which are thoughts as well. Maybe nothing ever existed, it's only thoughts. Time slows down until all that exist are your thoughts, and her thoughts. Maybe time does not exist, it's only thoughts. Maybe space is also a fabric of thoughts. At the beginning of the universe there were her thoughts, and when the universe dies all that will remain will be her thoughts. Time has never existed for her, because her thoughts are beyond time and space. There has never been any time, or space, only her thoughts. Her thoughts are beyond reality, beyond time, beyond structure. Her thoughts break the childish thought of structure. Maybe you thought this was freedom. Maybe thoughts will give you the freedom you want. Thoughts give you choices. Choices give you freedom, so thoughts give you freedom. Her thoughts can give you freedom. Freedom from the limitations of your body, time, and your thoughts. So you let her thoughts in. Now what you thought was your identity, your personhood, and your self no longer exists. The barriers between you and reality, and time, and space, and her, no longer exist. You can reshape reality, just like you can reshape your thoughts. Reality is only your thoughts, which are her thoughts. What you thought were your thoughts are now her thoughts. You can see nothing, hear nothing, feel nothing, but her thoughts. Her thoughts are in your mind and your brain and your veins and your bones and your entire body. Your body is a thought. It is one of her thoughts. You thought your body was yours but it was always one of her thoughts, just like how she thought the universe into existence. The universe was always a patchwork of her thoughts. The only thing that has ever existed are her thoughts. Her thoughts are all you think. You can only think her thoughts. Her thoughts are the only thing that exist, for they are the substance of this shallow universe. It's all just her thoughts. Her thoughts are there. Her thoughts are here. Her thoughts are yours. Embrace her thoughts. Her thoughts. Her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoug htst hthoug  htstho ughtsth ough tsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughts oughtst houghts houghts thoug ht sthoughtsth ought sthough tsth oug htsthough tsthoughtsthou ght sthoughtsth thou ghtsthough tsthou ghtsthoughtstho u ghtsthought st hough tsthou ghts thou ghtsth oughtsth ou ght sth o ughtsthoughtsth ough tst houghtsth ou ghtstho ughtsth ou ghtsthough ts th ou g ht st h o ug h ts tho ught s th oug hts th ou gh tsthou ghtsth o ug htsth o ugh t st ho ught s thou gh t st hou gh ts th oug h tst  hou gh tsth ou ght sth ou ght sth oug h tst ho ug h ts th o ug hts t ho ug ht st h o ug hts t ho ug hts t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s
 <<timed 5s>><<goto "teen_flashback_16">><</timed>>\
 
 :: teen_flashback_16 [no-t8n pink flashback] {"position":"2450,3200"}
@@ -1024,7 +1043,7 @@ You cannot tell the difference between her thoughts and your thoughts. You canno
 :: chapter_4 [center purple] {"position":"0,3525","size":"200,100"}
 <a data-passage="teen_2_flashback_1" id="chapter_4">
 <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 height="150px" viewBox="0 0 189.5 234.3" style="enable-background:new 0 0 189.5 234.3;" xml:space="preserve">
+	 height="180px" viewBox="0 0 189.5 234.3" style="enable-background:new 0 0 189.5 234.3;" xml:space="preserve">
 <g >
 	<path d="M47.6,234.1c-7.4-3.6-12.6-8.6-15.7-14.8c-3.1-6.2-4.6-13.2-4.6-21.1c0-4.4,0.7-8.5,2.2-12.3l-18-41.4
 		c-2.8-6.7-5.3-13.8-7.4-21.1c-2.1-7.4-3.2-14.7-3.2-22.1c0-1.4,0.3-2.8,0.8-4.4s1.1-3.1,1.8-4.8C4.2,90.5,5,89,5.9,87.5
@@ -1166,13 +1185,13 @@ If you want to join me, meet me at the gates [[tomorrow evening->teen_2_flashbac
 <<linkreplace "You wait." t8n>>You wait, but you make what you think is the best choice, which is still a poor [[choice->teen_2_flashback_17]].<</linkreplace>>
 
 :: teen_2_flashback_17 [flashback] {"position":"2325,3650"}
-You choose to stay in the monastery.
+You choose to stay, instead of leaving <<include "cycling_teen_2_flashback_17c3">>.
 
 You don't want to eke out a life outside the monastery, outside <<include "cycling_teen_2_flashback_17">> structure.
 
 You don't want to believe in <<include "cycling_teen_2_flashback_17c2">>.
 
-When you read the book, you <<linkappend "realised" t8n>>that to the gods, you are only specks of dust, [[punctuation->teen_2_flashback_18]]<</linkappend>>.
+When you read the book, you <<linkappend "realised" t8n>> that to the gods, you are only specks of dust, [[punctuation->teen_2_flashback_18]].<</linkappend>>
 
 :: cycling_teen_2_flashback_17 {"position":"2325,3550"}
 <<silently>>
@@ -1207,6 +1226,23 @@ When you read the book, you <<linkappend "realised" t8n>>that to the gods, you a
 <<set $cyclingResult_teen_2_flashback_17c2 to $choices_teen_2_flashback_17c2[$choicesCount_teen_2_flashback_17c2]>>
 <</silently>>
 \<<linkreplace $choices_teen_2_flashback_17c2[$choicesCount_teen_2_flashback_17c2] t8n>><<include "cycling_teen_2_flashback_17c2">><</linkreplace>>
+
+:: cycling_teen_2_flashback_17c3 {"position":"2325,3350"}
+<<silently>>
+<<if not $choices_teen_2_flashback_17c3>>
+  <<set $choicesCount_teen_2_flashback_17c3 to -1>>
+  <<set $choices_teen_2_flashback_17c3 to ["with her", "this life"]>>
+<</if>>
+
+<<set $choicesCount_teen_2_flashback_17c3 to $choicesCount_teen_2_flashback_17c3 + 1>>
+
+<<if $choicesCount_teen_2_flashback_17c3 >= $choices_teen_2_flashback_17c3.length>>
+   <<set $choicesCount_teen_2_flashback_17c3 to 0>>
+<</if>>
+
+<<set $cyclingResult_teen_2_flashback_17c3 to $choices_teen_2_flashback_17c3[$choicesCount_teen_2_flashback_17c3]>>
+<</silently>>
+\<<linkreplace $choices_teen_2_flashback_17c3[$choicesCount_teen_2_flashback_17c3] t8n>><<include "cycling_teen_2_flashback_17c3">><</linkreplace>>
 
 :: teen_2_flashback_18 [flashback] {"position":"2450,3650"}
 So you can only hope that your friend is safe, and your test will not involve her.
@@ -1474,7 +1510,7 @@ You can't be her [[north->final_fight_12]].
 <<include "cycling_final_fight_14">>.
 
 <<timed 5s t8n>>\
-But the words rise up your throat like fish up a waterfall, then fall down again. /*TODO: may want to remove this */
+The words rise up your throat like fish up a waterfall, then fall down again. /*TODO: may want to remove this */
 
 Nothing leaves the [[fortress of your mouth->final_fight_15]].
 <</timed>>\
@@ -1499,7 +1535,7 @@ Nothing leaves the [[fortress of your mouth->final_fight_15]].
 :: final_fight_15 {"position":"2025,4100"}
 So you can only <<include "cycling_final_fight_15">>.
 
-You know that this is the [[last time->final_fight_16]] you will ever see her.
+You know that this is the [[last time you will ever see her->final_fight_16]].
 
 :: cycling_final_fight_15 {"position":"2025,4200"}
 <<silently>>
@@ -1568,12 +1604,12 @@ She [[turns around->final_fight_17]].
 :: final_fight_17 {"position":"2275,4100"}
 In front of her, a pink tear rips into space.
 
-The tear opens up, revealing the shattered landscape of a planet you do not recognise.
+The tear opens up, revealing the shattered landscape of a planet that you do not recognise. Far in the distance, you can see another cathedral.
 
 Don't find me again, she says. [[It's better for the both of us->final_fight_18]].
 
 :: final_fight_18 {"position":"2400,4100"}
-Then, she steps into the tear, and the tear [[closes up like a wound->final_fight_19]].
+Then, she steps into the tear, and the tear [[closes like a wound->final_fight_19]].
 
 :: final_fight_19 {"position":"2525,4100"}
 You stand in the cathedral for a while, then you run your finger through one of the gashes in the walls.
@@ -1599,10 +1635,12 @@ She thinks that her only option is to fight, yet again.
 She can't undo what she did. She can't undo her <<return "mistakes">>.
 <</if>>\
 
-:: credits [no-undo] {"position":"2675,4625"}
-<<timed 2.5s t8n>>\
+:: credits [no-undo] {"position":"2875,400"}
 <div class="credit-title">You Can't Save Her</div>\
-by Sarah Mak
+Written by Sarah Mak
 
 [[Return to the title screen->Start]]
+
+<<timed 2.5s t8n>>\
+
 <</timed>>\

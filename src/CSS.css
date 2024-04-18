@@ -28,17 +28,14 @@
     -0.1px 10.3px 7.7px -4.4px hsl(var(--shadow-color) / 0.16),
     -0.2px 14.6px 11px -5px hsl(var(--shadow-color) / 0.08);
 
-  --red: rgb(255, 6, 6);
-  --red-hover: rgb(255, 106, 106);
-
   --blue: rgb(50, 195, 252);
-  --blue-hover: rgb(176, 231, 253);
+  --blue-hover: rgb(131 211 243);
 
   --pink: #ff3dbc;
   --pink-hover: rgb(252, 157, 255);
 
-  --purple: #9f44ff;
-  --purple-hover: rgb(196, 141, 255);
+  --purple: #ae7cff;
+  --purple-hover: rgb(211, 170, 255);
 }
 
 html {
@@ -53,7 +50,7 @@ html {
 }
 
 ::selection {
-  background-color: #838383;
+  color: #646464;
 }
 
 .passage {
@@ -143,7 +140,7 @@ ul>ul {
 }
 
 li::marker {
-  font-family: "Inknut Antiqua";
+  font-family: "Inknut Antiqua", serif;
   font-size: 62%;
 }
 
@@ -152,20 +149,37 @@ p:first-of-type {
 }
 
 .title {
-  font-size: 1.8em;
+  font-size: 2.2em;
   font-weight: 700;
   text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.94);
 }
 
 .subtitle {
-  font-size: 1.2em;
+  font-size: 1.38em;
   font-weight: 800;
   text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .credit-title {
-  font-size: 120%;
+  font-size: 1.5em;
   font-weight: 700;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.94);
+  transform-origin: left center;
 }
 
 .title-image {
@@ -229,6 +243,27 @@ p:first-of-type {
 
 #chapter_4 svg:hover path {
   fill: var(--purple-hover);
+  pointer-events: all;
+  /* Change this to your desired hover color */
+}
+
+#chapter_4_menu {
+  cursor: pointer;
+  fill: var(--blue);
+  pointer-events: all;
+  transition: fill 0.3s ease;
+  /* Smooth transition for color change */
+}
+
+#chapter_4_menu path {
+  transition: fill 0.3s ease;
+  fill: var(--blue);
+  pointer-events: all;
+  /* Smooth transition for color change */
+}
+
+#chapter_4_menu svg:hover path {
+  fill: var(--blue-hover);
   pointer-events: all;
   /* Change this to your desired hover color */
 }
@@ -313,38 +348,13 @@ body.moon {
 }
 
 body.flashback {
-  background-color: #ffffff;
+  background-color: #fffaf3;
   background-image: none;
   transition-duration: 1s ease-in-out;
 }
 
 body.long-t8n {
   transition-duration: 1s ease-in-out;
-}
-
-body.flash-black {
-  background-color: #000000;
-}
-
-div.flash-black {
-  background-color: #000000;
-  color: #ffffff;
-}
-
-.evening {
-  background-color: #00184b;
-}
-
-.night {
-  background-color: #1a0040;
-}
-
-.inhale {
-  transition: opacity 7s ease-in-out;
-}
-
-.exhale {
-  transition: opacity 11s ease-in-out;
 }
 
 .blocked-link {
@@ -464,7 +474,21 @@ button:not(:disabled):hover {
   width: 100%;
   color: var(--blue);
   margin-top: 1.5em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
+
+/* #menu a {
+  color: var(--purple);
+}
+
+#menu a:hover {
+  color: var(--purple-hover);
+} */
 
 #title-image {
   text-align: center;

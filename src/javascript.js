@@ -49,7 +49,6 @@ function updateUndoButton() {
 }
 
 // Attached to :passagerender event to initialize on passage render
-
 // Initialize the undo button on passage render
 $(document).on(":passagerender", updateUndoButton);
 
@@ -63,6 +62,8 @@ $(document).on(":passagerender", function () {
     State.passage !== "content_warning" &&
     State.passage !== "its_okay" &&
     State.passage !== "credits" &&
+    State.passage !== "chapters" &&
+    State.passage !== "setup_chapter_4" &&
     State.passage !== "restart"
   ) {
     Save.slots.save(1); // Automatically save to slot 1
@@ -124,19 +125,19 @@ $(document).on(":passagerender", function (ev) {
 });
 
 // GO TO START ON REFRESH
-// window.onbeforeunload = function () {
-//   window.sessionStorage.setItem("twine-reload-flag", "true");
-// }; // Set the reload flag before the page unloads
+window.onbeforeunload = function () {
+  window.sessionStorage.setItem("twine-reload-flag", "true");
+}; // Set the reload flag before the page unloads
 
-// // Use the :passagedisplay event to check the flag and redirect if necessary
-// $(document).on(":passagedisplay", function () {
-//   var refresh = sessionStorage.getItem("twine-reload-flag");
+// Use the :passagedisplay event to check the flag and redirect if necessary
+$(document).on(":passagedisplay", function () {
+  var refresh = sessionStorage.getItem("twine-reload-flag");
 
-//   // Clear the flag immediately after retrieving it to prevent unintended behavior
-//   sessionStorage.removeItem("twine-reload-flag");
+  // Clear the flag immediately after retrieving it to prevent unintended behavior
+  sessionStorage.removeItem("twine-reload-flag");
 
-//   if (refresh === "true" && passage() !== "Start") {
-//     // Ensure to only redirect if not on the 'Start' passage to avoid loops
-//     Engine.play("Start"); // Replace 'somePassage' with your target passage
-//   }
-// });
+  if (refresh === "true" && passage() !== "Start") {
+    // Ensure to only redirect if not on the 'Start' passage to avoid loops
+    Engine.play("Start"); // Replace 'somePassage' with your target passage
+  }
+});
