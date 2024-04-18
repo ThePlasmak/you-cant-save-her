@@ -5,6 +5,7 @@ import re
 # Define the source and destination directories
 source_dir = "src"
 temp_dir = "poof_temp"
+export_name = "You_Can't_Save_Her_poof"
 
 # Ensure the destination directory exists
 if not os.path.exists(temp_dir):
@@ -60,7 +61,7 @@ with open(base_tw_path, "w", encoding="utf-8") as file:
     file.write(base_content)
 
 # Export to Poof format
-os.system('call tweego -l -o "export/Script from Poof (Sarah Mak).html" poof_temp')
+os.system(f'call tweego -l -o "export/{export_name}.html" poof_temp')
 os.system(
     'call tweego -l -o "C:/Users/Sarah/Documents/GitHub/theplasmak.github.io/private/ACW_Poof.html" poof_temp'
 )
@@ -73,4 +74,4 @@ if os.path.exists(temp_dir):
     except Exception as e:
         print(f"Failed to delete {temp_dir}. Reason: {e}")
 
-print("Poof exported successfully.")
+print("Poof export attempt complete.")

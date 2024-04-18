@@ -38,7 +38,7 @@
   --pink-hover: rgb(252, 157, 255);
 
   --purple: #b56fff;
-  --purple-hover: rgb(223, 192, 255);
+  --purple-hover: rgb(207 161 255);
 }
 
 html {
@@ -160,6 +160,11 @@ p:first-of-type {
   font-size: 1.2em;
   font-weight: 800;
   text-align: center;
+}
+
+.credit-title {
+  font-size: 120%;
+  font-weight: 700;
 }
 
 .title-image {

@@ -20,24 +20,24 @@
     "prefix": ":cycling-t8n",
     "scope": "twee3-sugarcube-2",
     "body": [
-      "<<include \"cycling$_1\">>",
+      "<<include \"cycling_$1\">>",
       "",
-      ":: cycling$_1",
+      ":: cycling_$1",
       "<<silently>>",
-      "<<if not \\$choices$_1>>",
-      "  <<set \\$choicesCount$_1 to -1>>",
-      "  <<set \\$choices$_1 to [\"1\", \"2\", \"3\"]>>",
+      "<<if not \\$choices_$1>>",
+      "  <<set \\$choicesCount_$1 to -1>>",
+      "  <<set \\$choices_$1 to [\"1\", \"2\", \"3\"]>>",
       "<</if>>",
       "",
-      "<<set \\$choicesCount$_1 to \\$choicesCount$_1 + 1>>",
+      "<<set \\$choicesCount_$1 to \\$choicesCount_$1 + 1>>",
       "",
-      "<<if \\$choicesCount$_1 >= \\$choices$_1.length>>",
-      "   <<set \\$choicesCount$_1 to 0>>",
+      "<<if \\$choicesCount_$1 >= \\$choices_$1.length>>",
+      "   <<set \\$choicesCount_$1 to 0>>",
       "<</if>>",
       "",
-      "<<set \\$cyclingResult$_1 to \\$choices$_1[\\$choicesCount$_1]>>",
+      "<<set \\$cyclingResult_$1 to \\$choices_$1[\\$choicesCount_$1]>>",
       "<</silently>>",
-      "\\<<linkreplace \\$choices$_1[\\$choicesCount$_1] t8n>><<include \"cycling$_1\">><</linkreplace>>"
+      "\\<<linkreplace \\$choices_$1[\\$choicesCount_$1] t8n>><<include \"cycling_$1\">><</linkreplace>>"
     ],
     "description": "Cycling with transitions."
   },
@@ -58,5 +58,11 @@
     "scope": "twee3-sugarcube-2",
     "body": ["<<linkprepend \"$linktext\" t8n>>$content<</linkprepend>>"],
     "description": "Linkprepend with transition."
+  },
+  "timed t8n": {
+    "prefix": ":timed-t8n",
+    "scope": "twee3-sugarcube-2",
+    "body": ["<<timed $0s t8n>>", "<</timed>>"],
+    "description": "Timed with transition."
   }
 }
