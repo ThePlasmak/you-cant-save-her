@@ -357,7 +357,7 @@ You stop to catch your breath. You consider your [[options->options_comment]]:
 :: mc_fight_4 {"position":"750,1600"}
 <<if $cyclingResult_mc_fight_3 is "Steady your aim and shoot">>\
 <<set $shot_friend_3 to true>>\
-She smirks as she slices the bolt of fire with her $weapon midair. The fire dissipates behind her, like smoke.
+She smirks as she slices the bolt of fire with her $weapon in midair. The fire dissipates behind her, like smoke.
 
 <<else>>\
 <<set $shot_friend_3 to false>>\
@@ -1640,7 +1640,7 @@ Then, she steps into the tear, and it [[closes like a wound->final_fight_19]].
 :: final_fight_19 {"position":"2525,4100"}
 You stand in the cathedral for a while, watching the space where she stood.
 
-Then, you walk over to a wall, and you run your finger through one of its gashes.
+Then, you walk over to a wall, and run your finger through one of its gashes.
 
 [[This isn't your battle to fight, now->final_fight_20]].
 
