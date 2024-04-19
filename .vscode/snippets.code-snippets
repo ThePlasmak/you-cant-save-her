@@ -17,7 +17,7 @@
   // }
 
   "cycling": {
-    "prefix": ":cycling-t8n",
+    "prefix": [":c", ":cycling-t8n"],
     "scope": "twee3-sugarcube-2",
     "body": [
       "<<include \"cycling_$1\">>",
@@ -42,25 +42,25 @@
     "description": "Cycling with transitions."
   },
   "linkappend t8n": {
-    "prefix": ":linkappend-t8n",
+    "prefix": [":la", ":linkappend-t8n"],
     "scope": "twee3-sugarcube-2",
     "body": ["<<linkappend \"$linktext\" t8n>>$content<</linkappend>>"],
     "description": "Linkappend with transition."
   },
   "linkreplace t8n": {
-    "prefix": ":linkreplace-t8n",
+    "prefix": [":lr", ":linkreplace-t8n"],
     "scope": "twee3-sugarcube-2",
     "body": ["<<linkreplace \"$linktext\" t8n>>$content<</linkreplace>>"],
     "description": "Linkreplace with transition."
   },
   "linkprepend t8n": {
-    "prefix": ":linkprepend-t8n",
+    "prefix": [":lp", ":linkprepend-t8n"],
     "scope": "twee3-sugarcube-2",
     "body": ["<<linkprepend \"$linktext\" t8n>>$content<</linkprepend>>"],
     "description": "Linkprepend with transition."
   },
   "timed t8n": {
-    "prefix": ":timed-t8n",
+    "prefix": [":t", ":timed-t8n"],
     "scope": "twee3-sugarcube-2",
     "body": ["<<timed $0s t8n>>", "<</timed>>"],
     "description": "Timed with transition."
