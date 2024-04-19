@@ -34,7 +34,7 @@
   --pink: #ff3dbc;
   --pink-hover: rgb(252, 157, 255);
 
-  --purple: #ae7cff;
+  --purple: #ab77fa;
   --purple-hover: rgb(211, 170, 255);
 }
 
@@ -50,7 +50,7 @@ html {
 }
 
 ::selection {
-  color: #646464;
+  color: #838383;
 }
 
 .passage {
@@ -91,6 +91,7 @@ body {
       hsl(344deg 0% 7%) 74%,
       hsl(344deg 0% 7%) 85%,
       hsl(0deg 0% 8%) 100%);
+  background-attachment: fixed;
   margin: 0 auto;
   position: relative;
   font-family: "Averia Serif Libre", serif;
@@ -98,6 +99,7 @@ body {
   max-width: 690px;
   min-width: 300px;
   height: 100%;
+  min-height: 100vh;
   overflow-y: scroll;
   transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out, background-image 0.2s ease-in-out;
   -webkit-transition: background-image 0.2s ease-in-out;
@@ -174,6 +176,36 @@ p:first-of-type {
   user-select: none;
 }
 
+.chapter-selection-header {
+  font-size: 1.38em;
+  font-weight: 800;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 2;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.92);
+}
+
+.options-header {
+  font-size: 1.38em;
+  font-weight: 800;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.92);
+  transform-origin: left center;
+  padding-bottom: 0.5em;
+}
+
 .credit-title {
   font-size: 1.5em;
   font-weight: 700;
@@ -224,6 +256,10 @@ p:first-of-type {
 /* Special CSS */
 [data-tags~="center"].passage {
   text-align: center;
+}
+
+.chapter-select-link {
+  font-size: 120%;
 }
 
 #chapter_4 {
@@ -348,7 +384,7 @@ body.moon {
 }
 
 body.flashback {
-  background-color: #fffaf3;
+  background-color: #fffefb;
   background-image: none;
   transition-duration: 1s ease-in-out;
 }

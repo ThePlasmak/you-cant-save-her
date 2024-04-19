@@ -135,7 +135,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   --pink: #ff3dbc;
   --pink-hover: rgb(252, 157, 255);
 
-  --purple: #ae7cff;
+  --purple: #ab77fa;
   --purple-hover: rgb(211, 170, 255);
 }
 
@@ -151,7 +151,7 @@ html {
 }
 
 ::selection {
-  color: #646464;
+  color: #838383;
 }
 
 .passage {
@@ -192,6 +192,7 @@ body {
       hsl(344deg 0% 7%) 74%,
       hsl(344deg 0% 7%) 85%,
       hsl(0deg 0% 8%) 100%);
+  background-attachment: fixed;
   margin: 0 auto;
   position: relative;
   font-family: "Averia Serif Libre", serif;
@@ -199,6 +200,7 @@ body {
   max-width: 690px;
   min-width: 300px;
   height: 100%;
+  min-height: 100vh;
   overflow-y: scroll;
   transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out, background-image 0.2s ease-in-out;
   -webkit-transition: background-image 0.2s ease-in-out;
@@ -275,6 +277,36 @@ p:first-of-type {
   user-select: none;
 }
 
+.chapter-selection-header {
+  font-size: 1.38em;
+  font-weight: 800;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 2;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.92);
+}
+
+.options-header {
+  font-size: 1.38em;
+  font-weight: 800;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.92);
+  transform-origin: left center;
+  padding-bottom: 0.5em;
+}
+
 .credit-title {
   font-size: 1.5em;
   font-weight: 700;
@@ -325,6 +357,10 @@ p:first-of-type {
 /* Special CSS */
 [data-tags~="center"].passage {
   text-align: center;
+}
+
+.chapter-select-link {
+  font-size: 120%;
 }
 
 #chapter_4 {
@@ -449,7 +485,7 @@ body.moon {
 }
 
 body.flashback {
-  background-color: #fffaf3;
+  background-color: #fffefb;
   background-image: none;
   transition-duration: 1s ease-in-out;
 }
@@ -864,15 +900,13 @@ $(document).on(":passagerender", updateUndoButton);
 // AUTOSAVE
 // Autosaves whenever you enter a new passage
 $(document).on(":passagerender", function () {
-  // Check if the current passage is not a certain passage
+  // Check if autosaving is allowed (i.e., not in chapter selection mode)
   if (
     State.passage !== "Start" &&
     State.passage !== "options" &&
     State.passage !== "content_warning" &&
     State.passage !== "its_okay" &&
     State.passage !== "credits" &&
-    State.passage !== "chapters" &&
-    State.passage !== "setup_chapter_4" &&
     State.passage !== "restart"
   ) {
     Save.slots.save(1); // Automatically save to slot 1
@@ -956,8 +990,7 @@ $(document).on(":passagedisplay", function () {
 ;"use strict";function _typeof(t){return _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},_typeof(t)}function _classCallCheck(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function _defineProperties(t,e){for(var n=0;n<e.length;n++){var i=e[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,_toPropertyKey(i.key),i)}}function _createClass(t,e,n){return e&&_defineProperties(t.prototype,e),n&&_defineProperties(t,n),Object.defineProperty(t,"prototype",{writable:!1}),t}function _toPropertyKey(t){var e=_toPrimitive(t,"string");return"symbol"==_typeof(e)?e:String(e)}function _toPrimitive(t,e){if("object"!=_typeof(t)||!t)return t;var n=t[Symbol.toPrimitive];if(void 0!==n){var i=n.call(t,e||"default");if("object"!=_typeof(i))return i;throw new TypeError("@@toPrimitive must return a primitive value.")}return("string"===e?String:Number)(t)}!function(){var t={description:"",handler:null,displayName:"",consumable:!0,unique:!1,permanent:!1},e=new Map,n=function(){function n(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"",i=arguments.length>1&&void 0!==arguments[1]?arguments[1]:clone(t),r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:[];if(_classCallCheck(this,n),!e||"string"!=typeof e)throw new Error("invalid item ID");if("object"!==_typeof(i))throw new Error("invalid item definition");Object.assign(this,Object.assign(t,i)),this.id=e,this._tags=r instanceof Array?r:"string"==typeof r?[r]:[]}return _createClass(n,[{key:"tags",get:function(){return this._tags}},{key:"hasTag",value:function(t){return this._tags.includes(t)}},{key:"hasAllTags",value:function(){return this._tags.includesAll([].slice.call(arguments).flat(1/0))}},{key:"hasAnyTags",value:function(){return this._tags.includesAny([].slice.call(arguments).flat(1/0))}},{key:"name",get:function(){return this.displayName||this.id},set:function(t){this.displayName=t}},{key:"use",value:function(){return"string"==typeof this.handler?$.wiki(this.handler):"function"==typeof this.handler&&this.handler(this),this}},{key:"inspect",value:function(){return Dialog.setup(this.name,"simple-inventory item-description"),Dialog.wiki(this.description),Dialog.open(),this}}],[{key:"is",value:function(t){return t instanceof n}},{key:"add",value:function(t,i,r){var a=new n(t,i,r);return e.set(t,a),a}},{key:"get",value:function(t){return e.get(t)}},{key:"has",value:function(t){return e.has(t)}},{key:"list",get:function(){return e}}]),n}();setup.Item=n,window.Item=window.Item||n}(),function(){var t=setup.Item,e=!1,n="&hellip;",i={inspect:"Inspect",use:"Use",drop:"Drop",stack:"stack",take:"Take",give:"Give",stackPre:"&nbsp;&times;&nbsp;",stackPost:"&nbsp;"},r={};function a(e){return t.has(e)&&t.get(e).unique}var s=function(){function s(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:[];_classCallCheck(this,s),this.data=clone(t),this._tags=e instanceof Array?e:"string"==typeof e?[e]:[]}return _createClass(s,[{key:"emit",value:function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return s.emit(t,this,e),this}},{key:"array",get:function(){var t=this,e=[];return Object.keys(this.data).forEach((function(n){if(e.push(n),t.data[n]>1)for(var i=1;i<t.data[n];i++)e.push(n)})),e}},{key:"list",get:function(){return Object.keys(this.data)}},{key:"length",get:function(){return this.array.length}},{key:"uniqueLength",get:function(){return this.list.length}},{key:"table",get:function(){return this.data}},{key:"tags",get:function(){return this._tags}},{key:"hasTag",value:function(t){return this._tags.includes(t)}},{key:"hasAllTags",value:function(){return this._tags.includesAll([].slice.call(arguments).flat(1/0))}},{key:"hasAnyTags",value:function(){return this._tags.includesAny([].slice.call(arguments).flat(1/0))}},{key:"count",value:function(t){return t?this.data[t]||0:this.length}},{key:"has",value:function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:1;return this.data[t]>=e}},{key:"hasAll",value:function(){var t=this;return[].slice.call(arguments).flat(1/0).every((function(e){return t.has(e)}))}},{key:"hasAny",value:function(){var t=this;return[].slice.call(arguments).flat(1/0).some((function(e){return t.has(e)}))}},{key:"compare",value:function(t){var e=this,n=s.itemset(t);return Object.keys(n).every((function(t){return e.has(t,n[t])}))}},{key:"merge",value:function(t){var e=this,n=s.itemset(t);return Object.keys(n).forEach((function(t){s.change(e,t,n[t])})),n}},{key:"unmerge",value:function(t){var e=this,n={},i=s.itemset(t);return Object.keys(i).forEach((function(t){e.has(t,i[t])?n[t]=i[t]:e.has(t)&&(n[t]=e.count(t)),s.change(e,t,i[t],!0)})),n}},{key:"pickup",value:function(){var t=this.merge(s.parseArgList.apply(null,arguments));return this.emit("update",{delta:t}),this}},{key:"drop",value:function(){var t=this.unmerge(s.parseArgList.apply(null,arguments));return this.emit("update",{delta:t}),this}},{key:"empty",value:function(){var t=clone(this.data);return this.data={},this.emit("update",{delta:t}),this}},{key:"transfer",value:function(t){var e=s.parseArgList.apply(null,[].slice.call(arguments).slice(1));if(!s.is(t))throw new TypeError("target inventory is not an inventory instance");var n=this.unmerge(e);return t.merge(n),this.emit("update",{target:t,delta:n}),this}},{key:"isEmpty",value:function(){return 0===this.length}},{key:"iterate",value:function(t){var e=this;return"function"!=typeof t||this.list.forEach((function(n){t(n,e.data[n])})),this}},{key:"use",value:function(e){if(t.has(e)){var n=t.get(e);if(n.use(),n.consumable){s.change(this,e,1,!0);var i={};i[e]=1,this.emit("update",{delta:i})}return this.emit("use",{item:n}),this}}},{key:"clone",value:function(){return new s(this.data||{},this._tags||[])}},{key:"toJSON",value:function(){return JSON.reviveWrapper("new setup.Inventory("+JSON.stringify(this.data)+", "+JSON.stringify(this._tags)+")")}}],[{key:"confirm",get:function(){return e},set:function(t){e="string"==typeof t&&"all"===t.trim().toLowerCase()?"all":"string"==typeof t&&"stack"===t.trim().toLowerCase()?"stack":!!t}},{key:"emptyMessage",get:function(){return n},set:function(t){"string"==typeof t&&(n=t)}},{key:"strings",get:function(){return Object.assign(clone(i),r)},set:function(t){"object"===_typeof(t)&&(r=Object.assign(r,clone(t)))}},{key:"change",value:function(e,n){var i=arguments.length>2&&void 0!==arguments[2]?arguments[2]:1,r=arguments.length>3&&void 0!==arguments[3]&&arguments[3];if(0!==i){if(e instanceof s&&(e=e.data),"object"!==_typeof(e)){if(e)throw new TypeError("cannot access inventory data");e={}}if(!(o=n)||"string"!=typeof o||!o.trim())throw new TypeError("invalid item name/id");var o;if("number"==typeof i&&!Number.isNaN(i)&&Number.isInteger(i)||(i=1),r&&(i*=-1),i>0){if(Object.keys(e).includes(n)&&a(n))return;i>1&&a(n)&&(i=1),Object.keys(e).includes(n)||(e[n]=0),e[n]+=i}else{if(function(e){return t.has(e)&&t.get(e).permanent}(n))return;Object.keys(e).includes(n)&&"number"==typeof e[n]&&(e[n]+=i),e[n]<=0&&delete e[n]}return e}}},{key:"itemset",value:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};if(s.is(t)&&(t=t.data),"object"!==_typeof(t))return{};var e={};return Object.keys(t).forEach((function(n){"number"==typeof t[n]&&Number.isInteger(t[n])&&0!==t[n]&&(e[n]=t[n])})),e}},{key:"parseArgList",value:function(){var t=[].slice.call(arguments).flat(1/0);if(t.length%2!=0)throw new Error("item sets should be pairs of item IDs and numbers");var e={};return t.forEach((function(n,i){i%2==0&&(e[n]=t[i+1])})),e}},{key:"is",value:function(t){return t instanceof s}},{key:"emit",value:function(t,e){var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};$(document).trigger(Object.assign({type:":inventory-"+t+".simple-inventory",inventory:e,target:null,delta:{},item:null},n))}},{key:"create",value:function(t,e){return new s(t,e)}}]),s}();setup.Inventory=s,window.Inventory=window.Inventory||s}(),function(){var t=setup.Item,e=setup.Inventory;function n(t){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,i=arguments.length>2&&void 0!==arguments[2]&&arguments[2],r=arguments.length>3&&void 0!==arguments[3]?arguments[3]:"Alert",a=arguments.length>4&&void 0!==arguments[4]?arguments[4]:"Are you sure?";if(!t||"function"!=typeof t)throw new Error("Invalid confirmation callback!");if(e.confirm)if("all"!==e.confirm||"all"===i)if("stack"!==e.confirm||i){var s={display:"inline-block",float:"right"},o=$(document.createElement("div")),u=$(document.createElement("p")).append(a),l=$(document.createElement("div")).addClass("confirmation-buttons"),c=$(document.createElement("button")).append("Okay").addClass("confirm-yes").css(Object.assign(s,{"margin-right":"0.5rem"})),d=$(document.createElement("button")).append("Cancel").addClass("confirm-no").css(s);t&&"function"==typeof t&&c.ariaClick(t),n&&"function"==typeof n&&d.ariaClick(n),l.append(d,c),o.append(u,l),Dialog.setup(r,"simple-inventory confirmation"),Dialog.append(o),Dialog.open()}else t();else t();else t()}function i(t){var e=$(document.createElement("span")).addClass("spacer");return t&&e.wiki(""+t),e}function r(t,i){var r=arguments.length>2&&void 0!==arguments[2]&&arguments[2],a=arguments.length>3&&void 0!==arguments[3]?arguments[3]:null;return"give"===String(i).toLowerCase().trim()?i=e.strings.give:"take"===String(i).toLowerCase().trim()?i=e.strings.take:i&&"drop"!==String(i).toLowerCase().trim()||(i=e.strings.drop),$(document.createElement(r?"button":"a")).addClass("all-link drop-link").wiki(i+" all").ariaClick((function(){t.isEmpty()||n((function(){a&&e.is(a)?(a.merge(t),t.empty()):t.empty(),Dialog.close()}),(function(){Dialog.close()}),!0)}))}function a(a){var s,o=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{description:!0,use:!0,transfer:null,drop:!0,all:!0,stack:!0,dropActionText:"",classes:""},u=$(document.createElement("ul")).addClass("simple-inventory-list");if(a.length){if(s=a.list.map((function(r){var s=[],u=t.has(r)&&t.get(r).displayName?t.get(r).displayName:r;o.description&&t.has(r)&&t.get(r).description?s.push(function(n,i,r){var a=arguments.length>3&&void 0!==arguments[3]&&arguments[3];return r=r||e.strings.inspect,$(document.createElement(a?"button":"a")).addClass("inspect-link").wiki(""+i).ariaClick((function(){t.get(i).inspect()}))}(a,r,u)):s.push($(document.createElement("span")).append(t.has(r)?t.get(r).name:r).addClass("item-name")),s.push(function(t,n,i,r){var a=$(document.createElement("span")),s=t.count(n);return i=i||e.strings.stackPre,r=r||e.strings.stackPost,1==s?a.addClass("item-count single"):a.addClass("item-count multi"),a.append(""+i+(s||0)+r)}(a,r)),o.use&&t.has(r)&&t.get(r).handler?s.push(function(t,n,i){var r=arguments.length>3&&void 0!==arguments[3]&&arguments[3];return i=i||e.strings.use,$(document.createElement(r?"button":"a")).addClass("use-link").wiki(""+i).ariaClick((function(){t.use(n)}))}(a,r)):s.push(i()),(o.transfer&&e.is(o.transfer)||o.drop)&&!function(e){return t.has(e)&&t.get(e).permanent}(r)?(s.push(function(t,i,r){var a=arguments.length>3&&void 0!==arguments[3]&&arguments[3],s=arguments.length>4&&void 0!==arguments[4]?arguments[4]:null;return"give"===String(r).toLowerCase().trim()?r=e.strings.give:"take"===String(r).toLowerCase().trim()?r=e.strings.take:r&&"drop"!==String(r).toLowerCase().trim()||(r=e.strings.drop),$(document.createElement(a?"button":"a")).addClass("drop-link").wiki(""+r).ariaClick((function(){n((function(){s&&e.is(s)?t.transfer(s,i,1):t.drop(i,1),Dialog.close()}),(function(){Dialog.close()}))}))}(a,r,o.dropActionText,!1,o.transfer||null)),a.count(r)>1&&o.stack?s.push(function(t,i,r){var a=arguments.length>3&&void 0!==arguments[3]&&arguments[3],s=arguments.length>4&&void 0!==arguments[4]?arguments[4]:null;return"give"===String(r).toLowerCase().trim()?r=e.strings.give:"take"===String(r).toLowerCase().trim()?r=e.strings.take:r&&"drop"!==String(r).toLowerCase().trim()||(r=e.strings.drop),r=r+"&nbsp;"+e.strings.stack,$(document.createElement(a?"button":"a")).addClass("stack-link drop-link").wiki(""+r).ariaClick((function(){n((function(){s&&e.is(s)?t.transfer(s,i,t.count(i)):t.drop(i,t.count(i)),Dialog.close()}),(function(){Dialog.close()}))}))}(a,r,o.dropActionText,!1,o.transfer||null)):s.push(i())):s.push(i());var l=r.normalize().toLowerCase().replace(/\s+/g,"-");return $(document.createElement("li")).append(s).addClass("simple-inventory-listing").attr({"data-item-id":l,"data-keyword":u})})),o.all){var l=$(document.createElement("li")).addClass("all-listing simple-inventory-listing").append([i("&mdash;"),i(),i(),r(a,o.dropActionText,!1,o.transfer||null)]);s.push(l)}}else s=$(document.createElement("li")).addClass("simple-inventory-listing").append($(document.createElement("span")).wiki(e.emptyMessage));return u.append(s),u}e.prototype.interface=function(){var t,e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,i=this,r=$(document.createElement("div")).addClass("simple-inventory-wrapper");return e.filter&&r.append(function(){var t=$(document.createElement("div")).addClass("simple-inventory-filter"),e=$(document.createElement("input")).attr({type:"text",placeholder:"Filter..."}).on("input",(function(){var n=e.val().trim().toLowerCase(),i=t.parent().find("ul.simple-inventory-list li.simple-inventory-listing:not(.all-listing)");n?i.each((function(t,e){var i=$(e);i&&i.length&&(i.attr("data-keyword").substring(0,n.length).trim().toLowerCase()!==n?i.hide():i.show())})):i.show()}));return t.append(e),t}()),r.append(a(this,e)),$(document).on(":inventory-update.simple-inventory.gui-built-in",(function(){r.length?r.empty().append(a(i,e)):$(document).off(":inventory-update.simple-inventory.gui-built-in")})),n&&n instanceof $?t=n:n&&(t=$(n)),t&&r.appendTo(t),r}}(),function(){setup.Inventory,setup.Item;var t=".simple-inventory-userland",e=":inventory-update.simple-inventory"+t,n=":inventory-use.simple-inventory"+t;function i(t){return t&&"function"==typeof t}Object.assign(setup.Inventory,{events:{update:{on:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"";i(t)&&$(document).on(e+n,t)},one:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"";i(t)&&$(document).one(e+n,t)},off:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"";$(document).off(e+t)}},use:{on:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"";i(t)&&$(document).on(n+e,t)},one:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"";i(t)&&$(document).one(n+e,t)},off:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"";$(document).off(n+t)}}}})}(),function(){var t=":";function e(e){var n=function(t){return t.replace(/\r+/g,"\n").replace(/\n+/,"\n").replace(/ +/g," ").trim().split(/\n/g)}(e),i={};return n.forEach((function(e){if(e&&e.trim()&&e.includes(t)){var n=e.trim().split(t);i[n[0].trim()]=n[1].trim()}})),i}var n=function(t){try{return Story.has(t)?e(Story.get(t).text):{}}catch(t){return console.error(t.message,t),{}}}("inventory.strings");n.empty&&"string"==typeof n.empty&&n.empty.trim()&&(setup.Inventory.emptyMessage=n.empty,delete n.empty),setup.Inventory.strings=n||{}}(),function(){var t=setup.Item,e=setup.Inventory;function n(t){return t&&"string"==typeof t&&t.length>=2&&("$"===t[0]||"_"===t[0])}function i(t){if(n(t)&&(t=State.getVar(t)),e.is(t))return t}Macro.add(["item","consumable"],{tags:["description","tags","unique","permanent"],handler:function(){var e,n,i,r,a=null,s=!1,o=!1,u=!1;if(State.length>0)return this.error("items must be defined in `StoryInit` or story JavaScript!");if(!this.args[0]||"string"!=typeof this.args[0]||!this.args[0].trim())return this.error("invalid item ID");if(e=this.args[0].trim(),"consumable"===this.name&&(a=this.payload[0].contents||null,s=!0),this.args[1]&&(n=this.args[1]),this.payload.length>1){var l=this.payload.find((function(t){return"description"===t.name})),c=this.payload.find((function(t){return"tags"===t.name})),d=this.payload.find((function(t){return"unique"===t.name})),f=this.payload.find((function(t){return"permanent"===t.name}));l&&(i=l.contents.trim()),c&&(r=c.args.flat(1/0)),d&&(o=!0),f&&(u=!0)}t.add(e,{displayName:n||"",description:i||"",handler:a,consumable:s,unique:o,permanent:u},r)}}),Macro.add("newinv",{handler:function(){var t=this.args.raw.trim().split(" ").first().replace(/["']/g,"").trim();if(!n(t))return this.error("argument must be a story or temporary variable!");State.setVar(t,new e({},this.args.flat(1/0).slice(1)))}}),Macro.add(["pickup","drop"],{handler:function(){var t=i(this.args[0]);return t?this.args.length<3?this.error("no items to pick up were provided"):void t[this.name](this.args.slice(1)):this.error("first argument must be a valid inventory!")}}),Macro.add("dropall",{handler:function(){var t=i(this.args[0]);if(!t)return this.error("first argument must be a valid inventory!");t.empty()}}),Macro.add(["transfer","merge","unmerge"],{handler:function(){var t=i(this.args[0]);if(!t)return this.error("first argument must be a valid inventory!");var e=i(this.args[1]);if(!e)return this.error("second argument must be a valid inventory!");if("transfer"===this.name){if(this.args.length<4)return this.error("no items to transfer were provided");t.transfer(e,this.args.slice(2))}else t[this.name](e)}}),Macro.add(["inv","take","give"],{handler:function(){var t=null,n=i(this.args[0]);if(!n)return this.error("first argument must be a valid inventory!");this.args[1]&&i(this.args[1])&&(t=i(this.args[1]));var r={description:this.args.includesAny("inspect","description"),use:this.args.includes("use"),transfer:t,drop:this.args.includes("drop"),all:this.args.includes("all"),stack:this.args.includes("stack"),filter:this.args.includes("filter"),dropActionText:"inv"===this.name?"Drop":e.strings[this.name.trim().toLowerCase()],classes:"macro-".concat(this.name)};n.interface(r,$(this.output))}})}(),function(){var t=setup.Item,e=setup.Inventory;function n(t,e,n){if("object"!==_typeof(e))throw new TypeError("the extension should be a plain generic object holding the properties and methods you want to add");Object.keys(e).forEach((function(i){if(t[i]&&!n)throw new Error('Cannot override existing property "'+i+'"!');t[i]=e[i]}))}Object.assign(e,{extend:function(t){n(e,t,arguments.length>1&&void 0!==arguments[1]&&arguments[1])},extendPrototype:function(t){var i=arguments.length>1&&void 0!==arguments[1]&&arguments[1];n(e.prototype,t,i)}}),Object.assign(t,{extend:function(e){n(t,e,arguments.length>1&&void 0!==arguments[1]&&arguments[1])},extendPrototype:function(e){var i=arguments.length>1&&void 0!==arguments[1]&&arguments[1];n(t.prototype,e,i)}})}();
 // End Simple Inventory</script><tw-passagedata pid="1" name="Start" tags="no-undo" position="200,400" size="100,100">&lt;div class=&quot;title&quot;&gt;You Can&#39;t Save Her&lt;/div&gt;\
 &lt;div class=&quot;subtitle&quot;&gt;by Sarah Mak&lt;/div&gt;\
-&lt;div id=&quot;menu&quot;&gt;&lt;&lt;if Save.slots.has(1)&gt;&gt;&lt;&lt;link &quot;Continue&quot;&gt;&gt;&lt;&lt;run Save.slots.load(1)&gt;&gt;&lt;&lt;/link&gt;&gt; · &lt;&lt;link &#39;Restart&#39; &#39;restart&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;[[Start-&gt;content_warning]]&lt;&lt;/if&gt;&gt; · [[Chapters-&gt;chapters]] · [[Options-&gt;options]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="options" tags="no-undo options" position="75,400" size="100,100">&lt;span class=&quot;subtitle&quot;&gt;&#39;&#39;Options&#39;&#39;&lt;/span&gt; &lt;span class=&quot;close&quot;&gt;[[✖-&gt;Start]]&lt;/span&gt;
-
+&lt;div id=&quot;menu&quot;&gt;&lt;&lt;if Save.slots.has(1)&gt;&gt;&lt;&lt;link &quot;Continue&quot;&gt;&gt;&lt;&lt;run Save.slots.load(1)&gt;&gt;&lt;&lt;/link&gt;&gt; · &lt;&lt;link &#39;Restart&#39; &#39;restart&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;[[Start-&gt;content_warning]]&lt;&lt;/if&gt;&gt; · [[Chapters-&gt;chapters]] · [[Options-&gt;options]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="options" tags="no-undo options" position="75,400" size="100,100">&lt;div class=&quot;options-header&quot;&gt;&#39;&#39;Options&#39;&#39;&lt;/div&gt; &lt;span class=&quot;close&quot;&gt;[[✖-&gt;Start]]&lt;/span&gt;\
 &lt;&lt;if setup.enableUndo.get()&gt;&gt;\
     &#39;&#39;Enable Undo&#39;&#39; is currently &lt;&lt;link &quot;ON&quot;&gt;&gt;&lt;&lt;run setup.enableUndo.toggle()&gt;&gt;&lt;&lt;run Engine.play(passage())&gt;&gt;&lt;&lt;/link&gt;&gt;.
 &lt;&lt;else&gt;&gt;\
@@ -968,23 +1001,22 @@ When this option is &#39;&#39;ON&#39;&#39;, an undo button will appear at the to
 This story contains depictions of violence, horror, and mild gore.
 Are you okay with continuing this story?
 
-[[Yes-&gt;pre_intro]]
-[[No-&gt;its_okay]]</tw-passagedata><tw-passagedata pid="4" name="restart" tags="center no-undo" position="350,150" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;link &#39;It will always end the same way.&#39;&gt;&gt;
+&lt;&lt;link &quot;Yes&quot; &quot;intro_1&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+[[No-&gt;its_okay]]</tw-passagedata><tw-passagedata pid="4" name="restart" tags="center no-undo" position="350,150" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;link &#39;It will always end the same way.&#39;&gt;&gt;\
     &lt;&lt;for _key, _val range State.variables&gt;&gt;&lt;&lt;run delete State.variables[_key]&gt;&gt;&lt;&lt;/for&gt;&gt;
     &lt;&lt;set State.expired.length = 0&gt;&gt;
-    &lt;&lt;goto pre_intro&gt;&gt;
-&lt;&lt;/link&gt;&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="chapters" tags="no-undo options center" position="175,550" size="100,100">&lt;span class=&quot;subtitle&quot; style=&quot;line-height: 2;&quot;&gt;&#39;&#39;Chapters&#39;&#39;&lt;/span&gt; &lt;span class=&quot;close&quot;&gt;[[✖-&gt;Start]]&lt;/span&gt;
+    &lt;&lt;goto &quot;content_warning&quot;&gt;&gt;
+&lt;&lt;/link&gt;&gt;&lt;&lt;/nobr&gt;&gt;\</tw-passagedata><tw-passagedata pid="5" name="chapters" tags="no-undo options center" position="175,550" size="100,100">&lt;div class=&quot;chapter-selection-header&quot;&gt;&#39;&#39;Chapters&#39;&#39;&lt;/div&gt; &lt;span class=&quot;close&quot;&gt;[[✖-&gt;Start]]&lt;/span&gt;\
 &lt;&lt;if Save.slots.has(1)&gt;&gt;\
 Your previous progress will not be loaded.
-  Your save will be overwritten.
+Your save will be overwritten.
 &lt;&lt;/if&gt;&gt;\
 
-[[I-&gt;pre_intro]]
+&lt;span class=&quot;chapter-select-link&quot;&gt;&lt;&lt;link &quot;I&quot; &quot;intro_1&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;II&quot; &quot;chapter_2&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;III&quot; &quot;chapter_3&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;𓂘&quot; &quot;chapter_4&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;link &quot;V&quot; &quot;chapter_5&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="setup_chapter_4" tags="no-undo" position="175,650" size="100,100">&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;
-&lt;&lt;goto &quot;chapter_4&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="variable_setup" tags="" position="200,200" size="100,100">&lt;nobr&gt;
+&lt;&lt;link &quot;V&quot; &quot;chapter_5&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="6" name="variable_setup" tags="" position="200,200" size="100,100">&lt;nobr&gt;
 /* STORY */
 &lt;&lt;set $dir to &quot;north&quot;&gt;&gt;
 &lt;&lt;set $weapon to &quot;greatsword&quot;&gt;&gt;
@@ -1000,7 +1032,7 @@ Your previous progress will not be loaded.
 &lt;&lt;set $friend_dodge_1 to &quot;step into a fold in space and reappear in front of her&quot;&gt;&gt;
 &lt;&lt;set $friend_dodge_2 to &quot;sidestep&quot;&gt;&gt;
 
-&lt;&lt;set $cyclingResult_final_fight_6 to &quot;The nuns told me to kill you, but I don&#39;t want to.&quot;&gt;&gt;
+&lt;&lt;set $cyclingResult_final_fight_6 to &quot;The nuns told me to kill you, but I don&#39;t want to&quot;&gt;&gt;
 
 /* TRACK SEEN TEXT */
 &lt;&lt;set $goddess_freedom_seen to false&gt;&gt;
@@ -1009,13 +1041,12 @@ Your previous progress will not be loaded.
 /* TRACK VISITS */
 
 /* OVERRIDE FOR TESTING */
-&lt;/nobr&gt;</tw-passagedata><tw-passagedata pid="8" name="StoryInit" tags="" position="75,200" size="100,100">&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="its_okay" tags="no-undo center" position="350,275" size="100,100">[[It&#39;s okay.-&gt;Start]]</tw-passagedata><tw-passagedata pid="10" name="pre_intro" tags="no-undo" position="300,550" size="100,100">&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;
-&lt;&lt;timed 2s t8n&gt;&gt;&lt;&lt;goto &quot;intro_1&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="intro_1" tags="no-undo" position="425,550" size="100,100">[[You can&#39;t save her-&gt;intro_2]].  /* TODO: may want to adjust intro */</tw-passagedata><tw-passagedata pid="12" name="intro_2" tags="" position="550,550" size="100,100">[[This is what they told you-&gt;intro_3]].</tw-passagedata><tw-passagedata pid="13" name="intro_3" tags="" position="675,550" size="100,100">[[And this is what you tell yourself-&gt;chapter_1]].</tw-passagedata><tw-passagedata pid="14" name="chapter_1" tags="center" position="0,950" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[I-&gt;intro_4]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="15" name="intro_4" tags="no-undo" position="825,950" size="100,100">When the children at the monastery come of age, they must complete a [[test-&gt;intro_5]].</tw-passagedata><tw-passagedata pid="16" name="intro_5" tags="" position="950,950" size="100,100">After your friend left, you feared what your test would be.
+&lt;/nobr&gt;</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="75,200" size="100,100">&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="its_okay" tags="no-undo center" position="350,275" size="100,100">[[It&#39;s okay.-&gt;Start]]</tw-passagedata><tw-passagedata pid="9" name="intro_1" tags="no-undo" position="425,550" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;[[You can&#39;t save her-&gt;intro_2]].&lt;&lt;/timed&gt;&gt;  /* TODO: may want to adjust intro */</tw-passagedata><tw-passagedata pid="10" name="intro_2" tags="" position="550,550" size="100,100">[[This is what they told you-&gt;intro_3]].</tw-passagedata><tw-passagedata pid="11" name="intro_3" tags="" position="675,550" size="100,100">[[And this is what you tell yourself-&gt;chapter_1]].</tw-passagedata><tw-passagedata pid="12" name="chapter_1" tags="center" position="0,950" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[I-&gt;intro_4]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="13" name="intro_4" tags="no-undo" position="825,950" size="100,100">When the children at the monastery come of age, they must complete a [[test-&gt;intro_5]].</tw-passagedata><tw-passagedata pid="14" name="intro_5" tags="" position="950,950" size="100,100">After your friend left, you feared what your test would be.
 
-[[Your fears came true-&gt;intro_6]].</tw-passagedata><tw-passagedata pid="17" name="intro_6" tags="" position="1075,950" size="100,100">The nuns told you that you must [[kill her-&gt;weapon_1]], for she had fallen sway to the other god.</tw-passagedata><tw-passagedata pid="18" name="weapon_1" tags="center" position="300,1125" size="100,100">So you start by preparing your weapon:
+[[Your fears came true-&gt;intro_6]].</tw-passagedata><tw-passagedata pid="15" name="intro_6" tags="" position="1075,950" size="100,100">The nuns told you that you must [[kill her-&gt;weapon_1]], for she had fallen sway to the other god.</tw-passagedata><tw-passagedata pid="16" name="weapon_1" tags="center" position="300,1125" size="100,100">So you start by preparing your weapon:
 &lt;&lt;include &quot;cycling_weapon_1&quot;&gt;&gt;
 
-You pray that you are [[prepared-&gt;etching]].</tw-passagedata><tw-passagedata pid="19" name="cycling_weapon_1" tags="" position="200,1125" size="100,100">&lt;&lt;silently&gt;&gt;
+You pray that you are [[prepared-&gt;etching]].</tw-passagedata><tw-passagedata pid="17" name="cycling_weapon_1" tags="" position="200,1125" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_weapon_1&gt;&gt;
   &lt;&lt;set $choicesCount_weapon_1 to -1&gt;&gt;
   &lt;&lt;set $choices_weapon_1 to [&quot;A greatsword forged from soulsteel&quot;, &quot;A sabre carved from angel bone&quot;, &quot;A rapier shaped from dreamsilver&quot;]&gt;&gt;
@@ -1029,7 +1060,7 @@ You pray that you are [[prepared-&gt;etching]].</tw-passagedata><tw-passagedata 
 
 &lt;&lt;set $cyclingResult_weapon_1 to $choices_weapon_1[$choicesCount_weapon_1]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_weapon_1[$choicesCount_weapon_1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_weapon_1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="weapon_des_calc" tags="" position="575,100" size="100,100">&lt;&lt;nobr&gt;&gt;
+\&lt;&lt;linkreplace $choices_weapon_1[$choicesCount_weapon_1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_weapon_1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="weapon_des_calc" tags="" position="575,100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $cyclingResult_weapon_1 to $cyclingResult_weapon_1.toLowerCase()&gt;&gt;
 &lt;&lt;if $cyclingResult_weapon_1 is &quot;a greatsword forged from soulsteel&quot;&gt;&gt;
     &lt;&lt;set $weapon to &quot;greatsword&quot;&gt;&gt;
@@ -1040,11 +1071,11 @@ You pray that you are [[prepared-&gt;etching]].</tw-passagedata><tw-passagedata 
 &lt;&lt;else&gt;&gt;
     &lt;&lt;set $weapon to &quot;sword&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="etching" tags="center" position="425,1125" size="100,100">&lt;&lt;include &quot;weapon_des_calc&quot;&gt;&gt;\
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="etching" tags="center" position="425,1125" size="100,100">&lt;&lt;include &quot;weapon_des_calc&quot;&gt;&gt;\
 And you:
 &lt;&lt;include &quot;cycling_etching&quot;&gt;&gt;
 
-This is what you [[try to believe-&gt;weapon_3]] in.</tw-passagedata><tw-passagedata pid="22" name="cycling_etching" tags="" position="525,1125" size="100,100">&lt;&lt;silently&gt;&gt;
+This is what you [[try to believe-&gt;weapon_3]] in.</tw-passagedata><tw-passagedata pid="20" name="cycling_etching" tags="" position="525,1125" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_etching&gt;&gt;
   &lt;&lt;set $choicesCount_etching to -1&gt;&gt;
   &lt;&lt;set $choices_etching to [&quot;machine it with sigils of faith&quot;, &quot;etch it with invocations of death&quot;, &quot;anodise it with dreams of martyrdom&quot;]&gt;&gt;
@@ -1058,41 +1089,41 @@ This is what you [[try to believe-&gt;weapon_3]] in.</tw-passagedata><tw-passage
 
 &lt;&lt;set $cyclingResult_etching to $choices_etching[$choicesCount_etching]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_etching[$choicesCount_etching] t8n&gt;&gt;&lt;&lt;include &quot;cycling_etching&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="weapon_3" tags="" position="675,1125" size="100,100">[[You put yourself into your work-&gt;weapon_4]].</tw-passagedata><tw-passagedata pid="24" name="weapon_4" tags="" position="800,1125" size="100,100">You put yourself into your work, [[in the way that faith demands sacrifice-&gt;weapon_5]].</tw-passagedata><tw-passagedata pid="25" name="weapon_5" tags="" position="925,1125" size="100,100">And you bring a blazegun.
+\&lt;&lt;linkreplace $choices_etching[$choicesCount_etching] t8n&gt;&gt;&lt;&lt;include &quot;cycling_etching&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="weapon_3" tags="" position="675,1125" size="100,100">[[You put yourself into your work-&gt;weapon_4]].</tw-passagedata><tw-passagedata pid="22" name="weapon_4" tags="" position="800,1125" size="100,100">You put yourself into your work, [[in the way that faith demands sacrifice-&gt;weapon_5]].</tw-passagedata><tw-passagedata pid="23" name="weapon_5" tags="" position="925,1125" size="100,100">And you bring a blazegun.
 
-[[Even though she called it a coward&#39;s weapon-&gt;mc_travel_1]].</tw-passagedata><tw-passagedata pid="26" name="mc_travel_1" tags="moon" position="300,1275" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;The pale desert of this moon curves towards an empty horizon.
+[[Even though she called it a coward&#39;s weapon-&gt;mc_travel_1]].</tw-passagedata><tw-passagedata pid="24" name="mc_travel_1" tags="moon" position="300,1275" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;The pale desert of this moon curves towards an empty horizon.
 
 She is to the [[north-&gt;mc_travel_2]].
-&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="27" name="mc_travel_2" tags="moon" position="425,1275" size="100,100">Clouds of grey dust swirl in your wake.
+&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="25" name="mc_travel_2" tags="moon" position="425,1275" size="100,100">Clouds of grey dust swirl in your wake.
 
 The wind is howling a language that you do not understand.
 
-She is to the [[north-&gt;mc_travel_3]].</tw-passagedata><tw-passagedata pid="28" name="mc_travel_3" tags="moon" position="550,1275" size="100,100">A building rises in the distance. This is the cathedral where she is waiting.
+She is to the [[north-&gt;mc_travel_3]].</tw-passagedata><tw-passagedata pid="26" name="mc_travel_3" tags="moon" position="550,1275" size="100,100">A building rises in the distance. This is the cathedral where she is waiting.
 
 Blackened rocks dot the landscape. Perhaps this is what remains of the golems that protected this once-holy space.
 
-She is to the [[north-&gt;mc_travel_4]].</tw-passagedata><tw-passagedata pid="29" name="mc_travel_4" tags="moon" position="675,1275" size="100,100">The cathedral pierces the sky like a stalagmite.
+She is to the [[north-&gt;mc_travel_4]].</tw-passagedata><tw-passagedata pid="27" name="mc_travel_4" tags="moon" position="675,1275" size="100,100">The cathedral pierces the sky like a stalagmite.
 
 Slashing sounds emanate from it.
 
-She is to the [[north-&gt;mc_travel_5]].</tw-passagedata><tw-passagedata pid="30" name="mc_travel_5" tags="moon" position="800,1275" size="100,100">The sculptures have weathered away.
+She is to the [[north-&gt;mc_travel_5]].</tw-passagedata><tw-passagedata pid="28" name="mc_travel_5" tags="moon" position="800,1275" size="100,100">The sculptures have weathered away.
 
 Their faces are blank, and the folds of their clothing are fading dunes of stone.
 
-She is to the [[north-&gt;mc_travel_6]].</tw-passagedata><tw-passagedata pid="31" name="mc_travel_6" tags="" position="925,1275" size="100,100">She is waiting in the north of the cathedral, in front of the altar. The arches and walls are scarred with gashes, and the altar is stained red.
+She is to the [[north-&gt;mc_travel_6]].</tw-passagedata><tw-passagedata pid="29" name="mc_travel_6" tags="" position="925,1275" size="100,100">She is waiting in the north of the cathedral, in front of the altar. The arches and walls are scarred with gashes, and the altar is stained red.
 
-You look to the north. She is a silhouette cloaked in [[moonlight-&gt;mc_travel_7]].</tw-passagedata><tw-passagedata pid="32" name="mc_travel_7" tags="" position="1050,1275" size="100,100">Moonlight is shining through the stained glass window, painting a rose of rainbows on the floor.
+You look to the north. She is a silhouette cloaked in [[moonlight-&gt;mc_travel_7]].</tw-passagedata><tw-passagedata pid="30" name="mc_travel_7" tags="" position="1050,1275" size="100,100">Moonlight is shining through the stained glass window, painting a rose of rainbows on the floor.
 
 She is still waiting. From afar, you can already see that the marks on her body are &lt;span class=&quot;pink&quot;&gt;glowing pink&lt;/span&gt;.
 
-You take [[a better look at her-&gt;mc_travel_8]].</tw-passagedata><tw-passagedata pid="33" name="mc_travel_8" tags="" position="1175,1275" size="100,100">Her &lt;&lt;linkappend &quot;face&quot; t8n&gt;&gt; is a palette of scars.&lt;&lt;set $face_friend += 1&gt;&gt;&lt;&lt;if $face_friend is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;mc_travel_9&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
+You take [[a better look at her-&gt;mc_travel_8]].</tw-passagedata><tw-passagedata pid="31" name="mc_travel_8" tags="" position="1175,1275" size="100,100">Her &lt;&lt;linkappend &quot;face&quot; t8n&gt;&gt; is a palette of scars.&lt;&lt;set $face_friend += 1&gt;&gt;&lt;&lt;if $face_friend is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;mc_travel_9&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
 
 Her &lt;&lt;linkappend &quot;eyes&quot; t8n&gt;&gt; glow bright pink.&lt;&lt;set $face_friend += 1&gt;&gt;&lt;&lt;if $face_friend is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;mc_travel_9&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
 
-Her &lt;&lt;linkappend &quot;hair&quot; t8n&gt;&gt; barely conceals the nubs of her antlers, which look like buds emerging out of soil.&lt;&lt;set $face_friend += 1&gt;&gt;&lt;&lt;if $face_friend is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;mc_travel_9&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="mc_travel_9" tags="" position="1300,1275" size="100,100">This is worse than you feared.
+Her &lt;&lt;linkappend &quot;hair&quot; t8n&gt;&gt; barely conceals the nubs of her antlers, which are like buds emerging out of soil.&lt;&lt;set $face_friend += 1&gt;&gt;&lt;&lt;if $face_friend is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;mc_travel_9&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="mc_travel_9" tags="" position="1300,1275" size="100,100">This is worse than you feared.
 
 &lt;&lt;include &quot;cycling_mc_travel_7&quot;&gt;&gt;.
-&lt;&lt;timed 3.7s&gt;&gt;&lt;&lt;goto &quot;mc_pre_fight&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="35" name="cycling_mc_travel_7" tags="" position="1050,1375" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;timed 3.7s&gt;&gt;&lt;&lt;goto &quot;mc_pre_fight&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="33" name="cycling_mc_travel_7" tags="" position="1050,1375" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_mc_travel_7&gt;&gt;
   &lt;&lt;set $choicesCount_mc_travel_7 to -1&gt;&gt;
   &lt;&lt;set $choices_mc_travel_7 to [&quot;Shoot her&quot;, &quot;Strike her&quot;]&gt;&gt;
@@ -1106,7 +1137,7 @@ Her &lt;&lt;linkappend &quot;hair&quot; t8n&gt;&gt; barely conceals the nubs of 
 
 &lt;&lt;set $cyclingResult_mc_travel_7 to $choices_mc_travel_7[$choicesCount_mc_travel_7]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_mc_travel_7[$choicesCount_mc_travel_7] t8n&gt;&gt;&lt;&lt;include &quot;cycling_mc_travel_7&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="mc_pre_fight" tags="" position="250,1600" size="100,100">&lt;&lt;if $cyclingResult_mc_travel_7 is &quot;Shoot her&quot;&gt;&gt;\
+\&lt;&lt;linkreplace $choices_mc_travel_7[$choicesCount_mc_travel_7] t8n&gt;&gt;&lt;&lt;include &quot;cycling_mc_travel_7&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="mc_pre_fight" tags="" position="250,1600" size="100,100">&lt;&lt;if $cyclingResult_mc_travel_7 is &quot;Shoot her&quot;&gt;&gt;\
 &lt;&lt;set $shot_friend_1 to true&gt;&gt;\
 You fumble with your blazegun for a moment, but you steady yourself, and you shoot in her direction.
 
@@ -1119,7 +1150,7 @@ But you only slice vacant air, and scatter a dance of dust motes.
 
 She has disappeared. You ready your &lt;&lt;if $cyclingResult_mc_travel_7 is &quot;Shoot her&quot;&gt;&gt;blazegun&lt;&lt;else&gt;&gt;$weapon&lt;&lt;/if&gt;&gt;.
 
-She could be to the &lt;&lt;link &quot;north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;north by east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north by east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;north-northeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north-northeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northeast by north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northeast by north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northeast by east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northeast by east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east-northeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east-northeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east by north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east by north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east by south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east by south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east-southeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east-southeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southeast by east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southeast by east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southeast by south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southeast by south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south-southeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south-southeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south by east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south by east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south by west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south by west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south-southwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south-southwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southwest by south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southwest by south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southwest by west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southwest by west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west-southwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west-southwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west by south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west by south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west by north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west by north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west-northwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west-northwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northwest by west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northwest by west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northwest by north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northwest by north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;north-northwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north-northwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;, or &lt;&lt;link &quot;north by west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north by west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;.</tw-passagedata><tw-passagedata pid="37" name="mc_fight_1" tags="" position="375,1600" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $dir is &quot;north-northwest&quot; or $dir is &quot;north&quot; or $dir is &quot;north-northeast&quot;&gt;&gt;
+She could be to the &lt;&lt;link &quot;north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;north by east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north by east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;north-northeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north-northeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northeast by north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northeast by north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northeast by east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northeast by east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east-northeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east-northeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east by north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east by north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east by south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east by south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;east-southeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;east-southeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southeast by east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southeast by east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southeast by south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southeast by south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south-southeast&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south-southeast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south by east&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south by east&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south by west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south by west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;south-southwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;south-southwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southwest by south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southwest by south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;southwest by west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;southwest by west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west-southwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west-southwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west by south&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west by south&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west by north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west by north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;west-northwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;west-northwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northwest by west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northwest by west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;northwest by north&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;northwest by north&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;,  &lt;&lt;link &quot;north-northwest&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north-northwest&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;, or &lt;&lt;link &quot;north by west&quot; &quot;mc_fight_1&quot;&gt;&gt;&lt;&lt;set $dir to &quot;north by west&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;.</tw-passagedata><tw-passagedata pid="35" name="mc_fight_1" tags="" position="375,1600" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $dir is &quot;north-northwest&quot; or $dir is &quot;north&quot; or $dir is &quot;north-northeast&quot;&gt;&gt;
     &lt;&lt;set $gen_dir_desc to &quot;in front of her&quot;&gt;&gt;
 
 &lt;&lt;elseif $dir is &quot;northeast by north&quot; or $dir is &quot;northeast&quot; or $dir is &quot;northeast by east&quot; or $dir is &quot;east-northeast&quot; or $dir is &quot;east by north&quot; or $dir is &quot;east&quot; or $dir is &quot;east by south&quot; or $dir is &quot;east-southeast&quot; or $dir is &quot;southeast by east&quot; or $dir is &quot;southeast&quot; or $dir is &quot;southeast by south&quot; or $dir is &quot;north by west&quot; or $dir is &quot;north by east&quot;&gt;&gt;
@@ -1132,7 +1163,7 @@ She could be to the &lt;&lt;link &quot;north&quot; &quot;mc_fight_1&quot;&gt;&gt
     &lt;&lt;set $gen_dir_desc to &quot;to her left&quot;&gt;&gt;
 
 &lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;\
-[[One second-&gt;mc_fight_2]].</tw-passagedata><tw-passagedata pid="38" name="mc_fight_2" tags="" position="500,1600" size="100,100">&lt;&lt;if $dir is &quot;north&quot;&gt;&gt;\
+[[One second-&gt;mc_fight_2]].</tw-passagedata><tw-passagedata pid="36" name="mc_fight_2" tags="" position="500,1600" size="100,100">&lt;&lt;if $dir is &quot;north&quot;&gt;&gt;\
 Now, she isn&#39;t to the north. You miss again.
 
 You swerve around, and spot her behind you.
@@ -1144,7 +1175,7 @@ She isn&#39;t to the $dir. You swerve around, and spot her behind you.
 
 &lt;&lt;if $cyclingResult_mc_travel_7 is &quot;Shoot her&quot;&gt;&gt;&lt;&lt;include &quot;cycling_shoot_again&quot;&gt;&gt;.&lt;&lt;else&gt;&gt;&lt;&lt;include &quot;cycling_strike_again&quot;&gt;&gt;.&lt;&lt;/if&gt;&gt;
 
-[[Two seconds-&gt;mc_fight_3]].</tw-passagedata><tw-passagedata pid="39" name="mc_fight_3" tags="" position="625,1600" size="100,100">&lt;&lt;if $cyclingResult_shoot_again is &quot;Strike her&quot;&gt;&gt;&lt;&lt;set $shot_friend_2 to true&gt;&gt;&lt;&lt;/if&gt;&gt;\
+[[Two seconds-&gt;mc_fight_3]].</tw-passagedata><tw-passagedata pid="37" name="mc_fight_3" tags="" position="625,1600" size="100,100">&lt;&lt;if $cyclingResult_shoot_again is &quot;Strike her&quot;&gt;&gt;&lt;&lt;set $shot_friend_2 to true&gt;&gt;&lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $cyclingResult_strike_again is &quot;Shoot her&quot;&gt;&gt;&lt;&lt;set $shot_friend_2 to true&gt;&gt;&lt;&lt;/if&gt;&gt;\
 &lt;&lt;nobr&gt;&gt;&lt;&lt;if $shot_friend_2 is true&gt;&gt;
 She casually sidesteps your shots
@@ -1157,7 +1188,7 @@ You stop to catch your breath. You consider your [[options-&gt;options_comment]]
 
 &lt;&lt;include &quot;cycling_mc_fight_3&quot;&gt;&gt;.
 
-[[Three seconds-&gt;mc_fight_4]].</tw-passagedata><tw-passagedata pid="40" name="cycling_mc_fight_3" tags="" position="625,1700" size="100,100">&lt;&lt;silently&gt;&gt;
+[[Three seconds-&gt;mc_fight_4]].</tw-passagedata><tw-passagedata pid="38" name="cycling_mc_fight_3" tags="" position="625,1700" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_mc_fight_3&gt;&gt;
   &lt;&lt;set $choicesCount_mc_fight_3 to -1&gt;&gt;
   &lt;&lt;set $choices_mc_fight_3 to [&quot;Thrust your $weapon forward&quot;, &quot;Steady your aim, charge the shot, and shoot&quot;]&gt;&gt;
@@ -1171,7 +1202,7 @@ You stop to catch your breath. You consider your [[options-&gt;options_comment]]
 
 &lt;&lt;set $cyclingResult_mc_fight_3 to $choices_mc_fight_3[$choicesCount_mc_fight_3]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_mc_fight_3[$choicesCount_mc_fight_3] t8n&gt;&gt;&lt;&lt;include &quot;cycling_mc_fight_3&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="mc_fight_4" tags="" position="750,1600" size="100,100">&lt;&lt;if $cyclingResult_mc_fight_3 is &quot;Steady your aim and shoot&quot;&gt;&gt;\
+\&lt;&lt;linkreplace $choices_mc_fight_3[$choicesCount_mc_fight_3] t8n&gt;&gt;&lt;&lt;include &quot;cycling_mc_fight_3&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="mc_fight_4" tags="" position="750,1600" size="100,100">&lt;&lt;if $cyclingResult_mc_fight_3 is &quot;Steady your aim and shoot&quot;&gt;&gt;\
 &lt;&lt;set $shot_friend_3 to true&gt;&gt;\
 She smirks as she slices the bolt of fire midair with her $weapon.
 
@@ -1181,7 +1212,7 @@ The other god&#39;s power.
 She smirks as she parries your thrust with such strength, you let your $weapon go. It flies off to the other side of the room, and clatters on the floor, the sound echoing throughout this hollow space.
 &lt;&lt;/if&gt;&gt;\
 
-She starts laughing harder, laughing in the way that one would laugh at the antics of [[a small child-&gt;flashback_1]].</tw-passagedata><tw-passagedata pid="42" name="cycling_shoot_again" tags="" position="575,325" size="100,100">&lt;&lt;silently&gt;&gt;
+She starts laughing harder, laughing in the way that one would laugh at the antics of [[a small child-&gt;flashback_1]].</tw-passagedata><tw-passagedata pid="40" name="cycling_shoot_again" tags="" position="575,325" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_shoot_again&gt;&gt;
   &lt;&lt;set $choicesCount_shoot_again to -1&gt;&gt;
   &lt;&lt;set $choices_shoot_again to [&quot;Shoot her again&quot;, &quot;Strike her&quot;]&gt;&gt;
@@ -1195,7 +1226,7 @@ She starts laughing harder, laughing in the way that one would laugh at the anti
 
 &lt;&lt;set $cyclingResult_shoot_again to $choices_shoot_again[$choicesCount_shoot_again]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_shoot_again[$choicesCount_shoot_again] t8n&gt;&gt;&lt;&lt;include &quot;cycling_shoot_again&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="cycling_strike_again" tags="" position="575,225" size="100,100">&lt;&lt;silently&gt;&gt;
+\&lt;&lt;linkreplace $choices_shoot_again[$choicesCount_shoot_again] t8n&gt;&gt;&lt;&lt;include &quot;cycling_shoot_again&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="cycling_strike_again" tags="" position="575,225" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_strike_again&gt;&gt;
   &lt;&lt;set $choicesCount_strike_again to -1&gt;&gt;
   &lt;&lt;set $choices_strike_again to [&quot;Strike her&quot;, &quot;Shoot her&quot;]&gt;&gt;
@@ -1209,7 +1240,7 @@ She starts laughing harder, laughing in the way that one would laugh at the anti
 
 &lt;&lt;set $cyclingResult_strike_again to $choices_strike_again[$choicesCount_strike_again]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_strike_again[$choicesCount_strike_again] t8n&gt;&gt;&lt;&lt;include &quot;cycling_strike_again&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="flashback_1" tags="flashback long-t8n" position="750,1875" size="100,100">&lt;&lt;timed 2.5s t8n&gt;&gt;\
+\&lt;&lt;linkreplace $choices_strike_again[$choicesCount_strike_again] t8n&gt;&gt;&lt;&lt;include &quot;cycling_strike_again&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="flashback_1" tags="flashback long-t8n" position="750,1875" size="100,100">&lt;&lt;timed 2.5s t8n&gt;&gt;\
 She smirks as she sidesteps your sword, again and again.
 
 You are children at the monastery, and you are training to fight. She was always better at anything physical—your form is far clumsier than hers.
@@ -1221,7 +1252,7 @@ She is still laughing.
 &lt;&lt;include &quot;cycling_flashback_1&quot;&gt;&gt;
 
 [[One second.-&gt;flashback_2]]
-&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="45" name="cycling_flashback_1" tags="" position="750,1775" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="43" name="cycling_flashback_1" tags="" position="750,1775" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_flashback_1&gt;&gt;
   &lt;&lt;set $choicesCount_flashback_1 to -1&gt;&gt;
   &lt;&lt;set $choices_flashback_1 to [&quot;Slash at her with all your strength.&quot;, &quot;Hit her with the pommel of your sword.&quot;]&gt;&gt;
@@ -1235,26 +1266,26 @@ She is still laughing.
 
 &lt;&lt;set $cyclingResult_flashback_1 to $choices_flashback_1[$choicesCount_flashback_1]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_flashback_1[$choicesCount_flashback_1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_flashback_1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="flashback_2" tags="flashback" position="875,1875" size="100,100">You hit her, hard. Too hard. She grimaces as she falls, clutching her chest.
+\&lt;&lt;linkreplace $choices_flashback_1[$choicesCount_flashback_1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_flashback_1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="flashback_2" tags="flashback" position="875,1875" size="100,100">You hit her, hard. Too hard. She grimaces as she falls, clutching her chest.
 
-[[Two seconds.-&gt;flashback_2_1]]</tw-passagedata><tw-passagedata pid="47" name="flashback_2_1" tags="flashback" position="1000,1875" size="100,100">You watch her fall.
+[[Two seconds.-&gt;flashback_2_1]]</tw-passagedata><tw-passagedata pid="45" name="flashback_2_1" tags="flashback" position="1000,1875" size="100,100">You watch her fall.
 
-[[Three seconds.-&gt;flashback_2_2]]</tw-passagedata><tw-passagedata pid="48" name="flashback_2_2" tags="flashback" position="1125,1875" size="100,100">I&#39;m sorry! You say, as you run over to pick her up. She groans, but she says it doesn&#39;t hurt.
+[[Three seconds.-&gt;flashback_2_2]]</tw-passagedata><tw-passagedata pid="46" name="flashback_2_2" tags="flashback" position="1125,1875" size="100,100">I&#39;m sorry! You say, as you run over to pick her up. She groans, but she says it doesn&#39;t hurt.
 
-The nun jogs over to bring her to the infirmary, and you insist on [[following her-&gt;flashback_3]].</tw-passagedata><tw-passagedata pid="49" name="flashback_3" tags="flashback" position="1250,1875" size="100,100">The nun tells you that you can return to class, but you continue to apologise, &lt;&lt;linkreplace &quot;I&#39;m sorry&quot; t8n&gt;&gt;I&#39;m sorry, &lt;&lt;linkreplace &quot;I&#39;m sorry&quot; t8n&gt;&gt;I&#39;m sorry, &lt;&lt;linkreplace &quot;I&#39;m sorry&quot; t8n&gt;&gt;I&#39;m sorry&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;.
+The nun jogs over to bring her to the infirmary, and you insist on [[following her-&gt;flashback_3]].</tw-passagedata><tw-passagedata pid="47" name="flashback_3" tags="flashback" position="1250,1875" size="100,100">The nun tells you that you can return to class, but you continue to apologise, &lt;&lt;linkreplace &quot;I&#39;m sorry&quot; t8n&gt;&gt;I&#39;m sorry, &lt;&lt;linkreplace &quot;I&#39;m sorry&quot; t8n&gt;&gt;I&#39;m sorry, &lt;&lt;linkreplace &quot;I&#39;m sorry&quot; t8n&gt;&gt;I&#39;m sorry&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;.
 
-She tells you it&#39;s okay, [[you didn&#39;t mean it-&gt;flashback_4]].</tw-passagedata><tw-passagedata pid="50" name="flashback_4" tags="flashback" position="1375,1875" size="100,100">Still, after class, you continue to tell her how sorry you are, you just tell her &lt;span id=&quot;apology&quot;&gt;&lt;/span&gt;&lt;span id=&quot;sorry-link&quot;&gt;&lt;&lt;link &quot;I&#39;m sorry,&quot;&gt;&gt;
+She tells you it&#39;s okay, [[you didn&#39;t mean it-&gt;flashback_4]].</tw-passagedata><tw-passagedata pid="48" name="flashback_4" tags="flashback" position="1375,1875" size="100,100">Still, after class, you continue to tell her how sorry you are, you just tell her &lt;span id=&quot;apology&quot;&gt;&lt;/span&gt;&lt;span id=&quot;sorry-link&quot;&gt;&lt;&lt;link &quot;I&#39;m sorry,&quot;&gt;&gt;
     &lt;&lt;append &quot;#apology&quot; t8n&gt;&gt;I&#39;m sorry, &lt;&lt;/append&gt;&gt;
     &lt;&lt;replace &quot;#sorry-link&quot;&gt;&gt;&lt;&lt;link &quot;I&#39;m sorry,&quot;&gt;&gt;&lt;&lt;append &quot;#apology&quot; t8n&gt;&gt;I&#39;m sorry, &lt;&lt;/append&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/link&gt;&gt;&lt;/span&gt;
-&lt;&lt;timed 9s&gt;&gt;&lt;&lt;goto &quot;flashback_5&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="51" name="flashback_5" tags="flashback" position="1500,1875" size="100,100">You tell her, I&#39;m sorry, once again, and you say that maybe you can give her something to make up for this—
+&lt;&lt;timed 9s&gt;&gt;&lt;&lt;goto &quot;flashback_5&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="49" name="flashback_5" tags="flashback" position="1500,1875" size="100,100">You tell her, I&#39;m sorry, once again, and you say that maybe you can give her something to make up for this—
 
 She tells you no, it&#39;s okay, and laughs, maybe we should practice later instead. You should work on your technique, you could hit even harder.
 
-[[Just meet me outside-&gt;chapter_2]].</tw-passagedata><tw-passagedata pid="52" name="chapter_2" tags="center pink" position="0,2200" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[II-&gt;friend_fight_1]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="53" name="friend_fight_1" tags="pink" position="250,2200" size="100,100">[[Your goddess has granted you a vision-&gt;friend_fight_2]].</tw-passagedata><tw-passagedata pid="54" name="friend_fight_2" tags="pink" position="375,2200" size="100,100">[[Your old friend will visit you, in the hope that you can be saved-&gt;friend_fight_3]].</tw-passagedata><tw-passagedata pid="55" name="friend_fight_3" tags="pink" position="500,2200" size="100,100">[[But she is wrong-&gt;friend_fight_4]].</tw-passagedata><tw-passagedata pid="56" name="friend_fight_4" tags="pink" position="625,2200" size="100,100">You know that she will bring $cyclingResult_weapon_1, and so you [[remember to bring the same weapon-&gt;etching_friend]].</tw-passagedata><tw-passagedata pid="57" name="etching_friend" tags="pink center" position="750,2200" size="100,100">And you:
+[[Just meet me outside-&gt;chapter_2]].</tw-passagedata><tw-passagedata pid="50" name="chapter_2" tags="center pink" position="0,2200" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[II-&gt;friend_fight_1]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="51" name="friend_fight_1" tags="pink" position="250,2200" size="100,100">[[Your goddess has granted you a vision-&gt;friend_fight_2]].</tw-passagedata><tw-passagedata pid="52" name="friend_fight_2" tags="pink" position="375,2200" size="100,100">[[Your old friend will visit you, in the hope that you can be saved-&gt;friend_fight_3]].</tw-passagedata><tw-passagedata pid="53" name="friend_fight_3" tags="pink" position="500,2200" size="100,100">[[But she is wrong-&gt;friend_fight_4]].</tw-passagedata><tw-passagedata pid="54" name="friend_fight_4" tags="pink" position="625,2200" size="100,100">You know that she will bring $cyclingResult_weapon_1, and so you [[remember to bring the same weapon-&gt;etching_friend]].</tw-passagedata><tw-passagedata pid="55" name="etching_friend" tags="pink center" position="750,2200" size="100,100">And you:
 &lt;&lt;include &quot;cycling_etching_friend&quot;&gt;&gt;
 
-This is what you [[believe-&gt;friend_fight_5]] in.</tw-passagedata><tw-passagedata pid="58" name="cycling_etching_friend" tags="pink" position="525,1125" size="100,100">&lt;&lt;silently&gt;&gt;
+This is what you [[believe-&gt;friend_fight_5]] in.</tw-passagedata><tw-passagedata pid="56" name="cycling_etching_friend" tags="pink" position="525,1125" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_etching_friend&gt;&gt;
   &lt;&lt;set $choicesCount_etching_friend to -1&gt;&gt;
   &lt;&lt;set $choices_etching_friend to [&quot;imbue it with runes of faith&quot;, &quot;infuse it with an aura of death&quot;, &quot;empower it with dreams of martyrdom&quot;]&gt;&gt;
@@ -1268,27 +1299,27 @@ This is what you [[believe-&gt;friend_fight_5]] in.</tw-passagedata><tw-passaged
 
 &lt;&lt;set $cyclingResult_etching_friend to $choices_etching_friend[$choicesCount_etching_friend]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_etching_friend[$choicesCount_etching_friend] t8n&gt;&gt;&lt;&lt;include &quot;cycling_etching_friend&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="friend_fight_5" tags="pink" position="875,2200" size="100,100">[[You put yourself into your work-&gt;friend_fight_6]].</tw-passagedata><tw-passagedata pid="60" name="friend_fight_6" tags="pink" position="1000,2200" size="100,100">You put yourself into your work, [[in the way that faith demands sacrifice-&gt;friend_fight_7]].</tw-passagedata><tw-passagedata pid="61" name="friend_fight_7" tags="pink" position="1125,2200" size="100,100">And even without your goddess&#39;s vision, you know that she will also bring a blazegun.
+\&lt;&lt;linkreplace $choices_etching_friend[$choicesCount_etching_friend] t8n&gt;&gt;&lt;&lt;include &quot;cycling_etching_friend&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="friend_fight_5" tags="pink" position="875,2200" size="100,100">[[You put yourself into your work-&gt;friend_fight_6]].</tw-passagedata><tw-passagedata pid="58" name="friend_fight_6" tags="pink" position="1000,2200" size="100,100">You put yourself into your work, [[in the way that faith demands sacrifice-&gt;friend_fight_7]].</tw-passagedata><tw-passagedata pid="59" name="friend_fight_7" tags="pink" position="1125,2200" size="100,100">And even without your goddess&#39;s vision, you know that she will also bring a blazegun.
 
-She was always a bit of a [[coward-&gt;friend_fight_8]].</tw-passagedata><tw-passagedata pid="62" name="friend_fight_8" tags="pink" position="1250,2200" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;You are in the cathedral, [[waiting-&gt;friend_fight_9]] for her.
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="friend_fight_9" tags="pink" position="1375,2200" size="100,100">You observe how the arches are carved in perfect curves, with mathematical precision.
+She was always a bit of a [[coward-&gt;friend_fight_8]].</tw-passagedata><tw-passagedata pid="60" name="friend_fight_8" tags="pink" position="1250,2200" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;You are in the cathedral, [[waiting-&gt;friend_fight_9]] for her.
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="friend_fight_9" tags="pink" position="1375,2200" size="100,100">You observe how the arches are carved in perfect curves, with mathematical precision.
 
-You are [[tired-&gt;friend_fight_10]] of this worship of symmetry.</tw-passagedata><tw-passagedata pid="64" name="friend_fight_10" tags="pink" position="1500,2200" size="100,100">&lt;&lt;link &quot;There&quot;&gt;&gt;&lt;&lt;replace &quot;#1&quot; t8n&gt;&gt; You leap up to leave your mark on this building, &lt;&lt;if $weapon is &quot;rapier&quot;&gt;&gt;scraping&lt;&lt;else&gt;&gt;slashing&lt;&lt;/if&gt;&gt; your $weapon against an arch.&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;.&lt;span id=&quot;1&quot;&gt;&lt;/span&gt;
-&lt;&lt;timed 10s&gt;&gt;&lt;&lt;goto &quot;friend_fight_11&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="65" name="friend_fight_11" tags="pink" position="1625,2200" size="100,100">The cathedral walls are now a patchwork of grooves. They look like scratches on an old toy.
+You are [[tired-&gt;friend_fight_10]] of this worship of symmetry.</tw-passagedata><tw-passagedata pid="62" name="friend_fight_10" tags="pink" position="1500,2200" size="100,100">&lt;&lt;link &quot;There&quot;&gt;&gt;&lt;&lt;replace &quot;#1&quot; t8n&gt;&gt; You leap up to leave your mark on this building, &lt;&lt;if $weapon is &quot;rapier&quot;&gt;&gt;scraping&lt;&lt;else&gt;&gt;slashing&lt;&lt;/if&gt;&gt; your $weapon against an arch.&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;.&lt;span id=&quot;1&quot;&gt;&lt;/span&gt;
+&lt;&lt;timed 10s&gt;&gt;&lt;&lt;goto &quot;friend_fight_11&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="63" name="friend_fight_11" tags="pink" position="1625,2200" size="100,100">The cathedral walls are now a patchwork of grooves. They look like scratches on an old toy.
 
 You put your $weapon down.
 
-You are [[tired of waiting-&gt;friend_fight_12]].</tw-passagedata><tw-passagedata pid="66" name="friend_fight_12" tags="pink" position="1750,2200" size="100,100">But you hear the rhythm of boots against sand, then marble.
+You are [[tired of waiting-&gt;friend_fight_12]].</tw-passagedata><tw-passagedata pid="64" name="friend_fight_12" tags="pink" position="1750,2200" size="100,100">But you hear the rhythm of boots against sand, then marble.
 
-She is [[here-&gt;friend_fight_13]].</tw-passagedata><tw-passagedata pid="67" name="friend_fight_13" tags="pink" position="1875,2200" size="100,100">You are wearing the [[moonlight-&gt;friend_fight_14]] like a cloak.</tw-passagedata><tw-passagedata pid="68" name="friend_fight_14" tags="pink" position="2000,2200" size="100,100">Moonlight is shining through the stained glass window, painting a rose of rainbows on the floor.
+She is [[here-&gt;friend_fight_13]].</tw-passagedata><tw-passagedata pid="65" name="friend_fight_13" tags="pink" position="1875,2200" size="100,100">You are wearing the [[moonlight-&gt;friend_fight_14]] like a cloak.</tw-passagedata><tw-passagedata pid="66" name="friend_fight_14" tags="pink" position="2000,2200" size="100,100">Moonlight is shining through the stained glass window, painting a rose of rainbows on the floor.
 
 She is walking towards you.
 
-You take [[a better look at her-&gt;friend_fight_15]].</tw-passagedata><tw-passagedata pid="69" name="friend_fight_15" tags="pink" position="2125,2200" size="100,100">Her &lt;&lt;linkappend &quot;face&quot; t8n&gt;&gt; is as stony as ever.&lt;&lt;set $face_mc += 1&gt;&gt;&lt;&lt;if $face_mc is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;friend_fight_16&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
+You take [[a better look at her-&gt;friend_fight_15]].</tw-passagedata><tw-passagedata pid="67" name="friend_fight_15" tags="pink" position="2125,2200" size="100,100">Her &lt;&lt;linkappend &quot;face&quot; t8n&gt;&gt; is as stony as ever.&lt;&lt;set $face_mc += 1&gt;&gt;&lt;&lt;if $face_mc is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;friend_fight_16&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
 
 Her &lt;&lt;linkappend &quot;eyes&quot; t8n&gt;&gt; burn with determination.&lt;&lt;set $face_mc += 1&gt;&gt;&lt;&lt;if $face_mc is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;friend_fight_16&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
 
-Her &lt;&lt;linkappend &quot;hair&quot; t8n&gt;&gt; is combed perfectly, like a statue of a hero.&lt;&lt;set $face_mc += 1&gt;&gt;&lt;&lt;if $face_mc is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;friend_fight_16&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="friend_fight_16" tags="pink" position="2250,2200" size="100,100">Exactly as you expected.
+Her &lt;&lt;linkappend &quot;hair&quot; t8n&gt;&gt; is combed perfectly, like a statue of a hero.&lt;&lt;set $face_mc += 1&gt;&gt;&lt;&lt;if $face_mc is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;friend_fight_16&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="68" name="friend_fight_16" tags="pink" position="2250,2200" size="100,100">Exactly as you expected.
 
 And she is &lt;&lt;if $shot_friend_1 is true&gt;&gt;raising her blazegun, her finger on the trigger&lt;&lt;else&gt;&gt;raising her $weapon, ready to strike&lt;&lt;/if&gt;&gt;, you—
 
@@ -1303,7 +1334,7 @@ And she is &lt;&lt;if $shot_friend_1 is true&gt;&gt;raising her blazegun, her fi
 &lt;&lt;timed 4s t8n&gt;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Reappear to her left.&quot; &quot;friend_fight_17&quot;&gt;&gt;&lt;&lt;set $friend_dodge_1 to &quot;step into a fold in space and reappear to her left&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/timed&gt;&gt;
 &lt;&lt;timed 4.5s t8n&gt;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Reappear to her right.&quot; &quot;friend_fight_17&quot;&gt;&gt;&lt;&lt;set $friend_dodge_1 to &quot;step into a fold in space and reappear to her right&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/timed&gt;&gt;
 &lt;&lt;timed 5s t8n&gt;&gt;&lt;span class=&#39;goddess-vision&#39;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Reappear behind her.&quot; &quot;friend_fight_17&quot;&gt;&gt;&lt;&lt;set $friend_dodge_1 to &quot;step into a fold in space and reappear behind her&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;&lt;/timed&gt;&gt;
-&lt;&lt;timed 5.5s t8n&gt;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Reappear in front of her.&quot; &quot;friend_fight_17&quot;&gt;&gt;&lt;&lt;set $friend_dodge_1 to &quot;step into a fold in space and reappear in front of her&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="71" name="friend_fight_17" tags="pink" position="2375,2200" size="100,100">&lt;&lt;set $friend_dodge_1 to $friend_dodge_1.toLowerCase()&gt;&gt;\
+&lt;&lt;timed 5.5s t8n&gt;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Reappear in front of her.&quot; &quot;friend_fight_17&quot;&gt;&gt;&lt;&lt;set $friend_dodge_1 to &quot;step into a fold in space and reappear in front of her&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="friend_fight_17" tags="pink" position="2375,2200" size="100,100">&lt;&lt;set $friend_dodge_1 to $friend_dodge_1.toLowerCase()&gt;&gt;\
 &lt;&lt;if $friend_dodge_1 is &quot;step into a fold in space and reappear behind her&quot;&gt;&gt;\
   You step into the fold in space and reappear behind her, as you saw in the vision.
   &lt;&lt;if $dir is &quot;south&quot;&gt;&gt;\
@@ -1351,7 +1382,7 @@ You try not to laugh. What an idiot.
 &lt;&lt;timed 1.5s t8n&gt;&gt;&lt;span class=&#39;goddess-vision&#39;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Sidestep to the right.&quot; &quot;friend_fight_18&quot;&gt;&gt;&lt;&lt;set $friend_dodge_2 to &quot;sidestep to the right&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;&lt;/timed&gt;&gt;
 &lt;&lt;timed 2s t8n&gt;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Duck and roll forward.&quot; &quot;friend_fight_18&quot;&gt;&gt;&lt;&lt;set $friend_dodge_2 to &quot;duck and roll forward&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/timed&gt;&gt;
 &lt;&lt;timed 2.5s t8n&gt;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Duck and roll backward.&quot; &quot;friend_fight_18&quot;&gt;&gt;&lt;&lt;set $friend_dodge_2 to &quot;duck and roll backward&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/timed&gt;&gt;
-&lt;&lt;timed 3s t8n&gt;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Stay still.&quot; &quot;friend_fight_18&quot;&gt;&gt;&lt;&lt;set $friend_dodge_2 to &quot;stay still&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="friend_fight_18" tags="pink" position="2500,2200" size="100,100">&lt;&lt;if $friend_dodge_2 is &quot;sidestep to the right&quot;&gt;&gt;\
+&lt;&lt;timed 3s t8n&gt;&gt;&lt;&lt;link &quot;&lt;span class=&#39;ina-bullet&#39;&gt;*&lt;/span&gt; Stay still.&quot; &quot;friend_fight_18&quot;&gt;&gt;&lt;&lt;set $friend_dodge_2 to &quot;stay still&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="friend_fight_18" tags="pink" position="2500,2200" size="100,100">&lt;&lt;if $friend_dodge_2 is &quot;sidestep to the right&quot;&gt;&gt;\
   Just like in the vision, you dodge her attack, watching the &lt;&lt;if $shot_friend_2 is true&gt;&gt;bullets fly by&lt;&lt;else&gt;&gt;blade whoosh by&lt;&lt;/if&gt;&gt;.
 &lt;&lt;else&gt;&gt;\
   &lt;&lt;if $goddess_freedom_seen is false&gt;&gt;\
@@ -1359,6 +1390,7 @@ You try not to laugh. What an idiot.
 
   &lt;&lt;/if&gt;&gt;\
   &lt;&lt;if $shot_friend_2 is true&gt;&gt;The bullets pierce your chest, and you can feel the blood blooming across the fabric of your padded clothing.&lt;&lt;else&gt;&gt;The $weapon &lt;&lt;if $weapon is &quot;rapier&quot;&gt;&gt;pierces through&lt;&lt;else&gt;&gt;rakes&lt;&lt;/if&gt;&gt; your chest&lt;&lt;/if&gt;&gt;.
+
   &lt;&lt;if $wound_heal_seen is true&gt;&gt;\
     &lt;&lt;if $shot_friend_2 is true&gt;&gt;\
       You can feel the pleasant tickling sensation of your wounds healing, feeling how the bullets push out of your skin.
@@ -1378,7 +1410,7 @@ So, you can&#39;t hold in your laughter much longer. You let out a peal of laugh
 
 She draws deep, labored breaths, then she meets your gaze. Assessing her [[options-&gt;options_comment_2]].
 
-You know what to expect, and you [[wait-&gt;friend_fight_19]] for her next move.</tw-passagedata><tw-passagedata pid="73" name="friend_fight_19" tags="pink" position="2625,2200" size="100,100">Maybe this would finally scare her away.
+You know what to expect, and you [[wait-&gt;friend_fight_19]] for her next move.</tw-passagedata><tw-passagedata pid="71" name="friend_fight_19" tags="pink" position="2625,2200" size="100,100">Maybe this would finally scare her away.
 
 &lt;&lt;if $shot_friend_3 is true&gt;&gt;\
 It is as if time has slowed down to a quarter of a second. You slice the bolt of fire midair, and it tears into two.
@@ -1386,13 +1418,13 @@ It is as if time has slowed down to a quarter of a second. You slice the bolt of
 You tighten your grip on the $weapon, and parry her attack. To your surprise, she lets the weapon go. It flies off to the other side of the room, and clatters on the floor, so you hear a ghastly echo.
 &lt;&lt;/if&gt;&gt;\
 
-You compose yourself, then you laugh again. This is the first time you have seen your friend [[in years-&gt;tween_flashback_1]], and her first reaction is to try to kill you?</tw-passagedata><tw-passagedata pid="74" name="tween_flashback_1" tags="flashback long-t8n pink" position="150,2400" size="100,100">&lt;&lt;timed 2.5s t8n&gt;&gt;\
+You compose yourself, then you laugh again. This is the first time you have seen your friend [[in years-&gt;tween_flashback_1]], and her first reaction is to try to kill you?</tw-passagedata><tw-passagedata pid="72" name="tween_flashback_1" tags="flashback long-t8n pink" position="150,2400" size="100,100">&lt;&lt;timed 2.5s t8n&gt;&gt;\
 Maybe she is still too scared.
 
 You are teenagers at the monastery, and you heard that the nuns are  &lt;&lt;linkreplace &quot;burning books&quot; t8n&gt;&gt;[[ritually destroying heretic texts-&gt;tween_flashback_1_1]]&lt;&lt;/linkreplace&gt;&gt; today.
-&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="75" name="tween_flashback_1_1" tags="flashback long-t8n pink" position="275,2400" size="100,100">Most of them were stolen, but some were confiscated from an acolyte in the monastery.
+&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="73" name="tween_flashback_1_1" tags="flashback long-t8n pink" position="275,2400" size="100,100">Most of them were stolen, but some were confiscated from an acolyte in the monastery.
 
-She has been locked away, to be [[reeducated-&gt;tween_flashback_2]]. /* TODO: may want to improve this */</tw-passagedata><tw-passagedata pid="76" name="tween_flashback_2" tags="flashback pink" position="400,2400" size="100,100">But that does not stem your curiosity.
+She has been locked away, to be [[reeducated-&gt;tween_flashback_2]]. /* TODO: may want to improve this */</tw-passagedata><tw-passagedata pid="74" name="tween_flashback_2" tags="flashback pink" position="400,2400" size="100,100">But that does not stem your curiosity.
 
 You are young, and &lt;&lt;include &quot;cycling_tween_flashback_2&quot;&gt;&gt;. You want to steal one of these texts before they are destroyed.
 
@@ -1404,7 +1436,7 @@ But you tell her, don&#39;t you want to know what&#39;s out there? There must be
 
 She pauses. Okay, she says, but how?
 
-It&#39;s not that difficult, you answer. Just sneak into the library storage room [[during the assistant&#39;s break-&gt;tween_flashback_3]].</tw-passagedata><tw-passagedata pid="77" name="cycling_tween_flashback_2" tags="" position="400,2500" size="100,100">&lt;&lt;silently&gt;&gt;
+It&#39;s not that difficult, you answer. Just sneak into the library storage room [[during the assistant&#39;s break-&gt;tween_flashback_3]].</tw-passagedata><tw-passagedata pid="75" name="cycling_tween_flashback_2" tags="" position="400,2500" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_tween_flashback_2&gt;&gt;
   &lt;&lt;set $choicesCount_tween_flashback_2 to -1&gt;&gt;
   &lt;&lt;set $choices_tween_flashback_2 to [&quot;curious&quot;, &quot;naive&quot;, &quot;foolish&quot;]&gt;&gt;
@@ -1418,41 +1450,41 @@ It&#39;s not that difficult, you answer. Just sneak into the library storage roo
 
 &lt;&lt;set $cyclingResult_tween_flashback_2 to $choices_tween_flashback_2[$choicesCount_tween_flashback_2]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_tween_flashback_2[$choicesCount_tween_flashback_2] t8n&gt;&gt;&lt;&lt;include &quot;cycling_tween_flashback_2&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="78" name="tween_flashback_3" tags="flashback pink" position="525,2400" size="100,100">So you waited with her in the library, waiting for the assistant to leave.
+\&lt;&lt;linkreplace $choices_tween_flashback_2[$choicesCount_tween_flashback_2] t8n&gt;&gt;&lt;&lt;include &quot;cycling_tween_flashback_2&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="tween_flashback_3" tags="flashback pink" position="525,2400" size="100,100">So you waited with her in the library, waiting for the assistant to leave.
 
-The assistant steps out, and the both of you [[sneak in-&gt;tween_flashback_4]].</tw-passagedata><tw-passagedata pid="79" name="tween_flashback_4" tags="flashback pink" position="650,2400" size="100,100">Inside, you see piles of thick, yellowed books and loose paper. The books do not look very different from the books in the library. You feel a little disappointed.
+The assistant steps out, and the both of you [[sneak in-&gt;tween_flashback_4]].</tw-passagedata><tw-passagedata pid="77" name="tween_flashback_4" tags="flashback pink" position="650,2400" size="100,100">Inside, you see piles of thick, yellowed books and loose paper. The books do not look very different from the books in the library. You feel a little disappointed.
 
 Your friend is telling you to leave. Let&#39;s go now, please.
 
-Just as you turn around, you notice that one of the books is [[glowing pink-&gt;tween_flashback_5]].</tw-passagedata><tw-passagedata pid="80" name="tween_flashback_5" tags="flashback pink" position="775,2400" size="100,100">You don&#39;t remember picking it up, but you remember your friend telling you to put it down.
+Just as you turn around, you notice that one of the books is [[glowing pink-&gt;tween_flashback_5]].</tw-passagedata><tw-passagedata pid="78" name="tween_flashback_5" tags="flashback pink" position="775,2400" size="100,100">You don&#39;t remember picking it up, but you remember your friend telling you to put it down.
 
 She says, it must be cursed, please leave it here.
 
-That makes you want to [[read it more-&gt;tween_flashback_6]].</tw-passagedata><tw-passagedata pid="81" name="tween_flashback_6" tags="flashback pink" position="900,2400" size="100,100">[[You are on your bed, reading the book-&gt;tween_flashback_7]].</tw-passagedata><tw-passagedata pid="82" name="tween_flashback_7" tags="flashback pink" position="1025,2400" size="100,100">[[You learn about the other god-&gt;tween_flashback_8]].</tw-passagedata><tw-passagedata pid="83" name="tween_flashback_8" tags="flashback pink" position="1150,2400" size="100,100">You spend your nights reading the book, and your time burns away.
+That makes you want to [[read it more-&gt;tween_flashback_6]].</tw-passagedata><tw-passagedata pid="79" name="tween_flashback_6" tags="flashback pink" position="900,2400" size="100,100">[[You are on your bed, reading the book-&gt;tween_flashback_7]].</tw-passagedata><tw-passagedata pid="80" name="tween_flashback_7" tags="flashback pink" position="1025,2400" size="100,100">[[You learn about the other god-&gt;tween_flashback_8]].</tw-passagedata><tw-passagedata pid="81" name="tween_flashback_8" tags="flashback pink" position="1150,2400" size="100,100">You spend your nights reading the book, and your time burns away.
 
 A few days later, you tell your friend, please read it, there is another way we can live. A way beyond these walls.
 
 Your friend says, I don&#39;t &lt;&lt;include &quot;cycling_tween_flashback_8&quot;&gt;&gt; to know. But you insist. You ask her, don&#39;t you trust me?
 
-She trusted you, because &lt;&lt;linkreplace &quot;you were her friend&quot; t8n&gt;&gt;she didn&#39;t have the strength to [[fight back-&gt;tween_flashback_9]]&lt;&lt;/linkreplace&gt;&gt;.</tw-passagedata><tw-passagedata pid="84" name="tween_flashback_9" tags="flashback pink" position="1275,2400" size="100,100">She opens the book to a page in the middle.
+She trusted you, because &lt;&lt;linkreplace &quot;you were her friend&quot; t8n&gt;&gt;she didn&#39;t have the strength to [[fight back-&gt;tween_flashback_9]]&lt;&lt;/linkreplace&gt;&gt;.</tw-passagedata><tw-passagedata pid="82" name="tween_flashback_9" tags="flashback pink" position="1275,2400" size="100,100">She opens the book to a page in the middle.
 
 Your friend seems transfixed, as she flips to the next page, then the next, ignoring you, and everything around her.
 
-Then, she stops, and [[throws the book down-&gt;tween_flashback_10]].</tw-passagedata><tw-passagedata pid="85" name="tween_flashback_10" tags="flashback pink" position="1400,2400" size="100,100">She tells you, you should be reported for keeping this. You ask her, are you really going to?
+Then, she stops, and [[throws the book down-&gt;tween_flashback_10]].</tw-passagedata><tw-passagedata pid="83" name="tween_flashback_10" tags="flashback pink" position="1400,2400" size="100,100">She tells you, you should be reported for keeping this. You ask her, are you really going to?
 
 She doesn&#39;t look at you.
 
 No, she answers. Of course she can&#39;t.
 
-She was always a [[coward-&gt;tween_flashback_11]].</tw-passagedata><tw-passagedata pid="86" name="tween_flashback_11" tags="flashback pink" position="1525,2400" size="100,100">After that, she doesn&#39;t strike as hard during training sessions, doesn&#39;t answer as many questions in class, and doesn&#39;t talk to you as often.
+She was always a [[coward-&gt;tween_flashback_11]].</tw-passagedata><tw-passagedata pid="84" name="tween_flashback_11" tags="flashback pink" position="1525,2400" size="100,100">After that, she doesn&#39;t strike as hard during training sessions, doesn&#39;t answer as many questions in class, and doesn&#39;t talk to you as often.
 
-[[She lives like a ghost-&gt;tween_flashback_12]].</tw-passagedata><tw-passagedata pid="87" name="tween_flashback_12" tags="flashback pink" position="1650,2400" size="100,100">You don&#39;t apologise to her, but you tell her that you won&#39;t force her to do anything again. You know that this sickness is your fault.
+[[She lives like a ghost-&gt;tween_flashback_12]].</tw-passagedata><tw-passagedata pid="85" name="tween_flashback_12" tags="flashback pink" position="1650,2400" size="100,100">You don&#39;t apologise to her, but you tell her that you won&#39;t force her to do anything again. You know that this sickness is your fault.
 
 Maybe she read something which was too dangerous for her. Maybe the very idea of other paths and choices was too dangerous for her.
 
 Ideas are the most dangerous things in the universe.
 
-You wonder if reading the book broke her, somehow. You wonder if you are the reason why she has lost her [[faith-&gt;chapter_3]].</tw-passagedata><tw-passagedata pid="88" name="cycling_tween_flashback_8" tags="" position="1150,2500" size="100,100">&lt;&lt;silently&gt;&gt;
+You wonder if reading the book broke her, somehow. You wonder if you are the reason why she has lost her [[faith-&gt;chapter_3]].</tw-passagedata><tw-passagedata pid="86" name="cycling_tween_flashback_8" tags="" position="1150,2500" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_tween_flashback_8&gt;&gt;
   &lt;&lt;set $choicesCount_tween_flashback_8 to -1&gt;&gt;
   &lt;&lt;set $choices_tween_flashback_8 to [&quot;need&quot;, &quot;want&quot;]&gt;&gt;
@@ -1466,13 +1498,13 @@ You wonder if reading the book broke her, somehow. You wonder if you are the rea
 
 &lt;&lt;set $cyclingResult_tween_flashback_8 to $choices_tween_flashback_8[$choicesCount_tween_flashback_8]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_tween_flashback_8[$choicesCount_tween_flashback_8] t8n&gt;&gt;&lt;&lt;include &quot;cycling_tween_flashback_8&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="chapter_3" tags="center purple" position="0,2900" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[III-&gt;choiceless_fight_1]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="90" name="choiceless_fight_1" tags="" position="500,2900" size="100,100">[[The sacred algorithms have made their predictions-&gt;choiceless_fight_2]].</tw-passagedata><tw-passagedata pid="91" name="choiceless_fight_2" tags="" position="625,2900" size="100,100">They have predicted how &lt;&lt;linkreplace &quot;she will fight you&quot; t8n&gt;&gt;you [[must-&gt;choiceless_fight_2_1]] fight her&lt;&lt;/linkreplace&gt;&gt;.</tw-passagedata><tw-passagedata pid="92" name="choiceless_fight_2_1" tags="" position="750,2900" size="100,100">[[You must simply follow their instructions-&gt;choiceless_fight_2_2]].</tw-passagedata><tw-passagedata pid="93" name="choiceless_fight_2_2" tags="" position="875,2900" size="100,100">[[She can&#39;t be saved-&gt;choiceless_fight_3]].</tw-passagedata><tw-passagedata pid="94" name="choiceless_fight_3" tags="" position="1000,2900" size="100,100">You walk into the cathedral at a speed of 1.64 metres per second. 13.67 seconds later, she will disappear, and after 0.58 seconds, she will reappear 183.24 degrees clockwise from the north.
+\&lt;&lt;linkreplace $choices_tween_flashback_8[$choicesCount_tween_flashback_8] t8n&gt;&gt;&lt;&lt;include &quot;cycling_tween_flashback_8&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="chapter_3" tags="center purple" position="0,2900" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[III-&gt;choiceless_fight_1]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="88" name="choiceless_fight_1" tags="" position="500,2900" size="100,100">[[The sacred algorithms have made their predictions-&gt;choiceless_fight_2]].</tw-passagedata><tw-passagedata pid="89" name="choiceless_fight_2" tags="" position="625,2900" size="100,100">They have predicted how &lt;&lt;linkreplace &quot;she will fight you&quot; t8n&gt;&gt;you [[must-&gt;choiceless_fight_2_1]] fight her&lt;&lt;/linkreplace&gt;&gt;.</tw-passagedata><tw-passagedata pid="90" name="choiceless_fight_2_1" tags="" position="750,2900" size="100,100">[[You must simply follow their instructions-&gt;choiceless_fight_2_2]].</tw-passagedata><tw-passagedata pid="91" name="choiceless_fight_2_2" tags="" position="875,2900" size="100,100">[[She can&#39;t be saved-&gt;choiceless_fight_3]].</tw-passagedata><tw-passagedata pid="92" name="choiceless_fight_3" tags="" position="1000,2900" size="100,100">You walk into the cathedral at a speed of 1.64 metres per second. 13.67 seconds later, she will disappear, and after 0.58 seconds, she will reappear 183.24 degrees clockwise from the north.
 
 Hence, you mustn&#39;t shoot yet.
 
 &lt;&lt;include &quot;cycling_choiceless_fight_3&quot;&gt;&gt;.
 
-[[One second-&gt;choiceless_fight_5]].</tw-passagedata><tw-passagedata pid="95" name="cycling_choiceless_fight_3" tags="" position="1000,2800" size="100,100">&lt;&lt;silently&gt;&gt;
+[[One second-&gt;choiceless_fight_5]].</tw-passagedata><tw-passagedata pid="93" name="cycling_choiceless_fight_3" tags="" position="1000,2800" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_choiceless_fight_3&gt;&gt;
   &lt;&lt;set $choicesCount_choiceless_fight_3 to -1&gt;&gt;
   &lt;&lt;set $choices_choiceless_fight_3 to [&quot;Stay still&quot;, &quot;Stay still&quot;]&gt;&gt;
@@ -1486,11 +1518,11 @@ Hence, you mustn&#39;t shoot yet.
 
 &lt;&lt;set $cyclingResult_choiceless_fight_3 to $choices_choiceless_fight_3[$choicesCount_choiceless_fight_3]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_choiceless_fight_3[$choicesCount_choiceless_fight_3] t8n&gt;&gt;&lt;&lt;include &quot;cycling_choiceless_fight_3&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="96" name="choiceless_fight_5" tags="" position="1125,2900" size="100,100">She has reappeared 183.24 degrees clockwise from the north.
+\&lt;&lt;linkreplace $choices_choiceless_fight_3[$choicesCount_choiceless_fight_3] t8n&gt;&gt;&lt;&lt;include &quot;cycling_choiceless_fight_3&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="94" name="choiceless_fight_5" tags="" position="1125,2900" size="100,100">She has reappeared 183.24 degrees clockwise from the north.
 
 &lt;&lt;include &quot;cycling_choiceless_fight_5&quot;&gt;&gt;.
 
-[[Two seconds-&gt;choiceless_fight_6]].</tw-passagedata><tw-passagedata pid="97" name="cycling_choiceless_fight_5" tags="" position="1125,2800" size="100,100">&lt;&lt;silently&gt;&gt;
+[[Two seconds-&gt;choiceless_fight_6]].</tw-passagedata><tw-passagedata pid="95" name="cycling_choiceless_fight_5" tags="" position="1125,2800" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_choiceless_fight_5&gt;&gt;
   &lt;&lt;set $choicesCount_choiceless_fight_5 to -1&gt;&gt;
   &lt;&lt;set $choices_choiceless_fight_5 to [&quot;Shoot three shots charged at 58.31% power, 197.53 degrees clockwise from the north&quot;, &quot;Shoot three shots charged at 58.31% power, 197.53 degrees clockwise from the north&quot;]&gt;&gt;
@@ -1504,13 +1536,13 @@ Hence, you mustn&#39;t shoot yet.
 
 &lt;&lt;set $cyclingResult_choiceless_fight_5 to $choices_choiceless_fight_5[$choicesCount_choiceless_fight_5]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_choiceless_fight_5[$choicesCount_choiceless_fight_5] t8n&gt;&gt;&lt;&lt;include &quot;cycling_choiceless_fight_5&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="98" name="choiceless_fight_6" tags="" position="1250,2900" size="100,100">She deflects the first shot, and dodges the second, but the third shot hits her squarely in the stomach. The fire eats away her armor, then her padded clothing, then—
+\&lt;&lt;linkreplace $choices_choiceless_fight_5[$choicesCount_choiceless_fight_5] t8n&gt;&gt;&lt;&lt;include &quot;cycling_choiceless_fight_5&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="96" name="choiceless_fight_6" tags="" position="1250,2900" size="100,100">She deflects the first shot, and dodges the second, but the third shot hits her squarely in the stomach. The fire eats away her armor, then her padded clothing, then—
 
 You look away. You don&#39;t need to see her to follow the algorithms&#39; instructions.
 
 &lt;&lt;include &quot;cycling_choiceless_fight_6&quot;&gt;&gt;.
 
-&lt;&lt;linkreplace &quot;Three seconds&quot; t8n&gt;&gt;[[You want better choices-&gt;teen_flashback_1]]&lt;&lt;/linkreplace&gt;&gt;.</tw-passagedata><tw-passagedata pid="99" name="cycling_choiceless_fight_6" tags="" position="1250,2800" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;linkreplace &quot;Three seconds&quot; t8n&gt;&gt;[[You want better choices-&gt;teen_flashback_1]]&lt;&lt;/linkreplace&gt;&gt;.</tw-passagedata><tw-passagedata pid="97" name="cycling_choiceless_fight_6" tags="" position="1250,2800" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_choiceless_fight_6&gt;&gt;
   &lt;&lt;set $choicesCount_choiceless_fight_6 to -1&gt;&gt;
   &lt;&lt;set $choices_choiceless_fight_6 to [&quot;Shoot one shot charged at 99.98% power, 197.41 degrees clockwise from the north&quot;, &quot;Shoot one shot charged at 99.98% power, 197.41 degrees clockwise from the north&quot;]&gt;&gt;
@@ -1524,17 +1556,17 @@ You look away. You don&#39;t need to see her to follow the algorithms&#39; instr
 
 &lt;&lt;set $cyclingResult_choiceless_fight_6 to $choices_choiceless_fight_6[$choicesCount_choiceless_fight_6]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_choiceless_fight_6[$choicesCount_choiceless_fight_6] t8n&gt;&gt;&lt;&lt;include &quot;cycling_choiceless_fight_6&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="100" name="teen_flashback_1" tags="long-t8n flashback pink" position="575,3200" size="100,100">&lt;&lt;timed 2.5s t8n&gt;&gt;\
+\&lt;&lt;linkreplace $choices_choiceless_fight_6[$choicesCount_choiceless_fight_6] t8n&gt;&gt;&lt;&lt;include &quot;cycling_choiceless_fight_6&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="98" name="teen_flashback_1" tags="long-t8n flashback pink" position="575,3200" size="100,100">&lt;&lt;timed 2.5s t8n&gt;&gt;\
   She deflects your question.
 
   You ask her again, what did you read from [[the book-&gt;teen_flashback_2]]?
-&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="101" name="teen_flashback_2" tags="pink flashback" position="700,3200" size="100,100">I can&#39;t explain it, she says. Just [[stop reading that book-&gt;teen_flashback_3]].</tw-passagedata><tw-passagedata pid="102" name="teen_flashback_3" tags="pink flashback" position="825,3200" size="100,100">[[You continue reading the book-&gt;teen_flashback_4]].</tw-passagedata><tw-passagedata pid="103" name="teen_flashback_4" tags="pink flashback" position="950,3200" size="100,100">You learn how this goddess bestows gifts to her followers, while the god you &lt;&lt;linkreplace &quot;believe&quot; t8n&gt;&gt;believed&lt;&lt;/linkreplace&gt;&gt; does not.
+&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="99" name="teen_flashback_2" tags="pink flashback" position="700,3200" size="100,100">I can&#39;t explain it, she says. Just [[stop reading that book-&gt;teen_flashback_3]].</tw-passagedata><tw-passagedata pid="100" name="teen_flashback_3" tags="pink flashback" position="825,3200" size="100,100">[[You continue reading the book-&gt;teen_flashback_4]].</tw-passagedata><tw-passagedata pid="101" name="teen_flashback_4" tags="pink flashback" position="950,3200" size="100,100">You learn how this goddess bestows gifts to her followers, while the god you &lt;&lt;linkreplace &quot;believe&quot; t8n&gt;&gt;believed&lt;&lt;/linkreplace&gt;&gt; does not.
 
-He only cares about maintaining [[order and structure-&gt;teen_flashback_5]].</tw-passagedata><tw-passagedata pid="104" name="teen_flashback_5" tags="pink flashback" position="1075,3200" size="100,100">So you understand why the nuns chose your friend to lead, instead of you.
+He only cares about maintaining [[order and structure-&gt;teen_flashback_5]].</tw-passagedata><tw-passagedata pid="102" name="teen_flashback_5" tags="pink flashback" position="1075,3200" size="100,100">So you understand why the nuns chose your friend to lead, instead of you.
 
 They chose her, even though both of you know that you are the better fighter. They even say that she will, one day, become another &lt;&lt;include &quot;cycling_teen_flashback_5&quot;&gt;&gt;.
 
-Well, of course they chose [[her-&gt;teen_flashback_6]].</tw-passagedata><tw-passagedata pid="105" name="cycling_teen_flashback_5" tags="" position="1200,3100" size="100,100">&lt;&lt;silently&gt;&gt;
+Well, of course they chose [[her-&gt;teen_flashback_6]].</tw-passagedata><tw-passagedata pid="103" name="cycling_teen_flashback_5" tags="" position="1200,3100" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_teen_flashback_5&gt;&gt;
   &lt;&lt;set $choicesCount_teen_flashback_5 to -1&gt;&gt;
   &lt;&lt;set $choices_teen_flashback_5 to [&quot;legend&quot;, &quot;hero&quot;]&gt;&gt;
@@ -1548,15 +1580,15 @@ Well, of course they chose [[her-&gt;teen_flashback_6]].</tw-passagedata><tw-pas
 
 &lt;&lt;set $cyclingResult_teen_flashback_5 to $choices_teen_flashback_5[$choicesCount_teen_flashback_5]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_teen_flashback_5[$choicesCount_teen_flashback_5] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_flashback_5&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="teen_flashback_6" tags="pink flashback" position="1200,3200" size="100,100">&lt;&lt;linkappend &quot;She follows their every instruction.&quot; t8n&gt;&gt;
+\&lt;&lt;linkreplace $choices_teen_flashback_5[$choicesCount_teen_flashback_5] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_flashback_5&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="104" name="teen_flashback_6" tags="pink flashback" position="1200,3200" size="100,100">&lt;&lt;linkappend &quot;She follows their every instruction.&quot; t8n&gt;&gt;
 
 &lt;&lt;linkappend &quot;She thinks in binaries.&quot; t8n&gt;&gt;
 
-&lt;&lt;link &quot;And yet, she truly believes that the only choice she has is to fight&quot; &quot;teen_flashback_7&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;.&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="107" name="teen_flashback_7" tags="pink flashback" position="1325,3200" size="100,100">[[You want more choices-&gt;teen_flashback_8]].</tw-passagedata><tw-passagedata pid="108" name="teen_flashback_8" tags="pink flashback" position="1450,3200" size="100,100">So you continue to read the book, and eventually, you reach the middle.
+&lt;&lt;link &quot;And yet, she truly believes that the only choice she has is to fight&quot; &quot;teen_flashback_7&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;.&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="105" name="teen_flashback_7" tags="pink flashback" position="1325,3200" size="100,100">[[You want more choices-&gt;teen_flashback_8]].</tw-passagedata><tw-passagedata pid="106" name="teen_flashback_8" tags="pink flashback" position="1450,3200" size="100,100">So you continue to read the book, and eventually, you reach the middle.
 
-At this point, you are reading this out of [[hate-&gt;teen_flashback_9]].</tw-passagedata><tw-passagedata pid="109" name="teen_flashback_9" tags="pink flashback" position="1575,3200" size="100,100">You [[hate-&gt;teen_flashback_10]] the monastery&#39;s rules.</tw-passagedata><tw-passagedata pid="110" name="teen_flashback_10" tags="pink flashback" position="1700,3200" size="100,100">You [[hate-&gt;teen_flashback_11]] this place is honing you into a weapon, to fight for a cause that you do not even believe in.</tw-passagedata><tw-passagedata pid="111" name="teen_flashback_11" tags="pink flashback" position="1825,3200" size="100,100">You hate this society&#39;s worship of &lt;&lt;include &quot;cycling_teen_flashback_11&quot;&gt;&gt;.
+At this point, you are reading this out of [[hate-&gt;teen_flashback_9]].</tw-passagedata><tw-passagedata pid="107" name="teen_flashback_9" tags="pink flashback" position="1575,3200" size="100,100">You [[hate-&gt;teen_flashback_10]] the monastery&#39;s rules.</tw-passagedata><tw-passagedata pid="108" name="teen_flashback_10" tags="pink flashback" position="1700,3200" size="100,100">You [[hate-&gt;teen_flashback_11]] this place is honing you into a weapon, to fight for a cause that you do not even believe in.</tw-passagedata><tw-passagedata pid="109" name="teen_flashback_11" tags="pink flashback" position="1825,3200" size="100,100">You hate this society&#39;s worship of &lt;&lt;include &quot;cycling_teen_flashback_11&quot;&gt;&gt;.
 
-[[You want more choices-&gt;teen_flashback_11_1]].</tw-passagedata><tw-passagedata pid="112" name="cycling_teen_flashback_11" tags="" position="1950,3100" size="100,100">&lt;&lt;silently&gt;&gt;
+[[You want more choices-&gt;teen_flashback_11_1]].</tw-passagedata><tw-passagedata pid="110" name="cycling_teen_flashback_11" tags="" position="1950,3100" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_teen_flashback_11&gt;&gt;
   &lt;&lt;set $choicesCount_teen_flashback_11 to -1&gt;&gt;
   &lt;&lt;set $choices_teen_flashback_11 to [&quot;order and structure&quot;, &quot;numbers and time&quot;]&gt;&gt;
@@ -1570,13 +1602,13 @@ At this point, you are reading this out of [[hate-&gt;teen_flashback_9]].</tw-pa
 
 &lt;&lt;set $cyclingResult_teen_flashback_11 to $choices_teen_flashback_11[$choicesCount_teen_flashback_11]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_teen_flashback_11[$choicesCount_teen_flashback_11] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_flashback_11&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="113" name="teen_flashback_11_1" tags="pink flashback" position="1950,3200" size="100,100">So, you keep reading.
+\&lt;&lt;linkreplace $choices_teen_flashback_11[$choicesCount_teen_flashback_11] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_flashback_11&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="111" name="teen_flashback_11_1" tags="pink flashback" position="1950,3200" size="100,100">So, you keep reading.
 
-[[You turn over the page-&gt;teen_flashback_13]].</tw-passagedata><tw-passagedata pid="114" name="teen_flashback_13" tags="pink" position="2075,3200" size="100,100">&lt;span id=&quot;1&quot;&gt;&lt;/span&gt;&lt;span id=&quot;2&quot;&gt;&lt;&lt;link &quot;One second.&quot;&gt;&gt;
+[[You turn over the page-&gt;teen_flashback_13]].</tw-passagedata><tw-passagedata pid="112" name="teen_flashback_13" tags="pink" position="2075,3200" size="100,100">&lt;span id=&quot;1&quot;&gt;&lt;/span&gt;&lt;span id=&quot;2&quot;&gt;&lt;&lt;link &quot;One second.&quot;&gt;&gt;
     &lt;&lt;append &quot;#1&quot; t8n&gt;&gt;One second. &lt;&lt;/append&gt;&gt;
     &lt;&lt;replace &quot;#2&quot;&gt;&gt;&lt;&lt;link &quot;One second.&quot;&gt;&gt;&lt;&lt;append &quot;#1&quot; t8n&gt;&gt;One second. &lt;&lt;/append&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/link&gt;&gt;&lt;/span&gt;
-&lt;&lt;timed 7s&gt;&gt;&lt;&lt;goto &quot;teen_flashback_14&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="115" name="teen_flashback_14" tags="pink" position="2200,3200" size="100,100">&lt;&lt;nobr&gt;&gt;\
+&lt;&lt;timed 7s&gt;&gt;&lt;&lt;goto &quot;teen_flashback_14&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="113" name="teen_flashback_14" tags="pink" position="2200,3200" size="100,100">&lt;&lt;nobr&gt;&gt;\
 Her thoughts
 &lt;&lt;linkappend &quot;are your thoughts&quot; t8n&gt;&gt;
 &lt;&lt;linkappend &quot;are her thoughts&quot; t8n&gt;&gt;
@@ -1632,8 +1664,8 @@ Her thoughts
 &lt;&lt;linkappend &quot;are her thoughts&quot; t8n&gt;&gt;
 &lt;&lt;linkappend &quot;are your thoughts&quot; t8n&gt;&gt; are her thoughts&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
-&lt;&lt;timed 6s&gt;&gt;&lt;&lt;goto &quot;teen_flashback_15&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="116" name="teen_flashback_15" tags="pink full-text" position="2325,3200" size="100,100">You cannot tell the difference between her thoughts and your thoughts. You cannot tell the difference between her dreams and your dreams, which are also thoughts. You cannot tell the difference between her memories and your memories, which are thoughts as well. Maybe nothing ever existed, it&#39;s only thoughts. Time slows down until all that exist are your thoughts, and her thoughts. Maybe time does not exist, it&#39;s only thoughts. Maybe space is also a fabric of thoughts. At the beginning of the universe there were her thoughts, and when the universe dies all that will remain will be her thoughts. Time has never existed for her, because her thoughts are beyond time and space. There has never been any time, or space, only her thoughts. Her thoughts are beyond reality, beyond time, beyond structure. Her thoughts break the childish thought of structure. Maybe you thought this was freedom. Maybe thoughts will give you the freedom you want. Thoughts give you choices. Choices give you freedom, so thoughts give you freedom. Her thoughts can give you freedom. Freedom from the limitations of your body, time, and your thoughts. So you let her thoughts in. Now what you thought was your identity, your personhood, and your self no longer exists. The barriers between you and reality, and time, and space, and her, no longer exist. You can reshape reality, just like you can reshape your thoughts. Reality is only your thoughts, which are her thoughts. What you thought were your thoughts are now her thoughts. You can see nothing, hear nothing, feel nothing, but her thoughts. Her thoughts are in your mind and your brain and your veins and your bones and your entire body. Your body is a thought. It is one of her thoughts. You thought your body was yours but it was always one of her thoughts, just like how she thought the universe into existence. The universe was always a patchwork of her thoughts. The only thing that has ever existed are her thoughts. Her thoughts are all you think. You can only think her thoughts. Her thoughts are the only thing that exist, for they are the substance of this shallow universe. It&#39;s all just her thoughts. Her thoughts are there. Her thoughts are here. Her thoughts are yours. Embrace her thoughts. Her thoughts. Her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoug htst hthoug  htstho ughtsth ough tsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughts oughtst houghts houghts thoug ht sthoughtsth ought sthough tsth oug htsthough tsthoughtsthou ght sthoughtsth thou ghtsthough tsthou ghtsthoughtstho u ghtsthought st hough tsthou ghts thou ghtsth oughtsth ou ght sth o ughtsthoughtsth ough tst houghtsth ou ghtstho ughtsth ou ghtsthough ts th ou g ht st h o ug h ts tho ught s th oug hts th ou gh tsthou ghtsth o ug htsth o ugh t st ho ught s thou gh t st hou gh ts th oug h tst  hou gh tsth ou ght sth ou ght sth oug h tst ho ug h ts th o ug hts t ho ug ht st h o ug hts t ho ug hts t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s
-&lt;&lt;timed 5s&gt;&gt;&lt;&lt;goto &quot;teen_flashback_16&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="117" name="teen_flashback_16" tags="no-t8n pink flashback" position="2450,3200" size="100,100">[[You flip to the next page-&gt;chapter_4]].</tw-passagedata><tw-passagedata pid="118" name="chapter_4" tags="center purple" position="0,3525" size="200,100">&lt;a data-passage=&quot;teen_2_flashback_1&quot; id=&quot;chapter_4&quot;&gt;
+&lt;&lt;timed 6s&gt;&gt;&lt;&lt;goto &quot;teen_flashback_15&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="114" name="teen_flashback_15" tags="pink full-text" position="2325,3200" size="100,100">Time slows down until all that exist are your thoughts, and her thoughts. Maybe time does not exist, it&#39;s only thoughts. Maybe space is also a fabric of thoughts. At the beginning of the universe there were her thoughts, and when the universe dies all that will remain will be her thoughts. Time has never existed for her, because her thoughts are beyond time and space. There has never been any time, or space, only her thoughts. Her thoughts are beyond reality, beyond time, beyond structure. Her thoughts break the childish thought of structure. Maybe you thought this was freedom. Maybe thoughts will give you the freedom you want. Thoughts give you choices. Choices give you freedom, so thoughts give you freedom. Her thoughts can give you freedom. Freedom from the limitations of your body, time, and your thoughts. So you let her thoughts in. Now what you thought was your identity, your personhood, and your self no longer exists. The barriers between you and reality, and time, and space, and her, no longer exist. You can reshape reality, just like you can reshape your thoughts. Reality is only your thoughts, which are her thoughts. What you thought were your thoughts are now her thoughts. You can see nothing, hear nothing, feel nothing, but her thoughts. Her thoughts are in your mind and your veins and your bones and your flesh and your entire body. Your body is a thought. It is one of her thoughts. You thought your body was yours but it was always one of her thoughts, just like how she thought the universe into existence. The universe was always a patchwork of her thoughts. The only thing that has ever existed are her thoughts. Her thoughts are all you think. You can only think her thoughts. Her thoughts are the only thing that exist, for they are the substance of this shallow universe. It&#39;s all just her thoughts. Her thoughts are there. Her thoughts are here. Her thoughts are yours. Embrace her thoughts. Her thoughts. Her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoug htst hthoug  htstho ughtsth ough tsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughts oughtst houghts houghts thoug ht sthoughtsth ought sthough tsth oug htsthough tsthoughtsthou ght sthoughtsth thou ghtsthough tsthou ghtsthoughtstho u ghtsthought st hough tsthou ghts thou ghtsth oughtsth ou ght sth o ughtsthoughtsth ough tst houghtsth ou ghtstho ughtsth ou ghtsthough ts th ou g ht st h o ug h ts tho ught s th oug hts th ou gh tsthou ghtsth o ug htsth o ugh t st ho ught s thou gh t st hou gh ts th oug h tst  hou gh tsth ou ght sth ou ght sth oug h tst ho ug h ts th o ug hts t ho ug ht st h o ug hts t ho ug hts t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s
+&lt;&lt;timed 5s&gt;&gt;&lt;&lt;goto &quot;teen_flashback_16&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="115" name="teen_flashback_16" tags="no-t8n pink flashback" position="2450,3200" size="100,100">[[You flip to the next page-&gt;chapter_4]].</tw-passagedata><tw-passagedata pid="116" name="chapter_4" tags="center purple" position="0,3525" size="200,100">&lt;a data-passage=&quot;teen_2_flashback_1&quot; id=&quot;chapter_4&quot;&gt;
 &lt;svg version=&quot;1.1&quot;  xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; x=&quot;0px&quot; y=&quot;0px&quot;
 	 height=&quot;180px&quot; viewBox=&quot;0 0 189.5 234.3&quot; style=&quot;enable-background:new 0 0 189.5 234.3;&quot; xml:space=&quot;preserve&quot;&gt;
 &lt;g &gt;
@@ -1653,23 +1685,23 @@ Her thoughts
 		l-4.8-3c0-10.7-5-17.8-15-21.1c-1.5,2.8-2.2,5.8-2.2,9c0,5.4,1.4,10.3,4.4,14.9c2.9,4.6,6.2,8.7,9.8,12.3l0.8,4.1L47.6,234.1z&quot;/&gt;
 &lt;/g&gt;
 &lt;/svg&gt;
-&lt;/a&gt;</tw-passagedata><tw-passagedata pid="119" name="teen_2_flashback_1" tags="flashback" position="325,3525" size="100,100">[[You have been asked to check on your friend-&gt;teen_2_flashback_2]].</tw-passagedata><tw-passagedata pid="120" name="teen_2_flashback_2" tags="flashback" position="325,3650" size="100,100">The nuns noticed that your friend [[did not attend any training sessions today-&gt;teen_2_flashback_3]].</tw-passagedata><tw-passagedata pid="121" name="teen_2_flashback_3" tags="flashback" position="450,3650" size="100,100">You wonder if she assigned you to check on her, &lt;&lt;linkappend &quot;because you are the leader of your batch,&quot; t8n&gt;&gt; &lt;&lt;linkappend &quot;or because the nuns know you are her friend,&quot; t8n&gt;&gt; despite their [[disapproval-&gt;teen_2_flashback_4]].&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="122" name="teen_2_flashback_4" tags="flashback" position="575,3650" size="100,100">You bury those thoughts deeper into your mind.
+&lt;/a&gt;</tw-passagedata><tw-passagedata pid="117" name="teen_2_flashback_1" tags="flashback" position="325,3525" size="100,100">[[You have been asked to check on your friend-&gt;teen_2_flashback_2]].</tw-passagedata><tw-passagedata pid="118" name="teen_2_flashback_2" tags="flashback" position="325,3650" size="100,100">The nuns noticed that your friend [[did not attend any training sessions today-&gt;teen_2_flashback_3]].</tw-passagedata><tw-passagedata pid="119" name="teen_2_flashback_3" tags="flashback" position="450,3650" size="100,100">You wonder if she assigned you to check on her, &lt;&lt;linkappend &quot;because you are the leader of your batch,&quot; t8n&gt;&gt; &lt;&lt;linkappend &quot;or because the nuns know you are her friend,&quot; t8n&gt;&gt; despite their [[disapproval-&gt;teen_2_flashback_4]].&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="teen_2_flashback_4" tags="flashback" position="575,3650" size="100,100">You bury those thoughts deeper into your mind.
 
-You just need to focus on the [[task that they have assigned you-&gt;teen_2_flashback_5]].</tw-passagedata><tw-passagedata pid="123" name="teen_2_flashback_5" tags="flashback" position="700,3650" size="100,100">You walk up to her room, knock her door a few times, and turn the knob.
+You just need to focus on the [[task that they have assigned you-&gt;teen_2_flashback_5]].</tw-passagedata><tw-passagedata pid="121" name="teen_2_flashback_5" tags="flashback" position="700,3650" size="100,100">You walk up to her room, knock her door a few times, and turn the knob.
 
-[[One second-&gt;teen_2_flashback_6]].</tw-passagedata><tw-passagedata pid="124" name="teen_2_flashback_6" tags="flashback" position="825,3650" size="100,100">The door begins to open. The room is dark, and it is only lit by flickering candlelight.
+[[One second-&gt;teen_2_flashback_6]].</tw-passagedata><tw-passagedata pid="122" name="teen_2_flashback_6" tags="flashback" position="825,3650" size="100,100">The door begins to open. The room is dark, and it is only lit by flickering candlelight.
 
-[[Two seconds-&gt;teen_2_flashback_7]].</tw-passagedata><tw-passagedata pid="125" name="teen_2_flashback_7" tags="flashback" position="950,3650" size="100,100">You see the corner of her wooden desk.
+[[Two seconds-&gt;teen_2_flashback_7]].</tw-passagedata><tw-passagedata pid="123" name="teen_2_flashback_7" tags="flashback" position="950,3650" size="100,100">You see the corner of her wooden desk.
 
-[[Three seconds-&gt;teen_2_flashback_8]].</tw-passagedata><tw-passagedata pid="126" name="teen_2_flashback_8" tags="flashback" position="1075,3650" size="100,100">The door is fully open. You see her &lt;&lt;linkappend &quot;sitting at her desk,&quot; t8n&gt;&gt; reading &lt;&lt;linkreplace &quot;the book&quot; t8n&gt;&gt;&lt;&lt;linkappend &quot;the book you should have warned her about,&quot; t8n&gt;&gt; skin is covered in &lt;span class=&quot;pink&quot;&gt;[[glowing pink marks-&gt;teen_2_flashback_9]]&lt;/span&gt;.
-&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="127" name="teen_2_flashback_9" tags="flashback" position="1200,3650" size="100,100">[[You close the door-&gt;teen_2_flashback_10]].</tw-passagedata><tw-passagedata pid="128" name="teen_2_flashback_10" tags="flashback" position="1325,3650" size="100,100">&lt;&lt;timed 1s t8n&gt;&gt;It&#39;s your fault, isn&#39;t it? You should have warned her about the book, but you didn&#39;t.
+[[Three seconds-&gt;teen_2_flashback_8]].</tw-passagedata><tw-passagedata pid="124" name="teen_2_flashback_8" tags="flashback" position="1075,3650" size="100,100">The door is fully open. You see her &lt;&lt;linkappend &quot;sitting at her desk,&quot; t8n&gt;&gt; reading &lt;&lt;linkreplace &quot;the book&quot; t8n&gt;&gt;&lt;&lt;linkappend &quot;the book you should have warned her about,&quot; t8n&gt;&gt; skin is covered in &lt;span class=&quot;pink&quot;&gt;[[glowing pink marks-&gt;teen_2_flashback_9]]&lt;/span&gt;.
+&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="teen_2_flashback_9" tags="flashback" position="1200,3650" size="100,100">[[You close the door-&gt;teen_2_flashback_10]].</tw-passagedata><tw-passagedata pid="126" name="teen_2_flashback_10" tags="flashback" position="1325,3650" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;It&#39;s your fault, isn&#39;t it? You should have warned her about the book, but you didn&#39;t.
 
 You were scared that telling her about it &lt;&lt;include &quot;cycling_teen_2_flashback_10&quot;&gt;&gt;.
 
 &lt;&lt;timed 6s t8n&gt;&gt;You replay your regrets.&lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 10s t8n&gt;&gt;[[You have to end this loop-&gt;teen_2_flashback_11]].&lt;&lt;/timed&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="129" name="cycling_teen_2_flashback_10" tags="" position="1325,3550" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="127" name="cycling_teen_2_flashback_10" tags="" position="1325,3550" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_teen_2_flashback_10&gt;&gt;
   &lt;&lt;set $choicesCount_teen_2_flashback_10 to -1&gt;&gt;
   &lt;&lt;set $choices_teen_2_flashback_10 to [&quot;would have made her want to read it more&quot;, &quot;would have made the experience more real&quot;, &quot;would have reopened a wound&quot;]&gt;&gt;
@@ -1683,11 +1715,11 @@ You were scared that telling her about it &lt;&lt;include &quot;cycling_teen_2_f
 
 &lt;&lt;set $cyclingResult_teen_2_flashback_10 to $choices_teen_2_flashback_10[$choicesCount_teen_2_flashback_10]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_teen_2_flashback_10[$choicesCount_teen_2_flashback_10] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_10&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="teen_2_flashback_11" tags="flashback" position="1450,3650" size="100,100">You try to make a choice.
+\&lt;&lt;linkreplace $choices_teen_2_flashback_10[$choicesCount_teen_2_flashback_10] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_10&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="128" name="teen_2_flashback_11" tags="flashback" position="1450,3650" size="100,100">You try to make a choice.
 
 You could talk to her, but you fear being close to her. You don&#39;t know how dangerous &lt;&lt;include &quot;cycling_teen_2_flashback_11&quot;&gt;&gt; is.
 
-You could report this to the nuns, but you know that the acolytes sent to be reeducated [[never come back-&gt;teen_2_flashback_12]].</tw-passagedata><tw-passagedata pid="131" name="cycling_teen_2_flashback_11" tags="" position="1450,3550" size="100,100">&lt;&lt;silently&gt;&gt;
+You could report this to the nuns, but you know that the acolytes sent to be reeducated [[never come back-&gt;teen_2_flashback_12]].</tw-passagedata><tw-passagedata pid="129" name="cycling_teen_2_flashback_11" tags="" position="1450,3550" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_teen_2_flashback_11&gt;&gt;
   &lt;&lt;set $choicesCount_teen_2_flashback_11 to -1&gt;&gt;
   &lt;&lt;set $choices_teen_2_flashback_11 to [&quot;this situation&quot;, &quot;the other god&quot;, &quot;she&quot;]&gt;&gt;
@@ -1701,9 +1733,9 @@ You could report this to the nuns, but you know that the acolytes sent to be ree
 
 &lt;&lt;set $cyclingResult_teen_2_flashback_11 to $choices_teen_2_flashback_11[$choicesCount_teen_2_flashback_11]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_teen_2_flashback_11[$choicesCount_teen_2_flashback_11] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_11&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="132" name="teen_2_flashback_12" tags="flashback" position="1575,3650" size="100,100">So you make what you think is the best choice, which is still a poor [[choice-&gt;teen_2_flashback_12_1]].</tw-passagedata><tw-passagedata pid="133" name="teen_2_flashback_12_1" tags="" position="1700,3650" size="100,100">You explain the situation to the nuns, &lt;&lt;linkappend &quot;omitting your role in the story,&quot; t8n&gt;&gt; for you are a coward&lt;&lt;/linkappend&gt;&gt;, and you hope that she will survive as long as possible.
+\&lt;&lt;linkreplace $choices_teen_2_flashback_11[$choicesCount_teen_2_flashback_11] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_11&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="teen_2_flashback_12" tags="flashback" position="1575,3650" size="100,100">So you make what you think is the best choice, which is still a poor [[choice-&gt;teen_2_flashback_12_1]].</tw-passagedata><tw-passagedata pid="131" name="teen_2_flashback_12_1" tags="flashback" position="1700,3650" size="100,100">You explain the situation to the nuns, &lt;&lt;linkappend &quot;omitting your role in the story,&quot; t8n&gt;&gt; for you are a coward&lt;&lt;/linkappend&gt;&gt;, and you hope that she will survive as long as possible.
 
-At least [[she would be safe-&gt;teen_2_flashback_13]].</tw-passagedata><tw-passagedata pid="134" name="teen_2_flashback_13" tags="flashback" position="1825,3650" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;\
+At least [[she would be safe-&gt;teen_2_flashback_13]].</tw-passagedata><tw-passagedata pid="132" name="teen_2_flashback_13" tags="flashback" position="1825,3650" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;\
 You &lt;&lt;linkreplace &quot;visit her cell.&quot; t8n&gt;&gt;visit her cell, after begging the nuns for this little freedom.&lt;&lt;/linkreplace&gt;&gt;
 
 The entire room smells of urine, and the walls are covered in black grime.
@@ -1711,19 +1743,19 @@ The entire room smells of urine, and the walls are covered in black grime.
 She doesn&#39;t stand up when you approach the bars. The marks on her body are still glowing.
 
 [[I&#39;m sorry-&gt;teen_2_flashback_14]], you say.
-&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="135" name="teen_2_flashback_14" tags="flashback" position="1950,3650" size="100,100">I wanted to do something. I thought this would be better—
+&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="133" name="teen_2_flashback_14" tags="flashback" position="1950,3650" size="100,100">I wanted to do something. I thought this would be better—
 
-Better? She says. I guess you&#39;re right. Now, I finally have a good reason to escape [[this damn place-&gt;teen_2_flashback_15]].</tw-passagedata><tw-passagedata pid="136" name="teen_2_flashback_15" tags="flashback" position="2075,3650" size="100,100">But how? You ask. This monastery is surrounded by an army of golems—
+Better? She says. I guess you&#39;re right. Now, I finally have a good reason to escape [[this damn place-&gt;teen_2_flashback_15]].</tw-passagedata><tw-passagedata pid="134" name="teen_2_flashback_15" tags="flashback" position="2075,3650" size="100,100">But how? You ask. This monastery is surrounded by an army of golems—
 
 It&#39;s barely an army now. And I have a way.
 
-If you want to join me, meet me at the gates [[tomorrow evening-&gt;teen_2_flashback_16]].</tw-passagedata><tw-passagedata pid="137" name="teen_2_flashback_16" tags="flashback" position="2200,3650" size="100,100">&lt;&lt;linkreplace &quot;You wait.&quot; t8n&gt;&gt;You wait, but you make what you think is the best choice, which is still a poor [[choice-&gt;teen_2_flashback_17]].&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="138" name="teen_2_flashback_17" tags="flashback" position="2325,3650" size="100,100">You choose to stay, instead of leaving &lt;&lt;include &quot;cycling_teen_2_flashback_17c3&quot;&gt;&gt;.
+If you want to join me, meet me at the gates [[tomorrow evening-&gt;teen_2_flashback_16]].</tw-passagedata><tw-passagedata pid="135" name="teen_2_flashback_16" tags="flashback" position="2200,3650" size="100,100">&lt;&lt;linkreplace &quot;You wait.&quot; t8n&gt;&gt;You wait, but you make what you think is the best choice, which is still a poor [[choice-&gt;teen_2_flashback_17]].&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="136" name="teen_2_flashback_17" tags="flashback" position="2325,3650" size="100,100">You choose to stay, instead of leaving &lt;&lt;include &quot;cycling_teen_2_flashback_17c3&quot;&gt;&gt;.
 
 You don&#39;t want to eke out a life outside the monastery, outside &lt;&lt;include &quot;cycling_teen_2_flashback_17&quot;&gt;&gt; structure.
 
 You don&#39;t want to believe in &lt;&lt;include &quot;cycling_teen_2_flashback_17c2&quot;&gt;&gt;.
 
-When you read the book, you &lt;&lt;linkappend &quot;realised&quot; t8n&gt;&gt; that to the gods, you are only specks of dust, [[punctuation-&gt;teen_2_flashback_18]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="139" name="cycling_teen_2_flashback_17" tags="" position="2325,3550" size="100,100">&lt;&lt;silently&gt;&gt;
+When you read the book, you &lt;&lt;linkappend &quot;realised&quot; t8n&gt;&gt; that to the gods, you are only specks of dust, [[punctuation-&gt;teen_2_flashback_18]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="137" name="cycling_teen_2_flashback_17" tags="" position="2325,3550" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_teen_2_flashback_17&gt;&gt;
   &lt;&lt;set $choicesCount_teen_2_flashback_17 to -1&gt;&gt;
   &lt;&lt;set $choices_teen_2_flashback_17 to [&quot;this&quot;, &quot;all this&quot;]&gt;&gt;
@@ -1737,7 +1769,7 @@ When you read the book, you &lt;&lt;linkappend &quot;realised&quot; t8n&gt;&gt; 
 
 &lt;&lt;set $cyclingResult_teen_2_flashback_17 to $choices_teen_2_flashback_17[$choicesCount_teen_2_flashback_17]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_teen_2_flashback_17[$choicesCount_teen_2_flashback_17] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_17&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="140" name="cycling_teen_2_flashback_17c2" tags="" position="2325,3450" size="100,100">&lt;&lt;silently&gt;&gt;
+\&lt;&lt;linkreplace $choices_teen_2_flashback_17[$choicesCount_teen_2_flashback_17] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_17&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="138" name="cycling_teen_2_flashback_17c2" tags="" position="2325,3450" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_teen_2_flashback_17c2&gt;&gt;
   &lt;&lt;set $choicesCount_teen_2_flashback_17c2 to -1&gt;&gt;
   &lt;&lt;set $choices_teen_2_flashback_17c2 to [&quot;the other god&quot;, &quot;any god&quot;]&gt;&gt;
@@ -1751,7 +1783,7 @@ When you read the book, you &lt;&lt;linkappend &quot;realised&quot; t8n&gt;&gt; 
 
 &lt;&lt;set $cyclingResult_teen_2_flashback_17c2 to $choices_teen_2_flashback_17c2[$choicesCount_teen_2_flashback_17c2]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_teen_2_flashback_17c2[$choicesCount_teen_2_flashback_17c2] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_17c2&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="141" name="cycling_teen_2_flashback_17c3" tags="" position="2325,3350" size="100,100">&lt;&lt;silently&gt;&gt;
+\&lt;&lt;linkreplace $choices_teen_2_flashback_17c2[$choicesCount_teen_2_flashback_17c2] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_17c2&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="139" name="cycling_teen_2_flashback_17c3" tags="" position="2325,3350" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_teen_2_flashback_17c3&gt;&gt;
   &lt;&lt;set $choicesCount_teen_2_flashback_17c3 to -1&gt;&gt;
   &lt;&lt;set $choices_teen_2_flashback_17c3 to [&quot;with her&quot;, &quot;this life&quot;]&gt;&gt;
@@ -1765,29 +1797,29 @@ When you read the book, you &lt;&lt;linkappend &quot;realised&quot; t8n&gt;&gt; 
 
 &lt;&lt;set $cyclingResult_teen_2_flashback_17c3 to $choices_teen_2_flashback_17c3[$choicesCount_teen_2_flashback_17c3]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_teen_2_flashback_17c3[$choicesCount_teen_2_flashback_17c3] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_17c3&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="142" name="teen_2_flashback_18" tags="flashback" position="2450,3650" size="100,100">So you can only hope that your friend is safe, and your test will not involve her.
+\&lt;&lt;linkreplace $choices_teen_2_flashback_17c3[$choicesCount_teen_2_flashback_17c3] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_17c3&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="140" name="teen_2_flashback_18" tags="flashback" position="2450,3650" size="100,100">So you can only hope that your friend is safe, and your test will not involve her.
 
-Your hope is greater than your [[faith-&gt;teen_2_flashback_19]], these days.</tw-passagedata><tw-passagedata pid="143" name="teen_2_flashback_19" tags="flashback pink" position="325,3775" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;You are at the garden gates, waiting for your friend.
+Your hope is greater than your [[faith-&gt;teen_2_flashback_19]], these days.</tw-passagedata><tw-passagedata pid="141" name="teen_2_flashback_19" tags="flashback pink" position="325,3775" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;You are at the garden gates, waiting for your friend.
 
 The garden is littered with rocky remains of golems, and the fountain water is a deep red.
 
 You are carrying a $weapon, that you stole from the armory.
 
-[[One second-&gt;teen_2_flashback_20]].&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="144" name="teen_2_flashback_20" tags="flashback pink" position="450,3775" size="100,100">You continue to wait. To stem your boredom, you toss the $weapon up into the air, as if it was a knife.
+[[One second-&gt;teen_2_flashback_20]].&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="142" name="teen_2_flashback_20" tags="flashback pink" position="450,3775" size="100,100">You continue to wait. To stem your boredom, you toss the $weapon up into the air, as if it was a knife.
 
-[[Two seconds-&gt;teen_2_flashback_21]].</tw-passagedata><tw-passagedata pid="145" name="teen_2_flashback_21" tags="flashback pink" position="575,3775" size="100,100">You catch the $weapon in your hands.
+[[Two seconds-&gt;teen_2_flashback_21]].</tw-passagedata><tw-passagedata pid="143" name="teen_2_flashback_21" tags="flashback pink" position="575,3775" size="100,100">You catch the $weapon in your hands.
 
 She is still not here.
 
-[[Three seconds-&gt;teen_2_flashback_22]].</tw-passagedata><tw-passagedata pid="146" name="teen_2_flashback_22" tags="flashback pink" position="700,3775" size="100,100">[[Four seconds-&gt;teen_2_flashback_23]].</tw-passagedata><tw-passagedata pid="147" name="teen_2_flashback_23" tags="flashback pink" position="825,3775" size="100,100">[[Five seconds-&gt;teen_2_flashback_24]].</tw-passagedata><tw-passagedata pid="148" name="teen_2_flashback_24" tags="flashback pink" position="950,3775" size="100,100">[[Six seconds-&gt;teen_2_flashback_25]].</tw-passagedata><tw-passagedata pid="149" name="teen_2_flashback_25" tags="flashback pink" position="1075,3775" size="100,100">You are tired of waiting.
+[[Three seconds-&gt;teen_2_flashback_22]].</tw-passagedata><tw-passagedata pid="144" name="teen_2_flashback_22" tags="flashback pink" position="700,3775" size="100,100">[[Four seconds-&gt;teen_2_flashback_23]].</tw-passagedata><tw-passagedata pid="145" name="teen_2_flashback_23" tags="flashback pink" position="825,3775" size="100,100">[[Five seconds-&gt;teen_2_flashback_24]].</tw-passagedata><tw-passagedata pid="146" name="teen_2_flashback_24" tags="flashback pink" position="950,3775" size="100,100">[[Six seconds-&gt;teen_2_flashback_25]].</tw-passagedata><tw-passagedata pid="147" name="teen_2_flashback_25" tags="flashback pink" position="1075,3775" size="100,100">You are tired of waiting.
 
-But still, you wait a little longer, holding on to your last bit of hope, counting the seconds for the last [[time-&gt;teen_2_flashback_26]].</tw-passagedata><tw-passagedata pid="150" name="teen_2_flashback_26" tags="flashback pink" position="1200,3775" size="100,100">Soon, time will not matter to you anymore.
+But still, you wait a little longer, holding on to your last bit of hope, counting the seconds for the last [[time-&gt;teen_2_flashback_26]].</tw-passagedata><tw-passagedata pid="148" name="teen_2_flashback_26" tags="flashback pink" position="1200,3775" size="100,100">Soon, time will not matter to you anymore.
 
-[[Time is just an illusion that helps stories make sense-&gt;teen_2_flashback_27]].</tw-passagedata><tw-passagedata pid="151" name="teen_2_flashback_27" tags="flashback pink" position="1325,3775" size="100,100">You hear the guttural rumble of the [[golems-&gt;teen_2_flashback_28]].</tw-passagedata><tw-passagedata pid="152" name="teen_2_flashback_28" tags="flashback pink" position="1450,3775" size="100,100">One of the golem aims its arm of rock at you.
+[[Time is just an illusion that helps stories make sense-&gt;teen_2_flashback_27]].</tw-passagedata><tw-passagedata pid="149" name="teen_2_flashback_27" tags="flashback pink" position="1325,3775" size="100,100">You hear the guttural rumble of the [[golems-&gt;teen_2_flashback_28]].</tw-passagedata><tw-passagedata pid="150" name="teen_2_flashback_28" tags="flashback pink" position="1450,3775" size="100,100">One of the golem aims its arm of rock at you.
 
-[[One second-&gt;teen_2_flashback_28_1]].</tw-passagedata><tw-passagedata pid="153" name="teen_2_flashback_28_1" tags="flashback pink" position="1575,3775" size="100,100">You realise that your friend has &lt;&lt;include &quot;cycling_teen_2_flashback_28_1&quot;&gt;&gt;.
+[[One second-&gt;teen_2_flashback_28_1]].</tw-passagedata><tw-passagedata pid="151" name="teen_2_flashback_28_1" tags="flashback pink" position="1575,3775" size="100,100">You realise that your friend has &lt;&lt;include &quot;cycling_teen_2_flashback_28_1&quot;&gt;&gt;.
 
-[[One second-&gt;teen_2_flashback_29]].</tw-passagedata><tw-passagedata pid="154" name="cycling_teen_2_flashback_28_1" tags="flashback pink" position="1575,3875" size="100,100">&lt;&lt;silently&gt;&gt;
+[[One second-&gt;teen_2_flashback_29]].</tw-passagedata><tw-passagedata pid="152" name="cycling_teen_2_flashback_28_1" tags="flashback pink" position="1575,3875" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_teen_2_flashback_28_1&gt;&gt;
   &lt;&lt;set $choicesCount_teen_2_flashback_28_1 to -1&gt;&gt;
   &lt;&lt;set $choices_teen_2_flashback_28_1 to [&quot;left you waiting&quot;, &quot;left you&quot;, &quot;betrayed you&quot;]&gt;&gt;
@@ -1801,36 +1833,36 @@ But still, you wait a little longer, holding on to your last bit of hope, counti
 
 &lt;&lt;set $cyclingResult_teen_2_flashback_28_1 to $choices_teen_2_flashback_28_1[$choicesCount_teen_2_flashback_28_1]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_teen_2_flashback_28_1[$choicesCount_teen_2_flashback_28_1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_28_1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="155" name="teen_2_flashback_29" tags="flashback pink" position="1700,3775" size="100,100">The golem shoots the rocks in your direction.
+\&lt;&lt;linkreplace $choices_teen_2_flashback_28_1[$choicesCount_teen_2_flashback_28_1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_teen_2_flashback_28_1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="153" name="teen_2_flashback_29" tags="flashback pink" position="1700,3775" size="100,100">The golem shoots the rocks in your direction.
 
 The rocks are suspended in the air, and everything around you—the golem, the fountain water, the blades of grass—is completely still.
 
-[[One second-&gt;teen_2_flashback_30]].</tw-passagedata><tw-passagedata pid="156" name="teen_2_flashback_30" tags="flashback pink" position="1825,3775" size="100,100">You admire the golem for a moment.
+[[One second-&gt;teen_2_flashback_30]].</tw-passagedata><tw-passagedata pid="154" name="teen_2_flashback_30" tags="flashback pink" position="1825,3775" size="100,100">You admire the golem for a moment.
 
 The nuns could never explain whether the golems were controlled by the sacred algorithms, or if they are powered by some arcane mechanism.
 
-[[One second-&gt;teen_2_flashback_31]].</tw-passagedata><tw-passagedata pid="157" name="teen_2_flashback_31" tags="flashback pink" position="1950,3775" size="100,100">You turn around, and cut the gates open with your $weapon.
+[[One second-&gt;teen_2_flashback_31]].</tw-passagedata><tw-passagedata pid="155" name="teen_2_flashback_31" tags="flashback pink" position="1950,3775" size="100,100">You turn around, and cut the gates open with your $weapon.
 
 You wonder if the gates and golems are meant to keep heretics out, or keep the worshippers in.
 
-[[One second-&gt;teen_2_flashback_32]].</tw-passagedata><tw-passagedata pid="158" name="teen_2_flashback_32" tags="flashback pink" position="2075,3775" size="100,100">You pull the bars away, and they stay still midair. They stay in place, as if they are some kind of inscrutable sculpture.
+[[One second-&gt;teen_2_flashback_32]].</tw-passagedata><tw-passagedata pid="156" name="teen_2_flashback_32" tags="flashback pink" position="2075,3775" size="100,100">You pull the bars away, and they stay still midair. They stay in place, as if they are some kind of inscrutable sculpture.
 
 You wonder what stories the monastery will tell about you.
 
 You wonder if you will be the main character of their cautionary tales, the monster in their bedtime stories, or the ghost the children will whisper about in the dead of night.
 
-[[One second-&gt;teen_2_flashback_33]].</tw-passagedata><tw-passagedata pid="159" name="teen_2_flashback_33" tags="flashback pink" position="2200,3775" size="100,100">You walk through the bars.
+[[One second-&gt;teen_2_flashback_33]].</tw-passagedata><tw-passagedata pid="157" name="teen_2_flashback_33" tags="flashback pink" position="2200,3775" size="100,100">You walk through the bars.
 
-[[One second-&gt;teen_2_flashback_34]].</tw-passagedata><tw-passagedata pid="160" name="teen_2_flashback_34" tags="flashback pink" position="2325,3775" size="100,100">You walk away from the monastery.
+[[One second-&gt;teen_2_flashback_34]].</tw-passagedata><tw-passagedata pid="158" name="teen_2_flashback_34" tags="flashback pink" position="2325,3775" size="100,100">You walk away from the monastery.
 
-[[One second-&gt;teen_2_flashback_35]].</tw-passagedata><tw-passagedata pid="161" name="teen_2_flashback_35" tags="flashback pink" position="2450,3775" size="100,100">[[You wipe away tears-&gt;chapter_5]].</tw-passagedata><tw-passagedata pid="162" name="chapter_5" tags="center purple" position="0,4100" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[V-&gt;final_fight_1]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="163" name="final_fight_1" tags="" position="275,4100" size="100,100">[[You can save her-&gt;final_fight_2]].</tw-passagedata><tw-passagedata pid="164" name="final_fight_2" tags="" position="400,4100" size="100,100">[[This is not what they told you-&gt;final_fight_3]].</tw-passagedata><tw-passagedata pid="165" name="final_fight_3" tags="" position="525,4100" size="100,100">[[But this is what you tell yourself-&gt;final_fight_4]].</tw-passagedata><tw-passagedata pid="166" name="final_fight_4" tags="" position="650,4100" size="100,100">You have already pictured this fight with her, replaying each of your blows &lt;&lt;linkappend &quot;again,&quot; t8n&gt;&gt; and [[again-&gt;final_fight_5]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="167" name="final_fight_5" tags="" position="775,4100" size="100,100">The nuns directed you to consult the sacred algorithms, but you do not want to add to the [[statistics of violence-&gt;final_fight_6]].</tw-passagedata><tw-passagedata pid="168" name="final_fight_6" tags="" position="900,4100" size="100,100">So when you walk into the cathedral, you ready yourself to talk.
+[[One second-&gt;teen_2_flashback_35]].</tw-passagedata><tw-passagedata pid="159" name="teen_2_flashback_35" tags="flashback pink" position="2450,3775" size="100,100">[[You wipe away tears-&gt;chapter_5]].</tw-passagedata><tw-passagedata pid="160" name="chapter_5" tags="center purple" position="0,4100" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[V-&gt;final_fight_1]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="161" name="final_fight_1" tags="" position="275,4100" size="100,100">[[You can save her-&gt;final_fight_2]].</tw-passagedata><tw-passagedata pid="162" name="final_fight_2" tags="" position="400,4100" size="100,100">[[This is not what they told you-&gt;final_fight_3]].</tw-passagedata><tw-passagedata pid="163" name="final_fight_3" tags="" position="525,4100" size="100,100">[[But this is what you tell yourself-&gt;final_fight_4]].</tw-passagedata><tw-passagedata pid="164" name="final_fight_4" tags="" position="650,4100" size="100,100">You have already pictured this fight with her, replaying each of your blows &lt;&lt;linkappend &quot;again,&quot; t8n&gt;&gt; and [[again-&gt;final_fight_5]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="165" name="final_fight_5" tags="" position="775,4100" size="100,100">The nuns directed you to consult the sacred algorithms, but you do not want to add to the [[statistics of violence-&gt;final_fight_6]].</tw-passagedata><tw-passagedata pid="166" name="final_fight_6" tags="" position="900,4100" size="100,100">So when you walk into the cathedral, you ready yourself to talk.
 
-&lt;&lt;include &quot;cycling_final_fight_6&quot;&gt;&gt;
+&lt;&lt;include &quot;cycling_final_fight_6&quot;&gt;&gt;.
 
-[[One second-&gt;final_fight_7]].</tw-passagedata><tw-passagedata pid="169" name="cycling_final_fight_6" tags="" position="900,4200" size="100,100">&lt;&lt;silently&gt;&gt;
+[[One second-&gt;final_fight_7]].</tw-passagedata><tw-passagedata pid="167" name="cycling_final_fight_6" tags="" position="900,4200" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_fight_6&gt;&gt;
   &lt;&lt;set $choicesCount_final_fight_6 to -1&gt;&gt;
-  &lt;&lt;set $choices_final_fight_6 to [&quot;The nuns told me to kill you, but I don&#39;t want to.&quot;, &quot;I&#39;m here because the nuns told me to.&quot;]&gt;&gt;
+  &lt;&lt;set $choices_final_fight_6 to [&quot;The nuns told me to kill you, but I don&#39;t want to&quot;, &quot;I&#39;m here because the nuns told me to&quot;]&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set $choicesCount_final_fight_6 to $choicesCount_final_fight_6 + 1&gt;&gt;
@@ -1841,9 +1873,9 @@ You wonder if you will be the main character of their cautionary tales, the mons
 
 &lt;&lt;set $cyclingResult_final_fight_6 to $choices_final_fight_6[$choicesCount_final_fight_6]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_final_fight_6[$choicesCount_final_fight_6] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_6&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="170" name="final_fight_7" tags="" position="1025,4100" size="100,100">[[Two seconds-&gt;final_fight_8]].</tw-passagedata><tw-passagedata pid="171" name="final_fight_8" tags="" position="1150,4100" size="100,100">[[Three seconds-&gt;final_fight_9]].</tw-passagedata><tw-passagedata pid="172" name="final_fight_9" tags="" position="1275,4100" size="100,100">She turns around. You notice how the marks on her skin are still glowing pink, and you notice how years of fighting have cratered her body.
+\&lt;&lt;linkreplace $choices_final_fight_6[$choicesCount_final_fight_6] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_6&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="168" name="final_fight_7" tags="" position="1025,4100" size="100,100">[[Two seconds-&gt;final_fight_8]].</tw-passagedata><tw-passagedata pid="169" name="final_fight_8" tags="" position="1150,4100" size="100,100">[[Three seconds-&gt;final_fight_9]].</tw-passagedata><tw-passagedata pid="170" name="final_fight_9" tags="" position="1275,4100" size="100,100">She turns around. You notice how the marks on her skin are still glowing pink, and you notice how years of fighting have cratered her body.
 
-&lt;&lt;if $cyclingResult_final_fight_6 is &quot;The nuns told me to kill you, but I don&#39;t want to.&quot;&gt;&gt;\
+&lt;&lt;if $cyclingResult_final_fight_6 is &quot;The nuns told me to kill you, but I don&#39;t want to&quot;&gt;&gt;.\
 Her irises flicker like fire. She says, you can just go away. You didn&#39;t have to find me.
 
 You pause. But I wanted to ask you something.
@@ -1851,7 +1883,7 @@ You pause. But I wanted to ask you something.
 &lt;&lt;include &quot;cycling_final_final_9_c1&quot;&gt;&gt;?
 
 We can find a corner of this universe where we can just live [[together-&gt;final_fight_10]].
-&lt;&lt;elseif $cyclingResult_final_fight_6 is &quot;I&#39;m here because the nuns told me to.&quot;&gt;&gt;\
+&lt;&lt;elseif $cyclingResult_final_fight_6 is &quot;I&#39;m here because the nuns told me to&quot;&gt;&gt;\
 Her irises flicker like fire. She asks, so you&#39;re here to kill me, then?
 
 You pause. Yes, but I don&#39;t want to.
@@ -1859,7 +1891,7 @@ You pause. Yes, but I don&#39;t want to.
 &lt;&lt;include &quot;cycling_final_final_9_c2&quot;&gt;&gt;.
 
 We can find a corner of this universe where we can just live [[together-&gt;final_fight_10]].
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="173" name="cycling_final_final_9_c1" tags="" position="1275,4300" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="171" name="cycling_final_final_9_c1" tags="" position="1275,4300" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_final_9_c1&gt;&gt;
   &lt;&lt;set $choicesCount_final_final_9_c1 to -1&gt;&gt;
   &lt;&lt;set $choices_final_final_9_c1 to [&quot;Could you come with me&quot;, &quot;Could I leave with you&quot;]&gt;&gt;
@@ -1873,7 +1905,7 @@ We can find a corner of this universe where we can just live [[together-&gt;fina
 
 &lt;&lt;set $cyclingResult_final_final_9_c1 to $choices_final_final_9_c1[$choicesCount_final_final_9_c1]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_final_final_9_c1[$choicesCount_final_final_9_c1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_final_9_c1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="174" name="cycling_final_final_9_c2" tags="" position="1275,4200" size="100,100">&lt;&lt;silently&gt;&gt;
+\&lt;&lt;linkreplace $choices_final_final_9_c1[$choicesCount_final_final_9_c1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_final_9_c1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="172" name="cycling_final_final_9_c2" tags="" position="1275,4200" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_final_9_c2&gt;&gt;
   &lt;&lt;set $choicesCount_final_final_9_c2 to -1&gt;&gt;
   &lt;&lt;set $choices_final_final_9_c2 to [&quot;I want you to come with me&quot;, &quot;I want to leave with you&quot;]&gt;&gt;
@@ -1887,18 +1919,19 @@ We can find a corner of this universe where we can just live [[together-&gt;fina
 
 &lt;&lt;set $cyclingResult_final_final_9_c2 to $choices_final_final_9_c2[$choicesCount_final_final_9_c2]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_final_final_9_c2[$choicesCount_final_final_9_c2] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_final_9_c2&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="175" name="final_fight_10" tags="" position="1400,4100" size="100,100">Can&#39;t you both simply be punctuation on a page? Can&#39;t you both simply be as invisible as possible?
+\&lt;&lt;linkreplace $choices_final_final_9_c2[$choicesCount_final_final_9_c2] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_final_9_c2&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="173" name="final_fight_10" tags="" position="1400,4100" size="100,100">Can&#39;t you both simply be punctuation on a page? Can&#39;t you both simply be as invisible as possible?
 
-No, [[she-&gt;final_fight_11]] says. We can&#39;t.</tw-passagedata><tw-passagedata pid="176" name="final_fight_11" tags="pink" position="1525,4100" size="100,100">She had your chance, but you&#39;ve waited for far too long.
+No, [[she-&gt;final_fight_11]] says. We can&#39;t.</tw-passagedata><tw-passagedata pid="174" name="final_fight_11" tags="pink" position="1525,4100" size="100,100">Your old friend had her chance, but you&#39;ve waited for far too long.
 
-I&#39;m here now, your old friend says.
+I&#39;m here now, she says.
 
-But you know that this is too late. You&#39;re both different people now. And how could she follow you, fighting your battles, if she doesn&#39;t want to believe in &lt;&lt;include &quot;cycling_final_fight_11&quot;&gt;&gt;?
+But you know that this is too late. You&#39;re both different people now. And how could she follow you, fighting your battles, if she doesn&#39;t want to believe in &lt;&lt;linkreplace &quot;the “other god”&quot; t8n&gt;&gt;&lt;&lt;linkreplace &quot;any god&quot; t8n&gt;&gt;&lt;&lt;linkreplace &quot;anything&quot; t8n&gt;&gt;anything, except for you&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;?
 
-You can&#39;t be her [[north-&gt;final_fight_12]].</tw-passagedata><tw-passagedata pid="177" name="cycling_final_fight_11" tags="" position="1525,4200" size="100,100">&lt;&lt;silently&gt;&gt;
+You can&#39;t be her [[north-&gt;final_fight_12]].</tw-passagedata><tw-passagedata pid="175" name="cycling_final_fight_11" tags="" position="1525,4200" size="100,100">/* UNUSED AT THE MOMENT */
+&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_fight_11&gt;&gt;
   &lt;&lt;set $choicesCount_final_fight_11 to -1&gt;&gt;
-  &lt;&lt;set $choices_final_fight_11 to [&quot;the “other god”?&quot;, &quot;anything&quot;]&gt;&gt;
+  &lt;&lt;set $choices_final_fight_11 to [&quot;the “other god”&quot;, &quot;any god&quot;, &quot;anything&quot;, &quot;anything, except for you&quot;]&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set $choicesCount_final_fight_11 to $choicesCount_final_fight_11 + 1&gt;&gt;
@@ -1909,17 +1942,17 @@ You can&#39;t be her [[north-&gt;final_fight_12]].</tw-passagedata><tw-passageda
 
 &lt;&lt;set $cyclingResult_final_fight_11 to $choices_final_fight_11[$choicesCount_final_fight_11]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_final_fight_11[$choicesCount_final_fight_11] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_11&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="178" name="final_fight_12" tags="pink" position="1650,4100" size="100,100">&lt;&lt;if $cyclingResult_final_final_9_c2 is &quot;I want you to come with me&quot; or $cyclingResult_final_final_9_c1 is &quot;Could you come with me&quot;&gt;&gt;\
+\&lt;&lt;linkreplace $choices_final_fight_11[$choicesCount_final_fight_11] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_11&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="176" name="final_fight_12" tags="pink" position="1650,4100" size="100,100">&lt;&lt;if $cyclingResult_final_final_9_c2 is &quot;I want you to come with me&quot; or $cyclingResult_final_final_9_c1 is &quot;Could you come with me&quot;&gt;&gt;\
 [[You shouldn&#39;t come with me, you say-&gt;final_fight_13]].
 &lt;&lt;else&gt;&gt;\
 [[I can&#39;t leave with you, you say-&gt;final_fight_13]].
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="179" name="final_fight_13" tags="pink" position="1775,4100" size="100,100">[[I don&#39;t think we can save each other-&gt;final_fight_14]].</tw-passagedata><tw-passagedata pid="180" name="final_fight_14" tags="" position="1900,4100" size="100,100">&lt;&lt;include &quot;cycling_final_fight_14&quot;&gt;&gt;.
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="177" name="final_fight_13" tags="pink" position="1775,4100" size="100,100">[[I don&#39;t think we can save each other-&gt;final_fight_14]].</tw-passagedata><tw-passagedata pid="178" name="final_fight_14" tags="" position="1900,4100" size="100,100">&lt;&lt;include &quot;cycling_final_fight_14&quot;&gt;&gt;.
 
 &lt;&lt;timed 5s t8n&gt;&gt;\
 The words rise up your throat like fish up a waterfall, then fall down again. /*TODO: may want to remove this */
 
 Nothing leaves the [[fortress of your mouth-&gt;final_fight_15]].
-&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="181" name="cycling_final_fight_14" tags="" position="1900,4200" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="179" name="cycling_final_fight_14" tags="" position="1900,4200" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_fight_14&gt;&gt;
   &lt;&lt;set $choicesCount_final_fight_14 to -1&gt;&gt;
   &lt;&lt;set $choices_final_fight_14 to [&quot;You want to argue with her, to win her back to your side&quot;, &quot;You want to apologise to her, to smooth over your guilt&quot;]&gt;&gt;
@@ -1933,9 +1966,9 @@ Nothing leaves the [[fortress of your mouth-&gt;final_fight_15]].
 
 &lt;&lt;set $cyclingResult_final_fight_14 to $choices_final_fight_14[$choicesCount_final_fight_14]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_final_fight_14[$choicesCount_final_fight_14] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_14&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="182" name="final_fight_15" tags="" position="2025,4100" size="100,100">So you can only &lt;&lt;include &quot;cycling_final_fight_15&quot;&gt;&gt;.
+\&lt;&lt;linkreplace $choices_final_fight_14[$choicesCount_final_fight_14] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_14&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="180" name="final_fight_15" tags="" position="2025,4100" size="100,100">So you can only &lt;&lt;include &quot;cycling_final_fight_15&quot;&gt;&gt;.
 
-You know that this is the [[last time you will ever see her-&gt;final_fight_16]].</tw-passagedata><tw-passagedata pid="183" name="cycling_final_fight_15" tags="" position="2025,4200" size="100,100">&lt;&lt;silently&gt;&gt;
+You know that this is the [[last time you will ever see her-&gt;final_fight_16]].</tw-passagedata><tw-passagedata pid="181" name="cycling_final_fight_15" tags="" position="2025,4200" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_fight_15&gt;&gt;
   &lt;&lt;set $choicesCount_final_fight_15 to -1&gt;&gt;
   &lt;&lt;set $choices_final_fight_15 to [&quot;hug her&quot;, &quot;stand still&quot;]&gt;&gt;
@@ -1949,7 +1982,7 @@ You know that this is the [[last time you will ever see her-&gt;final_fight_16]]
 
 &lt;&lt;set $cyclingResult_final_fight_15 to $choices_final_fight_15[$choicesCount_final_fight_15]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_final_fight_15[$choicesCount_final_fight_15] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_15&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="184" name="final_fight_16" tags="" position="2150,4100" size="100,100">&lt;&lt;if $cyclingResult_final_fight_15 is &quot;hug her&quot;&gt;&gt;\
+\&lt;&lt;linkreplace $choices_final_fight_15[$choicesCount_final_fight_15] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_15&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="182" name="final_fight_16" tags="" position="2150,4100" size="100,100">&lt;&lt;if $cyclingResult_final_fight_15 is &quot;hug her&quot;&gt;&gt;\
 You hug her.
 
 You remember hugging her harder than the world was hurting &lt;&lt;include &quot;cycling_final_fight_16c2&quot;&gt;&gt;.
@@ -1959,7 +1992,7 @@ Then, she lets go, and [[turns around-&gt;final_fight_17]].
 You keep the distance you&#39;ve always maintained with her, to keep &lt;&lt;include &quot;cycling_final_fight_16&quot;&gt;&gt; safe.
 
 She [[turns around-&gt;final_fight_17]].
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="185" name="cycling_final_fight_16" tags="" position="2150,4200" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="183" name="cycling_final_fight_16" tags="" position="2150,4200" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_fight_16&gt;&gt;
   &lt;&lt;set $choicesCount_final_fight_16 to -1&gt;&gt;
   &lt;&lt;set $choices_final_fight_16 to [&quot;yourself&quot;, &quot;her&quot;, &quot;the both of you&quot;]&gt;&gt;
@@ -1973,7 +2006,7 @@ She [[turns around-&gt;final_fight_17]].
 
 &lt;&lt;set $cyclingResult_final_fight_16 to $choices_final_fight_16[$choicesCount_final_fight_16]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_final_fight_16[$choicesCount_final_fight_16] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_16&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="186" name="cycling_final_fight_16c2" tags="" position="2150,4300" size="100,100">&lt;&lt;silently&gt;&gt;
+\&lt;&lt;linkreplace $choices_final_fight_16[$choicesCount_final_fight_16] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_16&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="184" name="cycling_final_fight_16c2" tags="" position="2150,4300" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_fight_16c2&gt;&gt;
   &lt;&lt;set $choicesCount_final_fight_16c2 to -1&gt;&gt;
   &lt;&lt;set $choices_final_fight_16c2 to [&quot;you&quot;, &quot;her&quot;, &quot;the both of you&quot;]&gt;&gt;
@@ -1987,23 +2020,23 @@ She [[turns around-&gt;final_fight_17]].
 
 &lt;&lt;set $cyclingResult_final_fight_16c2 to $choices_final_fight_16c2[$choicesCount_final_fight_16c2]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_final_fight_16c2[$choicesCount_final_fight_16c2] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_16c2&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="187" name="final_fight_17" tags="" position="2275,4100" size="100,100">In front of her, a pink tear rips into space.
+\&lt;&lt;linkreplace $choices_final_fight_16c2[$choicesCount_final_fight_16c2] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_16c2&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="185" name="final_fight_17" tags="" position="2275,4100" size="100,100">In front of her, a pink tear rips into space.
 
 The tear opens up, revealing the shattered landscape of a planet that you do not recognise. Far in the distance, you can see another cathedral.
 
-Don&#39;t find me again, she says. [[It&#39;s better for the both of us-&gt;final_fight_18]].</tw-passagedata><tw-passagedata pid="188" name="final_fight_18" tags="" position="2400,4100" size="100,100">Then, she steps into the tear, and the tear [[closes like a wound-&gt;final_fight_19]].</tw-passagedata><tw-passagedata pid="189" name="final_fight_19" tags="" position="2525,4100" size="100,100">You stand in the cathedral for a while, then you run your finger through one of the gashes in the walls.
+Don&#39;t find me again, she says. [[It&#39;s better for the both of us-&gt;final_fight_18]].</tw-passagedata><tw-passagedata pid="186" name="final_fight_18" tags="" position="2400,4100" size="100,100">Then, she steps into the tear, and the tear [[closes like a wound-&gt;final_fight_19]].</tw-passagedata><tw-passagedata pid="187" name="final_fight_19" tags="" position="2525,4100" size="100,100">You stand in the cathedral for a while, then you run your finger through one of the gashes in the walls.
 
-[[This isn&#39;t your battle to fight, now-&gt;final_fight_20]].</tw-passagedata><tw-passagedata pid="190" name="final_fight_20" tags="" position="2650,4100" size="100,100">&lt;&lt;linkappend &quot;You walk away from the cathedral,&quot; t8n&gt;&gt; [[and you do not return to the monastery-&gt;credits]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="191" name="options_comment" tags="" position="625,1475" size="100,100">&lt;&lt;if setup.enableUndo.get()&gt;&gt;\
+[[This isn&#39;t your battle to fight, now-&gt;final_fight_20]].</tw-passagedata><tw-passagedata pid="188" name="final_fight_20" tags="" position="2650,4100" size="100,100">&lt;&lt;linkappend &quot;You walk away from the cathedral,&quot; t8n&gt;&gt; [[and you do not return to the monastery-&gt;credits]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="189" name="options_comment" tags="" position="625,1475" size="100,100">&lt;&lt;if setup.enableUndo.get()&gt;&gt;\
 Even if you could undo your decisions, maybe you would have made the same &lt;&lt;return &quot;mistakes&quot;&gt;&gt;.
 &lt;&lt;else&gt;&gt;\
 You can&#39;t undo your decisions. You can&#39;t undo your &lt;&lt;return &quot;mistakes&quot;&gt;&gt;.
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="192" name="options_comment_2" tags="" position="2500,2075" size="100,100">&lt;&lt;if setup.enableUndo.get()&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="190" name="options_comment_2" tags="" position="2500,2075" size="100,100">&lt;&lt;if setup.enableUndo.get()&gt;&gt;\
 She thinks that her only option is to fight. Even if she could undo her decisions, she would have made the same &lt;&lt;return &quot;mistakes&quot;&gt;&gt;.
 &lt;&lt;else&gt;&gt;\
 She thinks that her only option is to fight, yet again.
 
 She can&#39;t undo what she did. She can&#39;t undo her &lt;&lt;return &quot;mistakes&quot;&gt;&gt;.
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="193" name="credits" tags="no-undo" position="2875,400" size="100,100">&lt;div class=&quot;credit-title&quot;&gt;You Can&#39;t Save Her&lt;/div&gt;\
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="191" name="credits" tags="no-undo" position="2875,400" size="100,100">&lt;div class=&quot;credit-title&quot;&gt;You Can&#39;t Save Her&lt;/div&gt;\
 Written by Sarah Mak
 
 [[Return to the title screen-&gt;Start]]

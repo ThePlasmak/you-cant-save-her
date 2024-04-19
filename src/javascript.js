@@ -55,15 +55,13 @@ $(document).on(":passagerender", updateUndoButton);
 // AUTOSAVE
 // Autosaves whenever you enter a new passage
 $(document).on(":passagerender", function () {
-  // Check if the current passage is not a certain passage
+  // Check if autosaving is allowed (i.e., not in chapter selection mode)
   if (
     State.passage !== "Start" &&
     State.passage !== "options" &&
     State.passage !== "content_warning" &&
     State.passage !== "its_okay" &&
     State.passage !== "credits" &&
-    State.passage !== "chapters" &&
-    State.passage !== "setup_chapter_4" &&
     State.passage !== "restart"
   ) {
     Save.slots.save(1); // Automatically save to slot 1
