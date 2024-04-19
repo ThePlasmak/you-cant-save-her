@@ -57,11 +57,13 @@ $(document).on(":passagerender", updateUndoButton);
 $(document).on(":passagerender", function () {
   // Check if autosaving is allowed (i.e., not in chapter selection mode)
   if (
+    State.variables.chapter_select_active !== true &&
     State.passage !== "Start" &&
     State.passage !== "options" &&
     State.passage !== "content_warning" &&
     State.passage !== "its_okay" &&
     State.passage !== "credits" &&
+    State.passage !== "chapters" &&
     State.passage !== "restart"
   ) {
     Save.slots.save(1); // Automatically save to slot 1

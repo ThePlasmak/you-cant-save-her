@@ -32,7 +32,7 @@
   --blue-hover: rgb(131 211 243);
 
   --pink: #ff3dbc;
-  --pink-hover: rgb(252, 157, 255);
+  --pink-hover: rgb(243, 92, 248);
 
   --purple: #ab77fa;
   --purple-hover: rgb(211, 170, 255);
@@ -70,7 +70,7 @@ html {
   position: relative;
   color: rgb(255, 255, 255);
   transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
-  padding: 1em 1em 1em 1em;
+  padding: 1.2em 1.2em 1.2em 1.2em;
   border-radius: 0.25em;
   margin: 0;
   max-width: none;
@@ -212,6 +212,12 @@ p:first-of-type {
   font-family: "Inknut Antiqua", serif;
   transform: scaleX(0.94);
   transform-origin: left center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .title-image {
@@ -285,23 +291,16 @@ p:first-of-type {
 
 #chapter_4_menu {
   cursor: pointer;
-  fill: var(--blue);
   pointer-events: all;
-  transition: fill 0.3s ease;
-  /* Smooth transition for color change */
 }
 
 #chapter_4_menu path {
   transition: fill 0.3s ease;
   fill: var(--blue);
-  pointer-events: all;
-  /* Smooth transition for color change */
 }
 
-#chapter_4_menu svg:hover path {
+#chapter_4_menu:hover path {
   fill: var(--blue-hover);
-  pointer-events: all;
-  /* Change this to your desired hover color */
 }
 
 body.full-text {

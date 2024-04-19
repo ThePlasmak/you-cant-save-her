@@ -13,7 +13,10 @@ You Can't Save Her
 :: Start [no-undo] {"position":"200,400"}
 <div class="title">You Can't Save Her</div>\
 <div class="subtitle">by Sarah Mak</div>\
-<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<run Save.slots.load(1)>><</link>> · <<link 'Restart' 'restart'>><</link>><<else>>[[Start->content_warning]]<</if>> · [[Chapters->chapters]] · [[Options->options]]</div>
+<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<set $chapter_select_active to false>><<run Save.slots.load(1)>><</link>> · <<link 'Restart' 'restart'>><</link>><<else>>[[Start->content_warning]]<</if>> · [[Chapters->chapters]] · [[Options->options]]</div>
+
+:: StoryInit {"position":"75,250"}
+<<include "variable_setup">>
 
 :: options [no-undo options] {"position":"75,400"}
 <div class="options-header">''Options''</div> <span class="close">[[✖->Start]]</span>\
@@ -30,7 +33,7 @@ When this option is ''ON'', an undo button will appear at the top of the window.
 This story contains depictions of violence, horror, and mild gore.
 Are you okay with continuing this story?
 
-<<link "Yes" "intro_1">><<include "variable_setup">><</link>>
+<<link "Yes" "intro_1">><<include "variable_setup_cs_false">><</link>>
 [[No->its_okay]]
 
 :: restart [center no-undo] {"position":"350,150"}
@@ -43,22 +46,22 @@ Are you okay with continuing this story?
 :: chapters [no-undo options center] {"position":"175,550"}
 <div class="chapter-selection-header">''Chapters''</div> <span class="close">[[✖->Start]]</span>\
 <<if Save.slots.has(1)>>\
-Your previous progress will not be loaded.
-Your save will be overwritten.
+Your previous progress will not be loaded or overwritten.
 <</if>>\
+Your progress will not be saved.
 
-<span class="chapter-select-link"><<link "I" "intro_1">><<include "variable_setup">><</link>>
-<<link "II" "chapter_2">><<include "variable_setup">><</link>>
-<<link "III" "chapter_3">><<include "variable_setup">><</link>>
-<<link "𓂘" "chapter_4">><<include "variable_setup">><</link>>
-<<link "V" "chapter_5">><<include "variable_setup">><</link>></span>
+<span class="chapter-select-link"><<link "I" "intro_1">><<include "variable_setup_cs_true">><</link>>
+<<link "II" "chapter_2">><<include "variable_setup_cs_true">><</link>>
+<<link "III" "chapter_3">><<include "variable_setup_cs_true">><</link>>
+<<link '<svg version="1.1" height="19px" id="chapter_4_menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 	 viewBox="0 0 191 237" style="enable-background:new 0 0 191 237;" xml:space="preserve"> <path d="M188.3,92.6c-1.9-3.6-3.3-6.3-4.7-8.6l-38.3-61.8c-2.8-4.5-6-8.2-9.7-11c-4-3.1-8-5.4-12.2-6.8c-5-1.7-9.4-2.8-13.7-3.4 	c-4.4-0.7-9.3-1-14.4-1c-4.1,0-8.6,0.3-14,1c-4.8,0.6-9.4,1.7-13.9,3.4c-4.5,1.7-8.6,4-12.3,6.8c-3.9,3-7.2,6.7-9.8,11L7.5,84.1 	c-0.5,0.8-1,1.8-1.7,2.9l-0.5,0.9c-1,1.7-1.8,3.2-2.5,4.8c-0.7,1.6-1.3,3.2-1.8,4.9c-0.6,1.9-0.9,3.4-0.9,4.8 	c0,7.4,1.1,14.8,3.3,22.5c2.1,7.3,4.6,14.4,7.5,21.3l17.8,40.8c-1.4,3.7-2.1,7.8-2.1,12.3c0,8.2,1.6,15.4,4.8,21.8 	c3.3,6.6,8.8,11.8,16.4,15.5l0,0l2.8-0.7c2-1,3.1-3.2,2.6-5.3l-0.4-2l-0.3-0.3c-3.6-3.6-6.8-7.6-9.6-12.1c-2.8-4.3-4.2-8.9-4.2-14.1 	c0-2.6,0.5-4.9,1.5-7.1c8.6,3.2,12.7,9.6,12.7,19.2v0.8l5.9,3.7H59c1.4,0,2.6-1,2.8-2.4c0.1-0.8,0.2-1.5,0.2-2.1 	c0-6-1.6-11.6-5-17.2c-3.2-5.3-6.9-10-11-13.9c-1.4-1.4-2.6-3.4-3.7-5.8c-1.2-2.7-2.3-5.7-3.3-8.9c-1-3.1-1.9-6.3-2.6-9.2 	c-0.4-1.7-0.8-3.2-1.1-4.6c-0.2-1-0.5-2-0.7-2.8c-1.7-7.3-3.5-14.8-5-20.4c-1.8-6.9-4.3-13.5-7.4-19.8c0.1-3.9,1.1-8.1,3.1-12.4 	c2.4-4.8,5.2-9.7,8.4-14.5c3.9-5.6,7.6-10.7,11.4-15.4l0.2-0.2c4.1-5,8.3-10.2,12.3-15.2c4.1-5.1,8-10,11.7-14.7 	c3.5-4.4,6.3-8.6,8.4-12.5H113c2.1,4,4.9,8.3,8.3,12.9c4.1,5.3,7.9,10.1,11.6,14.6c2.4,2.8,4.8,5.8,7.1,8.7c1.8,2.2,3.6,4.5,5.4,6.7 	c3.9,4.7,7.8,9.9,11.5,15.2c3.3,4.9,6.2,9.7,8.4,14.5c2,4.4,3.1,8.6,3.2,12.5c-3.1,6.3-5.6,13-7.4,19.8c-0.5,1.8-0.9,3.6-1.4,5.4 	c-1.3,5.2-2.6,10.1-3.8,15l0,0.1c-0.3,1.7-0.8,3.9-1.4,6.5l-0.2,0.8c-0.6,2.6-1.4,5.5-2.6,9.2c-1,3.1-2.1,6.1-3.3,8.9 	c-1.2,3-2.6,4.8-3.5,5.8c-3.8,3.7-7.4,8.3-10.8,13.9c-3.3,5.4-5,11.2-5,17.2c0,0.2,0,0.9,0.1,1.8c0.3,2.2,1.6,2.5,2.3,2.5 	c1.2,0,2.5-0.4,3.7-1.3c1-0.7,1.8-1.5,2.4-2.1l0.4-0.4v-0.6c0-9.6,4.2-15.9,12.8-19.2c1,2.3,1.5,4.7,1.5,7.1c0,5.2-1.4,9.9-4.1,14.1 	c-3.1,4.7-6.4,8.8-9.7,12.1l-0.3,0.3l-0.4,2.1c-0.4,2.1,0.7,4.2,2.6,5.2l2.8,0.8l0,0c7.6-3.8,13.1-9,16.4-15.5 	c3.2-6.4,4.9-13.8,4.9-21.9c0-4-0.7-8.1-2.1-12.1l17.6-41c2.8-6.6,5.3-13.6,7.7-21.3c2.2-7.3,3.4-14.9,3.4-22.4 	C191,99.4,190.1,96,188.3,92.6z"/> </svg>' "chapter_4">><<include "variable_setup_cs_true">><</link>>
+<<link "V" "chapter_5">><<include "variable_setup_cs_true">><</link>></span>
 
-:: variable_setup {"position":"200,200"}
-<nobr>
+:: variable_setup {"position":"200,250"}
+<nobr>\
 /* STORY */
 <<set $dir to "north">>
-<<set $weapon to "greatsword">>
-<<set $cyclingResult_weapon_1 to "a greatsword forged from soulsteel">>
+<<set $weapon to "rapier">>
+<<set $cyclingResult_weapon_1 to "a rapier shaped from dreamsilver">>
 <<set $face_friend to 0>>
 <<set $face_mc to 0>>
 <<set $gen_dir_desc to "in front of her">>
@@ -79,10 +82,19 @@ Your save will be overwritten.
 /* TRACK VISITS */
 
 /* OVERRIDE FOR TESTING */
-</nobr>
+</nobr>\
 
-:: StoryInit {"position":"75,200"}
+:: variable_setup_cs_true {"position":"200,150"}
+<nobr>\
 <<include "variable_setup">>
+<<set $chapter_select_active to true>>
+</nobr>\
+
+:: variable_setup_cs_false {"position":"200,50"}
+<nobr>\
+<<include "variable_setup">>
+<<set $chapter_select_active to false>>
+</nobr>\
 
 :: its_okay [no-undo center] {"position":"350,275"}
 [[It's okay.->Start]]
@@ -120,7 +132,7 @@ You pray that you are [[prepared->etching]].
 <<silently>>
 <<if not $choices_weapon_1>>
   <<set $choicesCount_weapon_1 to -1>>
-  <<set $choices_weapon_1 to ["A greatsword forged from soulsteel", "A sabre carved from angel bone", "A rapier shaped from dreamsilver"]>>
+  <<set $choices_weapon_1 to ["a greatsword forged from soulsteel", "a sabre carved from angel bone", "a rapier shaped from dreamsilver"]>>
 <</if>>
 
 <<set $choicesCount_weapon_1 to $choicesCount_weapon_1 + 1>>
@@ -143,7 +155,7 @@ You pray that you are [[prepared->etching]].
 <<elseif $cyclingResult_weapon_1 is "a rapier shaped from dreamsilver">>
     <<set $weapon to "rapier">>
 <<else>>
-    <<set $weapon to "sword">>
+    <<set $weapon to "rapier">>
 <</if>>
 <</nobr>>
 
@@ -158,7 +170,7 @@ This is what you [[try to believe->weapon_3]] in.
 <<silently>>
 <<if not $choices_etching>>
   <<set $choicesCount_etching to -1>>
-  <<set $choices_etching to ["machine it with sigils of faith", "etch it with invocations of death", "anodise it with dreams of martyrdom"]>>
+  <<set $choices_etching to ["machine it with sigils of faith", "etch it with invocations of death", "anodise it in dreams of martyrdom"]>>
 <</if>>
 
 <<set $choicesCount_etching to $choicesCount_etching + 1>>
@@ -178,7 +190,7 @@ This is what you [[try to believe->weapon_3]] in.
 You put yourself into your work, [[in the way that faith demands sacrifice->weapon_5]].
 
 :: weapon_5 {"position":"925,1125"}
-And you bring a blazegun.
+And also, you bring a blazegun.
 
 [[Even though she called it a coward's weapon->mc_travel_1]].
 
@@ -198,33 +210,35 @@ She is to the [[north->mc_travel_3]].
 :: mc_travel_3 [moon] {"position":"550,1275"}
 A building rises in the distance. This is the cathedral where she is waiting.
 
-Blackened rocks dot the landscape. Perhaps this is what remains of the golems that protected this once-holy space.
+Blackened piles of rock dot the landscape. These must be the remains of the golems that protected this once-holy space.
 
 She is to the [[north->mc_travel_4]].
 
 :: mc_travel_4 [moon] {"position":"675,1275"}
 The cathedral pierces the sky like a stalagmite.
 
-Slashing sounds emanate from it.
+Slashing sounds echo from the inside.
 
 She is to the [[north->mc_travel_5]].
 
 :: mc_travel_5 [moon] {"position":"800,1275"}
-The sculptures have weathered away.
+The sculptures on the cathedral's facades have weathered away.
 
-Their faces are blank, and the folds of their clothing are fading dunes of stone.
+The faces are blank, and the folds of clothing are fading dunes of stone.
 
 She is to the [[north->mc_travel_6]].
 
 :: mc_travel_6 {"position":"925,1275"}
-She is waiting in the north of the cathedral, in front of the altar. The arches and walls are scarred with gashes, and the altar is stained red.
+She is still waiting in the north of the cathedral, in front of the altar.
 
-You look to the north. She is a silhouette cloaked in [[moonlight->mc_travel_7]].
+The arches and walls are scarred with gashes, and the altar is stained red.
+
+You look up. She is a silhouette cloaked in [[moonlight->mc_travel_7]].
 
 :: mc_travel_7 {"position":"1050,1275"}
 Moonlight is shining through the stained glass window, painting a rose of rainbows on the floor.
 
-She is still waiting. From afar, you can already see that the marks on her body are <span class="pink">glowing pink</span>.
+She is still waiting.
 
 You take [[a better look at her->mc_travel_8]].
 
@@ -301,6 +315,8 @@ She has reappeared to your south, but she still dodges your <<if $cyclingResult_
 She isn't to the $dir. You swerve around, and spot her behind you.
 <</if>>\
 
+The pink marks on her body, and her eyes, are glowing brighter than before.
+
 <<if $cyclingResult_mc_travel_7 is "Shoot her">><<include "cycling_shoot_again">>.<<else>><<include "cycling_strike_again">>.<</if>>
 
 [[Two seconds->mc_fight_3]].
@@ -313,7 +329,7 @@ She casually sidesteps your shots
 <<else>>
 She casually sidesteps your $weapon
 <</if>>
- and laughs, in the way she always did.<</nobr>>
+ and laughs, as she always did.<</nobr>>
 
 You stop to catch your breath. You consider your [[options->options_comment]]:
 
@@ -341,15 +357,14 @@ You stop to catch your breath. You consider your [[options->options_comment]]:
 :: mc_fight_4 {"position":"750,1600"}
 <<if $cyclingResult_mc_fight_3 is "Steady your aim and shoot">>\
 <<set $shot_friend_3 to true>>\
-She smirks as she slices the bolt of fire midair with her $weapon.
+She smirks as she slices the bolt of fire with her $weapon midair. The fire dissipates behind her, like smoke.
 
-The other god's power.
 <<else>>\
 <<set $shot_friend_3 to false>>\
-She smirks as she parries your thrust with such strength, you let your $weapon go. It flies off to the other side of the room, and clatters on the floor, the sound echoing throughout this hollow space.
+She smirks as she parries your thrust with such strength, your $weapon flies off to the other side of the room. It clatters on the floor, and the sound echoes throughout this hollow space.
 <</if>>\
 
-She starts laughing harder, laughing in the way that one would laugh at the antics of [[a small child->flashback_1]].
+Your old friend starts laughing harder, laughing in the way that one would laugh at the antics of [[a small child->flashback_1]].
 
 :: cycling_shoot_again {"position":"575,325"}
 <<silently>>
@@ -389,9 +404,9 @@ She starts laughing harder, laughing in the way that one would laugh at the anti
 <<timed 2.5s t8n>>\
 She smirks as she sidesteps your sword, again and again.
 
-You are children at the monastery, and you are training to fight. She was always better at anything physical—your form is far clumsier than hers.
+You are children at the monastery, and you are training to fight. She was always better at anything physical—your form has always been far clumsier than hers.
 
-The sunlight is prickling your skin, and you are trying your best to ignore it. Frustration is burning in your chest.
+The sunlight is prickling your skin, and you are trying your best to ignore this. Frustration is burning in your chest.
 
 She is still laughing.
 
@@ -428,17 +443,17 @@ You watch her fall.
 [[Three seconds.->flashback_2_2]]
 
 :: flashback_2_2 [flashback] {"position":"1125,1875"}
-I'm sorry! You say, as you run over to pick her up. She groans, but she says it doesn't hurt.
+I'm sorry! You say, as you run over to pick her up. She groans, but she says it doesn't hurt at all.
 
 The nun jogs over to bring her to the infirmary, and you insist on [[following her->flashback_3]].
 
 :: flashback_3 [flashback] {"position":"1250,1875"}
-The nun tells you that you can return to class, but you continue to apologise, <<linkreplace "I'm sorry" t8n>>I'm sorry, <<linkreplace "I'm sorry" t8n>>I'm sorry, <<linkreplace "I'm sorry" t8n>>I'm sorry<</linkreplace>><</linkreplace>><</linkreplace>>.
+The nun insists that you can simply return to class, but you continue to apologise, <<linkreplace "I'm sorry" t8n>>I'm sorry, <<linkreplace "I'm sorry" t8n>>I'm sorry, <<linkreplace "I'm sorry" t8n>>I'm sorry<</linkreplace>><</linkreplace>><</linkreplace>>.
 
 She tells you it's okay, [[you didn't mean it->flashback_4]].
 
 :: flashback_4 [flashback] {"position":"1375,1875"}
-Still, after class, you continue to tell her how sorry you are, you just tell her <span id="apology"></span><span id="sorry-link"><<link "I'm sorry,">>
+But still, after class, you continue to tell her how sorry you are, you tell her <span id="apology"></span><span id="sorry-link"><<link "I'm sorry,">>
     <<append "#apology" t8n>>I'm sorry, <</append>>
     <<replace "#sorry-link">><<link "I'm sorry,">><<append "#apology" t8n>>I'm sorry, <</append>><</link>><</replace>>
 <</link>></span>
@@ -447,7 +462,7 @@ Still, after class, you continue to tell her how sorry you are, you just tell he
 :: flashback_5 [flashback] {"position":"1500,1875"}
 You tell her, I'm sorry, once again, and you say that maybe you can give her something to make up for this—
 
-She tells you no, it's okay, and laughs, maybe we should practice later instead. You should work on your technique, you could hit even harder.
+She tells you no, it's okay, and laughs, maybe we should just practice later instead. You should work on your technique, you could hit even harder.
 
 [[Just meet me outside->chapter_2]].
 
@@ -505,16 +520,16 @@ She was always a bit of a [[coward->friend_fight_8]].
 <</timed>>
 
 :: friend_fight_9 [pink] {"position":"1375,2200"}
-You observe how the arches are carved in perfect curves, with mathematical precision.
+You observe how the arches are carved into perfect curves, with mathematical precision.
 
 You are [[tired->friend_fight_10]] of this worship of symmetry.
 
 :: friend_fight_10 [pink] {"position":"1500,2200"}
-<<link "There">><<replace "#1" t8n>> You leap up to leave your mark on this building, <<if $weapon is "rapier">>scraping<<else>>slashing<</if>> your $weapon against an arch.<</replace>><</link>>.<span id="1"></span>
-<<timed 10s>><<goto "friend_fight_11">><</timed>>\
+<<link "There">><<replace "#1" t8n>> You leave your mark on this building, <<if $weapon is "rapier">>scraping<<else>>slashing<</if>> your $weapon against an arch.<</replace>><</link>>.<span id="1"></span>
+<<timed 8s>><<goto "friend_fight_11">><</timed>>\
 
 :: friend_fight_11 [pink] {"position":"1625,2200"}
-The cathedral walls are now a patchwork of grooves. They look like scratches on an old toy.
+The cathedral walls are now a patchwork of grooves, like scratches on an old toy.
 
 You put your $weapon down.
 
@@ -545,7 +560,7 @@ Her <<linkappend "hair" t8n>> is combed perfectly, like a statue of a hero.<<set
 :: friend_fight_16 [pink] {"position":"2250,2200"}
 Exactly as you expected.
 
-And she is <<if $shot_friend_1 is true>>raising her blazegun, her finger on the trigger<<else>>raising her $weapon, ready to strike<</if>>, you—
+She is <<if $shot_friend_1 is true>>raising her blazegun, her finger on the trigger<<else>>raising her $weapon, ready to strike<</if>>, you—
 
 <<timed 1s t8n>><<link "<span class='ina-bullet'>*</span> Sidestep to the left." "friend_fight_17">><<set $friend_dodge_1 to "sidestep to the left">><</link>><</timed>>
 <<timed 1.5s t8n>><<link "<span class='ina-bullet'>*</span> Sidestep to the right." "friend_fight_17">><<set $friend_dodge_1 to "sidestep to the right">><</link>><</timed>>
@@ -613,7 +628,7 @@ You try not to laugh. What an idiot.
 
 :: friend_fight_18 [pink] {"position":"2500,2200"}
 <<if $friend_dodge_2 is "sidestep to the right">>\
-  Just like in the vision, you dodge her attack, watching the <<if $shot_friend_2 is true>>bullets fly by<<else>>blade whoosh by<</if>>.
+  Just like in the vision,<<if $friend_dodge_1 is "step into a fold in space and reappear behind her">> again,<</if>> you dodge her attack, watching the <<if $shot_friend_2 is true>>bullets fly by<<else>>blade whoosh by<</if>>.
 <<else>>\
   <<if $goddess_freedom_seen is false>>\
     The goddess gave you the freedom to make your own mistakes. You defy her vision, just to prove to yourself that you do not need it.
@@ -623,7 +638,7 @@ You try not to laugh. What an idiot.
 
   <<if $wound_heal_seen is true>>\
     <<if $shot_friend_2 is true>>\
-      You can feel the pleasant tickling sensation of your wounds healing, feeling how the bullets push out of your skin.
+      You can feel the pleasant tickling sensation of your wounds healing, feeling how the bullets are pushing out of your flesh.
     <<else>>\
       You can feel the pleasant tickling sensation of your wounds healing, feeling how the gash in your skin is folding over itself.
     <</if>>\
@@ -648,10 +663,12 @@ Maybe this would finally scare her away.
 <<if $shot_friend_3 is true>>\
 It is as if time has slowed down to a quarter of a second. You slice the bolt of fire midair, and it tears into two.
 <<else>>\
-You tighten your grip on the $weapon, and parry her attack. To your surprise, she lets the weapon go. It flies off to the other side of the room, and clatters on the floor, so you hear a ghastly echo.
+You tighten your grip on the $weapon, and parry her attack. To your surprise, she lets the weapon go. It flies off to the other side of the room, and clatters on the floor.
+
+You hear a ghastly echo.
 <</if>>\
 
-You compose yourself, then you laugh again. This is the first time you have seen your friend [[in years->tween_flashback_1]], and her first reaction is to try to kill you?
+You laugh again. This is the first time you have seen your friend [[in years->tween_flashback_1]], and her first reaction is to try to kill you?
 
 :: tween_flashback_1 [flashback long-t8n pink] {"position":"150,2400"}
 <<timed 2.5s t8n>>\
@@ -666,17 +683,20 @@ Most of them were stolen, but some were confiscated from an acolyte in the monas
 She has been locked away, to be [[reeducated->tween_flashback_2]]. /* TODO: may want to improve this */
 
 :: tween_flashback_2 [flashback pink] {"position":"400,2400"}
-But that does not stem your curiosity.
+However, that does not stem your curiosity.
 
 You are young, and <<include "cycling_tween_flashback_2">>. You want to steal one of these texts before they are destroyed.
 
-And your friend is refusing to help you. They are banned for a reason, she says.
+And your friend is refusing to help you. They have been banned for a reason, she says.
 
-They're dangerous. It's best not to read them in the first place.
+They must be dangerous. It's best not to read them in the first place.
 
-But you tell her, don't you want to know what's out there? There must be worlds other than the one we know.
+But you tell her, don't you want to know what's out there? There must be [[worlds other than the one we know->tween_flashback_2_1]].
 
-She pauses. Okay, she says, but how?
+:: tween_flashback_2_1 [flashback pink] {"position":"525,2550"}
+She pauses. You know that deep in her stubborn heart, she wants to read it too.
+
+Okay, she says. But how?
 
 It's not that difficult, you answer. Just sneak into the library storage room [[during the assistant's break->tween_flashback_3]].
 
@@ -703,9 +723,9 @@ So you waited with her in the library, waiting for the assistant to leave.
 The assistant steps out, and the both of you [[sneak in->tween_flashback_4]].
 
 :: tween_flashback_4 [flashback pink] {"position":"650,2400"}
-Inside, you see piles of thick, yellowed books and loose paper. The books do not look very different from the books in the library. You feel a little disappointed.
+Inside, you see piles of thick, yellowed books and loose paper. The books do not look very different from the books you have seen in the library, and you feel a little disappointed.
 
-Your friend is telling you to leave. Let's go now, please.
+Let's go now, please, your friend says.
 
 Just as you turn around, you notice that one of the books is [[glowing pink->tween_flashback_5]].
 
@@ -723,43 +743,13 @@ That makes you want to [[read it more->tween_flashback_6]].
 [[You learn about the other god->tween_flashback_8]].
 
 :: tween_flashback_8 [flashback pink] {"position":"1150,2400"}
-You spend your nights reading the book, and your time burns away.
+You spend your next nights reading the book, and your time burns away.
 
 A few days later, you tell your friend, please read it, there is another way we can live. A way beyond these walls.
 
 Your friend says, I don't <<include "cycling_tween_flashback_8">> to know. But you insist. You ask her, don't you trust me?
 
 She trusted you, because <<linkreplace "you were her friend" t8n>>she didn't have the strength to [[fight back->tween_flashback_9]]<</linkreplace>>.
-
-:: tween_flashback_9 [flashback pink] {"position":"1275,2400"}
-She opens the book to a page in the middle.
-
-Your friend seems transfixed, as she flips to the next page, then the next, ignoring you, and everything around her.
-
-Then, she stops, and [[throws the book down->tween_flashback_10]].
-
-:: tween_flashback_10 [flashback pink] {"position":"1400,2400"}
-She tells you, you should be reported for keeping this. You ask her, are you really going to?
-
-She doesn't look at you.
-
-No, she answers. Of course she can't.
-
-She was always a [[coward->tween_flashback_11]].
-
-:: tween_flashback_11 [flashback pink] {"position":"1525,2400"}
-After that, she doesn't strike as hard during training sessions, doesn't answer as many questions in class, and doesn't talk to you as often.
-
-[[She lives like a ghost->tween_flashback_12]].
-
-:: tween_flashback_12 [flashback pink] {"position":"1650,2400"}
-You don't apologise to her, but you tell her that you won't force her to do anything again. You know that this sickness is your fault.
-
-Maybe she read something which was too dangerous for her. Maybe the very idea of other paths and choices was too dangerous for her.
-
-Ideas are the most dangerous things in the universe.
-
-You wonder if reading the book broke her, somehow. You wonder if you are the reason why she has lost her [[faith->chapter_3]].
 
 :: cycling_tween_flashback_8 {"position":"1150,2500"}
 <<silently>>
@@ -778,6 +768,40 @@ You wonder if reading the book broke her, somehow. You wonder if you are the rea
 <</silently>>
 \<<linkreplace $choices_tween_flashback_8[$choicesCount_tween_flashback_8] t8n>><<include "cycling_tween_flashback_8">><</linkreplace>>
 
+:: tween_flashback_9 [flashback pink] {"position":"1275,2400"}
+She opens the book to a page in the middle.
+
+Your friend simply stands there, transfixed, as she flips to the next page, then the next, ignoring you, and everything around her.
+
+Then, she stops, and [[throws the book down->tween_flashback_10]].
+
+:: tween_flashback_10 [flashback pink] {"position":"1400,2400"}
+She tells you, you should be reported for keeping this.
+
+You ask her, are you really going to?
+
+She doesn't look at you.
+
+No, she answers. Of course she can't.
+
+She was always a [[coward->tween_flashback_11]].
+
+:: tween_flashback_11 [flashback pink] {"position":"1525,2400"}
+After that, she doesn't strike as hard during training sessions, doesn't answer as many questions in class, and doesn't talk to you as often.
+
+[[She lives like a ghost->tween_flashback_12]].
+
+:: tween_flashback_12 [flashback pink] {"position":"1650,2400"}
+You don't apologise to her, but you tell her, I won't force you to do anything you don't want to do, ever again.
+
+You know that this sickness is your fault.
+
+Maybe she read something that was too dangerous for her. Maybe the very idea of other choices was too dangerous for her.
+
+Ideas are the most dangerous things in the universe.
+
+You wonder if reading the book broke her, somehow. You wonder if you are the reason why she has lost her [[faith->chapter_3]].
+
 :: chapter_3 [center purple] {"position":"0,2900","size":"200,100"}
 <span class="number-heading">[[III->choiceless_fight_1]]</span>
 
@@ -785,7 +809,7 @@ You wonder if reading the book broke her, somehow. You wonder if you are the rea
 [[The sacred algorithms have made their predictions->choiceless_fight_2]].
 
 :: choiceless_fight_2 {"position":"625,2900"}
-They have predicted how <<linkreplace "she will fight you" t8n>>you [[must->choiceless_fight_2_1]] fight her<</linkreplace>>.
+They have predicted how <<linkreplace "she will fight you" t8n>>[[you must fight her->choiceless_fight_2_1]]<</linkreplace>>.
 
 :: choiceless_fight_2_1 {"position":"750,2900"}
 [[You must simply follow their instructions->choiceless_fight_2_2]].
@@ -846,7 +870,7 @@ She has reappeared 183.24 degrees clockwise from the north.
 :: choiceless_fight_6 {"position":"1250,2900"}
 She deflects the first shot, and dodges the second, but the third shot hits her squarely in the stomach. The fire eats away her armor, then her padded clothing, then—
 
-You look away. You don't need to see her to follow the algorithms' instructions.
+You look away. You don't need to see her to follow the sacred algorithms' instructions.
 
 <<include "cycling_choiceless_fight_6">>.
 
@@ -898,7 +922,7 @@ Well, of course they chose [[her->teen_flashback_6]].
 <<silently>>
 <<if not $choices_teen_flashback_5>>
   <<set $choicesCount_teen_flashback_5 to -1>>
-  <<set $choices_teen_flashback_5 to ["legend", "hero"]>>
+  <<set $choices_teen_flashback_5 to ["hero", "legend"]>>
 <</if>>
 
 <<set $choicesCount_teen_flashback_5 to $choicesCount_teen_flashback_5 + 1>>
@@ -922,7 +946,7 @@ Well, of course they chose [[her->teen_flashback_6]].
 [[You want more choices->teen_flashback_8]].
 
 :: teen_flashback_8 [pink flashback] {"position":"1450,3200"}
-So you continue to read the book, and eventually, you reach the middle.
+So you press on with reading through the book, and eventually, you reach its middle.
 
 At this point, you are reading this out of [[hate->teen_flashback_9]].
 
@@ -933,9 +957,10 @@ You [[hate->teen_flashback_10]] the monastery's rules.
 You [[hate->teen_flashback_11]] this place is honing you into a weapon, to fight for a cause that you do not even believe in.
 
 :: teen_flashback_11 [pink flashback] {"position":"1825,3200"}
-You hate this society's worship of <<include "cycling_teen_flashback_11">>.
+You [[hate->teen_flashback_11_1]] this society's worship of <<include "cycling_teen_flashback_11">>.
 
-[[You want more choices->teen_flashback_11_1]].
+:: teen_flashback_11_1 [pink flashback] {"position":"1900,3350"}
+[[You want more choices->teen_flashback_12]].
 
 :: cycling_teen_flashback_11 {"position":"1950,3100"}
 <<silently>>
@@ -954,7 +979,7 @@ You hate this society's worship of <<include "cycling_teen_flashback_11">>.
 <</silently>>
 \<<linkreplace $choices_teen_flashback_11[$choicesCount_teen_flashback_11] t8n>><<include "cycling_teen_flashback_11">><</linkreplace>>
 
-:: teen_flashback_11_1 [pink flashback] {"position":"1950,3200"}
+:: teen_flashback_12 [pink flashback] {"position":"1950,3200"}
 So, you keep reading.
 
 [[You turn over the page->teen_flashback_13]].
@@ -1026,7 +1051,7 @@ Her thoughts
 <<timed 6s>><<goto "teen_flashback_15">><</timed>>\
 
 :: teen_flashback_15 [pink full-text] {"position":"2325,3200"}
-Time slows down until all that exist are your thoughts, and her thoughts. Maybe time does not exist, it's only thoughts. Maybe space is also a fabric of thoughts. At the beginning of the universe there were her thoughts, and when the universe dies all that will remain will be her thoughts. Time has never existed for her, because her thoughts are beyond time and space. There has never been any time, or space, only her thoughts. Her thoughts are beyond reality, beyond time, beyond structure. Her thoughts break the childish thought of structure. Maybe you thought this was freedom. Maybe thoughts will give you the freedom you want. Thoughts give you choices. Choices give you freedom, so thoughts give you freedom. Her thoughts can give you freedom. Freedom from the limitations of your body, time, and your thoughts. So you let her thoughts in. Now what you thought was your identity, your personhood, and your self no longer exists. The barriers between you and reality, and time, and space, and her, no longer exist. You can reshape reality, just like you can reshape your thoughts. Reality is only your thoughts, which are her thoughts. What you thought were your thoughts are now her thoughts. You can see nothing, hear nothing, feel nothing, but her thoughts. Her thoughts are in your mind and your veins and your bones and your flesh and your entire body. Your body is a thought. It is one of her thoughts. You thought your body was yours but it was always one of her thoughts, just like how she thought the universe into existence. The universe was always a patchwork of her thoughts. The only thing that has ever existed are her thoughts. Her thoughts are all you think. You can only think her thoughts. Her thoughts are the only thing that exist, for they are the substance of this shallow universe. It's all just her thoughts. Her thoughts are there. Her thoughts are here. Her thoughts are yours. Embrace her thoughts. Her thoughts. Her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoug htst hthoug  htstho ughtsth ough tsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughts oughtst houghts houghts thoug ht sthoughtsth ought sthough tsth oug htsthough tsthoughtsthou ght sthoughtsth thou ghtsthough tsthou ghtsthoughtstho u ghtsthought st hough tsthou ghts thou ghtsth oughtsth ou ght sth o ughtsthoughtsth ough tst houghtsth ou ghtstho ughtsth ou ghtsthough ts th ou g ht st h o ug h ts tho ught s th oug hts th ou gh tsthou ghtsth o ug htsth o ugh t st ho ught s thou gh t st hou gh ts th oug h tst  hou gh tsth ou ght sth ou ght sth oug h tst ho ug h ts th o ug hts t ho ug ht st h o ug hts t ho ug hts t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s
+Time slows down until all that exist are your thoughts, and her thoughts. Maybe time does not exist, it's only thoughts. Maybe space is also a fabric of thoughts. At the beginning of the universe there were her thoughts, and when the universe breathes its final sordid breath all that will remain will be her thoughts. Time has never existed for her, because her thoughts are beyond time and space. There has never been any time, or space, only her thoughts. Her thoughts are beyond reality, beyond time, beyond structure. Her thoughts break the childish thought of structure. Maybe you thought this was freedom. Maybe thoughts will give you the freedom you want. Thoughts give you choices. Choices give you freedom, so thoughts give you freedom. Her thoughts give you more choices. Her thoughts can give you freedom. Freedom from the limitations of your body, time, and your thoughts. So you let her thoughts in. Now what you thought was your identity, your personhood, and your self no longer exists. The barriers between you and reality, time, space, and her no longer exist. You can reshape reality, just like you can easily reshape your thoughts. Reality is only your thoughts, which are her thoughts. What you thought were your thoughts are now her thoughts. You can see nothing, hear nothing, and feel nothing but her thoughts. Her thoughts are in your mind, veins, bones and flesh and your entire body. Your body is a thought. It is one of her thoughts. You thought your body was yours but it was always one of her thoughts, just like how she thought the universe into existence. The universe was always a patchwork of her thoughts. The only thing that has ever existed are her thoughts. Her thoughts are all you think. You can only think her thoughts. Her thoughts are the only thing that exist, for they are the substance of this shallow universe. It's all just her thoughts. Her thoughts are there. Her thoughts are here. Her thoughts are yours. Embrace her thoughts. Her thoughts. Her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoug htst hthoug  htstho ughtsth ough tsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughts oughtst houghts houghts thoug ht sthoughtsth ought sthough tsth oug htsthough tsthoughtsthou ght sthoughtsth thou ghtsthough tsthou ghtsthoughtstho u ghtsthought st hough tsthou ghts thou ghtsth oughtsth ou ght sth o ughtsthoughtsth ough tst houghtsth ou ghtstho ughtsth ou ghtsthough ts th ou g ht st h o ug h ts tho ught s th oug hts th ou gh tsthou ghtsth o ug htsth o ugh t st ho ught s thou gh t st hou gh ts th oug h tst  hou gh tsth ou ght sth ou ght sth oug h tst ho ug h ts th o ug hts t ho ug ht st h o ug hts t ho ug hts t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s
 <<timed 5s>><<goto "teen_flashback_16">><</timed>>\
 
 :: teen_flashback_16 [no-t8n pink flashback] {"position":"2450,3200"}
@@ -1080,7 +1105,7 @@ The door begins to open. The room is dark, and it is only lit by flickering cand
 [[Two seconds->teen_2_flashback_7]].
 
 :: teen_2_flashback_7 [flashback] {"position":"950,3650"}
-You see the corner of her wooden desk.
+You see the corner of her desk.
 
 [[Three seconds->teen_2_flashback_8]].
 
@@ -1094,7 +1119,7 @@ The door is fully open. You see her <<linkappend "sitting at her desk," t8n>> re
 :: teen_2_flashback_10 [flashback] {"position":"1325,3650"}
 <<timed 2s t8n>>It's your fault, isn't it? You should have warned her about the book, but you didn't.
 
-You were scared that telling her about it <<include "cycling_teen_2_flashback_10">>.
+You were scared that warning her about it <<include "cycling_teen_2_flashback_10">>.
 
 <<timed 6s t8n>>You replay your regrets.<</timed>>
 
@@ -1119,11 +1144,11 @@ You were scared that telling her about it <<include "cycling_teen_2_flashback_10
 \<<linkreplace $choices_teen_2_flashback_10[$choicesCount_teen_2_flashback_10] t8n>><<include "cycling_teen_2_flashback_10">><</linkreplace>>
 
 :: teen_2_flashback_11 [flashback] {"position":"1450,3650"}
-You try to make a choice.
+You try to make a decision.
 
 You could talk to her, but you fear being close to her. You don't know how dangerous <<include "cycling_teen_2_flashback_11">> is.
 
-You could report this to the nuns, but you know that the acolytes sent to be reeducated [[never come back->teen_2_flashback_12]].
+You could report this to the nuns, but you know that the acolytes who where sent to be reeducated [[never come back->teen_2_flashback_12]].
 
 :: cycling_teen_2_flashback_11 {"position":"1450,3550"}
 <<silently>>
@@ -1146,7 +1171,7 @@ You could report this to the nuns, but you know that the acolytes sent to be ree
 So you make what you think is the best choice, which is still a poor [[choice->teen_2_flashback_12_1]].
 
 :: teen_2_flashback_12_1 [flashback] {"position":"1700,3650"}
-You explain the situation to the nuns, <<linkappend "omitting your role in the story," t8n>> for you are a coward<</linkappend>>, and you hope that she will survive as long as possible.
+You explain the situation to the nuns, <<linkappend "omitting your role in this story" t8n>>, for you are a coward<</linkappend>>, and you hope that she will survive as long as possible.
 
 At least [[she would be safe->teen_2_flashback_13]].
 
@@ -1171,7 +1196,7 @@ But how? You ask. This monastery is surrounded by an army of golems—
 
 It's barely an army now. And I have a way.
 
-If you want to join me, meet me at the gates [[tomorrow evening->teen_2_flashback_16]].
+If you want to join me, meet me at the gates [[this evening->teen_2_flashback_16]].
 
 :: teen_2_flashback_16 [flashback] {"position":"2200,3650"}
 <<linkreplace "You wait." t8n>>You wait, but you make what you think is the best choice, which is still a poor [[choice->teen_2_flashback_17]].<</linkreplace>>
@@ -1237,26 +1262,26 @@ When you read the book, you <<linkappend "realised" t8n>> that to the gods, you 
 \<<linkreplace $choices_teen_2_flashback_17c3[$choicesCount_teen_2_flashback_17c3] t8n>><<include "cycling_teen_2_flashback_17c3">><</linkreplace>>
 
 :: teen_2_flashback_18 [flashback] {"position":"2450,3650"}
-So you can only hope that your friend is safe, and your test will not involve her.
+So you can only hope that your friend is safe, and your future test will not involve her.
 
 Your hope is greater than your [[faith->teen_2_flashback_19]], these days.
 
 :: teen_2_flashback_19 [flashback pink] {"position":"325,3775"}
-<<timed 2s t8n>>You are at the garden gates, waiting for your friend.
+<<timed 2s t8n>>You are at the gates, waiting for your friend.
 
-The garden is littered with rocky remains of golems, and the fountain water is a deep red.
+The garden is littered with the crumbled remains of golems, and the fountain water is a deep red.
 
-You are carrying a $weapon, that you stole from the armory.
+You are carrying a $weapon that you stole from the armory.
 
 [[One second->teen_2_flashback_20]].<</timed>>
 
 :: teen_2_flashback_20 [flashback pink] {"position":"450,3775"}
-You continue to wait. To stem your boredom, you toss the $weapon up into the air, as if it was a knife.
+You continue to wait. To stave off your boredom, you toss the $weapon up into the air, as if it were a knife.
 
 [[Two seconds->teen_2_flashback_21]].
 
 :: teen_2_flashback_21 [flashback pink] {"position":"575,3775"}
-You catch the $weapon in your hands.
+You catch the $weapon in your hand.
 
 She is still not here.
 
@@ -1274,7 +1299,7 @@ She is still not here.
 :: teen_2_flashback_25 [flashback pink] {"position":"1075,3775"}
 You are tired of waiting.
 
-But still, you wait a little longer, holding on to your last bit of hope, counting the seconds for the last [[time->teen_2_flashback_26]].
+But still, you wait a little longer, holding on to your last bit of <<linkreplace "faith" t8n>>hope<</linkreplace>>, counting the seconds for the last [[time->teen_2_flashback_26]].
 
 :: teen_2_flashback_26 [flashback pink] {"position":"1200,3775"}
 Soon, time will not matter to you anymore.
@@ -1285,12 +1310,14 @@ Soon, time will not matter to you anymore.
 You hear the guttural rumble of the [[golems->teen_2_flashback_28]].
 
 :: teen_2_flashback_28 [flashback pink] {"position":"1450,3775"}
-One of the golem aims its arm of rock at you.
+One of the golems aims its arm of rock at you.
 
 [[One second->teen_2_flashback_28_1]].
 
 :: teen_2_flashback_28_1 [flashback pink] {"position":"1575,3775"}
 You realise that your friend has <<include "cycling_teen_2_flashback_28_1">>.
+
+But didn't you tell her, a long time ago, that you wouldn't force her to do anything that she didn't want to do?
 
 [[One second->teen_2_flashback_29]].
 
@@ -1312,16 +1339,16 @@ You realise that your friend has <<include "cycling_teen_2_flashback_28_1">>.
 \<<linkreplace $choices_teen_2_flashback_28_1[$choicesCount_teen_2_flashback_28_1] t8n>><<include "cycling_teen_2_flashback_28_1">><</linkreplace>>
 
 :: teen_2_flashback_29 [flashback pink] {"position":"1700,3775"}
-The golem shoots the rocks in your direction.
+The golem launches the rocks in your direction.
 
-The rocks are suspended in the air, and everything around you—the golem, the fountain water, the blades of grass—is completely still.
+The rocks are suspended in the air, and everything around you—the golem, the water from the fountain, the blades of grass—is completely still.
 
 [[One second->teen_2_flashback_30]].
 
 :: teen_2_flashback_30 [flashback pink] {"position":"1825,3775"}
-You admire the golem for a moment.
+You admire the golem for a moment—its cracks, its runes, and the way the light reflects off every imperfect crevice on its body.
 
-The nuns could never explain whether the golems were controlled by the sacred algorithms, or if they are powered by some arcane mechanism.
+The nuns could never explain whether the golems are controlled by the sacred algorithms, or if they are powered by some arcane mechanism.
 
 [[One second->teen_2_flashback_31]].
 
@@ -1333,7 +1360,7 @@ You wonder if the gates and golems are meant to keep heretics out, or keep the w
 [[One second->teen_2_flashback_32]].
 
 :: teen_2_flashback_32 [flashback pink] {"position":"2075,3775"}
-You pull the bars away, and they stay still midair. They stay in place, as if they are some kind of inscrutable sculpture.
+You pull the bars away, and they remain suspended in midair. They stay in place, as if they are some kind of inscrutable sculpture.
 
 You wonder what stories the monastery will tell about you.
 
@@ -1367,13 +1394,13 @@ You walk away from the monastery.
 [[But this is what you tell yourself->final_fight_4]].
 
 :: final_fight_4 {"position":"650,4100"}
-You have already pictured this fight with her, replaying each of your blows <<linkappend "again," t8n>> and [[again->final_fight_5]].<</linkappend>>
+You have already pictured this fight with her, replaying every single one of your blows <<linkappend "again," t8n>> and [[again->final_fight_5]].<</linkappend>>
 
 :: final_fight_5 {"position":"775,4100"}
 The nuns directed you to consult the sacred algorithms, but you do not want to add to the [[statistics of violence->final_fight_6]].
 
 :: final_fight_6 {"position":"900,4100"}
-So when you walk into the cathedral, you ready yourself to talk.
+So when you step into the cathedral, you ready yourself to talk to her.
 
 <<include "cycling_final_fight_6">>.
 
@@ -1403,7 +1430,7 @@ So when you walk into the cathedral, you ready yourself to talk.
 [[Three seconds->final_fight_9]].
 
 :: final_fight_9 {"position":"1275,4100"}
-She turns around. You notice how the marks on her skin are still glowing pink, and you notice how years of fighting have cratered her body.
+She turns around. You notice how the marks on her skin are still glowing pink, and you notice how the years of fighting have cratered her body.
 
 <<if $cyclingResult_final_fight_6 is "The nuns told me to kill you, but I don't want to">>.\
 Her irises flicker like fire. She says, you can just go away. You didn't have to find me.
@@ -1490,6 +1517,8 @@ You can't be her [[north->final_fight_12]].
 \<<linkreplace $choices_final_fight_11[$choicesCount_final_fight_11] t8n>><<include "cycling_final_fight_11">><</linkreplace>>
 
 :: final_fight_12 [pink] {"position":"1650,4100"}
+You avoid her gaze like the sun.
+
 <<if $cyclingResult_final_final_9_c2 is "I want you to come with me" or $cyclingResult_final_final_9_c1 is "Could you come with me">>\
 [[You shouldn't come with me, you say->final_fight_13]].
 <<else>>\
@@ -1501,11 +1530,13 @@ You can't be her [[north->final_fight_12]].
 
 :: final_fight_14 {"position":"1900,4100"}
 <<include "cycling_final_fight_14">>.
+<<timed 4s t8n>>\
 
-<<timed 5s t8n>>\
 The words rise up your throat like fish up a waterfall, then fall down again. /*TODO: may want to remove this */
+<<timed 5s t8n>>\
 
 Nothing leaves the [[fortress of your mouth->final_fight_15]].
+<</timed>>\
 <</timed>>\
 
 :: cycling_final_fight_14 {"position":"1900,4200"}
@@ -1549,7 +1580,7 @@ You know that this is the [[last time you will ever see her->final_fight_16]].
 
 :: final_fight_16 {"position":"2150,4100"}
 <<if $cyclingResult_final_fight_15 is "hug her">>\
-You hug her.
+So, you hug her. You feel her stiffen for a moment, but after a heartbeat, she pulls you closer.
 
 You remember hugging her harder than the world was hurting <<include "cycling_final_fight_16c2">>.
 
@@ -1581,7 +1612,7 @@ She [[turns around->final_fight_17]].
 <<silently>>
 <<if not $choices_final_fight_16c2>>
   <<set $choicesCount_final_fight_16c2 to -1>>
-  <<set $choices_final_fight_16c2 to ["you", "her", "the both of you"]>>
+  <<set $choices_final_fight_16c2 to ["her", "you", "the both of you"]>>
 <</if>>
 
 <<set $choicesCount_final_fight_16c2 to $choicesCount_final_fight_16c2 + 1>>
@@ -1595,17 +1626,21 @@ She [[turns around->final_fight_17]].
 \<<linkreplace $choices_final_fight_16c2[$choicesCount_final_fight_16c2] t8n>><<include "cycling_final_fight_16c2">><</linkreplace>>
 
 :: final_fight_17 {"position":"2275,4100"}
-In front of her, a pink tear rips into space.
+She raises her $weapon and slices a tear into space. The edges of the tear crackle with pink energy.
 
-The tear opens up, revealing the shattered landscape of a planet that you do not recognise. Far in the distance, you can see another cathedral.
+The tear opens up, revealing the shattered landscape of a planet that you do not recognise.
+
+Far off in the distance, you can see another cathedral.
 
 Don't find me again, she says. [[It's better for the both of us->final_fight_18]].
 
 :: final_fight_18 {"position":"2400,4100"}
-Then, she steps into the tear, and the tear [[closes like a wound->final_fight_19]].
+Then, she steps into the tear, and it [[closes like a wound->final_fight_19]].
 
 :: final_fight_19 {"position":"2525,4100"}
-You stand in the cathedral for a while, then you run your finger through one of the gashes in the walls.
+You stand in the cathedral for a while, watching the space where she stood.
+
+Then, you walk over to a wall, and you run your finger through one of its gashes.
 
 [[This isn't your battle to fight, now->final_fight_20]].
 
@@ -1614,26 +1649,24 @@ You stand in the cathedral for a while, then you run your finger through one of 
 
 :: options_comment {"position":"625,1475"}
 <<if setup.enableUndo.get()>>\
-Even if you could undo your decisions, maybe you would have made the same <<return "mistakes">>.
+Even if you could undo your decisions, you would have made the same <<return "mistakes">>.
 <<else>>\
 You can't undo your decisions. You can't undo your <<return "mistakes">>.
 <</if>>\
 
-:: options_comment_2 {"position":"2500,2075"}
+:: options_comment_2 [pink] {"position":"2500,2075"}
 <<if setup.enableUndo.get()>>\
-She thinks that her only option is to fight. Even if she could undo her decisions, she would have made the same <<return "mistakes">>.
+She thinks that the only option is to fight. Even if she could undo her decisions, she would have made the same <<return "mistakes">>.
 <<else>>\
-She thinks that her only option is to fight, yet again.
+She thinks that the only option is to fight, yet again.
 
 She can't undo what she did. She can't undo her <<return "mistakes">>.
 <</if>>\
 
 :: credits [no-undo] {"position":"2875,400"}
+<<timed 2.5s t8n>>\
 <div class="credit-title">You Can't Save Her</div>\
 Written by Sarah Mak
 
 [[Return to the title screen->Start]]
-
-<<timed 2.5s t8n>>\
-
 <</timed>>\
