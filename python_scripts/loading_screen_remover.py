@@ -23,7 +23,7 @@ def modify_html_file(file_path):
         with open(file_path, "w", encoding="utf-8") as file:
             file.write(file_contents)
 
-        print(f"The {file_path} has been modified successfully.")
+        print(f"{file_path} has been modified successfully.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
