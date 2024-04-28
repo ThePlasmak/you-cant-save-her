@@ -33,7 +33,7 @@ setup.enableUndo = {
 };
 
 function updateUndoButton() {
-  $("#undobar").remove(); // Remove existing Undo button, if any.
+  $("#undobar").remove(); // Remove existing undo button, if any.
 
   // If chapter selection is active, and if the current passage is one of the chapter starts, hide the undo button
   var isChapterSelectionActive = State.variables.chapter_select_active;
@@ -83,8 +83,8 @@ $(document).on(":passagerender", function () {
   }
 });
 
-// CSS CHANGES FOR #PASSAGES AND LINKS
-// I can't change the #passages sections with Twine tags alone
+// CSS CHANGES
+// For #passages, as I can't change the #passages sections with Twine tags alone
 $(document).on(":passagerender", function (ev) {
   // Get the current passage's tags
   var currentTags = tags();
@@ -102,9 +102,10 @@ $(document).on(":passagerender", function (ev) {
       "background-color": "rgb(27 27 27)",
       "box-shadow": "var(--shadow-elevation-high)",
     });
-  } else if (currentTags.includes("full-text")) {
+  } else if (currentTags.includes("full-text-white")) {
     $("#passages").css({
       padding: "0",
+      color: "white",
     });
   } else {
     // Reset styles for passages without certain tags
@@ -117,6 +118,17 @@ $(document).on(":passagerender", function (ev) {
     });
   }
 });
+
+// // Fix passages with the no-t8n tag having the wrong text color when undoed to
+// var isWhitePassage = ["teen_flashback_15"].includes(State.passage);
+
+// $(document).on(":passagerender", function () {
+//   if (State.passage == "teen_flashback_15") {
+//     $("#passages").css("color", "white");
+//   } else {
+//     $("#passages").css("color", ""); // Reset to default or another specified value if needed
+//   }
+// });
 
 // GO TO START ON REFRESH
 window.onbeforeunload = function () {
