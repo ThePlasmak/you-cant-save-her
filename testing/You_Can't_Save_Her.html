@@ -98,7 +98,12 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4// --><tw-storydata name="You Can&#39;t Save Her" startnode="1" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "CSS.css" */
+	<!-- UUID://3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4// --><tw-storydata name="You Can&#39;t Save Her" startnode="178" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "CSS.css" */
+html {
+  visibility: hidden;
+  opacity: 0;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -292,6 +297,22 @@ p:first-of-type {
   transform: scaleX(0.92);
 }
 
+.cw-header {
+  font-size: 1.38em;
+  font-weight: 800;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 2;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.92);
+  padding-bottom: 2px;
+}
+
 .options-header {
   font-size: 1.38em;
   font-weight: 800;
@@ -367,41 +388,51 @@ p:first-of-type {
 
 .chapter-select-link {
   font-size: 120%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-#chapter_4 {
+#chapter_5 {
   cursor: pointer;
   fill: var(--purple);
   pointer-events: all;
   transition: fill 0.3s ease;
-  /* Smooth transition for color change */
 }
 
-#chapter_4 path {
+#chapter_5 path {
   transition: fill 0.3s ease;
   fill: var(--purple);
   pointer-events: all;
-  /* Smooth transition for color change */
 }
 
-#chapter_4 svg:hover path {
+#chapter_5 svg:hover path {
   fill: var(--purple-hover);
   pointer-events: all;
-  /* Change this to your desired hover color */
 }
 
-#chapter_4_menu {
+#chapter_5:hover path {
+  fill: var(--purple-hover);
+  pointer-events: all;
+}
+
+#chapter_5_menu {
   cursor: pointer;
   pointer-events: all;
 }
 
-#chapter_4_menu path {
+#chapter_5_menu path {
   transition: fill 0.3s ease;
   fill: var(--blue);
+  pointer-events: all;
 }
 
-#chapter_4_menu:hover path {
+#chapter_5_menu:hover path {
   fill: var(--blue-hover);
+  pointer-events: all;
 }
 
 body.full-text {
@@ -837,6 +868,11 @@ body.black #undobar a {
     font-size: 12pt;
   }
 }
+
+html {
+  visibility: visible;
+  opacity: 1;
+}
 /* twine-user-stylesheet #2: "simple-inventory.css" */
 /* Simple Inventory, for SugarCube 2, by Chapel
 v3.0.0, 2024-02-20, 1d95a49488446cafefaa956e53345395394e4b51 */
@@ -999,12 +1035,12 @@ $(document).on(":passagedisplay", function () {
     &#39;&#39;Enable Undo&#39;&#39; is currently &lt;&lt;link &quot;OFF&quot;&gt;&gt;&lt;&lt;run setup.enableUndo.toggle()&gt;&gt;&lt;&lt;run Engine.play(passage())&gt;&gt;&lt;&lt;/link&gt;&gt;.
 &lt;&lt;/if&gt;&gt;\
 
-When this option is &#39;&#39;ON&#39;&#39;, an undo button will appear at the top of the window.</tw-passagedata><tw-passagedata pid="4" name="content_warning" tags="no-undo center options" position="350,400" size="100,100">&lt;span class=&quot;subtitle&quot;&gt;&#39;&#39;Content Warning&#39;&#39;&lt;/span&gt;
+When this option is &#39;&#39;ON&#39;&#39;, an undo button will appear at the top of the window.</tw-passagedata><tw-passagedata pid="4" name="content_warning" tags="no-undo center options" position="350,400" size="100,100">&lt;div class=&quot;cw-header&quot;&gt;&#39;&#39;Content Warning&#39;&#39;&lt;/div&gt;\
 This story contains depictions of violence, horror, and mild gore.
 Are you okay with continuing this story?
 
 &lt;&lt;link &quot;Yes&quot; &quot;intro_1&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup_cs_false&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-[[No-&gt;its_okay]]</tw-passagedata><tw-passagedata pid="5" name="restart" tags="center no-undo" position="350,150" size="100,100">&lt;&lt;link &quot;It will always end the same way.&quot; &quot;content_warning_restart&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="content_warning_restart" tags="no-undo center options" position="725,100" size="100,100">&lt;span class=&quot;subtitle&quot;&gt;&#39;&#39;Content Warning&#39;&#39;&lt;/span&gt;
+[[No-&gt;its_okay]]</tw-passagedata><tw-passagedata pid="5" name="restart" tags="center no-undo" position="350,150" size="100,100">&lt;&lt;link &quot;It will always end the same way&quot; &quot;content_warning_restart&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;.</tw-passagedata><tw-passagedata pid="6" name="content_warning_restart" tags="no-undo center options" position="475,275" size="100,100">&lt;div class=&quot;cw-header&quot;&gt;&#39;&#39;Content Warning&#39;&#39;&lt;/div&gt;\
 This story contains depictions of violence, horror, and mild gore.
 Are you okay with continuing this story?
 
@@ -1018,16 +1054,17 @@ Are you okay with continuing this story?
 &lt;&lt;/nobr&gt;&gt;\
 
 [[No-&gt;its_okay]]</tw-passagedata><tw-passagedata pid="7" name="chapters" tags="no-undo options center" position="175,550" size="100,100">&lt;div class=&quot;chapter-selection-header&quot;&gt;&#39;&#39;Chapters&#39;&#39;&lt;/div&gt; &lt;span class=&quot;close&quot;&gt;[[✖-&gt;Start]]&lt;/span&gt;\
+Your progress will not be saved.
 &lt;&lt;if Save.slots.has(1)&gt;&gt;\
 Your previous progress will not be loaded or overwritten.
 &lt;&lt;/if&gt;&gt;\
-Your progress will not be saved.
 
 &lt;span class=&quot;chapter-select-link&quot;&gt;&lt;&lt;link &quot;I&quot; &quot;intro_1&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup_cs_true&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;II&quot; &quot;chapter_2&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup_cs_true&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;III&quot; &quot;chapter_3&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup_cs_true&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;link &#39;&lt;svg version=&quot;1.1&quot; height=&quot;19px&quot; id=&quot;chapter_4_menu&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; x=&quot;0px&quot; y=&quot;0px&quot; 	 viewBox=&quot;0 0 191 237&quot; style=&quot;enable-background:new 0 0 191 237;&quot; xml:space=&quot;preserve&quot;&gt; &lt;path d=&quot;M188.3,92.6c-1.9-3.6-3.3-6.3-4.7-8.6l-38.3-61.8c-2.8-4.5-6-8.2-9.7-11c-4-3.1-8-5.4-12.2-6.8c-5-1.7-9.4-2.8-13.7-3.4 	c-4.4-0.7-9.3-1-14.4-1c-4.1,0-8.6,0.3-14,1c-4.8,0.6-9.4,1.7-13.9,3.4c-4.5,1.7-8.6,4-12.3,6.8c-3.9,3-7.2,6.7-9.8,11L7.5,84.1 	c-0.5,0.8-1,1.8-1.7,2.9l-0.5,0.9c-1,1.7-1.8,3.2-2.5,4.8c-0.7,1.6-1.3,3.2-1.8,4.9c-0.6,1.9-0.9,3.4-0.9,4.8 	c0,7.4,1.1,14.8,3.3,22.5c2.1,7.3,4.6,14.4,7.5,21.3l17.8,40.8c-1.4,3.7-2.1,7.8-2.1,12.3c0,8.2,1.6,15.4,4.8,21.8 	c3.3,6.6,8.8,11.8,16.4,15.5l0,0l2.8-0.7c2-1,3.1-3.2,2.6-5.3l-0.4-2l-0.3-0.3c-3.6-3.6-6.8-7.6-9.6-12.1c-2.8-4.3-4.2-8.9-4.2-14.1 	c0-2.6,0.5-4.9,1.5-7.1c8.6,3.2,12.7,9.6,12.7,19.2v0.8l5.9,3.7H59c1.4,0,2.6-1,2.8-2.4c0.1-0.8,0.2-1.5,0.2-2.1 	c0-6-1.6-11.6-5-17.2c-3.2-5.3-6.9-10-11-13.9c-1.4-1.4-2.6-3.4-3.7-5.8c-1.2-2.7-2.3-5.7-3.3-8.9c-1-3.1-1.9-6.3-2.6-9.2 	c-0.4-1.7-0.8-3.2-1.1-4.6c-0.2-1-0.5-2-0.7-2.8c-1.7-7.3-3.5-14.8-5-20.4c-1.8-6.9-4.3-13.5-7.4-19.8c0.1-3.9,1.1-8.1,3.1-12.4 	c2.4-4.8,5.2-9.7,8.4-14.5c3.9-5.6,7.6-10.7,11.4-15.4l0.2-0.2c4.1-5,8.3-10.2,12.3-15.2c4.1-5.1,8-10,11.7-14.7 	c3.5-4.4,6.3-8.6,8.4-12.5H113c2.1,4,4.9,8.3,8.3,12.9c4.1,5.3,7.9,10.1,11.6,14.6c2.4,2.8,4.8,5.8,7.1,8.7c1.8,2.2,3.6,4.5,5.4,6.7 	c3.9,4.7,7.8,9.9,11.5,15.2c3.3,4.9,6.2,9.7,8.4,14.5c2,4.4,3.1,8.6,3.2,12.5c-3.1,6.3-5.6,13-7.4,19.8c-0.5,1.8-0.9,3.6-1.4,5.4 	c-1.3,5.2-2.6,10.1-3.8,15l0,0.1c-0.3,1.7-0.8,3.9-1.4,6.5l-0.2,0.8c-0.6,2.6-1.4,5.5-2.6,9.2c-1,3.1-2.1,6.1-3.3,8.9 	c-1.2,3-2.6,4.8-3.5,5.8c-3.8,3.7-7.4,8.3-10.8,13.9c-3.3,5.4-5,11.2-5,17.2c0,0.2,0,0.9,0.1,1.8c0.3,2.2,1.6,2.5,2.3,2.5 	c1.2,0,2.5-0.4,3.7-1.3c1-0.7,1.8-1.5,2.4-2.1l0.4-0.4v-0.6c0-9.6,4.2-15.9,12.8-19.2c1,2.3,1.5,4.7,1.5,7.1c0,5.2-1.4,9.9-4.1,14.1 	c-3.1,4.7-6.4,8.8-9.7,12.1l-0.3,0.3l-0.4,2.1c-0.4,2.1,0.7,4.2,2.6,5.2l2.8,0.8l0,0c7.6-3.8,13.1-9,16.4-15.5 	c3.2-6.4,4.9-13.8,4.9-21.9c0-4-0.7-8.1-2.1-12.1l17.6-41c2.8-6.6,5.3-13.6,7.7-21.3c2.2-7.3,3.4-14.9,3.4-22.4 	C191,99.4,190.1,96,188.3,92.6z&quot;/&gt; &lt;/svg&gt;&#39; &quot;chapter_4&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup_cs_true&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;link &quot;V&quot; &quot;chapter_5&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup_cs_true&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="8" name="variable_setup" tags="" position="200,250" size="100,100">&lt;nobr&gt;\
+&lt;&lt;link &#39;&lt;svg version=&quot;1.1&quot; height=&quot;19px&quot; id=&quot;chapter_5_menu&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; x=&quot;0px&quot; y=&quot;0px&quot; 	 viewBox=&quot;0 0 192 192&quot; style=&quot;enable-background:new 0 0 192 192;&quot; xml:space=&quot;preserve&quot;&gt; &lt;path d=&quot;M191.8,39.2c0-6.3-0.8-12.4-2.2-18.2c-1.4-5.7-3.3-11.6-5.8-17.6l-0.1-0.3l-4.5-2.7L178.6,1c-1.1,1.2-1.9,2.7-2.3,4.3 	c-0.4,1.6-0.6,3.1-0.6,4.6c0,2.6,0.2,4.9,0.7,7c0.3,0.9,0.5,2,0.7,3.2l1.7,6.5c0.3,0.9,0.5,2,0.7,3.1c0.5,2,0.7,4.1,0.7,6.5 	c0,4.4-0.4,8.7-1.2,13.1c-0.7,4.1-1.8,8.1-3,12.1c-2.1-0.1-3.8-0.6-5-1.6c-1.4-1.1-2.5-2.5-3.3-4.2c-0.8-1.8-1.3-3.8-1.6-5.8 	c-0.3-1.9-0.4-4-0.4-6.3c0-3,0.2-6,0.6-9c0.5-3.1,1.2-6,2.2-8.7l0.2-0.6l-0.4-0.4c-0.3-0.3-0.7-0.8-1.1-1.2 	c-0.2-0.3-0.5-0.6-0.7-0.9c-0.9-1.1-2-1.7-3.4-1.7c-2.2,0-3.9,1.4-4.9,4.3c-0.9,2.7-1.6,5.6-1.9,8.5c-0.4,2.9-0.6,5.8-0.7,9.2 	c-0.1,3-0.1,4.9-0.1,5.8c0,5.3,0.9,10,2.9,14.4c1.9,4.2,4.7,8.2,8.3,11.8c0.7,6.4,1.1,12.5,1.1,18.5c0,12.4-0.1,23.3-0.4,33.3 	l-0.3,9.4c-0.3,9.8-0.4,20.4-0.4,32.5c-4.8,0.6-10.1,1.1-15.9,1.4l-0.9,0c-6,0.3-12.1,0.6-18.3,1c-6.9,0.4-13.2,1-19.1,1.9 	c-6.1,0.9-11.6,2.5-16.4,4.7c-3.5-1.6-7.9-2.9-13.3-4c-4.6-0.9-9.8-1.6-16.7-2.3c-5-0.5-10.5-1-16.7-1.3c-3.1-0.2-6-0.3-8.6-0.4 	c-1.9-0.1-3.6-0.2-5.1-0.3c-1.8-0.2-3.5-0.4-5.1-0.6c-1.4-0.2-2.8-0.3-4.4-0.3c-0.2-7.5-0.5-15-0.8-21.5c-0.3-8.3-0.5-15.6-0.5-22.5 	c0-4.9,0-9.1-0.1-12.6c0-2.6,0-4.9,0-6.8c0-2-0.1-5-0.1-7.7c0-7.2,0.5-14.8,1.4-22.6C29.4,71,32.1,67,34,62.8 	c1.9-4.5,2.9-9.3,2.9-14.4c0-0.4,0-0.9,0-1.5c0-1.1-0.1-2.5-0.1-4.3c-0.1-3.4-0.3-6.4-0.7-9.2c-0.4-3.4-1.1-6.2-2-8.5 	c-1.1-2.8-2.7-4.2-4.9-4.2c-1.3,0-2.4,0.5-3.4,1.6c-0.3,0.3-0.5,0.6-0.8,0.9c-0.4,0.5-0.7,0.9-1.1,1.2l-0.5,0.5l0.2,0.6 	c1,2.8,1.7,5.6,2.1,8.7c0.4,3.1,0.6,6.1,0.6,9.1c0,1.9-0.2,4.2-0.4,6.3c-0.2,2-0.7,3.9-1.6,5.8c-0.8,1.7-1.9,3.1-3.5,4.2 	c-1.3,0.9-2.9,1.5-4.9,1.6c-1.3-4.2-2.3-8.2-3-12.3c-0.8-4.3-1.2-8.7-1.2-13c0-2.3,0.2-4.4,0.7-6.3c0.4-2.2,0.9-4.3,1.5-6.5l1.5-6.6 	c0.5-2.1,0.7-4.4,0.7-6.7c0-1.7-0.1-3.2-0.4-4.6c-0.4-1.8-1.2-3.3-2.5-4.4l-0.5-0.5L8.4,2.9L8.3,3.2C5.7,9,3.7,14.7,2.2,20.6 	C0.8,26.5,0,32.6,0,39c0,6.8,0.8,13.3,2.5,19.9c1.4,6,3.3,12.1,5.8,18.6c-1.1,10.6-2,21.9-3.1,35.6c-0.9,12.3-1.4,24.3-1.4,35.8 	c0,3.6,0.2,8,0.5,12.2c0.3,4.9,1.1,9.7,2.4,14.1c1.3,4.6,3.4,8.5,6.1,11.8c2.8,3.4,6.8,5.1,11.8,5.1h142.6c4.9,0,8.8-1.7,11.8-5.1 	c2.8-3.3,4.9-7.2,6.2-11.8c1.3-4.6,2.1-9.2,2.4-14.1c0.3-4.3,0.4-8.4,0.4-12.2c0-12.3-0.4-24.3-1.3-35.8c-0.9-12.1-1.9-24.1-3-35.6 	c2.4-6.3,4.3-12.5,5.8-18.6C191,52.3,191.8,45.7,191.8,39.2z&quot;/&gt; &lt;/svg&gt;&#39; &quot;chapter_4&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup_cs_true&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link &#39;&lt;svg version=&quot;1.1&quot; height=&quot;21.2px&quot; id=&quot;chapter_5_menu&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; x=&quot;0px&quot; y=&quot;0px&quot; 	 viewBox=&quot;0 0 191 237&quot; style=&quot;enable-background:new 0 0 191 237;&quot; xml:space=&quot;preserve&quot;&gt; &lt;path d=&quot;M188.3,92.6c-1.9-3.6-3.3-6.3-4.7-8.6l-38.3-61.8c-2.8-4.5-6-8.2-9.7-11c-4-3.1-8-5.4-12.2-6.8c-5-1.7-9.4-2.8-13.7-3.4 	c-4.4-0.7-9.3-1-14.4-1c-4.1,0-8.6,0.3-14,1c-4.8,0.6-9.4,1.7-13.9,3.4c-4.5,1.7-8.6,4-12.3,6.8c-3.9,3-7.2,6.7-9.8,11L7.5,84.1 	c-0.5,0.8-1,1.8-1.7,2.9l-0.5,0.9c-1,1.7-1.8,3.2-2.5,4.8c-0.7,1.6-1.3,3.2-1.8,4.9c-0.6,1.9-0.9,3.4-0.9,4.8 	c0,7.4,1.1,14.8,3.3,22.5c2.1,7.3,4.6,14.4,7.5,21.3l17.8,40.8c-1.4,3.7-2.1,7.8-2.1,12.3c0,8.2,1.6,15.4,4.8,21.8 	c3.3,6.6,8.8,11.8,16.4,15.5l0,0l2.8-0.7c2-1,3.1-3.2,2.6-5.3l-0.4-2l-0.3-0.3c-3.6-3.6-6.8-7.6-9.6-12.1c-2.8-4.3-4.2-8.9-4.2-14.1 	c0-2.6,0.5-4.9,1.5-7.1c8.6,3.2,12.7,9.6,12.7,19.2v0.8l5.9,3.7H59c1.4,0,2.6-1,2.8-2.4c0.1-0.8,0.2-1.5,0.2-2.1 	c0-6-1.6-11.6-5-17.2c-3.2-5.3-6.9-10-11-13.9c-1.4-1.4-2.6-3.4-3.7-5.8c-1.2-2.7-2.3-5.7-3.3-8.9c-1-3.1-1.9-6.3-2.6-9.2 	c-0.4-1.7-0.8-3.2-1.1-4.6c-0.2-1-0.5-2-0.7-2.8c-1.7-7.3-3.5-14.8-5-20.4c-1.8-6.9-4.3-13.5-7.4-19.8c0.1-3.9,1.1-8.1,3.1-12.4 	c2.4-4.8,5.2-9.7,8.4-14.5c3.9-5.6,7.6-10.7,11.4-15.4l0.2-0.2c4.1-5,8.3-10.2,12.3-15.2c4.1-5.1,8-10,11.7-14.7 	c3.5-4.4,6.3-8.6,8.4-12.5H113c2.1,4,4.9,8.3,8.3,12.9c4.1,5.3,7.9,10.1,11.6,14.6c2.4,2.8,4.8,5.8,7.1,8.7c1.8,2.2,3.6,4.5,5.4,6.7 	c3.9,4.7,7.8,9.9,11.5,15.2c3.3,4.9,6.2,9.7,8.4,14.5c2,4.4,3.1,8.6,3.2,12.5c-3.1,6.3-5.6,13-7.4,19.8c-0.5,1.8-0.9,3.6-1.4,5.4 	c-1.3,5.2-2.6,10.1-3.8,15l0,0.1c-0.3,1.7-0.8,3.9-1.4,6.5l-0.2,0.8c-0.6,2.6-1.4,5.5-2.6,9.2c-1,3.1-2.1,6.1-3.3,8.9 	c-1.2,3-2.6,4.8-3.5,5.8c-3.8,3.7-7.4,8.3-10.8,13.9c-3.3,5.4-5,11.2-5,17.2c0,0.2,0,0.9,0.1,1.8c0.3,2.2,1.6,2.5,2.3,2.5 	c1.2,0,2.5-0.4,3.7-1.3c1-0.7,1.8-1.5,2.4-2.1l0.4-0.4v-0.6c0-9.6,4.2-15.9,12.8-19.2c1,2.3,1.5,4.7,1.5,7.1c0,5.2-1.4,9.9-4.1,14.1 	c-3.1,4.7-6.4,8.8-9.7,12.1l-0.3,0.3l-0.4,2.1c-0.4,2.1,0.7,4.2,2.6,5.2l2.8,0.8l0,0c7.6-3.8,13.1-9,16.4-15.5 	c3.2-6.4,4.9-13.8,4.9-21.9c0-4-0.7-8.1-2.1-12.1l17.6-41c2.8-6.6,5.3-13.6,7.7-21.3c2.2-7.3,3.4-14.9,3.4-22.4 	C191,99.4,190.1,96,188.3,92.6z&quot;/&gt; &lt;/svg&gt;&#39; &quot;chapter_5&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup_cs_true&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/span&gt;</tw-passagedata><tw-passagedata pid="8" name="variable_setup" tags="" position="200,250" size="100,100">&lt;nobr&gt;\
 /* STORY */
 &lt;&lt;set $dir to &quot;north&quot;&gt;&gt;
 &lt;&lt;set $weapon to &quot;rapier&quot;&gt;&gt;
@@ -1058,7 +1095,7 @@ Your progress will not be saved.
 &lt;/nobr&gt;\</tw-passagedata><tw-passagedata pid="10" name="variable_setup_cs_false" tags="" position="200,50" size="100,100">&lt;nobr&gt;\
 &lt;&lt;include &quot;variable_setup&quot;&gt;&gt;
 &lt;&lt;set $chapter_select_active to false&gt;&gt;
-&lt;/nobr&gt;\</tw-passagedata><tw-passagedata pid="11" name="its_okay" tags="no-undo center" position="350,275" size="100,100">[[It&#39;s okay.-&gt;Start]]</tw-passagedata><tw-passagedata pid="12" name="intro_1" tags="no-undo" position="425,550" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;[[You can&#39;t save her-&gt;intro_2]].&lt;&lt;/timed&gt;&gt;  /* TODO: may want to adjust intro */</tw-passagedata><tw-passagedata pid="13" name="intro_2" tags="" position="550,550" size="100,100">[[This is what they told you-&gt;intro_3]].</tw-passagedata><tw-passagedata pid="14" name="intro_3" tags="" position="675,550" size="100,100">[[And this is what you tell yourself-&gt;chapter_1]].</tw-passagedata><tw-passagedata pid="15" name="chapter_1" tags="center" position="0,950" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[I-&gt;intro_4]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="16" name="intro_4" tags="no-undo" position="825,950" size="100,100">When the children at the monastery come of age, they must complete a [[test-&gt;intro_5]].</tw-passagedata><tw-passagedata pid="17" name="intro_5" tags="" position="950,950" size="100,100">After your friend left, you feared what your test would be.
+&lt;/nobr&gt;\</tw-passagedata><tw-passagedata pid="11" name="its_okay" tags="no-undo center" position="350,275" size="100,100">[[It&#39;s okay.-&gt;Start]]</tw-passagedata><tw-passagedata pid="12" name="intro_1" tags="" position="425,550" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;[[You can&#39;t save her-&gt;intro_2]].&lt;&lt;/timed&gt;&gt;  /* TODO: may want to adjust intro */</tw-passagedata><tw-passagedata pid="13" name="intro_2" tags="" position="550,550" size="100,100">[[This is what they told you-&gt;intro_3]].</tw-passagedata><tw-passagedata pid="14" name="intro_3" tags="" position="675,550" size="100,100">[[And this is what you tell yourself-&gt;chapter_1]].</tw-passagedata><tw-passagedata pid="15" name="chapter_1" tags="center" position="0,950" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[I-&gt;intro_4]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="16" name="intro_4" tags="" position="825,950" size="100,100">When the children at the monastery come of age, they must complete a [[test-&gt;intro_5]].</tw-passagedata><tw-passagedata pid="17" name="intro_5" tags="" position="950,950" size="100,100">After your friend left, you feared what your test would be.
 
 [[Your fears came true-&gt;intro_6]].</tw-passagedata><tw-passagedata pid="18" name="intro_6" tags="" position="1075,950" size="100,100">The nuns told you that you must [[kill her-&gt;weapon_1]], for she had fallen sway to the other god.</tw-passagedata><tw-passagedata pid="19" name="weapon_1" tags="center" position="300,1125" size="100,100">So you start by preparing your weapon:
 &lt;&lt;include &quot;cycling_weapon_1&quot;&gt;&gt;
@@ -1077,7 +1114,7 @@ You pray that you are [[prepared-&gt;etching]].</tw-passagedata><tw-passagedata 
 
 &lt;&lt;set $cyclingResult_weapon_1 to $choices_weapon_1[$choicesCount_weapon_1]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_weapon_1[$choicesCount_weapon_1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_weapon_1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="weapon_des_calc" tags="" position="575,100" size="100,100">&lt;&lt;nobr&gt;&gt;
+\&lt;&lt;linkreplace $choices_weapon_1[$choicesCount_weapon_1] t8n&gt;&gt;&lt;&lt;include &quot;cycling_weapon_1&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="weapon_des_calc" tags="" position="600,100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $cyclingResult_weapon_1 to $cyclingResult_weapon_1.toLowerCase()&gt;&gt;
 &lt;&lt;if $cyclingResult_weapon_1 is &quot;a greatsword forged from soulsteel&quot;&gt;&gt;
     &lt;&lt;set $weapon to &quot;greatsword&quot;&gt;&gt;
@@ -1205,7 +1242,7 @@ She casually sidesteps your $weapon
 &lt;&lt;/if&gt;&gt;
  and laughs, as she always did.&lt;&lt;/nobr&gt;&gt;
 
-You stop to catch your breath. You consider your [[options-&gt;options_comment]]:
+You stop to catch your breath. You consider your choices:
 
 &lt;&lt;include &quot;cycling_mc_fight_3&quot;&gt;&gt;.
 
@@ -1232,7 +1269,7 @@ She smirks as she slices the bolt of fire with her $weapon in midair. The fire d
 She smirks as she parries your thrust with such strength, your $weapon flies off to the other side of the room. It clatters on the floor, and the sound echoes throughout this hollow space.
 &lt;&lt;/if&gt;&gt;\
 
-Your old friend starts laughing harder, laughing in the way that one would laugh at the antics of [[a small child-&gt;flashback_1]].</tw-passagedata><tw-passagedata pid="43" name="cycling_shoot_again" tags="" position="575,325" size="100,100">&lt;&lt;silently&gt;&gt;
+Your old friend starts laughing harder, laughing in the way that one would laugh at the antics of [[a small child-&gt;flashback_1]].</tw-passagedata><tw-passagedata pid="43" name="cycling_shoot_again" tags="" position="600,325" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_shoot_again&gt;&gt;
   &lt;&lt;set $choicesCount_shoot_again to -1&gt;&gt;
   &lt;&lt;set $choices_shoot_again to [&quot;Shoot her again&quot;, &quot;Strike her&quot;]&gt;&gt;
@@ -1246,7 +1283,7 @@ Your old friend starts laughing harder, laughing in the way that one would laugh
 
 &lt;&lt;set $cyclingResult_shoot_again to $choices_shoot_again[$choicesCount_shoot_again]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_shoot_again[$choicesCount_shoot_again] t8n&gt;&gt;&lt;&lt;include &quot;cycling_shoot_again&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="cycling_strike_again" tags="" position="575,225" size="100,100">&lt;&lt;silently&gt;&gt;
+\&lt;&lt;linkreplace $choices_shoot_again[$choicesCount_shoot_again] t8n&gt;&gt;&lt;&lt;include &quot;cycling_shoot_again&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="cycling_strike_again" tags="" position="600,225" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_strike_again&gt;&gt;
   &lt;&lt;set $choicesCount_strike_again to -1&gt;&gt;
   &lt;&lt;set $choices_strike_again to [&quot;Strike her&quot;, &quot;Shoot her&quot;]&gt;&gt;
@@ -1428,7 +1465,7 @@ You try not to laugh. What an idiot.
 
 So, you can&#39;t hold in your laughter much longer. You let out a peal of laughter, and your old friend stops in her tracks.
 
-She draws deep, labored breaths, then she meets your gaze. Assessing her [[options-&gt;options_comment_2]].
+She draws deep, labored breaths, then she meets your gaze.
 
 You know what to expect, and you [[wait-&gt;friend_fight_19]] for her next move.</tw-passagedata><tw-passagedata pid="74" name="friend_fight_19" tags="pink" position="2625,2200" size="100,100">Maybe this would finally scare her away.
 
@@ -1689,27 +1726,9 @@ Her thoughts
 &lt;&lt;linkappend &quot;are your thoughts&quot; t8n&gt;&gt; are her thoughts&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
 &lt;&lt;timed 6s&gt;&gt;&lt;&lt;goto &quot;teen_flashback_15&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="119" name="teen_flashback_15" tags="pink full-text" position="2325,3200" size="100,100">Time slows down until all that exist are your thoughts, and her thoughts. Maybe time does not exist, it&#39;s only thoughts. Maybe space is also a fabric of thoughts. At the beginning of the universe there were her thoughts, and when the universe breathes its final sordid breath all that will remain will be her thoughts. Time has never existed for her, because her thoughts are beyond time and space. There has never been any time, or space, only her thoughts. Her thoughts are beyond reality, beyond time, beyond structure. Her thoughts break the childish thought of structure. Maybe you thought this was freedom. Maybe thoughts will give you the freedom you want. Thoughts give you choices. Choices give you freedom, so thoughts give you freedom. Her thoughts give you more choices. Her thoughts can give you freedom. Freedom from the limitations of your body, time, and your thoughts. So you let her thoughts in. Now what you thought was your identity, your personhood, and your self no longer exists. The barriers between you and reality, time, space, and her no longer exist. You can reshape reality, just like you can easily reshape your thoughts. Reality is only your thoughts, which are her thoughts. What you thought were your thoughts are now her thoughts. You can see nothing, hear nothing, and feel nothing but her thoughts. Her thoughts are in your mind, veins, bones and flesh and your entire body. Your body is a thought. It is one of her thoughts. You thought your body was yours but it was always one of her thoughts, just like how she thought the universe into existence. The universe was always a patchwork of her thoughts. The only thing that has ever existed are her thoughts. Her thoughts are all you think. You can only think her thoughts. Her thoughts are the only thing that exist, for they are the substance of this shallow universe. It&#39;s all just her thoughts. Her thoughts are there. Her thoughts are here. Her thoughts are yours. Embrace her thoughts. Her thoughts. Her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are your thoughts are her thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts are thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoughts thoug htst hthoug  htstho ughtsth ough tsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughtsthoughts oughtst houghts houghts thoug ht sthoughtsth ought sthough tsth oug htsthough tsthoughtsthou ght sthoughtsth thou ghtsthough tsthou ghtsthoughtstho u ghtsthought st hough tsthou ghts thou ghtsth oughtsth ou ght sth o ughtsthoughtsth ough tst houghtsth ou ghtstho ughtsth ou ghtsthough ts th ou g ht st h o ug h ts tho ught s th oug hts th ou gh tsthou ghtsth o ug htsth o ugh t st ho ught s thou gh t st hou gh ts th oug h tst  hou gh tsth ou ght sth ou ght sth oug h tst ho ug h ts th o ug hts t ho ug ht st h o ug hts t ho ug hts t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s t h o u g h t s
-&lt;&lt;timed 5s&gt;&gt;&lt;&lt;goto &quot;teen_flashback_16&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="120" name="teen_flashback_16" tags="no-t8n pink flashback" position="2450,3200" size="100,100">[[You flip to the next page-&gt;chapter_4]].</tw-passagedata><tw-passagedata pid="121" name="chapter_4" tags="center purple" position="0,3525" size="200,100">&lt;a data-passage=&quot;teen_2_flashback_1&quot; id=&quot;chapter_4&quot;&gt;
-&lt;svg version=&quot;1.1&quot;  xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; x=&quot;0px&quot; y=&quot;0px&quot;
-	 height=&quot;180px&quot; viewBox=&quot;0 0 189.5 234.3&quot; style=&quot;enable-background:new 0 0 189.5 234.3;&quot; xml:space=&quot;preserve&quot;&gt;
-&lt;g &gt;
-	&lt;path d=&quot;M47.6,234.1c-7.4-3.6-12.6-8.6-15.7-14.8c-3.1-6.2-4.6-13.2-4.6-21.1c0-4.4,0.7-8.5,2.2-12.3l-18-41.4
-		c-2.8-6.7-5.3-13.8-7.4-21.1c-2.1-7.4-3.2-14.7-3.2-22.1c0-1.4,0.3-2.8,0.8-4.4s1.1-3.1,1.8-4.8C4.2,90.5,5,89,5.9,87.5
-		c0.9-1.5,1.7-2.8,2.3-3.9l37.9-61.8c2.6-4.3,5.8-7.8,9.4-10.6c3.6-2.8,7.6-5,11.9-6.6C71.8,3,76.3,1.9,81,1.3c4.7-0.6,9.3-1,13.8-1
-		c4.8,0,9.6,0.3,14.2,1c4.7,0.6,9.1,1.8,13.4,3.3s8.2,3.8,11.8,6.6s6.7,6.4,9.3,10.6l38.3,61.8c1.4,2.4,2.9,5.2,4.6,8.5
-		c1.7,3.3,2.5,6.4,2.5,9.2c0,7.5-1.1,14.8-3.3,22c-2.2,7.2-4.7,14.3-7.6,21.2L160.2,186c1.4,3.8,2.2,7.9,2.2,12.1
-		c0,7.9-1.6,15-4.7,21.2c-3.1,6.2-8.4,11.2-15.7,14.8l-3.7-1.9l0.7-4.1c3.6-3.6,6.9-7.8,9.9-12.3s4.4-9.6,4.4-14.9
-		c0-3.2-0.8-6.2-2.3-9c-10,3.4-15,10.4-15,21.1c-0.6,0.6-1.3,1.3-2.2,1.9c-0.9,0.6-1.9,1-2.9,1c-0.5,0-0.7-0.4-0.8-1.2
-		c-0.1-0.8-0.1-1.4-0.1-1.6c0-5.7,1.6-11.2,4.8-16.4c3.2-5.2,6.7-9.8,10.6-13.6c1.4-1.4,2.8-3.5,3.9-6.3c1.2-2.8,2.3-5.8,3.3-9
-		c1-3.2,1.9-6.3,2.6-9.3c0.7-3,1.3-5.5,1.6-7.4c1.6-6.6,3.4-13.4,5.2-20.4c1.8-7,4.3-13.6,7.4-19.8c0-4.3-1.1-8.8-3.3-13.5
-		c-2.2-4.7-5-9.6-8.5-14.7c-3.5-5-7.4-10.2-11.6-15.3S137.7,57,133.5,52c-4.2-5-8-9.8-11.6-14.5c-3.5-4.7-6.4-9.2-8.6-13.5H76.3
-		c-2.1,4-5,8.4-8.7,13.1c-3.7,4.7-7.6,9.6-11.7,14.7c-4.1,5-8.3,10.2-12.5,15.4c-4.2,5.2-8,10.4-11.5,15.5c-3.4,5.1-6.2,10-8.5,14.7
-		c-2.2,4.7-3.3,9.2-3.3,13.4c3.2,6.3,5.7,12.9,7.5,19.8c1.8,7,3.5,13.8,5,20.4c0.5,1.9,1,4.4,1.8,7.4c0.7,3,1.6,6.2,2.6,9.3
-		c1,3.2,2.1,6.2,3.3,9s2.6,4.9,4,6.3c4,3.8,7.6,8.3,10.8,13.6s4.8,10.7,4.8,16.4c0,0.5-0.1,1.2-0.2,1.9c-0.1,0.7-0.6,1.1-1.3,1.1
-		l-4.8-3c0-10.7-5-17.8-15-21.1c-1.5,2.8-2.2,5.8-2.2,9c0,5.4,1.4,10.3,4.4,14.9c2.9,4.6,6.2,8.7,9.8,12.3l0.8,4.1L47.6,234.1z&quot;/&gt;
-&lt;/g&gt;
-&lt;/svg&gt;
-&lt;/a&gt;</tw-passagedata><tw-passagedata pid="122" name="teen_2_flashback_1" tags="flashback" position="325,3525" size="100,100">[[You have been asked to check on your friend-&gt;teen_2_flashback_2]].</tw-passagedata><tw-passagedata pid="123" name="teen_2_flashback_2" tags="flashback" position="325,3650" size="100,100">The nuns noticed that your friend [[did not attend any training sessions today-&gt;teen_2_flashback_3]].</tw-passagedata><tw-passagedata pid="124" name="teen_2_flashback_3" tags="flashback" position="450,3650" size="100,100">You wonder if she assigned you to check on her, &lt;&lt;linkappend &quot;because you are the leader of your batch,&quot; t8n&gt;&gt; &lt;&lt;linkappend &quot;or because the nuns know you are her friend,&quot; t8n&gt;&gt; despite their [[disapproval-&gt;teen_2_flashback_4]].&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="teen_2_flashback_4" tags="flashback" position="575,3650" size="100,100">You bury those thoughts deeper into your mind.
+&lt;&lt;timed 5s&gt;&gt;&lt;&lt;goto &quot;teen_flashback_16&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="120" name="teen_flashback_16" tags="no-t8n pink flashback" position="2450,3200" size="100,100">[[You flip to the next page-&gt;chapter_4]].</tw-passagedata><tw-passagedata pid="121" name="chapter_4" tags="center purple" position="0,3525" size="200,100">&lt;&lt;link &#39;&lt;svg version=&quot;1.1&quot; id=&quot;chapter_5&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; x=&quot;0px&quot; y=&quot;0px&quot; 	 height=&quot;180px&quot; viewBox=&quot;0 0 189.5 189.4&quot; style=&quot;enable-background:new 0 0 189.5 189.4;&quot; xml:space=&quot;preserve&quot;&gt; &lt;g&gt; 	&lt;path d=&quot;M11.7,0c1.2,1,1.9,2.3,2.2,3.8c0.3,1.5,0.4,3,0.4,4.4c0,2.1-0.2,4.3-0.7,6.5c-0.5,2.2-1,4.4-1.5,6.6 		c-0.6,2.2-1.1,4.4-1.5,6.5c-0.5,2.1-0.7,4.3-0.7,6.5c0,4.4,0.4,8.8,1.2,13.2c0.8,4.4,1.9,8.7,3.3,13.1c2.5,0,4.6-0.6,6.2-1.8 		c1.6-1.2,2.9-2.7,3.8-4.6c0.9-1.9,1.5-3.9,1.7-6.1s0.4-4.4,0.4-6.4c0-3.1-0.2-6.1-0.6-9.2c-0.4-3.1-1.1-6-2.2-8.9 		c0.6-0.6,1.2-1.4,1.9-2.2c0.7-0.8,1.5-1.3,2.6-1.3c1.8,0,3.1,1.2,4,3.6c0.9,2.4,1.5,5.2,1.9,8.3c0.4,3.1,0.6,6.2,0.7,9.1 		c0,2.9,0.1,4.8,0.1,5.8c0,5.1-1,9.8-2.8,14c-1.9,4.3-4.7,8.2-8.3,11.7c-0.9,7.7-1.4,15.4-1.4,23.1c0,0.6,0,3.2,0.1,7.7 		c0,4.5,0.1,11,0.1,19.4c0,7.6,0.2,15.1,0.5,22.5c0.3,7.4,0.6,14.9,0.8,22.5c1.9,0,3.6,0.1,5.2,0.3c1.6,0.2,3.3,0.4,5.1,0.6 		c3.7,0.2,8.3,0.4,13.7,0.7c5.4,0.3,11,0.7,16.7,1.3c5.7,0.6,11.3,1.3,16.6,2.3c5.3,1,9.8,2.3,13.5,4.1c4.8-2.3,10.3-3.9,16.5-4.8 		c6.2-0.9,12.5-1.5,19-1.9c6.5-0.4,12.9-0.7,19.2-1c6.3-0.3,11.9-0.8,16.9-1.5c0-11.1,0.1-22.2,0.4-33.3l0.3-9.4 		c0.3-11.1,0.4-22.2,0.4-33.3c0-6.5-0.4-12.8-1.1-19c-3.6-3.5-6.4-7.4-8.3-11.7c-1.9-4.3-2.8-8.9-2.8-14c0-0.9,0-2.8,0.1-5.8 		s0.3-6,0.7-9.1c0.4-3.1,1.1-5.9,1.9-8.3c0.9-2.4,2.2-3.6,4-3.6c1,0,1.9,0.4,2.6,1.3c0.7,0.8,1.3,1.6,1.9,2.2 		c-1,2.9-1.7,5.8-2.2,8.9c-0.4,3.1-0.6,6.1-0.6,9.2c0,2,0.1,4.2,0.4,6.4s0.9,4.3,1.7,6.1c0.9,1.9,2.1,3.4,3.6,4.6 		c1.5,1.2,3.6,1.8,6.3,1.8c1.4-4.2,2.5-8.5,3.3-12.9c0.8-4.4,1.2-8.8,1.2-13.3c0-2.3-0.2-4.5-0.7-6.7c-0.2-1.1-0.4-2.2-0.7-3.2 		l-1.7-6.5c-0.2-1.1-0.4-2.2-0.7-3.2c-0.5-2.1-0.7-4.4-0.7-6.7c0-1.4,0.2-2.8,0.6-4.3c0.4-1.5,1.1-2.8,2.1-3.9l3.5,2.1 		c2.4,5.7,4.4,11.6,5.8,17.4c1.5,5.9,2.2,11.9,2.2,18c0,6.6-0.8,13.1-2.3,19.5c-1.5,6.4-3.5,12.7-5.8,18.7c1.1,11.9,2.1,23.9,3,35.8 		c0.9,11.9,1.3,23.9,1.3,35.7c0,3.2-0.1,7.3-0.4,12.1c-0.3,4.8-1.1,9.4-2.4,13.9c-1.3,4.4-3.3,8.2-6,11.4c-2.7,3.1-6.3,4.7-11,4.7 		H23.6c-4.7,0-8.4-1.6-11-4.7c-2.6-3.1-4.6-6.9-5.9-11.4c-1.3-4.4-2.1-9.1-2.4-13.9c-0.3-4.8-0.5-8.8-0.5-12.1 		c0-11.9,0.5-23.8,1.4-35.7c0.9-11.9,1.9-23.9,3.1-35.8c-2.3-6-4.3-12.2-5.8-18.7C0.8,50.6,0,44.1,0,37.5c0-6.1,0.7-12.2,2.2-18.1 		c1.5-6,3.5-11.7,6-17.3L11.7,0z&quot;/&gt; &lt;/g&gt; &lt;/svg&gt;&#39; &quot;teen_2_flashback_1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="122" name="teen_2_flashback_1" tags="flashback" position="325,3525" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;\
+[[You have been asked to check on your friend-&gt;teen_2_flashback_2]].
+&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="123" name="teen_2_flashback_2" tags="flashback" position="325,3650" size="100,100">The nuns noticed that your friend [[did not attend any training sessions today-&gt;teen_2_flashback_3]].</tw-passagedata><tw-passagedata pid="124" name="teen_2_flashback_3" tags="flashback" position="450,3650" size="100,100">You wonder if she assigned you to check on her, &lt;&lt;linkappend &quot;because you are the leader of your cohort,&quot; t8n&gt;&gt; &lt;&lt;linkappend &quot;or because the nuns know you are her friend,&quot; t8n&gt;&gt; despite their [[disapproval-&gt;teen_2_flashback_4]].&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="teen_2_flashback_4" tags="flashback" position="575,3650" size="100,100">You bury those thoughts deeper into your mind.
 
 You just need to focus on the [[task that they have assigned you-&gt;teen_2_flashback_5]].</tw-passagedata><tw-passagedata pid="126" name="teen_2_flashback_5" tags="flashback" position="700,3650" size="100,100">You walk up to her room, knock her door a few times, and turn the knob.
 
@@ -1881,7 +1900,7 @@ You wonder if you will be the main character of their cautionary tales, the mons
 
 [[One second-&gt;teen_2_flashback_34]].</tw-passagedata><tw-passagedata pid="163" name="teen_2_flashback_34" tags="flashback pink" position="2325,3775" size="100,100">You walk away from the monastery.
 
-[[One second-&gt;teen_2_flashback_35]].</tw-passagedata><tw-passagedata pid="164" name="teen_2_flashback_35" tags="flashback pink" position="2450,3775" size="100,100">[[You wipe away tears-&gt;chapter_5]].</tw-passagedata><tw-passagedata pid="165" name="chapter_5" tags="center purple" position="0,4100" size="200,100">&lt;span class=&quot;number-heading&quot;&gt;[[V-&gt;final_fight_1]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="166" name="final_fight_1" tags="" position="275,4100" size="100,100">[[You can save her-&gt;final_fight_2]].</tw-passagedata><tw-passagedata pid="167" name="final_fight_2" tags="" position="400,4100" size="100,100">[[This is not what they told you-&gt;final_fight_3]].</tw-passagedata><tw-passagedata pid="168" name="final_fight_3" tags="" position="525,4100" size="100,100">[[But this is what you tell yourself-&gt;final_fight_4]].</tw-passagedata><tw-passagedata pid="169" name="final_fight_4" tags="" position="650,4100" size="100,100">You have already pictured this fight with her, replaying every single one of your blows &lt;&lt;linkappend &quot;again,&quot; t8n&gt;&gt; and [[again-&gt;final_fight_5]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="170" name="final_fight_5" tags="" position="775,4100" size="100,100">The nuns directed you to consult the sacred algorithms, but you do not want to add to the [[statistics of violence-&gt;final_fight_6]].</tw-passagedata><tw-passagedata pid="171" name="final_fight_6" tags="" position="900,4100" size="100,100">So when you step into the cathedral, you ready yourself to talk to her.
+[[One second-&gt;teen_2_flashback_35]].</tw-passagedata><tw-passagedata pid="164" name="teen_2_flashback_35" tags="flashback pink" position="2450,3775" size="100,100">[[You wipe away tears-&gt;chapter_5]].</tw-passagedata><tw-passagedata pid="165" name="chapter_5" tags="center purple" position="0,4100" size="200,100">&lt;&lt;link &#39;&lt;svg version=&quot;1.1&quot;  xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; x=&quot;0px&quot; y=&quot;0px&quot; id=&quot;chapter_5&quot;	 height=&quot;180px&quot; viewBox=&quot;0 0 189.5 234.3&quot; style=&quot;enable-background:new 0 0 189.5 234.3;&quot; xml:space=&quot;preserve&quot;&gt; &lt;g &gt; 	&lt;path d=&quot;M47.6,234.1c-7.4-3.6-12.6-8.6-15.7-14.8c-3.1-6.2-4.6-13.2-4.6-21.1c0-4.4,0.7-8.5,2.2-12.3l-18-41.4 		c-2.8-6.7-5.3-13.8-7.4-21.1c-2.1-7.4-3.2-14.7-3.2-22.1c0-1.4,0.3-2.8,0.8-4.4s1.1-3.1,1.8-4.8C4.2,90.5,5,89,5.9,87.5 		c0.9-1.5,1.7-2.8,2.3-3.9l37.9-61.8c2.6-4.3,5.8-7.8,9.4-10.6c3.6-2.8,7.6-5,11.9-6.6C71.8,3,76.3,1.9,81,1.3c4.7-0.6,9.3-1,13.8-1 		c4.8,0,9.6,0.3,14.2,1c4.7,0.6,9.1,1.8,13.4,3.3s8.2,3.8,11.8,6.6s6.7,6.4,9.3,10.6l38.3,61.8c1.4,2.4,2.9,5.2,4.6,8.5 		c1.7,3.3,2.5,6.4,2.5,9.2c0,7.5-1.1,14.8-3.3,22c-2.2,7.2-4.7,14.3-7.6,21.2L160.2,186c1.4,3.8,2.2,7.9,2.2,12.1 		c0,7.9-1.6,15-4.7,21.2c-3.1,6.2-8.4,11.2-15.7,14.8l-3.7-1.9l0.7-4.1c3.6-3.6,6.9-7.8,9.9-12.3s4.4-9.6,4.4-14.9 		c0-3.2-0.8-6.2-2.3-9c-10,3.4-15,10.4-15,21.1c-0.6,0.6-1.3,1.3-2.2,1.9c-0.9,0.6-1.9,1-2.9,1c-0.5,0-0.7-0.4-0.8-1.2 		c-0.1-0.8-0.1-1.4-0.1-1.6c0-5.7,1.6-11.2,4.8-16.4c3.2-5.2,6.7-9.8,10.6-13.6c1.4-1.4,2.8-3.5,3.9-6.3c1.2-2.8,2.3-5.8,3.3-9 		c1-3.2,1.9-6.3,2.6-9.3c0.7-3,1.3-5.5,1.6-7.4c1.6-6.6,3.4-13.4,5.2-20.4c1.8-7,4.3-13.6,7.4-19.8c0-4.3-1.1-8.8-3.3-13.5 		c-2.2-4.7-5-9.6-8.5-14.7c-3.5-5-7.4-10.2-11.6-15.3S137.7,57,133.5,52c-4.2-5-8-9.8-11.6-14.5c-3.5-4.7-6.4-9.2-8.6-13.5H76.3 		c-2.1,4-5,8.4-8.7,13.1c-3.7,4.7-7.6,9.6-11.7,14.7c-4.1,5-8.3,10.2-12.5,15.4c-4.2,5.2-8,10.4-11.5,15.5c-3.4,5.1-6.2,10-8.5,14.7 		c-2.2,4.7-3.3,9.2-3.3,13.4c3.2,6.3,5.7,12.9,7.5,19.8c1.8,7,3.5,13.8,5,20.4c0.5,1.9,1,4.4,1.8,7.4c0.7,3,1.6,6.2,2.6,9.3 		c1,3.2,2.1,6.2,3.3,9s2.6,4.9,4,6.3c4,3.8,7.6,8.3,10.8,13.6s4.8,10.7,4.8,16.4c0,0.5-0.1,1.2-0.2,1.9c-0.1,0.7-0.6,1.1-1.3,1.1 		l-4.8-3c0-10.7-5-17.8-15-21.1c-1.5,2.8-2.2,5.8-2.2,9c0,5.4,1.4,10.3,4.4,14.9c2.9,4.6,6.2,8.7,9.8,12.3l0.8,4.1L47.6,234.1z&quot;/&gt; &lt;/g&gt; &lt;/svg&gt;&#39; &quot;final_fight_1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="166" name="final_fight_1" tags="" position="275,4100" size="100,100">[[You can save her-&gt;final_fight_2]].</tw-passagedata><tw-passagedata pid="167" name="final_fight_2" tags="" position="400,4100" size="100,100">[[This is not what they told you-&gt;final_fight_3]].</tw-passagedata><tw-passagedata pid="168" name="final_fight_3" tags="" position="525,4100" size="100,100">[[But this is what you tell yourself-&gt;final_fight_4]].</tw-passagedata><tw-passagedata pid="169" name="final_fight_4" tags="" position="650,4100" size="100,100">You have already pictured this fight with her, replaying every single one of your blows &lt;&lt;linkappend &quot;again,&quot; t8n&gt;&gt; and [[again-&gt;final_fight_5]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="170" name="final_fight_5" tags="" position="775,4100" size="100,100">The nuns directed you to consult the sacred algorithms, but you do not want to add to the [[statistics of violence-&gt;final_fight_6]].</tw-passagedata><tw-passagedata pid="171" name="final_fight_6" tags="" position="900,4100" size="100,100">So when you step into the cathedral, you ready yourself to talk to her.
 
 &lt;&lt;include &quot;cycling_final_fight_6&quot;&gt;&gt;.
 
@@ -1947,13 +1966,15 @@ We can find a corner of this universe where we can just live [[together-&gt;fina
 &lt;&lt;/silently&gt;&gt;
 \&lt;&lt;linkreplace $choices_final_final_9_c2[$choicesCount_final_final_9_c2] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_final_9_c2&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="178" name="final_fight_10" tags="" position="1400,4100" size="100,100">Can&#39;t you both simply be punctuation on a page? Can&#39;t you both simply be as invisible as possible?
 
-No, [[she-&gt;final_fight_11]] says. We can&#39;t.</tw-passagedata><tw-passagedata pid="179" name="final_fight_11" tags="pink" position="1525,4100" size="100,100">Your old friend had her chance, but you&#39;ve waited for far too long.
+No, [[she-&gt;final_fight_11]] says. We can&#39;t.</tw-passagedata><tw-passagedata pid="179" name="final_fight_11" tags="pink" position="1525,4100" size="100,100">&lt;&lt;timed 1.7s t8n&gt;&gt;\
+Your old friend had her chance, but you&#39;ve waited for far too long.
 
 I&#39;m here now, she says.
 
 But you know that this is too late. You&#39;re both different people now. And how could she follow you, fighting your battles, if she doesn&#39;t want to believe in &lt;&lt;linkreplace &quot;the “other god”&quot; t8n&gt;&gt;&lt;&lt;linkreplace &quot;any god&quot; t8n&gt;&gt;&lt;&lt;linkreplace &quot;anything&quot; t8n&gt;&gt;anything, except for you&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;?
 
-You can&#39;t be her [[north-&gt;final_fight_12]].</tw-passagedata><tw-passagedata pid="180" name="cycling_final_fight_11" tags="" position="1525,4200" size="100,100">/* UNUSED AT THE MOMENT */
+You can&#39;t be her [[north-&gt;final_fight_12]].
+&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="180" name="cycling_final_fight_11" tags="" position="1525,4200" size="100,100">/* UNUSED AT THE MOMENT */
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_fight_11&gt;&gt;
   &lt;&lt;set $choicesCount_final_fight_11 to -1&gt;&gt;
@@ -1968,19 +1989,21 @@ You can&#39;t be her [[north-&gt;final_fight_12]].</tw-passagedata><tw-passageda
 
 &lt;&lt;set $cyclingResult_final_fight_11 to $choices_final_fight_11[$choicesCount_final_fight_11]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-\&lt;&lt;linkreplace $choices_final_fight_11[$choicesCount_final_fight_11] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_11&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="181" name="final_fight_12" tags="pink" position="1650,4100" size="100,100">You avoid her gaze like the sun.
+\&lt;&lt;linkreplace $choices_final_fight_11[$choicesCount_final_fight_11] t8n&gt;&gt;&lt;&lt;include &quot;cycling_final_fight_11&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="181" name="final_fight_12" tags="pink" position="1650,4100" size="100,100">You avoid her gaze, as if it was the sun.
 
 &lt;&lt;if $cyclingResult_final_final_9_c2 is &quot;I want you to come with me&quot; or $cyclingResult_final_final_9_c1 is &quot;Could you come with me&quot;&gt;&gt;\
 [[You shouldn&#39;t come with me, you say-&gt;final_fight_13]].
 &lt;&lt;else&gt;&gt;\
 [[I can&#39;t leave with you, you say-&gt;final_fight_13]].
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="182" name="final_fight_13" tags="pink" position="1775,4100" size="100,100">[[I don&#39;t think we can save each other-&gt;final_fight_14]].</tw-passagedata><tw-passagedata pid="183" name="final_fight_14" tags="" position="1900,4100" size="100,100">&lt;&lt;include &quot;cycling_final_fight_14&quot;&gt;&gt;.
-&lt;&lt;timed 4s t8n&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="182" name="final_fight_13" tags="pink" position="1775,4100" size="100,100">[[I don&#39;t think we can save each other-&gt;final_fight_14]].</tw-passagedata><tw-passagedata pid="183" name="final_fight_14" tags="" position="1900,4100" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;\
+&lt;&lt;include &quot;cycling_final_fight_14&quot;&gt;&gt;.
+&lt;&lt;timed 6s t8n&gt;&gt;\
 
-The words rise up your throat like fish up a waterfall, then fall down again. /*TODO: may want to remove this */
-&lt;&lt;timed 5s t8n&gt;&gt;\
+The words crawl up your throat, then fall down again.
+&lt;&lt;timed 7s t8n&gt;&gt;\
 
-Nothing leaves the [[fortress of your mouth-&gt;final_fight_15]].
+Nothing leaves the [[fortress of your mouth-&gt;final_fight_15]]. /* TODO: may want to remove */
+&lt;&lt;/timed&gt;&gt;\
 &lt;&lt;/timed&gt;&gt;\
 &lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="184" name="cycling_final_fight_14" tags="" position="1900,4200" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_final_fight_14&gt;&gt;
@@ -2060,11 +2083,13 @@ Don&#39;t find me again, she says. [[It&#39;s better for the both of us-&gt;fina
 
 Then, you walk over to a wall, and run your finger through one of its gashes.
 
-[[This isn&#39;t your battle to fight, now-&gt;final_fight_20]].</tw-passagedata><tw-passagedata pid="193" name="final_fight_20" tags="" position="2650,4100" size="100,100">&lt;&lt;linkappend &quot;You walk away from the cathedral,&quot; t8n&gt;&gt; [[and you do not return to the monastery-&gt;credits]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="194" name="options_comment" tags="" position="625,1475" size="100,100">&lt;&lt;if setup.enableUndo.get()&gt;&gt;\
+[[This isn&#39;t your battle to fight, now-&gt;final_fight_20]].</tw-passagedata><tw-passagedata pid="193" name="final_fight_20" tags="" position="2650,4100" size="100,100">&lt;&lt;linkappend &quot;You walk away from the cathedral,&quot; t8n&gt;&gt; [[and you do not return to the monastery-&gt;credits]].&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="194" name="options_comment" tags="" position="625,1475" size="100,100">/* UNUSED AT THE MOMENT */
+&lt;&lt;if setup.enableUndo.get()&gt;&gt;\
 Even if you could undo your decisions, you would have made the same &lt;&lt;return &quot;mistakes&quot;&gt;&gt;.
 &lt;&lt;else&gt;&gt;\
 You can&#39;t undo your decisions. You can&#39;t undo your &lt;&lt;return &quot;mistakes&quot;&gt;&gt;.
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="195" name="options_comment_2" tags="pink" position="2500,2075" size="100,100">&lt;&lt;if setup.enableUndo.get()&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="195" name="options_comment_2" tags="pink" position="2500,2075" size="100,100">/* UNUSED AT THE MOMENT */
+&lt;&lt;if setup.enableUndo.get()&gt;&gt;\
 She thinks that the only option is to fight. Even if she could undo her decisions, she would have made the same &lt;&lt;return &quot;mistakes&quot;&gt;&gt;.
 &lt;&lt;else&gt;&gt;\
 She thinks that the only option is to fight, yet again.
@@ -2073,6 +2098,8 @@ She can&#39;t undo what she did. She can&#39;t undo her &lt;&lt;return &quot;mis
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="196" name="credits" tags="no-undo" position="2875,400" size="100,100">&lt;&lt;timed 2.5s t8n&gt;&gt;\
 &lt;div class=&quot;credit-title&quot;&gt;You Can&#39;t Save Her&lt;/div&gt;\
 Written by Sarah Mak
+
+Special thanks to Kok Wei Liang, Pooja Nansi, and the Twine Discord server.
 
 [[Return to the title screen-&gt;Start]]
 &lt;&lt;/timed&gt;&gt;\</tw-passagedata></tw-storydata>

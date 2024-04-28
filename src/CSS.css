@@ -1,3 +1,8 @@
+html {
+  visibility: hidden;
+  opacity: 0;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -191,6 +196,22 @@ p:first-of-type {
   transform: scaleX(0.92);
 }
 
+.cw-header {
+  font-size: 1.38em;
+  font-weight: 800;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 2;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.92);
+  padding-bottom: 2px;
+}
+
 .options-header {
   font-size: 1.38em;
   font-weight: 800;
@@ -266,41 +287,51 @@ p:first-of-type {
 
 .chapter-select-link {
   font-size: 120%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-#chapter_4 {
+#chapter_5 {
   cursor: pointer;
   fill: var(--purple);
   pointer-events: all;
   transition: fill 0.3s ease;
-  /* Smooth transition for color change */
 }
 
-#chapter_4 path {
+#chapter_5 path {
   transition: fill 0.3s ease;
   fill: var(--purple);
   pointer-events: all;
-  /* Smooth transition for color change */
 }
 
-#chapter_4 svg:hover path {
+#chapter_5 svg:hover path {
   fill: var(--purple-hover);
   pointer-events: all;
-  /* Change this to your desired hover color */
 }
 
-#chapter_4_menu {
+#chapter_5:hover path {
+  fill: var(--purple-hover);
+  pointer-events: all;
+}
+
+#chapter_5_menu {
   cursor: pointer;
   pointer-events: all;
 }
 
-#chapter_4_menu path {
+#chapter_5_menu path {
   transition: fill 0.3s ease;
   fill: var(--blue);
+  pointer-events: all;
 }
 
-#chapter_4_menu:hover path {
+#chapter_5_menu:hover path {
   fill: var(--blue-hover);
+  pointer-events: all;
 }
 
 body.full-text {
@@ -735,4 +766,9 @@ body.black #undobar a {
   #menu {
     font-size: 12pt;
   }
+}
+
+html {
+  visibility: visible;
+  opacity: 1;
 }
