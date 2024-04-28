@@ -35,8 +35,20 @@ setup.enableUndo = {
 function updateUndoButton() {
   $("#undobar").remove(); // Remove existing Undo button, if any.
 
-  if (setup.enableUndo.get()) {
-    // Show the undo button
+  // If chapter selection is active, and if the current passage is one of the chapter starts, hide the undo button
+  var isChapterSelectionActive = State.variables.chapter_select_active;
+  var isChapterPassage = [
+    "chapter_1",
+    "chapter_2",
+    "chapter_3",
+    "chapter_4",
+    "chapter_5",
+  ].includes(State.passage);
+
+  var isChapterNoUndo = isChapterSelectionActive && isChapterPassage;
+
+  if (setup.enableUndo.get() && !isChapterNoUndo) {
+    // Show the undo button only if undo is enabled and not in chapter selection mode or on a chapter passage
     $("body").prepend(
       "<div id='undobar'><a href='#' id='undoButton'>←</a></div>"
     );
