@@ -280,6 +280,14 @@ p:first-of-type {
   opacity: 0;
 }
 
+h1 {
+  font-size: 1.14em;
+  font-weight: 800;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.92);
+  transform-origin: left center;
+}
+
 /* Special CSS */
 [data-tags~="center"].passage {
   text-align: center;

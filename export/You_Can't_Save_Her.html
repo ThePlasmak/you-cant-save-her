@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4// --><tw-storydata name="You Can&#39;t Save Her" startnode="178" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "CSS.css" */
+	<!-- UUID://3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4// --><tw-storydata name="You Can&#39;t Save Her" startnode="1" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "CSS.css" */
 html {
   visibility: hidden;
   opacity: 0;
@@ -379,6 +379,14 @@ p:first-of-type {
 
 #preload {
   opacity: 0;
+}
+
+h1 {
+  font-size: 1.14em;
+  font-weight: 800;
+  font-family: "Inknut Antiqua", serif;
+  transform: scaleX(0.92);
+  transform-origin: left center;
 }
 
 /* Special CSS */
@@ -935,7 +943,7 @@ $(document).on(":passagerender", updateUndoButton);
 // AUTOSAVE
 // Autosaves whenever you enter a new passage
 $(document).on(":passagerender", function () {
-  // Check if autosaving is allowed (i.e., not in chapter selection mode)
+  // Check if autosaving is allowed
   if (
     State.variables.chapter_select_active !== true &&
     State.passage !== "Start" &&
@@ -983,25 +991,6 @@ $(document).on(":passagerender", function (ev) {
       padding: "",
       transition: "",
     });
-  }
-});
-
-// CSS CHANGES FOR BODY
-// Need this for time changes for passages tagged "outside"
-$(document).on(":passagerender", function (ev) {
-  // Check if the current passage has the "outside" tag
-  if (tags().includes("outside")) {
-    // Check if the time is "Night"
-    if (State.variables.time === "Night") {
-      // Apply the night theme
-      $("body").removeClass("evening").addClass("night");
-    } else {
-      // Otherwise, apply the evening theme
-      $("body").removeClass("night").addClass("evening");
-    }
-  } else {
-    // For passages without the "outside" tag, ensure the default theme
-    $("body").removeClass("night").removeClass("evening");
   }
 });
 
@@ -1858,7 +1847,7 @@ She is still not here.
 
 But still, you wait a little longer, holding on to your last bit of &lt;&lt;linkreplace &quot;faith&quot; t8n&gt;&gt;hope&lt;&lt;/linkreplace&gt;&gt;, counting the seconds for the last [[time-&gt;teen_2_flashback_26]].</tw-passagedata><tw-passagedata pid="153" name="teen_2_flashback_26" tags="flashback pink" position="1200,3775" size="100,100">Soon, time will not matter to you anymore.
 
-[[Time is just an illusion that helps stories make sense-&gt;teen_2_flashback_27]].</tw-passagedata><tw-passagedata pid="154" name="teen_2_flashback_27" tags="flashback pink" position="1325,3775" size="100,100">You hear the guttural rumble of the [[golems-&gt;teen_2_flashback_28]].</tw-passagedata><tw-passagedata pid="155" name="teen_2_flashback_28" tags="flashback pink" position="1450,3775" size="100,100">One of the golems aims its arm of rock at you.
+[[Time is just an illusion that helps things make sense-&gt;teen_2_flashback_27]].</tw-passagedata><tw-passagedata pid="154" name="teen_2_flashback_27" tags="flashback pink" position="1325,3775" size="100,100">You hear the guttural rumble of the [[golems-&gt;teen_2_flashback_28]].</tw-passagedata><tw-passagedata pid="155" name="teen_2_flashback_28" tags="flashback pink" position="1450,3775" size="100,100">One of the golems aims its arm of rock at you.
 
 [[One second-&gt;teen_2_flashback_28_1]].</tw-passagedata><tw-passagedata pid="156" name="teen_2_flashback_28_1" tags="flashback pink" position="1575,3775" size="100,100">You realise that your friend has &lt;&lt;include &quot;cycling_teen_2_flashback_28_1&quot;&gt;&gt;.
 
@@ -2098,8 +2087,22 @@ She can&#39;t undo what she did. She can&#39;t undo her &lt;&lt;return &quot;mis
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="196" name="credits" tags="no-undo" position="2875,400" size="100,100">&lt;&lt;timed 2.5s t8n&gt;&gt;\
 &lt;div class=&quot;credit-title&quot;&gt;You Can&#39;t Save Her&lt;/div&gt;\
 Written by Sarah Mak
+/*
+&lt;h1&gt;Credits&lt;/h1&gt;\
+Cover art by ???
+Music by ???
+*/
+&lt;h1&gt;Acknowledgments&lt;/h1&gt;\
+Thank you to Kok Wei Liang for giving feedback on an early version of this piece, and for being a wonderful friend.
 
-Special thanks to Kok Wei Liang, Pooja Nansi, and the Twine Discord server.
+Thank you to the members of the Twine Discord server for the prompt replies to my technical questions. This piece would not be possible without their help. The members who helped me include Hituro, Sjoerd Hekking, TheMadExile, {G𝖜𝖊𝖓[♡].T𝖆𝖘𝖙𝖎𝖈}, SleepyFool, leahiel, Overdrive8911, fg109, Maliface, and Crepes. (There may be more—I&#39;m so sorry if I left you out!)
+
+And thank you to Pooja Nansi for the insightful creative writing lessons and for being a great inspiration.
+
+&lt;h1&gt;Notes&lt;/h1&gt;\
+This piece was heavily inspired by a scene from //With Those We Love Alive// by Porpentine, and it borrows lines from //With Those We Love Alive//, Porpentine&#39;s notes on //Contrition// in //Eczema Angel Orifice//, and the song //Time Adventure// by Rebecca Sugar.
+
+This piece was also inspired by scenes from //Known Unknowns// and //Birdland// by Brendan Patrick Hennessy.
 
 [[Return to the title screen-&gt;Start]]
 &lt;&lt;/timed&gt;&gt;\</tw-passagedata></tw-storydata>

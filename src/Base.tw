@@ -6,7 +6,7 @@ You Can't Save Her
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
     "format-version": "2.36.1",
-    "start": "final_fight_10",
+    "start": "Start",
     "zoom": 1
 }
 
@@ -1299,7 +1299,7 @@ But still, you wait a little longer, holding on to your last bit of <<linkreplac
 :: teen_2_flashback_26 [flashback pink] {"position":"1200,3775"}
 Soon, time will not matter to you anymore.
 
-[[Time is just an illusion that helps stories make sense->teen_2_flashback_27]].
+[[Time is just an illusion that helps things make sense->teen_2_flashback_27]].
 
 :: teen_2_flashback_27 [flashback pink] {"position":"1325,3775"}
 You hear the guttural rumble of the [[golems->teen_2_flashback_28]].
@@ -1668,8 +1668,22 @@ She can't undo what she did. She can't undo her <<return "mistakes">>.
 <<timed 2.5s t8n>>\
 <div class="credit-title">You Can't Save Her</div>\
 Written by Sarah Mak
+/*
+<h1>Credits</h1>\
+Cover art by ???
+Music by ???
+*/
+<h1>Acknowledgments</h1>\
+Thank you to Kok Wei Liang for giving feedback on an early version of this piece, and for being a wonderful friend.
 
-Special thanks to Kok Wei Liang, Pooja Nansi, and the Twine Discord server.
+Thank you to the members of the Twine Discord server for the prompt replies to my technical questions. This piece would not be possible without their help. The members who helped me include Hituro, Sjoerd Hekking, TheMadExile, {G𝖜𝖊𝖓[♡].T𝖆𝖘𝖙𝖎𝖈}, SleepyFool, leahiel, Overdrive8911, fg109, Maliface, and Crepes. (There may be more—I'm so sorry if I left you out!)
+
+And thank you to Pooja Nansi for the insightful creative writing lessons and for being a great inspiration.
+
+<h1>Notes</h1>\
+This piece was heavily inspired by a scene from //With Those We Love Alive// by Porpentine, and it borrows lines from //With Those We Love Alive//, Porpentine's notes on //Contrition// in //Eczema Angel Orifice//, and the song //Time Adventure// by Rebecca Sugar.
+
+This piece was also inspired by scenes from //Known Unknowns// and //Birdland// by Brendan Patrick Hennessy.
 
 [[Return to the title screen->Start]]
 <</timed>>\
