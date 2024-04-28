@@ -61,6 +61,7 @@ $(document).on(":passagerender", function () {
     State.passage !== "Start" &&
     State.passage !== "options" &&
     State.passage !== "content_warning" &&
+    State.passage !== "content_warning_restart" &&
     State.passage !== "its_okay" &&
     State.passage !== "credits" &&
     State.passage !== "chapters" &&

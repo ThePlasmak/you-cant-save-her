@@ -37,11 +37,23 @@ Are you okay with continuing this story?
 [[No->its_okay]]
 
 :: restart [center no-undo] {"position":"350,150"}
-<<nobr>><<link 'It will always end the same way.'>>\
-    <<for _key, _val range State.variables>><<run delete State.variables[_key]>><</for>>
-    <<set State.expired.length = 0>>
-    <<goto "content_warning">>
-<</link>><</nobr>>\
+<<link "It will always end the same way." "content_warning_restart">><</link>>
+
+:: content_warning_restart [no-undo center options]
+<span class="subtitle">''Content Warning''</span>
+This story contains depictions of violence, horror, and mild gore.
+Are you okay with continuing this story?
+
+<<nobr>>\
+<<link "Yes" "intro_1">><<include "variable_setup_cs_false">>
+  <<for _key, _val range State.variables>>
+  <<run delete State.variables[_key]>>
+  <</for>>
+  <<set State.expired.length = 0>>
+<</link>>
+<</nobr>>\
+
+[[No->its_okay]]
 
 :: chapters [no-undo options center] {"position":"175,550"}
 <div class="chapter-selection-header">''Chapters''</div> <span class="close">[[✖->Start]]</span>\
