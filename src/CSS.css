@@ -43,11 +43,6 @@ html {
   --purple-hover: rgb(211, 170, 255);
 }
 
-html {
-  height: 100%;
-  box-sizing: border-box;
-}
-
 *,
 *:before,
 *:after {
@@ -780,6 +775,11 @@ body.black #undobar a {
   #menu {
     font-size: 12pt;
   }
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
 }
 
 html {
