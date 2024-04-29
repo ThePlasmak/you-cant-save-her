@@ -1064,11 +1064,12 @@ This story contains depictions of violence, horror, and mild gore.
 Are you okay with continuing this story?
 
 &lt;&lt;nobr&gt;&gt;\
-&lt;&lt;link &quot;Yes&quot; &quot;intro_1&quot;&gt;&gt;&lt;&lt;include &quot;variable_setup_cs_false&quot;&gt;&gt;
+&lt;&lt;link &quot;Yes&quot; &quot;intro_1&quot;&gt;&gt;
   &lt;&lt;for _key, _val range State.variables&gt;&gt;
   &lt;&lt;run delete State.variables[_key]&gt;&gt;
   &lt;&lt;/for&gt;&gt;
   &lt;&lt;set State.expired.length = 0&gt;&gt;
+  &lt;&lt;include &quot;variable_setup_cs_false&quot;&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
 

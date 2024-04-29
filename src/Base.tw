@@ -45,11 +45,12 @@ This story contains depictions of violence, horror, and mild gore.
 Are you okay with continuing this story?
 
 <<nobr>>\
-<<link "Yes" "intro_1">><<include "variable_setup_cs_false">>
+<<link "Yes" "intro_1">>
   <<for _key, _val range State.variables>>
   <<run delete State.variables[_key]>>
   <</for>>
   <<set State.expired.length = 0>>
+  <<include "variable_setup_cs_false">>
 <</link>>
 <</nobr>>\
 
