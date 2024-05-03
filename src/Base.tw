@@ -7,6 +7,10 @@ You Can't Save Her
     "format": "SugarCube",
     "format-version": "2.36.1",
     "start": "Start",
+    "tag-colors": {
+		"pink": "purple",
+		"no-undo": "green"
+	},
     "zoom": 1
 }
 
@@ -204,7 +208,7 @@ This is what you [[try to believe->weapon_3]] in.
 You put yourself into your work, [[in the way that faith demands sacrifice->weapon_5]].
 
 :: weapon_5 {"position":"925,1125"}
-And also, you bring a blazegun.
+And you bring a blazegun.
 
 [[Even though she called it a coward's weapon->mc_travel_1]].
 
