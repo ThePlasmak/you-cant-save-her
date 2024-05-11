@@ -129,6 +129,11 @@ a:hover {
   transition: 0.3s;
 }
 
+a.link-external::after {
+  visibility: hidden;
+  content: "";
+}
+
 level-2 {
   margin-top: 1.5em;
   margin-right: 0px;
