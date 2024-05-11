@@ -17,10 +17,20 @@ You Can't Save Her
 :: Start [no-undo] {"position":"200,400"}
 <div class="title">You Can't Save Her</div>\
 <div class="subtitle">by Sarah Mak</div>\
-<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<set $chapter_select_active to false>><<run Save.slots.load(1)>><</link>> · <<link 'Restart' 'restart'>><</link>><<else>>[[Start->content_warning]]<</if>> · [[Chapters->chapters]] · [[Options->options]]</div>
+<div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<set $chapter_select_active to false>><<run Save.slots.load(1)>><</link>> · <<link 'Restart' 'restart'>><</link>><<else>>[[Start->content_warning]]<</if>> · [[Chapters->chapters]] · [[Options->options]] · [[About->about]]</div>
 
 :: StoryInit {"position":"75,250"}
 <<include "variable_setup">>
+
+:: about [no-undo options]
+<div class="options-header">''About''</div> <span class="close">[[✖->Start]]</span>\
+//You Can't Save Her// was written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a> and scored by <a href="linktr.ee/fallingislands">Falling Islands</a>.
+
+It takes around 12 minutes to complete.
+
+This story was submitted to the 2024 <a href="https://ifcomp.org/">Interactive Fiction Competition</a> and created in <a href="https://twinery.org/">Twine</a>, an open-source tool for telling interactive, nonlinear stories.
+
+Special thanks to Kok Wei Liang, Pooja Nansi, and the Twine Discord.
 
 :: options [no-undo options] {"position":"75,400"}
 <div class="options-header">''Options''</div> <span class="close">[[✖->Start]]</span>\
@@ -40,7 +50,7 @@ Are you okay with continuing this story?
 <<link "Yes" "intro_1">><<include "variable_setup_cs_false">><</link>>
 [[No->its_okay]]
 
-:: restart [center no-undo] {"position":"350,150"}
+:: restart [no-undo center] {"position":"350,150"}
 <<link "It will always end the same way" "content_warning_restart">><</link>>.
 
 :: content_warning_restart [no-undo center options] {"position":"475,275"}
@@ -1672,7 +1682,8 @@ She can't undo what she did. She can't undo her <<return "mistakes">>.
 :: credits [no-undo] {"position":"2875,400"}
 <<timed 2.5s t8n>>\
 <div class="credit-title">You Can't Save Her</div>\
-Written by Sarah Mak
+Written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a>
+Scored by <a href="linktr.ee/fallingislands">Falling Islands</a>
 /*
 <h1>Credits</h1>\
 Cover art by ???

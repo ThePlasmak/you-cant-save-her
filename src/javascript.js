@@ -79,6 +79,7 @@ $(document).on(":passagerender", function () {
       "credits",
       "chapters",
       "restart",
+      "about",
     ].includes(State.passage)
   ) {
     Save.slots.save(1); // Automatically save to slot 1
@@ -120,17 +121,6 @@ $(document).on(":passagerender", function (ev) {
     });
   }
 });
-
-// // Fix passages with the no-t8n tag having the wrong text color when undoed to
-// var isWhitePassage = ["teen_flashback_15"].includes(State.passage);
-
-// $(document).on(":passagerender", function () {
-//   if (State.passage == "teen_flashback_15") {
-//     $("#passages").css("color", "white");
-//   } else {
-//     $("#passages").css("color", ""); // Reset to default or another specified value if needed
-//   }
-// });
 
 // GO TO START ON REFRESH
 window.onbeforeunload = function () {
