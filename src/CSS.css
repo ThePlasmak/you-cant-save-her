@@ -303,6 +303,16 @@ h1 {
   user-select: none;
 }
 
+.title-svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#title {
+  fill: white;
+}
+
 #chapter_5 {
   cursor: pointer;
   fill: var(--purple);
