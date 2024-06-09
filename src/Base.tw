@@ -8,9 +8,9 @@ You Can't Save Her
     "format-version": "2.36.1",
     "start": "Start",
     "tag-colors": {
-		"pink": "purple",
-		"no-undo": "green"
-	},
+        "pink": "purple",
+        "no-undo": "green"
+    },
     "zoom": 1
 }
 
@@ -51,7 +51,7 @@ You Can't Save Her
 :: StoryInit {"position":"75,250"}
 <<include "variable_setup">>
 
-:: about [no-undo options]
+:: about [no-undo options] {"position":"300,550"}
 <div class="options-header">''About''</div> <span class="close">[[✖->Start]]</span>\
 //You Can't Save Her// was written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a> and scored by <a href="linktr.ee/fallingislands">Falling Islands</a>.
 
@@ -310,7 +310,8 @@ Her <<linkappend "hair" t8n>> barely conceals the nubs of her antlers, which are
 This is worse than you feared.
 
 <<include "cycling_mc_travel_7">>.
-<<timed 3.7s>><<goto "mc_pre_fight">><</timed>>\
+
+[[You have to do this->mc_pre_fight]].
 
 :: cycling_mc_travel_7 {"position":"1050,1375"}
 <<silently>>
@@ -1149,7 +1150,7 @@ You see the corner of her desk.
 [[Three seconds->teen_2_flashback_8]].
 
 :: teen_2_flashback_8 [flashback] {"position":"1075,3650"}
-The door is fully open. You see her <<linkappend "sitting at her desk," t8n>> reading <<linkreplace "the book" t8n>><<linkappend "the book you should have warned her about," t8n>> skin is covered in <span class="pink">[[glowing pink marks->teen_2_flashback_9]]</span>.
+The door is fully open. You see her <<linkappend "sitting at her desk," t8n>> reading <<linkreplace "the book" t8n>><<linkappend "the book you should have warned her about," t8n>> her skin covered in <span class="pink">[[glowing pink marks->teen_2_flashback_9]]</span>.
 <</linkappend>><</linkreplace>><</linkappend>>
 
 :: teen_2_flashback_9 [flashback] {"position":"1200,3650"}

@@ -1025,23 +1025,23 @@ $(document).on(":passagerender", function (ev) {
 });
 
 // GO TO START ON REFRESH
-// window.onbeforeunload = function () {
-//   window.sessionStorage.setItem("twine-reload-flag", "true");
-// }; // Set the reload flag before the page unloads
+window.onbeforeunload = function () {
+  window.sessionStorage.setItem("twine-reload-flag", "true");
+}; // Set the reload flag before the page unloads
 
-// // Use the :passagedisplay event to check the flag and redirect if necessary
-// $(document).on(":passagedisplay", function () {
-//   var refresh = sessionStorage.getItem("twine-reload-flag");
+// Use the :passagedisplay event to check the flag and redirect if necessary
+$(document).on(":passagedisplay", function () {
+  var refresh = sessionStorage.getItem("twine-reload-flag");
 
-//   // Clear the flag immediately after retrieving it to prevent unintended behavior
-//   sessionStorage.removeItem("twine-reload-flag");
+  // Clear the flag immediately after retrieving it to prevent unintended behavior
+  sessionStorage.removeItem("twine-reload-flag");
 
-//   if (refresh === "true" && passage() !== "Start") {
-//     // Ensure to only redirect if not on the 'Start' passage to avoid loops
-//     Engine.play("Start"); // Replace 'somePassage' with your target passage
-//   }
-// });
-</script><tw-tag name="pink" color="purple"></tw-tag><tw-tag name="no-undo" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="no-undo" position="200,400" size="100,100">&lt;div class=&quot;title-svg&quot;&gt;\
+  if (refresh === "true" && passage() !== "Start") {
+    // Ensure to only redirect if not on the 'Start' passage to avoid loops
+    Engine.play("Start"); // Replace 'somePassage' with your target passage
+  }
+});
+</script><tw-tag name="no-undo" color="green"></tw-tag><tw-tag name="pink" color="purple"></tw-tag><tw-passagedata pid="1" name="Start" tags="no-undo" position="200,400" size="100,100">&lt;div class=&quot;title-svg&quot;&gt;\
 &lt;svg id=&quot;title&quot; data-name=&quot;title&quot; width=&quot;400px&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; xmlns:i=&quot;http://ns.adobe.com/AdobeIllustrator/10.0/&quot; viewBox=&quot;0 0 1435 305&quot;&gt; &lt;g&gt;
     &lt;path class=&quot;cls-1&quot; d=&quot;M78.15,112.9l14.33,4.12-4.13,8.93h-44.94v-7.69l12.14-10.17v-18.27L20.82,31.99l-9.43-5.08,2.58-8.93h44.04v7.69l-9.69,7.97,23.12,38.33,23.12-35.58-18.85-9.62,4.13-8.93h41.71v7.69l-12.78,9.89-30.6,47.67v29.81Z&quot;/&gt;
     &lt;path class=&quot;cls-1&quot; d=&quot;M171,55.14c4.99,3.16,8.89,7.49,11.69,12.98,2.8,5.5,4.2,11.59,4.2,18.27,0,7.24-2.2,13.99-6.59,20.26-4.39,6.27-9.88,11.27-16.46,14.97-6.59,3.71-12.94,5.56-19.05,5.56s-11.94-1.58-16.98-4.74c-5.04-3.16-8.96-7.49-11.75-12.98-2.8-5.5-4.2-11.58-4.2-18.27,0-7.23,2.2-13.99,6.59-20.26,4.39-6.27,9.88-11.27,16.46-14.97,6.59-3.71,12.93-5.56,19.05-5.56s12.05,1.58,17.05,4.74ZM138.27,70.93c-1.85,3.07-2.78,7.62-2.78,13.67,0,7.69,1.46,14.08,4.39,19.16,2.93,5.08,7.06,7.62,12.4,7.62,3.53,0,6.22-1.58,8.07-4.74,1.85-3.16,2.78-7.76,2.78-13.81,0-7.69-1.46-14.03-4.39-19.03-2.93-4.99-7.02-7.49-12.27-7.49-3.62,0-6.35,1.54-8.2,4.6Z&quot;/&gt;
@@ -1072,7 +1072,7 @@ $(document).on(":passagerender", function (ev) {
     &lt;path class=&quot;cls-1&quot; d=&quot;M1008.53,231.74c6.04,0,9.07.93,9.1,2.8,0,1.08-1.92,2.85-5.77,5.31-7.7,4.95-11.55,8.96-11.55,12.04,0,1.11,3.14,5.49,9.42,13.12,2.19,2.65,4.58,5.03,7.18,7.12,2.6,2.1,3.9,3.56,3.9,4.4s-.38,1.46-1.13,1.87c-.75.41-3.52.61-8.29.61h-1.8c-4.62,0-7.68-.8-9.19-2.41-.89-.95-1.55-2.6-1.96-4.94-.42-2.34-1.12-4.33-2.1-5.97-2.25-3.77-4.39-5.65-6.42-5.65-1.26,0-1.89,1.59-1.89,4.77s.63,6.08,1.89,8.7c.55,1.15.83,1.85.83,2.11,0,1.44-1.02,2.42-3.05,2.95-1.05.26-3.52.39-7.41.39s-6.44-.16-7.64-.49c-1.79-.49-2.68-1.34-2.68-2.56,0-.69.59-2.07,1.78-4.15s1.87-3.68,2.06-4.79c.46-2.82.69-11.65.69-26.48s-.18-22.78-.55-23.81c-.37-1.03-1.46-2.06-3.26-3.07-1.8-1.01-2.7-2.14-2.7-3.37s.83-2.15,2.49-2.78c3.17-1.21,6.65-1.82,10.44-1.82h1.62c1.94,0,3.19,1.2,3.74,3.59.4,1.7.6,8.15.6,19.34s.05,17.14.14,17.86c.28,2.29.92,3.44,1.94,3.44,1.39,0,3.77-2,7.16-6,2.09-2.46,3.14-4.55,3.14-6.29l-.65-2.95c0-1.11.64-1.88,1.92-2.29,1.28-.41,3.95-.61,8.01-.61Z&quot;/&gt;
   &lt;/g&gt; &lt;/svg&gt;
 &lt;/div&gt;\
-&lt;div id=&quot;menu&quot;&gt;&lt;&lt;if Save.slots.has(1)&gt;&gt;&lt;&lt;link &quot;Continue&quot;&gt;&gt;&lt;&lt;set $chapter_select_active to false&gt;&gt;&lt;&lt;run Save.slots.load(1)&gt;&gt;&lt;&lt;/link&gt;&gt; · &lt;&lt;link &#39;Restart&#39; &#39;restart&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;[[Start-&gt;content_warning]]&lt;&lt;/if&gt;&gt; · [[Chapters-&gt;chapters]] · [[Options-&gt;options]] · [[About-&gt;about]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="75,250" size="100,100">&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="about" tags="no-undo options" position="350,100" size="100,100">&lt;div class=&quot;options-header&quot;&gt;&#39;&#39;About&#39;&#39;&lt;/div&gt; &lt;span class=&quot;close&quot;&gt;[[✖-&gt;Start]]&lt;/span&gt;\
+&lt;div id=&quot;menu&quot;&gt;&lt;&lt;if Save.slots.has(1)&gt;&gt;&lt;&lt;link &quot;Continue&quot;&gt;&gt;&lt;&lt;set $chapter_select_active to false&gt;&gt;&lt;&lt;run Save.slots.load(1)&gt;&gt;&lt;&lt;/link&gt;&gt; · &lt;&lt;link &#39;Restart&#39; &#39;restart&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;[[Start-&gt;content_warning]]&lt;&lt;/if&gt;&gt; · [[Chapters-&gt;chapters]] · [[Options-&gt;options]] · [[About-&gt;about]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="75,250" size="100,100">&lt;&lt;include &quot;variable_setup&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="about" tags="no-undo options" position="300,550" size="100,100">&lt;div class=&quot;options-header&quot;&gt;&#39;&#39;About&#39;&#39;&lt;/div&gt; &lt;span class=&quot;close&quot;&gt;[[✖-&gt;Start]]&lt;/span&gt;\
 //You Can&#39;t Save Her// was written by &lt;a href=&quot;https://www.sarahmakmq.com/&quot;&gt;Sarah Mak&lt;/a&gt; and scored by &lt;a href=&quot;linktr.ee/fallingislands&quot;&gt;Falling Islands&lt;/a&gt;.
 
 It takes around 12 minutes to complete.
@@ -1231,7 +1231,8 @@ Her &lt;&lt;linkappend &quot;eyes&quot; t8n&gt;&gt; glow bright pink.&lt;&lt;set
 Her &lt;&lt;linkappend &quot;hair&quot; t8n&gt;&gt; barely conceals the nubs of her antlers, which are like buds emerging out of soil.&lt;&lt;set $face_friend += 1&gt;&gt;&lt;&lt;if $face_friend is 3&gt;&gt;&lt;&lt;timed 6s t8n&gt;&gt;&lt;&lt;goto &quot;mc_travel_9&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="mc_travel_9" tags="" position="1300,1275" size="100,100">This is worse than you feared.
 
 &lt;&lt;include &quot;cycling_mc_travel_7&quot;&gt;&gt;.
-&lt;&lt;timed 3.7s&gt;&gt;&lt;&lt;goto &quot;mc_pre_fight&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;\</tw-passagedata><tw-passagedata pid="37" name="cycling_mc_travel_7" tags="" position="1050,1375" size="100,100">&lt;&lt;silently&gt;&gt;
+
+[[You have to do this-&gt;mc_pre_fight]].</tw-passagedata><tw-passagedata pid="37" name="cycling_mc_travel_7" tags="" position="1050,1375" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;if not $choices_mc_travel_7&gt;&gt;
   &lt;&lt;set $choicesCount_mc_travel_7 to -1&gt;&gt;
   &lt;&lt;set $choices_mc_travel_7 to [&quot;Shoot her&quot;, &quot;Strike her&quot;]&gt;&gt;
@@ -1788,7 +1789,7 @@ You just need to focus on the [[task that they have assigned you-&gt;teen_2_flas
 
 [[Two seconds-&gt;teen_2_flashback_7]].</tw-passagedata><tw-passagedata pid="129" name="teen_2_flashback_7" tags="flashback" position="950,3650" size="100,100">You see the corner of her desk.
 
-[[Three seconds-&gt;teen_2_flashback_8]].</tw-passagedata><tw-passagedata pid="130" name="teen_2_flashback_8" tags="flashback" position="1075,3650" size="100,100">The door is fully open. You see her &lt;&lt;linkappend &quot;sitting at her desk,&quot; t8n&gt;&gt; reading &lt;&lt;linkreplace &quot;the book&quot; t8n&gt;&gt;&lt;&lt;linkappend &quot;the book you should have warned her about,&quot; t8n&gt;&gt; skin is covered in &lt;span class=&quot;pink&quot;&gt;[[glowing pink marks-&gt;teen_2_flashback_9]]&lt;/span&gt;.
+[[Three seconds-&gt;teen_2_flashback_8]].</tw-passagedata><tw-passagedata pid="130" name="teen_2_flashback_8" tags="flashback" position="1075,3650" size="100,100">The door is fully open. You see her &lt;&lt;linkappend &quot;sitting at her desk,&quot; t8n&gt;&gt; reading &lt;&lt;linkreplace &quot;the book&quot; t8n&gt;&gt;&lt;&lt;linkappend &quot;the book you should have warned her about,&quot; t8n&gt;&gt; her skin covered in &lt;span class=&quot;pink&quot;&gt;[[glowing pink marks-&gt;teen_2_flashback_9]]&lt;/span&gt;.
 &lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="131" name="teen_2_flashback_9" tags="flashback" position="1200,3650" size="100,100">[[You close the door-&gt;teen_2_flashback_10]].</tw-passagedata><tw-passagedata pid="132" name="teen_2_flashback_10" tags="flashback" position="1325,3650" size="100,100">&lt;&lt;timed 2s t8n&gt;&gt;It&#39;s your fault, isn&#39;t it? You should have warned her about the book, but you didn&#39;t.
 
 You were scared that warning her about it &lt;&lt;include &quot;cycling_teen_2_flashback_10&quot;&gt;&gt;.
