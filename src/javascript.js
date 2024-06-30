@@ -92,6 +92,35 @@ setup.enableTimed = {
   },
 };
 
+// LIGHT MODE OPTION
+$(document).on(":start", function () {
+  // Check if 'enableLightMode' is stored in localStorage, set it to 'true' if not.
+  if (localStorage.getItem("enableLightMode") === null) {
+    localStorage.setItem("enableLightMode", "false"); // Set default to false if not present
+  }
+
+  // Load the enableLightMode state from localStorage
+  State.variables.enableLightMode =
+    localStorage.getItem("enableLightMode") === "true";
+});
+
+setup.enableLightMode = {
+  // Retrieves the current undo state from localStorage, defaulting to false
+  get: function () {
+    return localStorage.getItem("enableLightMode") === "false";
+  },
+
+  // Toggles the undo state and saves the new state to localStorage
+  toggle: function () {
+    var currentState = this.get();
+    localStorage.setItem("enableLightMode", !currentState);
+    State.variables.enableLightMode = !currentState;
+
+    // Refresh the current passage to reflect the change immediately
+    Engine.play(passage());
+  },
+};
+
 // AUTOSAVE
 // Autosaves whenever you enter a new passage
 $(document).on(":passagerender", function () {
@@ -120,9 +149,9 @@ $(document).on(":passagerender", function (ev) {
   // Get the current passage's tags
   var currentTags = tags();
 
-  // Check if tag is included
+  // Check if tag is included and apply styles accordingly
   if (currentTags.includes("flashback")) {
-    // Apply styles for passages with the tag
+    // Apply styles for passages with the tag 'flashback'
     $("#passages").css({
       "background-color": "transparent",
       "box-shadow": "none",

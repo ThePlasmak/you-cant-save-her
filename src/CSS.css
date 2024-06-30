@@ -33,14 +33,21 @@ html {
     -0.1px 10.3px 7.7px -4.4px hsl(var(--shadow-color) / 0.16),
     -0.2px 14.6px 11px -5px hsl(var(--shadow-color) / 0.08);
 
-  --blue: rgb(50, 195, 252);
-  --blue-hover: rgb(131 211 243);
+  --blue: #5CD1FF;
+  --blue-hover: rgb(138, 213, 242);
+  --blue-fb: #09b0ed;
+  --blue-fb-hover: #0089bb;
 
-  --pink: #ff3dbc;
-  --pink-hover: rgb(243, 92, 248);
+  --pink: #ff00d2;
+  --pink-hover: rgb(244, 125, 248);
+  --pink-fb: #ff41dd;
+  --pink-fb-hover: #c330a8;
 
   --purple: #ab77fa;
   --purple-hover: rgb(211, 170, 255);
+
+  --white: #fff;
+  --body: var(--white)
 }
 
 *,
@@ -64,7 +71,7 @@ html {
 
 #passages {
   position: relative;
-  color: rgb(255, 255, 255);
+  color: var(--body);
   transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
   padding: 1.2em 1.2em 1.2em 1.2em;
   border-radius: 0.25em;
@@ -311,7 +318,7 @@ h1 {
 }
 
 #title {
-  fill: white;
+  fill: var(--body);
 }
 
 #chapter_5 {
@@ -448,29 +455,20 @@ body.long-t8n {
   transition-duration: 1s ease-in-out;
 }
 
-.blocked-link {
-  color: #888888;
-  text-decoration: line-through;
+body[data-tags~="blue-fb"] a {
+  color: var(--blue-fb);
 }
 
-.freestat {
-  background-color: #ffff74;
-  padding: 0 0.3333em;
+body[data-tags~="blue-fb"] a:hover {
+  color: var(--blue-fb-hover);
 }
 
-.freelink {
-  border-bottom: 4px solid #ffff74;
+body[data-tags~="pink-fb"] a {
+  color: var(--pink-fb);
 }
 
-.freelink:hover {
-  border-bottom: 4px solid #ffff74;
-}
-
-.blocked-stat {
-  background-color: #dfdfdf;
-  padding: 0 0.3333em;
-  /* background-color: #dfdfdf;
-  padding: 0.43em 0.3333em 0.2em 0.3333em; */
+body[data-tags~="pink-fb"] a:hover {
+  color: var(--pink-fb-hover);
 }
 
 .noshow {
@@ -489,11 +487,6 @@ h4 {
   margin-block-start: 0em;
   margin-block-end: 1em;
   border-bottom: 2px solid;
-}
-
-h4.evening {
-  color: #001a40;
-  border-bottom: 2px solid #001a40;
 }
 
 ol {
@@ -604,8 +597,7 @@ button:not(:disabled):hover {
 
 #undobar a {
   transition: color 0.5s ease-in-out;
-  color: #fffef0;
-  opacity: 36%;
+  color: #696964;
 }
 
 body.no-undo #undobar a {
@@ -613,11 +605,7 @@ body.no-undo #undobar a {
 }
 
 body.flashback #undobar a {
-  color: #212121;
-}
-
-body.black #undobar a {
-  color: #ffffff;
+  color: #afaeac;
 }
 
 .close {
