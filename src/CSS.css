@@ -49,10 +49,6 @@ html {
   box-sizing: inherit;
 }
 
-::selection {
-  color: #838383;
-}
-
 .passage {
   transition: opacity 0.5s ease-in-out;
   line-height: 1.55;
