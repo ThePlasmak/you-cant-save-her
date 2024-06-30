@@ -64,6 +64,34 @@ function updateUndoButton() {
 // Initialize the undo button on passage render
 $(document).on(":passagerender", updateUndoButton);
 
+// TIMED PAGE TRANSITIONS OPTION
+$(document).on(":start", function () {
+  // Check if 'enableTimed' is stored in localStorage, set it to 'true' if not.
+  if (localStorage.getItem("enableTimed") === null) {
+    localStorage.setItem("enableTimed", "true"); // Set default to true if not present
+  }
+
+  // Load the enableTimed state from localStorage
+  State.variables.enableTimed = localStorage.getItem("enableTimed") === "true";
+});
+
+setup.enableTimed = {
+  // Retrieves the current undo state from localStorage, defaulting to true
+  get: function () {
+    return localStorage.getItem("enableTimed") === "true";
+  },
+
+  // Toggles the undo state and saves the new state to localStorage
+  toggle: function () {
+    var currentState = this.get();
+    localStorage.setItem("enableTimed", !currentState);
+    State.variables.enableTimed = !currentState;
+
+    // Refresh the current passage to reflect the change immediately
+    Engine.play(passage());
+  },
+};
+
 // AUTOSAVE
 // Autosaves whenever you enter a new passage
 $(document).on(":passagerender", function () {
@@ -123,19 +151,19 @@ $(document).on(":passagerender", function (ev) {
 });
 
 // GO TO START ON REFRESH
-window.onbeforeunload = function () {
-  window.sessionStorage.setItem("twine-reload-flag", "true");
-}; // Set the reload flag before the page unloads
+// window.onbeforeunload = function () {
+//   window.sessionStorage.setItem("twine-reload-flag", "true");
+// }; // Set the reload flag before the page unloads
 
-// Use the :passagedisplay event to check the flag and redirect if necessary
-$(document).on(":passagedisplay", function () {
-  var refresh = sessionStorage.getItem("twine-reload-flag");
+// // Use the :passagedisplay event to check the flag and redirect if necessary
+// $(document).on(":passagedisplay", function () {
+//   var refresh = sessionStorage.getItem("twine-reload-flag");
 
-  // Clear the flag immediately after retrieving it to prevent unintended behavior
-  sessionStorage.removeItem("twine-reload-flag");
+//   // Clear the flag immediately after retrieving it to prevent unintended behavior
+//   sessionStorage.removeItem("twine-reload-flag");
 
-  if (refresh === "true" && passage() !== "Start") {
-    // Ensure to only redirect if not on the 'Start' passage to avoid loops
-    Engine.play("Start"); // Replace 'somePassage' with your target passage
-  }
-});
+//   if (refresh === "true" && passage() !== "Start") {
+//     // Ensure to only redirect if not on the 'Start' passage to avoid loops
+//     Engine.play("Start"); // Replace 'somePassage' with your target passage
+//   }
+// });
