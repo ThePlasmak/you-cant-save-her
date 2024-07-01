@@ -1,6 +1,3 @@
-call tweego -l -o "testing\You_Can't_Save_Her.html" src
-python python_scripts/loading_screen_remover.py "testing\You_Can't_Save_Her.html"
-
 call tweego -l -o "export\You_Can't_Save_Her.html" src
 python python_scripts/loading_screen_remover.py "export\You_Can't_Save_Her.html"
 
