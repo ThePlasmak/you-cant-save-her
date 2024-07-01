@@ -76,12 +76,12 @@ $(document).on(":start", function () {
 });
 
 setup.enableTimed = {
-  // Retrieves the current undo state from localStorage, defaulting to true
+  // Retrieves the current enableTimed state from localStorage, defaulting to true
   get: function () {
     return localStorage.getItem("enableTimed") === "true";
   },
 
-  // Toggles the undo state and saves the new state to localStorage
+  // Toggles the enableTimed state and saves the new state to localStorage
   toggle: function () {
     var currentState = this.get();
     localStorage.setItem("enableTimed", !currentState);
@@ -91,6 +91,14 @@ setup.enableTimed = {
     Engine.play(passage());
   },
 };
+
+// Initialize the enableTimed state on document ready
+$(document).ready(function () {
+  if (localStorage.getItem("enableTimed") === null) {
+    localStorage.setItem("enableTimed", "true");
+  }
+  State.variables.enableTimed = localStorage.getItem("enableTimed") === "true";
+});
 
 // LIGHT MODE OPTION
 $(document).on(":start", function () {
@@ -105,12 +113,12 @@ $(document).on(":start", function () {
 });
 
 setup.enableLightMode = {
-  // Retrieves the current undo state from localStorage, defaulting to false
+  // Retrieves the current state from localStorage, defaulting to false
   get: function () {
-    return localStorage.getItem("enableLightMode") === "false";
+    return localStorage.getItem("enableLightMode") === "true";
   },
 
-  // Toggles the undo state and saves the new state to localStorage
+  // Toggles the state and saves the new state to localStorage
   toggle: function () {
     var currentState = this.get();
     localStorage.setItem("enableLightMode", !currentState);
@@ -121,10 +129,21 @@ setup.enableLightMode = {
   },
 };
 
+// Change the CSS if light mode is active
+$(document).on(":passagerender", function (ev) {
+  if (setup.enableLightMode.get()) {
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light");
+  } else {
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("theme", "dark");
+  }
+});
+
 // AUTOSAVE
 // Autosaves whenever you enter a new passage
 $(document).on(":passagerender", function () {
-  // Check if autosaving is allowed
+  // Check if that passage allows autosaving
   if (
     State.variables.chapter_select_active !== true &&
     ![
@@ -143,56 +162,20 @@ $(document).on(":passagerender", function () {
   }
 });
 
-// CSS CHANGES
-// For #passages, as I can't change the #passages sections with Twine tags alone
-$(document).on(":passagerender", function (ev) {
-  // Get the current passage's tags
-  var currentTags = tags();
+// GO TO START ON REFRESH
+window.onbeforeunload = function () {
+  window.sessionStorage.setItem("twine-reload-flag", "true");
+}; // Set the reload flag before the page unloads
 
-  // Check if tag is included and apply styles accordingly
-  if (currentTags.includes("flashback")) {
-    // Apply styles for passages with the tag 'flashback'
-    $("#passages").css({
-      "background-color": "transparent",
-      "box-shadow": "none",
-      color: "black",
-    });
-  } else if (currentTags.includes("options")) {
-    $("#passages").css({
-      "background-color": "rgb(27 27 27)",
-      "box-shadow": "var(--shadow-elevation-high)",
-    });
-  } else if (currentTags.includes("full-text-white")) {
-    $("#passages").css({
-      padding: "0",
-      color: "white",
-    });
-  } else {
-    // Reset styles for passages without certain tags
-    $("#passages").css({
-      "background-color": "",
-      "box-shadow": "",
-      color: "",
-      padding: "",
-      transition: "",
-    });
+// Use the :passagedisplay event to check the flag and redirect if necessary
+$(document).on(":passagedisplay", function () {
+  var refresh = sessionStorage.getItem("twine-reload-flag");
+
+  // Clear the flag immediately after retrieving it to prevent unintended behavior
+  sessionStorage.removeItem("twine-reload-flag");
+
+  if (refresh === "true" && passage() !== "Start") {
+    // Ensure to only redirect if not on the 'Start' passage to avoid loops
+    Engine.play("Start"); // Replace 'somePassage' with your target passage
   }
 });
-
-// GO TO START ON REFRESH
-// window.onbeforeunload = function () {
-//   window.sessionStorage.setItem("twine-reload-flag", "true");
-// }; // Set the reload flag before the page unloads
-
-// // Use the :passagedisplay event to check the flag and redirect if necessary
-// $(document).on(":passagedisplay", function () {
-//   var refresh = sessionStorage.getItem("twine-reload-flag");
-
-//   // Clear the flag immediately after retrieving it to prevent unintended behavior
-//   sessionStorage.removeItem("twine-reload-flag");
-
-//   if (refresh === "true" && passage() !== "Start") {
-//     // Ensure to only redirect if not on the 'Start' passage to avoid loops
-//     Engine.play("Start"); // Replace 'somePassage' with your target passage
-//   }
-// });
