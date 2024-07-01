@@ -55,7 +55,7 @@ You Can't Save Her
 
 :: about [no-undo options] {"position":"300,550"}
 <div class="options-header">''About''</div> <span class="close">[[✖->Start]]</span>\
-//You Can't Save Her// was written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a> and scored by <a href="linktr.ee/fallingislands">Falling Islands</a>.
+//You Can't Save Her// was written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a> and scored by <a href="https://linktr.ee/fallingislands">Falling Islands</a>.
 
 It takes around 12 minutes to complete.
 
@@ -76,13 +76,15 @@ Special thanks to Kok Wei Liang, Pooja Nansi, and the Twine Discord.
 <<else>>\
     ''Timed Passages'': <<link "OFF">><<run setup.enableTimed.toggle()>><<run Engine.play(passage())>><</link>>
 <</if>>\
-<div class="options-text">When this setting is ''ON'', certain passages will automatically progress to the next one after a set amount of time. ''ON'' by default.</div>
+<div class="options-text">When this setting is ''ON'', certain passages will automatically progress to the next one after a set amount of time.</div>\
+<div class="options-text">''ON'' by default.</div>
 <<if setup.enableLightMode.get()>>\
     ''Light Mode'': <<link "ON">><<run setup.enableLightMode.toggle()>><<run Engine.play(passage())>><</link>>
 <<else>>\
     ''Light Mode'': <<link "OFF">><<run setup.enableLightMode.toggle()>><<run Engine.play(passage())>><</link>>
 <</if>>\
-<div class="options-text">When this setting is ''ON'', all passages will have black text on a light background. ''OFF'' by default.</div>
+<div class="options-text">When this setting is ''ON'', all passages will have dark text on a light background.</div>\
+<div class="options-text">''OFF'' by default.</div>
 
 :: content_warning [no-undo center options] {"position":"350,400"}
 <div class="cw-header">''Content Warning''</div>\
@@ -1766,7 +1768,6 @@ Scored by <a href="https://linktr.ee/fallingislands">Falling Islands</a>
 /*
 <h1>Credits</h1>\
 Cover art by ???
-Music by ???
 */
 <h1>Acknowledgments</h1>\
 Thank you to Kok Wei Liang and Pooja Nansi for their feedback and advice on this piece, and thank you to the Twine Discord for their technical help.
