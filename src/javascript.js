@@ -1,8 +1,9 @@
 // DESTROY THE UI BAR
 UIBar.destroy();
 
-// UNDO BUTTON
+// SET UP THE OPTIONS
 $(document).on(":start", function () {
+  // UNDO BUTTON
   // Check if 'enableUndo' is stored in localStorage, set it to 'false' if not.
   if (localStorage.getItem("enableUndo") === null) {
     localStorage.setItem("enableUndo", "false"); // Set default to false if not present
@@ -13,8 +14,28 @@ $(document).on(":start", function () {
 
   // Update the undo button based on the current state.
   updateUndoButton();
+
+  // TIMED PAGE TRANSITIONS
+  // Check if 'enableTimed' is stored in localStorage, set it to 'true' if not.
+  if (localStorage.getItem("enableTimed") === null) {
+    localStorage.setItem("enableTimed", "true"); // Set default to true if not present
+  }
+
+  // Load the enableTimed state from localStorage
+  State.variables.enableTimed = localStorage.getItem("enableTimed") === "true";
+
+  // LIGHT MODE
+  // Check if 'enableLightMode' is stored in localStorage, set it to 'true' if not.
+  if (localStorage.getItem("enableLightMode") === null) {
+    localStorage.setItem("enableLightMode", "false"); // Set default to false if not present
+  }
+
+  // Load the enableLightMode state from localStorage
+  State.variables.enableLightMode =
+    localStorage.getItem("enableLightMode") === "true";
 });
 
+// UNDO BUTTON
 setup.enableUndo = {
   // Retrieves the current undo state from localStorage, defaulting to false
   get: function () {
@@ -65,16 +86,6 @@ function updateUndoButton() {
 $(document).on(":passagerender", updateUndoButton);
 
 // TIMED PAGE TRANSITIONS OPTION
-$(document).on(":start", function () {
-  // Check if 'enableTimed' is stored in localStorage, set it to 'true' if not.
-  if (localStorage.getItem("enableTimed") === null) {
-    localStorage.setItem("enableTimed", "true"); // Set default to true if not present
-  }
-
-  // Load the enableTimed state from localStorage
-  State.variables.enableTimed = localStorage.getItem("enableTimed") === "true";
-});
-
 setup.enableTimed = {
   // Retrieves the current enableTimed state from localStorage, defaulting to true
   get: function () {
@@ -101,17 +112,6 @@ $(document).ready(function () {
 });
 
 // LIGHT MODE OPTION
-$(document).on(":start", function () {
-  // Check if 'enableLightMode' is stored in localStorage, set it to 'true' if not.
-  if (localStorage.getItem("enableLightMode") === null) {
-    localStorage.setItem("enableLightMode", "false"); // Set default to false if not present
-  }
-
-  // Load the enableLightMode state from localStorage
-  State.variables.enableLightMode =
-    localStorage.getItem("enableLightMode") === "true";
-});
-
 setup.enableLightMode = {
   // Retrieves the current state from localStorage, defaulting to false
   get: function () {
