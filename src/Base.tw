@@ -52,6 +52,25 @@ You Can't Save Her
 
 :: StoryInit {"position":"75,250"}
 <<include "variable_setup">>
+<<cacheaudio "scene_1" "audio/scene_1.mp3">>
+<<cacheaudio "scene_2" "audio/red_flag.mp3">>
+
+:: PassageReady {"position":"75,125"}
+/* SET UP AUDIO */
+/* Use tags to play the current audio for each passage */
+<<if tags().includes('scene_1')>>
+  <<if not isPlaying("scene_1")>>
+    <<audio ":playing" stop>>
+    <<audio "scene_1" loop play>>
+  <</if>>
+<<elseif tags().includes('scene_2')>>
+  <<if not isPlaying("scene_2")>>
+    <<audio ":playing" stop>>
+    <<audio "scene_2" loop play>>
+  <</if>>
+<<else>>
+  <<audio ":playing" stop>>
+<</if>>
 
 :: about [no-undo options] {"position":"300,550"}
 <div class="options-header">''About''</div> <span class="close">[[✖->Start]]</span>\
@@ -171,13 +190,13 @@ Your previous progress will not be loaded or overwritten.
 :: its_okay [no-undo center] {"position":"350,275"}
 [[It's okay.->Start]]
 
-:: intro_1 [no-undo] {"position":"425,550"}
+:: intro_1 [scene_1 no-undo] {"position":"425,550"}
 <<timed 2s t8n>>[[You can't save her->intro_2]].<</timed>>
 
-:: intro_2 {"position":"550,550"}
+:: intro_2 [scene_1] {"position":"550,550"}
 [[This is what they told you->intro_3]].
 
-:: intro_3 {"position":"675,550"}
+:: intro_3 [scene_2] {"position":"675,550"}
 [[And this is what you tell yourself->chapter_1]].
 
 :: chapter_1 [center] {"position":"0,950","size":"200,100"}
@@ -1773,7 +1792,7 @@ Cover art by ???
 Thank you to Kok Wei Liang and Pooja Nansi for their feedback and advice on this piece, and thank you to the Twine Discord for their technical help.
 
 <h1>Notes</h1>\
-This piece was heavily inspired by a scene from //With Those We Love Alive// by Porpentine, and it borrows lines from //With Those We Love Alive//, //The Sky in the Room// and Porpentine's notes on //Contrition// in her Twine collection, //Eczema Angel Orifice//.
+This piece was inspired by a scene from //With Those We Love Alive// by Porpentine, and it borrows lines from //With Those We Love Alive//, //The Sky in the Room// and Porpentine's notes on //Contrition// in her Twine collection, //Eczema Angel Orifice//.
 
 [[Return to the title screen->Start]]
 <</timed>>\
