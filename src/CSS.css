@@ -33,21 +33,114 @@ html {
     -0.1px 10.3px 7.7px -4.4px hsl(var(--shadow-color) / 0.16),
     -0.2px 14.6px 11px -5px hsl(var(--shadow-color) / 0.08);
 
-  --blue: #5CD1FF;
-  --blue-hover: rgb(138, 213, 242);
-  --blue-fb: #09b0ed;
-  --blue-fb-hover: #0089bb;
+  --blue: #00BEFD;
+  --blue-hover: rgb(165, 219, 241);
+  --blue-fb: #0092DB;
+  --blue-fb-hover: #0075a0;
 
-  --pink: #ff00d2;
+  --pink: #FF05D1;
   --pink-hover: rgb(244, 125, 248);
-  --pink-fb: #ff41dd;
+  --pink-fb: var(--pink);
   --pink-fb-hover: #c330a8;
 
-  --purple: #ab77fa;
+  --purple: #A26BF5;
   --purple-hover: rgb(211, 170, 255);
 
   --white: #fff;
-  --body: var(--white)
+  --grey: #37352f;
+  --dark-grey: #1b1b1b;
+  --black: #000;
+
+  --light-sepia: #fffefb;
+
+  --undobar: #b8b8b8;
+  --undobar-fb: #5d5d5d;
+
+  --body: var(--white);
+  --background: var(--black);
+  --background-image: linear-gradient(0deg,
+      hsl(0deg 0% 0%) 0%,
+      hsl(344deg 0% 1%) 16%,
+      hsl(344deg 0% 2%) 27%,
+      hsl(344deg 0% 3%) 36%,
+      hsl(344deg 0% 4%) 46%,
+      hsl(344deg 0% 5%) 55%,
+      hsl(344deg 0% 6%) 64%,
+      hsl(344deg 0% 7%) 74%,
+      hsl(344deg 0% 7%) 85%,
+      hsl(0deg 0% 8%) 100%);
+
+  --body-fb: var(--dark-grey);
+  --background-fb: var(--light-sepia);
+
+  --options-bg: var(--dark-grey);
+  --options-shadow: var(--shadow-elevation-high);
+
+  --moon-bi: linear-gradient(180deg,
+      hsl(240deg 2% 11%) 0%,
+      hsl(265deg 1% 13%) 15%,
+      hsl(296deg 1% 15%) 29%,
+      hsl(324deg 1% 18%) 43%,
+      hsl(341deg 1% 21%) 56%,
+      hsl(354deg 1% 23%) 68%,
+      hsl(5deg 1% 26%) 78%,
+      hsl(14deg 1% 28%) 87%,
+      hsl(22deg 1% 31%) 95%,
+      hsl(30deg 1% 34%) 100%);
+
+  --goddess-vision: 0px 0px 12px rgb(140 129 139), 0px 0px 20px rgb(255 255 255), 0px 0px 27px rgb(131 131 131);
+}
+
+[data-theme="light"] {
+  --shadow-elevation-light:
+    rgba(15, 15, 15, 0.1) 0px 5px 10px, rgba(15, 15, 15, 0.2) 0px 15px 40px;
+
+  --sepia: #fff7e6;
+  --dark-brown: #342513;
+
+  --undobar: #383838;
+  --undobar-fb: #2a2a2a;
+
+  --blue: var(--blue-fb);
+  --blue-hover: var(--blue-fb-hover);
+
+  --purple-hover: #8957d4;
+
+  --body: var(--dark-grey);
+  --background: var(--white);
+  --background-image: linear-gradient(0deg,
+      hsl(0deg 0% 96%) 0%,
+      hsl(344deg 0% 96%) 16%,
+      hsl(344deg 0% 96%) 27%,
+      hsl(344deg 0% 96%) 36%,
+      hsl(344deg 0% 96%) 46%,
+      hsl(344deg 0% 97%) 55%,
+      hsl(344deg 0% 98%) 64%,
+      hsl(344deg 0% 99%) 74%,
+      hsl(344deg 0% 99%) 85%,
+      hsl(0, 0%, 100%) 100%);
+
+  --body-fb: var(--dark-brown);
+  --background-fb: var(--sepia);
+
+  --options-bg: var(--white);
+  --options-shadow: var(--shadow-elevation-light);
+
+  --moon-bi: linear-gradient(180deg,
+      hsl(0deg 0% 100%) 0%,
+      hsl(0deg 0% 95%) 25%,
+      hsl(0deg 0% 90%) 42%,
+      hsl(0deg 0% 85%) 53%,
+      hsl(0deg 0% 80%) 62%,
+      hsl(0deg 0% 76%) 70%,
+      hsl(0deg 0% 71%) 76%,
+      hsl(0deg 0% 66%) 81%,
+      hsl(0deg 0% 61%) 85%,
+      hsl(0deg 0% 56%) 90%,
+      hsl(0deg 0% 51%) 95%,
+      hsl(0deg 0% 46%) 100%);
+
+  --goddess-vision: 0 0 5px rgba(255, 5, 209, .7), 0 0 20px rgb(255 146 235 / 70%), 0 0 60px rgb(255 25 213 / 70%)
 }
 
 *,
@@ -83,17 +176,7 @@ html {
 }
 
 body {
-  background-image: linear-gradient(0deg,
-      hsl(0deg 0% 0%) 0%,
-      hsl(344deg 0% 1%) 16%,
-      hsl(344deg 0% 2%) 27%,
-      hsl(344deg 0% 3%) 36%,
-      hsl(344deg 0% 4%) 46%,
-      hsl(344deg 0% 5%) 55%,
-      hsl(344deg 0% 6%) 64%,
-      hsl(344deg 0% 7%) 74%,
-      hsl(344deg 0% 7%) 85%,
-      hsl(0deg 0% 8%) 100%);
+  background-image: var(--background-image);
   background-attachment: fixed;
   margin: 0 auto;
   position: relative;
@@ -231,7 +314,7 @@ p:first-of-type {
 }
 
 .options-text {
-  margin-top: 10px;
+  margin-top: 8px;
   font-weight: 300;
 }
 
@@ -360,7 +443,7 @@ h1 {
   pointer-events: all;
 }
 
-body.full-text-white {
+body.full-text-body {
   margin: 0;
   max-width: max-content;
   margin: 0;
@@ -388,7 +471,7 @@ body.no-t8n {
 }
 
 .goddess-vision a {
-  text-shadow: 0px 0px 12px rgb(140 129 139), 0px 0px 20px rgb(255 255 255), 0px 0px 27px rgb(131 131 131);
+  text-shadow: var(--goddess-vision);
 }
 
 .purple span a {
@@ -430,29 +513,35 @@ body.no-t8n {
 }
 
 body.moon {
-  background-image: linear-gradient(180deg,
-      hsl(240deg 2% 11%) 0%,
-      hsl(265deg 1% 13%) 15%,
-      hsl(296deg 1% 15%) 29%,
-      hsl(324deg 1% 18%) 43%,
-      hsl(341deg 1% 21%) 56%,
-      hsl(354deg 1% 23%) 68%,
-      hsl(5deg 1% 26%) 78%,
-      hsl(14deg 1% 28%) 87%,
-      hsl(22deg 1% 31%) 95%,
-      hsl(30deg 1% 34%) 100%);
+  background-image: var(--moon-bi);
   -webkit-transition: background-image 0.2s ease-in-out;
   transition: background-image 0.2s ease-in-out;
 }
 
+body.long-t8n {
+  transition-duration: 1s ease-in-out;
+}
+
 body.flashback {
-  background-color: #fffefb;
+  background-color: var(--background-fb);
   background-image: none;
   transition-duration: 1s ease-in-out;
 }
 
-body.long-t8n {
-  transition-duration: 1s ease-in-out;
+body[data-tags~="flashback"] #passages {
+  background-color: "transparent";
+  box-shadow: "none";
+  color: var(--body-fb);
+}
+
+body[data-tags~="options"] #passages {
+  background-color: var(--options-bg);
+  box-shadow: var(--options-shadow);
+}
+
+body[data-tags~="full-text-body"] #passages {
+  padding: "0";
+  color: var(--body);
 }
 
 body[data-tags~="blue-fb"] a {
@@ -499,8 +588,8 @@ div#preload {
 
 .macro-textbox,
 textarea {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--body);
+  color: var(--background);
 }
 
 /* Change transition time for macros with t8n */
@@ -517,34 +606,34 @@ textarea {
 
 textarea:not(:disabled):focus,
 textarea:not(:disabled):hover {
-  background-color: #ffffff;
-  border-color: #000000;
+  background-color: var(--body);
+  border-color: var(--background);
 }
 
 input,
 select {
   border-radius: 0.25em;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--body);
+  color: var(--background);
 }
 
 input:not(:disabled):focus,
 input:not(:disabled):hover {
-  background-color: #ffffff;
-  border-color: #000000;
+  background-color: var(--body);
+  border-color: var(--background);
 }
 
 button {
-  border: 1px solid #000000;
+  border: 1px solid var(--background);
   border-radius: 0.25em;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--body);
+  color: var(--background);
 }
 
 button:not(:disabled):focus,
 button:not(:disabled):hover {
   background-color: #ededed;
-  border-color: #000000;
+  border-color: var(--background);
 }
 
 #title-image img {
@@ -597,7 +686,8 @@ button:not(:disabled):hover {
 
 #undobar a {
   transition: color 0.5s ease-in-out;
-  color: #696964;
+  color: var(--undobar);
+  opacity: 36%;
 }
 
 body.no-undo #undobar a {
@@ -605,7 +695,7 @@ body.no-undo #undobar a {
 }
 
 body.flashback #undobar a {
-  color: #afaeac;
+  color: var(--undobar-fb);
 }
 
 .close {
