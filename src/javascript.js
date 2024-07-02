@@ -162,6 +162,13 @@ $(document).on(":passagerender", function () {
   }
 });
 
+// CHECK AUDIO
+// Check to see if trackID is the currently playing track
+window.isPlaying = function (trackID) {
+  var track = SimpleAudio.tracks.get(trackID);
+  return track !== null && track.isPlaying();
+};
+
 // GO TO START ON REFRESH
 window.onbeforeunload = function () {
   window.sessionStorage.setItem("twine-reload-flag", "true");
