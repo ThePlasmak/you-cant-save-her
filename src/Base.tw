@@ -61,7 +61,7 @@ It takes around 12 minutes to complete.
 
 This was made for the 2024 <a href="https://ifcomp.org/">Interactive Fiction Competition</a> and created in <a href="https://twinery.org/">Twine</a>, an open-source tool for telling interactive, nonlinear stories.
 
-Special thanks to Kok Wei Liang, Pooja Nansi, and the Twine Discord.
+Special thanks to Kok Wei Liang, Pooja Nansi, the Twine Discord, and zer0sleep.
 
 :: options [no-undo options] {"position":"75,400"}
 <div class="options-header">''Options''</div> <span class="close">[[✖->Start]]</span>\
