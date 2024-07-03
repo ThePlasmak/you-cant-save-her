@@ -190,13 +190,13 @@ Your previous progress will not be loaded or overwritten.
 :: its_okay [no-undo center] {"position":"350,275"}
 [[It's okay.->Start]]
 
-:: intro_1 [scene_1 no-undo] {"position":"425,550"}
+:: intro_1 [no-undo] {"position":"425,550"}
 <<timed 2s t8n>>[[You can't save her->intro_2]].<</timed>>
 
-:: intro_2 [scene_1] {"position":"550,550"}
+:: intro_2 [] {"position":"550,550"}
 [[This is what they told you->intro_3]].
 
-:: intro_3 [scene_2] {"position":"675,550"}
+:: intro_3 [] {"position":"675,550"}
 [[And this is what you tell yourself->chapter_1]].
 
 :: chapter_1 [center] {"position":"0,950","size":"200,100"}
