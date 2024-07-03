@@ -105,11 +105,13 @@ Special thanks to Kok Wei Liang, Pooja Nansi, the Twine Discord, and zer0sleep.
 <div class="options-text">When this setting is ''ON'', all passages will have dark text on a light background.</div>\
 <div class="options-text">''OFF'' by default.</div>
 
-:: content_warning [no-undo center options] {"position":"350,400"}
+:: content_warning_text
 <div class="cw-header">''Content Warning''</div>\
-This story contains depictions of violence, horror, and mild gore.
-Are you okay with continuing this story?
+<div class="cw-text">This story contains depictions of violence, horror, and mild gore.</div>\
+<div class="cw-text" style="margin-bottom:20px">Are you okay with continuing this story?</div>\
 
+:: content_warning [no-undo center options] {"position":"350,400"}
+<<include "content_warning_text">>\
 <<link "Yes" "intro_1">><<include "variable_setup_cs_false">><</link>>
 [[No->its_okay]]
 
@@ -117,10 +119,7 @@ Are you okay with continuing this story?
 <<link "It will always end the same way" "content_warning_restart">><</link>>.
 
 :: content_warning_restart [no-undo center options] {"position":"475,275"}
-<div class="cw-header">''Content Warning''</div>\
-This story contains depictions of violence, horror, and mild gore.
-Are you okay with continuing this story?
-
+<<include "content_warning_text">>\
 <<nobr>>\
 <<link "Yes" "intro_1">>
   <<for _key, _val range State.variables>>
