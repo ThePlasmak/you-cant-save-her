@@ -175,19 +175,36 @@ window.isPlaying = function (trackID) {
 };
 
 // GO TO START ON REFRESH
-window.onbeforeunload = function () {
-  window.sessionStorage.setItem("twine-reload-flag", "true");
-}; // Set the reload flag before the page unloads
+var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-// Use the :passagedisplay event to check the flag and redirect if necessary
-$(document).on(":passagedisplay", function () {
-  var refresh = sessionStorage.getItem("twine-reload-flag");
+if (isIOS) {
+  window.onunload = function () {
+    localStorage.setItem("twine-reload-flag", "true");
+  };
 
-  // Clear the flag immediately after retrieving it to prevent unintended behavior
-  sessionStorage.removeItem("twine-reload-flag");
+  $(document).on(":passagedisplay", function () {
+    var refresh = localStorage.getItem("twine-reload-flag");
+    localStorage.removeItem("twine-reload-flag");
 
-  if (refresh === "true" && passage() !== "Start") {
-    // Ensure to only redirect if not on the 'Start' passage to avoid loops
-    Engine.play("Start"); // Replace 'somePassage' with your target passage
-  }
-});
+    if (refresh === "true" && passage() !== "Start") {
+      Engine.play("Start");
+    }
+  });
+} else {
+  window.onbeforeunload = function () {
+    window.sessionStorage.setItem("twine-reload-flag", "true");
+  }; // Set the reload flag before the page unloads
+
+  // Use the :passagedisplay event to check the flag and redirect if necessary
+  $(document).on(":passagedisplay", function () {
+    var refresh = sessionStorage.getItem("twine-reload-flag");
+
+    // Clear the flag immediately after retrieving it to prevent unintended behavior
+    sessionStorage.removeItem("twine-reload-flag");
+
+    if (refresh === "true" && passage() !== "Start") {
+      // Ensure to only redirect if not on the 'Start' passage to avoid loops
+      Engine.play("Start");
+    }
+  });
+}
