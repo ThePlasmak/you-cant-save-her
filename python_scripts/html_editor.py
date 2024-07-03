@@ -10,14 +10,24 @@ def modify_html_file(file_path):
         with open(file_path, "r", encoding="utf-8") as file:
             file_contents = file.read()
 
-        # Replace the specified string
+        # Replace the loading background color
         file_contents = file_contents.replace(
             f"Helmet,Freesans,sans-serif;font-weight:700;color:#eee;background-color:#111;text-align:center",
             f"Helmet,Freesans,sans-serif;font-weight:700;color:{loading_background_color};background-color:{loading_background_color};text-align:center",
         )
 
-        # Remove the specified string
+        # Remove the init-loading part
         file_contents = re.sub(r"#init-loading\{[^\}]+\}", "", file_contents)
+
+        # Add more meta tags
+        file_contents = file_contents.replace(
+            f"""<meta name="viewport" content="width=device-width,initial-scale=1" />""",
+            f"""<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="An interactive fiction game about fighting your former friend." />
+<meta property="og:title" content="You Can&#39;t Save Her" />
+<meta property="og:description" content="An interactive fiction game about fighting your former friend." />
+<meta property="twitter:description" content="An interactive fiction game about fighting your former friend." />""",
+        )
 
         # Write the modified contents back to the file
         with open(file_path, "w", encoding="utf-8") as file:
