@@ -162,6 +162,11 @@ $(document).on(":passagerender", function () {
   }
 });
 
+// SCROLL TO TOP OF WINDOW ON PASSAGE RENDER
+$(document).on(":passagerender", function () {
+  window.scrollTo(0, 0);
+});
+
 // CHECK AUDIO
 // Check to see if trackID is the currently playing track
 window.isPlaying = function (trackID) {
