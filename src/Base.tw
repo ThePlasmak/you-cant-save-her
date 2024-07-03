@@ -50,12 +50,12 @@ You Can't Save Her
 </div>\
 <div id="menu"><<if Save.slots.has(1)>><<link "Continue">><<set $chapter_select_active to false>><<run Save.slots.load(1)>><</link>> · <<link 'Restart' 'restart'>><</link>><<else>>[[Start->content_warning]]<</if>> · [[Chapters->chapters]] · [[Options->options]] · [[About->about]]</div>
 
-:: StoryInit {"position":"75,250"}
+:: StoryInit {"position":"75,125"}
 <<include "variable_setup">>
 <<cacheaudio "scene_1" "audio/scene_1.mp3">>
 <<cacheaudio "scene_2" "audio/red_flag.mp3">>
 
-:: PassageReady {"position":"75,125"}
+:: PassageReady {"position":"75,250"}
 /* SET UP AUDIO */
 /* Use tags to play the current audio for each passage */
 <<if tags().includes('scene_1')>>
