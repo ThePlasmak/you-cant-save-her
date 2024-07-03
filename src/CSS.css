@@ -5,8 +5,6 @@ html {
   opacity: 0;
 }
 
-/* AVERIA SERIF LIBRE */
-/* latin */
 @font-face {
   font-family: 'Averia Serif Libre';
   font-style: italic;
@@ -16,7 +14,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Averia Serif Libre';
   font-style: italic;
@@ -26,7 +23,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Averia Serif Libre';
   font-style: italic;
@@ -36,7 +32,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Averia Serif Libre';
   font-style: normal;
@@ -46,7 +41,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Averia Serif Libre';
   font-style: normal;
@@ -56,7 +50,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Averia Serif Libre';
   font-style: normal;
@@ -66,8 +59,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* INKNUT ANTIQUA */
-/* latin */
 @font-face {
   font-family: 'Inknut Antiqua';
   font-style: normal;
@@ -77,7 +68,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Inknut Antiqua';
   font-style: normal;
@@ -87,7 +77,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Inknut Antiqua';
   font-style: normal;
@@ -97,7 +86,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Inknut Antiqua';
   font-style: normal;
@@ -107,7 +95,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Inknut Antiqua';
   font-style: normal;
@@ -117,7 +104,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Inknut Antiqua';
   font-style: normal;
@@ -127,7 +113,6 @@ html {
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* latin */
 @font-face {
   font-family: 'Inknut Antiqua';
   font-style: normal;
@@ -186,6 +171,7 @@ html {
 
   --undobar: #b8b8b8;
   --undobar-fb: #5d5d5d;
+  --undobar-hover: #cdcdcd;
 
   --body: var(--white);
   --background: var(--black);
@@ -231,6 +217,7 @@ html {
 
   --undobar: #383838;
   --undobar-fb: #2a2a2a;
+  --undobar-hover: #121212;
 
   --blue: var(--blue-fb);
   --blue-hover: var(--blue-fb-hover);
@@ -449,6 +436,10 @@ p:first-of-type {
   font-weight: 300;
 }
 
+.cw-text {
+  margin-top: 3px;
+}
+
 .credit-title {
   font-size: 1.5em;
   font-weight: 700;
@@ -650,13 +641,15 @@ body.moon {
 }
 
 body.long-t8n {
-  transition-duration: 1s ease-in-out;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
 }
 
 body.flashback {
   background-color: var(--background-fb);
   background-image: none;
-  transition-duration: 1s ease-in-out;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
 }
 
 body[data-tags~="flashback"] #passages {
@@ -816,8 +809,13 @@ button:not(:disabled):hover {
 }
 
 #undobar a {
-  transition: color 0.5s ease-in-out;
+  transition: color 0.2s ease-in-out;
   color: var(--undobar);
+  opacity: 36%;
+}
+
+#undobar a:hover {
+  color: var(--undobar-hover);
   opacity: 36%;
 }
 
@@ -928,12 +926,16 @@ body.flashback #undobar a {
     content: "";
     clear: none;
   }
+
+  body {
+    padding: 0em 0em;
+    margin: 0px 0px;
+  }
 }
 
 @media screen and (max-width: 640px) {
   body {
     font-size: 12pt;
-    padding: 3em 1em;
   }
 
   #footer {
@@ -958,7 +960,6 @@ body.flashback #undobar a {
 @media screen and (max-width: 480px) {
   body {
     font-size: 12pt;
-    padding: 2em 1em;
   }
 
   #footer {
@@ -973,6 +974,15 @@ body.flashback #undobar a {
     font-size: 14pt;
   }
 
+  #story {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+  }
+
+  #passages {
+    padding: 1em 1em 1em 1em
+  }
+
   .title {
     line-height: 1.2;
   }
@@ -985,16 +995,20 @@ body.flashback #undobar a {
 @media screen and (max-width: 320px) {
   body {
     font-size: 12pt;
-    padding: 1.5em 1em;
   }
 
   #footer {
     height: 1.5em;
   }
 
+  #story {
+    margin-right: 0.2em;
+    margin-left: 0.2em;
+  }
+
   #undobar {
     font-size: 18pt !important;
-    top: -0.75em;
+    top: 0.45em;
   }
 
   #menu {
