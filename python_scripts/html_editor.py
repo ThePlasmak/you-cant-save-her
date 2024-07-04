@@ -19,6 +19,13 @@ def modify_html_file(file_path):
         # Remove the init-loading part
         file_contents = re.sub(r"#init-loading\{[^\}]+\}", "", file_contents)
 
+        # Prevent flash of unstyled content (edit: does not work)
+        #         file_contents = file_contents.replace(
+        #             f"""<meta charset="UTF-8" />""",
+        #             f"""<meta charset="UTF-8" />
+        # <style>html{{visibility: hidden;opacity:0;\}}</style>""",
+        #         )
+
         # Add more meta tags
         file_contents = file_contents.replace(
             f"""<meta name="viewport" content="width=device-width,initial-scale=1" />""",
