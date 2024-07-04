@@ -890,7 +890,8 @@ body.flashback #undobar a {
   opacity: 0.5;
 }
 
-@media screen and (max-width: 1136px) {
+/* Small desktop */
+@media screen and (max-width: 1200px) {
   #story {
     margin-right: 0.8em;
     margin-left: 0.8em;
@@ -901,7 +902,8 @@ body.flashback #undobar a {
   }
 }
 
-@media screen and (max-width: 920px) {
+/* Big tablet */
+@media screen and (max-width: 1024px) {
   body {
     font-size: 13pt;
     padding: 3.5em 1em;
@@ -920,26 +922,19 @@ body.flashback #undobar a {
   }
 }
 
-@media screen and (max-width: 720px) {
-  .charbreak4 {
-    display: inline;
-    content: "";
-    clear: none;
-  }
-
-  body {
-    padding: 0em 0em;
-    margin: 0px 0px;
-  }
-}
-
-@media screen and (max-width: 640px) {
+/* Small tablet */
+@media screen and (max-width: 768px) {
   body {
     font-size: 12pt;
   }
 
   #footer {
     height: 3em;
+  }
+
+  #story {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
   }
 
   #undobar {
@@ -950,13 +945,28 @@ body.flashback #undobar a {
     font-size: 15pt;
   }
 
+  #passages {
+    padding: 1em 1em 1em 1em
+  }
+
+  body {
+    padding: 0em 0em;
+  }
+
   .charbreak {
+    display: inline;
+    content: "";
+    clear: none;
+  }
+
+  .charbreak4 {
     display: inline;
     content: "";
     clear: none;
   }
 }
 
+/* Big mobile */
 @media screen and (max-width: 480px) {
   body {
     font-size: 12pt;
@@ -974,15 +984,6 @@ body.flashback #undobar a {
     font-size: 14pt;
   }
 
-  #story {
-    margin-right: 0.5em;
-    margin-left: 0.5em;
-  }
-
-  #passages {
-    padding: 1em 1em 1em 1em
-  }
-
   .title {
     line-height: 1.2;
   }
@@ -992,6 +993,7 @@ body.flashback #undobar a {
   }
 }
 
+/* Small mobile */
 @media screen and (max-width: 320px) {
   body {
     font-size: 12pt;
