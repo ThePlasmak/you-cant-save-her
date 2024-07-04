@@ -58,12 +58,12 @@ You Can't Save Her
 :: PassageReady {"position":"75,250"}
 /* SET UP AUDIO */
 /* Use tags to play the current audio for each passage */
-<<if tags().includes('scene_1')>>
+<<if tags().includes('s1')>>
   <<if not isPlaying("scene_1")>>
     <<audio ":playing" stop>>
     <<audio "scene_1" loop play>>
   <</if>>
-<<elseif tags().includes('scene_2')>>
+<<elseif tags().includes('s2')>>
   <<if not isPlaying("scene_2")>>
     <<audio ":playing" stop>>
     <<audio "scene_2" loop play>>
@@ -78,7 +78,7 @@ You Can't Save Her
 
 It takes around 12 minutes to complete.
 
-This was made for the 2024 <a href="https://ifcomp.org/">Interactive Fiction Competition</a> and created in <a href="https://twinery.org/">Twine</a>, an open-source tool for telling interactive, nonlinear stories.
+This story was made for the 2024 <a href="https://ifcomp.org/">Interactive Fiction Competition</a> and created in <a href="https://twinery.org/">Twine</a>, an open-source tool for telling interactive, nonlinear stories.
 
 Special thanks to Kok Wei Liang, Pooja Nansi, the Twine Discord, and zer0sleep.
 
