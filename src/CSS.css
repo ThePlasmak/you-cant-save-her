@@ -267,6 +267,14 @@ html {
   box-sizing: inherit;
 }
 
+::-moz-selection {
+  background: var(--blue);
+}
+
+::selection {
+  background: var(--blue);
+}
+
 .passage {
   transition: opacity 0.5s ease-in-out;
   line-height: 1.55;
@@ -438,6 +446,7 @@ p:first-of-type {
 
 .cw-text {
   margin-top: 3px;
+  line-height: 1.45;
 }
 
 .credit-title {
@@ -592,6 +601,14 @@ body.no-t8n {
   color: var(--pink-hover);
 }
 
+.pink ::-moz-selection {
+  background: var(--pink);
+}
+
+.pink ::selection {
+  background: var(--pink);
+}
+
 .goddess-vision a {
   text-shadow: var(--goddess-vision);
 }
@@ -658,6 +675,14 @@ body[data-tags~="flashback"] #passages {
   color: var(--body-fb);
 }
 
+.flashback ::-moz-selection {
+  background: var(--blue-fb);
+}
+
+.flashback ::selection {
+  background: var(--blue-fb);
+}
+
 body[data-tags~="options"] #passages {
   background-color: var(--options-bg);
   box-shadow: var(--options-shadow);
@@ -682,6 +707,14 @@ body[data-tags~="pink-fb"] a {
 
 body[data-tags~="pink-fb"] a:hover {
   color: var(--pink-fb-hover);
+}
+
+.pink-fb ::-moz-selection {
+  background: var(--pink-fb);
+}
+
+.pink-fb ::selection {
+  background: var(--pink-fb);
 }
 
 .noshow {
