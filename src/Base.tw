@@ -184,7 +184,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 
 :: content_warning_text [scene-11-cont] {"position":"475,150"}
 <div class="cw-header">''Content Warning''</div>\
-<div class="cw-text" style="margin-bottom:8px">This story contains depictions of <<linkappend "violence" t8n>> <<linkreplace "[more details, with minor spoilers]" t8n>>(there are fight scenes, with several descriptions of the wounds inflicted)<</linkreplace>><</linkappend>> and blood.</div>\
+<div class="cw-text" style="margin-bottom:8px">This story contains descriptions of <<linkappend "violence" t8n>> <<linkreplace "[more details, with minor spoilers]" t8n>>(there are fight scenes, with several descriptions of the wounds inflicted)<</linkreplace>><</linkappend>> and blood.</div>\
 <div class="cw-text" style="margin-bottom:20px">Are you okay with continuing this story?</div>\
 
 :: content_warning [no-undo center options scene-11-cont] {"position":"350,400"}
