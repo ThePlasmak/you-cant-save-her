@@ -187,9 +187,9 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <div class="cw-text" style="margin-bottom:8px">This story contains descriptions of <<linkappend "violence" t8n>> <<linkreplace "[more details, with minor spoilers]" t8n>>(there are fight scenes, with several descriptions of the wounds inflicted)<</linkreplace>><</linkappend>> and blood.</div>\
 <div class="cw-text" style="margin-bottom:20px">Are you okay with continuing this story?</div>\
 
-:: content_warning [no-undo center options scene-11-cont] {"position":"350,400"}
+:: content_warning [no-undo center options scene-11-cont] {"position":"425,475"}
 <<include "content_warning_text">>\
-<<link "Yes" "intro_1">><<include "variable_setup_cs_false">><</link>>
+[[Yes->headphones]]
 [[No->its_okay]]
 
 :: restart [no-undo center scene-11-cont] {"position":"350,150"}
@@ -197,17 +197,22 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 
 :: content_warning_restart [no-undo center options scene-11-cont] {"position":"475,275"}
 <<include "content_warning_text">>\
-<<nobr>>\
-<<link "Yes" "intro_1">>
+[[Yes->headphones_restart]]
+[[No->its_okay]]
+
+:: headphones [no-undo center] {"position":"275,825"}
+<<link "Headphones recommended" "intro_1">><<include "variable_setup_cs_false">><</link>>.
+
+:: headphones_restart [no-undo center] {"position":"275,700"}
+<<nobr>>
+<<link "Headphones recommended" "intro_1">>
   <<for _key, _val range State.variables>>
   <<run delete State.variables[_key]>>
   <</for>>
   <<set State.expired.length = 0>>
   <<include "variable_setup_cs_false">>
 <</link>>
-<</nobr>>\
-
-[[No->its_okay]]
+<</nobr>>.
 
 :: chapters [no-undo options center scene-11-cont] {"position":"175,550"}
 <div class="chapter-selection-header">''Chapters''</div> <span class="close">[[✖->Start]]</span>\
@@ -264,7 +269,7 @@ Your previous progress will not be loaded or overwritten.
 </nobr>\
 
 :: its_okay [no-undo center scene-11-cont] {"position":"350,275"}
-[[It's okay.->Start]]
+[[It's okay->Start]].
 
 :: intro_1 [scene-1-2s no-undo] {"position":"425,775"}
 <<timed 2s t8n>>[[You can't save her->intro_2]].<</timed>>
@@ -275,7 +280,7 @@ Your previous progress will not be loaded or overwritten.
 :: intro_3 [scene-1] {"position":"675,775"}
 [[And this is what you tell yourself->chapter_1]].
 
-:: chapter_1 [scene-1 center] {"position":"0,950","size":"200,100"}
+:: chapter_1 [scene-1 center] {"position":"0,1000","size":"200,100"}
 <span class="number-heading">[[I->intro_4]]</span>
 
 :: intro_4 [scene-1] {"position":"825,950"}
@@ -588,7 +593,7 @@ She is still laughing.
 
 <<include "cycling_flashback_1">>
 
-[[One second.->flashback_2]]
+[[One second->flashback_2]].
 <</timed>>\
 
 :: cycling_flashback_1 [scene-2] {"position":"650,1875"}
@@ -611,12 +616,12 @@ She is still laughing.
 :: flashback_2 [flashback blue-fb scene-2] {"position":"875,1875"}
 You hit her, hard. Too hard. She grimaces as she falls, clutching her chest.
 
-[[Two seconds.->flashback_2_1]]
+[[Two seconds->flashback_2_1]].
 
 :: flashback_2_1 [flashback blue-fb scene-2] {"position":"1000,1875"}
 You watch her fall.
 
-[[Three seconds.->flashback_2_2]]
+[[Three seconds->flashback_2_2]].
 
 :: flashback_2_2 [flashback blue-fb scene-2] {"position":"1125,1875"}
 I'm sorry! You say, as you run over to pick her up. She groans, but she says it doesn't hurt at all.
@@ -1184,7 +1189,7 @@ So, you keep reading.
 <</link>></span>
 <<timed 7s>><<goto "teen_flashback_14">><</timed>>\
 <<else>>\
-<<linkappend "One second." t8n>> <<linkappend "One second." t8n>> [[One second.->teen_flashback_14]]<</linkappend>><</linkappend>>
+<<linkappend "One second." t8n>> <<linkappend "One second." t8n>> [[One second->teen_flashback_14]].<</linkappend>><</linkappend>>
 <</if>>\
 
 :: teen_flashback_14 [pink] {"position":"2325,3200"}

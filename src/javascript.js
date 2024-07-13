@@ -151,6 +151,8 @@ $(document).on(":passagerender", function () {
       "options",
       "content_warning",
       "content_warning_restart",
+      "headphones",
+      "headphones_restart",
       "its_okay",
       "credits",
       "chapters",
