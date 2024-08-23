@@ -151,11 +151,11 @@ You Can't Save Her
 
 :: about [no-undo options scene-11-cont] {"position":"300,550"}
 <div class="options-header">''About''</div> <span class="close">[[✖->Start]]</span>\
-//You Can't Save Her// was written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a> and scored by <a href="https://linktr.ee/fallingislands">Falling Islands</a>.
+//You Can't Save Her// was written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a> and scored by <a href="https://linktr.ee/fallingislands">Falling Islands</a>. The cover art was drawn by <a href="https://x.com/aishasoup">Aisha</a>.
 
-It takes around 12 minutes to complete.
+This story takes around 12 minutes to complete.
 
-This story was made for the 2024 <a href="https://ifcomp.org/">Interactive Fiction Competition</a> and created in <a href="https://twinery.org/">Twine</a>, an open-source tool for telling interactive, nonlinear stories.
+It was made for the 2024 <a href="https://ifcomp.org/">Interactive Fiction Competition</a> and created in <a href="https://twinery.org/">Twine</a>, an open-source tool for telling interactive, nonlinear stories.
 
 Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and zer0sleep.
 
@@ -1844,7 +1844,7 @@ Then, you walk over to a wall, and run your fingers through one of its gashes.
 <div class="credit-title">You Can't Save Her</div>\
 Written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a>
 Scored by <a href="https://linktr.ee/fallingislands">Falling Islands</a>
-/* Cover art by ??? */
+Cover art by <a href="https://x.com/aishasoup">Aisha</a>
 
 <h1>Acknowledgments</h1>\
 Thank you to Kok Wei Liang and Pooja Nansi for their feedback and advice on this piece.
