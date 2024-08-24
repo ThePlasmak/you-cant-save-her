@@ -151,7 +151,7 @@ You Can't Save Her
 
 :: about [no-undo options scene-11-cont] {"position":"300,550"}
 <div class="options-header">''About''</div> <span class="close">[[✖->Start]]</span>\
-//You Can't Save Her// was written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a> and scored by <a href="https://linktr.ee/fallingislands">Falling Islands</a>. The cover art was drawn by <a href="https://x.com/aishasoup">Aisha</a>.
+//You Can't Save Her// was written by <a href="https://www.sarahmakmq.com/" target="_blank">Sarah Mak</a> and scored by <a href="https://linktr.ee/fallingislands" target="_blank">Falling Islands</a>. The cover art was drawn by <a href="https://x.com/aishasoup" target="_blank">Aisha</a>.
 
 This story takes around 12 minutes to complete.
 
@@ -1842,9 +1842,9 @@ Then, you walk over to a wall, and run your fingers through one of its gashes.
 :: credits [no-undo scene-11] {"position":"2875,400"}
 <<timed 5s t8n>>\
 <div class="credit-title">You Can't Save Her</div>\
-Written by <a href="https://www.sarahmakmq.com/">Sarah Mak</a>
-Scored by <a href="https://linktr.ee/fallingislands">Falling Islands</a>
-Cover art by <a href="https://x.com/aishasoup">Aisha</a>
+Written by <a href="https://www.sarahmakmq.com/" target="_blank">Sarah Mak</a>
+Scored by <a href="https://linktr.ee/fallingislands" target="_blank">Falling Islands</a>
+Cover art by <a href="https://x.com/aishasoup" target="_blank">Aisha</a>
 
 <h1>Acknowledgments</h1>\
 Thank you to Kok Wei Liang and Pooja Nansi for their feedback and advice on this piece.
