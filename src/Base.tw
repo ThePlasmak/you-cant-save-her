@@ -155,7 +155,7 @@ You Can't Save Her
 
 This story takes around 12 minutes to complete.
 
-It was made for the 2024 <a href="https://ifcomp.org/">Interactive Fiction Competition</a> and created in <a href="https://twinery.org/">Twine</a>, an open-source tool for telling interactive, nonlinear stories.
+It was made for the 2024 <a href="https://ifcomp.org/" target="_blank">Interactive Fiction Competition</a> and created in <a href="https://twinery.org/" target="_blank">Twine</a>, an open-source tool for telling interactive, nonlinear stories.
 
 Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and zer0sleep.
 
@@ -304,7 +304,7 @@ You pray that you are [[prepared->etching]].
 <<silently>>
 <<if not $choices_weapon_1>>
   <<set $choicesCount_weapon_1 to -1>>
-  <<set $choices_weapon_1 to ["a greatsword forged from soulsteel", "a sabre carved from angel bone", "a rapier shaped from dreamsilver"]>>
+  <<set $choices_weapon_1 to ["a greatsword forged from soulsteel", "a saber carved from angel bone", "a rapier shaped from dreamsilver"]>>
 <</if>>
 
 <<set $choicesCount_weapon_1 to $choicesCount_weapon_1 + 1>>
@@ -322,8 +322,8 @@ You pray that you are [[prepared->etching]].
 <<set $cyclingResult_weapon_1 to $cyclingResult_weapon_1.toLowerCase()>>
 <<if $cyclingResult_weapon_1 is "a greatsword forged from soulsteel">>
     <<set $weapon to "greatsword">>
-<<elseif $cyclingResult_weapon_1 is "a sabre carved from angel bone">>
-    <<set $weapon to "sabre">>
+<<elseif $cyclingResult_weapon_1 is "a saber carved from angel bone">>
+    <<set $weapon to "saber">>
 <<elseif $cyclingResult_weapon_1 is "a rapier shaped from dreamsilver">>
     <<set $weapon to "rapier">>
 <<else>>
@@ -373,7 +373,7 @@ She is to the [[north->mc_travel_2]].
 <</timed>>\
 
 :: mc_travel_2 [moon scene-1] {"position":"425,1275"}
-Clouds of grey dust swirl in your wake.
+Clouds of gray dust swirl in your wake.
 
 The wind is howling a language that you do not understand.
 
@@ -1015,7 +1015,7 @@ They have predicted how <<linkreplace "she will fight you" t8n>>[[you must fight
 [[She can't be saved->choiceless_fight_3]].
 
 :: choiceless_fight_3 [scene-5] {"position":"1000,2900"}
-You walk into the cathedral at a speed of 1.64 metres per second. 13.67 seconds later, she will disappear, and after 0.58 seconds, she will reappear 183.24 degrees clockwise from the north.
+You walk into the cathedral at a speed of 1.64 meters per second. 13.67 seconds later, she will disappear, and after 0.58 seconds, she will reappear 183.24 degrees clockwise from the north.
 
 Hence, you mustn't shoot yet.
 
@@ -1738,7 +1738,7 @@ Nothing leaves the [[fortress of your mouth->final_fight_15]].
 <<silently>>
 <<if not $choices_final_fight_14>>
   <<set $choicesCount_final_fight_14 to -1>>
-  <<set $choices_final_fight_14 to ["You want to argue with her, to win her back to your side", "You want to apologise to her, to smooth over your guilt"]>>
+  <<set $choices_final_fight_14 to ["You want to argue with her, to win her back to your side", "You want to apologize to her, to smooth over your guilt"]>>
 <</if>>
 
 <<set $choicesCount_final_fight_14 to $choicesCount_final_fight_14 + 1>>
@@ -1823,7 +1823,7 @@ She [[turns around->final_fight_17]].
 :: final_fight_17 [scene-10] {"position":"2275,4100"}
 She raises her $weapon and slices a tear into space. The edges of the tear crackle with pink energy.
 
-The tear opens up, revealing the shattered landscape of a planet that you do not recognise.
+The tear opens up, revealing the shattered landscape of a planet that you do not recognize.
 
 Far off in the distance, you can see another cathedral.
 
