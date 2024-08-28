@@ -300,7 +300,7 @@ So you start by preparing your weapon:
 
 You pray that you are [[prepared->etching]].
 
-:: cycling_weapon_1 [scene-1] {"position":"200,1125"}
+:: cycling_weapon_1 [scene-1] {"position":"300,1025"}
 <<silently>>
 <<if not $choices_weapon_1>>
   <<set $choicesCount_weapon_1 to -1>>
@@ -338,7 +338,7 @@ And you:
 
 This is what you [[try to believe->weapon_3]] in.
 
-:: cycling_etching [scene-1] {"position":"525,1125"}
+:: cycling_etching [scene-1] {"position":"425,1025"}
 <<silently>>
 <<if not $choices_etching>>
   <<set $choicesCount_etching to -1>>
@@ -596,7 +596,7 @@ She is still laughing.
 [[One second->flashback_2]].
 <</timed>>\
 
-:: cycling_flashback_1 [scene-2] {"position":"650,1875"}
+:: cycling_flashback_1 [scene-2] {"position":"750,1975"}
 <<silently>>
 <<if not $choices_flashback_1>>
   <<set $choicesCount_flashback_1 to -1>>
@@ -890,7 +890,7 @@ They must be dangerous. It's best not to read them in the first place.
 
 But you tell her, don't you want to know what's out there? There must be [[worlds other than the one we know->tween_flashback_2_1]].
 
-:: tween_flashback_2_1 [flashback pink-fb scene-4] {"position":"525,2575"}
+:: tween_flashback_2_1 [flashback pink-fb scene-4] {"position":"525,2425"}
 She pauses. You know that deep in her stubborn heart, she wants to read it too.
 
 Okay, she says. But how?
@@ -914,32 +914,32 @@ It's not that difficult, you answer. Just sneak into the library storage room [[
 <</silently>>
 \<<linkreplace $choices_tween_flashback_2[$choicesCount_tween_flashback_2] t8n>><<include "cycling_tween_flashback_2">><</linkreplace>>
 
-:: tween_flashback_3 [flashback pink-fb scene-4] {"position":"525,2425"}
+:: tween_flashback_3 [flashback pink-fb scene-4] {"position":"650,2425"}
 So you waited with her in the library, waiting for the assistant to leave.
 
 The assistant steps out, and the both of you [[sneak in->tween_flashback_4]].
 
-:: tween_flashback_4 [flashback pink-fb scene-4] {"position":"650,2425"}
+:: tween_flashback_4 [flashback pink-fb scene-4] {"position":"775,2425"}
 Inside, you see piles of thick, yellowed books and loose paper. The books do not look very different from the books you have seen in the library, and you feel a little disappointed.
 
 Let's go now, please, your friend says.
 
 Just as you turn around, you notice that one of the books is [[glowing pink->tween_flashback_5]].
 
-:: tween_flashback_5 [flashback pink-fb scene-4] {"position":"775,2425"}
+:: tween_flashback_5 [flashback pink-fb scene-4] {"position":"900,2425"}
 You don't remember picking it up, but you remember your friend telling you to put it down.
 
 She says, it must be cursed, please leave it here.
 
 That makes you want to [[read it more->tween_flashback_6]].
 
-:: tween_flashback_6 [flashback pink-fb scene-4] {"position":"900,2425"}
+:: tween_flashback_6 [flashback pink-fb scene-4] {"position":"1025,2425"}
 [[You are on your bed, reading the book->tween_flashback_7]].
 
-:: tween_flashback_7 [flashback pink-fb scene-4] {"position":"1025,2425"}
+:: tween_flashback_7 [flashback pink-fb scene-4] {"position":"1150,2425"}
 [[You learn about the other god->tween_flashback_8]].
 
-:: tween_flashback_8 [flashback pink-fb scene-4] {"position":"1150,2425"}
+:: tween_flashback_8 [flashback pink-fb scene-4] {"position":"1275,2425"}
 You spend your next nights reading the book, and your time burns away.
 
 A few days later, you tell your friend, please read it, there is another way we can live. A way beyond these walls.
@@ -965,14 +965,14 @@ She trusted you, because <<linkreplace "you were her friend" t8n>>she didn't hav
 <</silently>>
 \<<linkreplace $choices_tween_flashback_8[$choicesCount_tween_flashback_8] t8n>><<include "cycling_tween_flashback_8">><</linkreplace>>
 
-:: tween_flashback_9 [flashback pink-fb scene-4] {"position":"1275,2425"}
+:: tween_flashback_9 [flashback pink-fb scene-4] {"position":"1400,2425"}
 She opens the book to a page in the middle.
 
 Your friend simply stands there, transfixed, as she flips to the next page, then the next, ignoring you, and everything around her.
 
 Then, she stops, and [[throws the book down->tween_flashback_10]].
 
-:: tween_flashback_10 [flashback pink-fb scene-4] {"position":"1400,2425"}
+:: tween_flashback_10 [flashback pink-fb scene-4] {"position":"1525,2425"}
 She tells you, you should be reported for keeping this.
 
 You ask her, are you really going to?
@@ -983,12 +983,12 @@ No, she answers. Of course she can't.
 
 She was always a [[coward->tween_flashback_11]].
 
-:: tween_flashback_11 [flashback pink-fb scene-4] {"position":"1525,2425"}
+:: tween_flashback_11 [flashback pink-fb scene-4] {"position":"1650,2425"}
 After that, she doesn't strike as hard during training sessions, doesn't answer as many questions in class, and doesn't talk to you as often.
 
 [[She lives like a ghost->tween_flashback_12]].
 
-:: tween_flashback_12 [flashback pink-fb scene-4] {"position":"1650,2425"}
+:: tween_flashback_12 [flashback pink-fb scene-4] {"position":"1775,2425"}
 You don't apologize to her, but you tell her, I won't force you to do anything you don't want to do, ever again.
 
 You know that this sickness is your fault.
@@ -1389,10 +1389,10 @@ If you want to join me, meet me at the gates [[this evening->teen_2_flashback_16
 :: teen_2_flashback_16 [flashback blue-fb scene-7] {"position":"2200,3650"}
 [[You wait->teen_2_flashback_16_1]].
 
-:: teen_2_flashback_16_1 [flashback blue-fb scene-7]
+:: teen_2_flashback_16_1 [flashback blue-fb scene-7] {"position":"2325,3650"}
 You wait, but you make what you think is the best choice, which is still a poor [[choice->teen_2_flashback_17]].
 
-:: teen_2_flashback_17 [flashback blue-fb scene-7] {"position":"2325,3650"}
+:: teen_2_flashback_17 [flashback blue-fb scene-7] {"position":"2450,3650"}
 You choose to stay, instead of leaving <<include "cycling_teen_2_flashback_17c3">>.
 
 You don't want to eke out a life outside the monastery, outside <<include "cycling_teen_2_flashback_17">> structure.
@@ -1401,7 +1401,7 @@ You don't want to believe in <<include "cycling_teen_2_flashback_17c2">>.
 
 When you read the book, you <<linkappend "realized" t8n>> that to the gods, you are only specks of dust, [[punctuation->teen_2_flashback_18]].<</linkappend>>
 
-:: cycling_teen_2_flashback_17 [scene-7] {"position":"2325,3550"}
+:: cycling_teen_2_flashback_17 [scene-7] {"position":"2450,3550"}
 <<silently>>
 <<if not $choices_teen_2_flashback_17>>
   <<set $choicesCount_teen_2_flashback_17 to -1>>
@@ -1418,7 +1418,7 @@ When you read the book, you <<linkappend "realized" t8n>> that to the gods, you 
 <</silently>>
 \<<linkreplace $choices_teen_2_flashback_17[$choicesCount_teen_2_flashback_17] t8n>><<include "cycling_teen_2_flashback_17">><</linkreplace>>
 
-:: cycling_teen_2_flashback_17c2 [scene-7] {"position":"2325,3450"}
+:: cycling_teen_2_flashback_17c2 [scene-7] {"position":"2450,3450"}
 <<silently>>
 <<if not $choices_teen_2_flashback_17c2>>
   <<set $choicesCount_teen_2_flashback_17c2 to -1>>
@@ -1435,7 +1435,7 @@ When you read the book, you <<linkappend "realized" t8n>> that to the gods, you 
 <</silently>>
 \<<linkreplace $choices_teen_2_flashback_17c2[$choicesCount_teen_2_flashback_17c2] t8n>><<include "cycling_teen_2_flashback_17c2">><</linkreplace>>
 
-:: cycling_teen_2_flashback_17c3 [scene-7] {"position":"2325,3350"}
+:: cycling_teen_2_flashback_17c3 [scene-7] {"position":"2450,3350"}
 <<silently>>
 <<if not $choices_teen_2_flashback_17c3>>
   <<set $choicesCount_teen_2_flashback_17c3 to -1>>
@@ -1452,7 +1452,7 @@ When you read the book, you <<linkappend "realized" t8n>> that to the gods, you 
 <</silently>>
 \<<linkreplace $choices_teen_2_flashback_17c3[$choicesCount_teen_2_flashback_17c3] t8n>><<include "cycling_teen_2_flashback_17c3">><</linkreplace>>
 
-:: teen_2_flashback_18 [flashback blue-fb scene-7] {"position":"2450,3650"}
+:: teen_2_flashback_18 [flashback blue-fb scene-7] {"position":"2575,3650"}
 So you can only hope that your friend is safe, and your future test will not involve her.
 
 Your hope is greater than your [[faith->teen_2_flashback_19]], these days.
