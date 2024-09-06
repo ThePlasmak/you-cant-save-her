@@ -179,7 +179,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <<else>>\
     ''Light Mode'': <<link "OFF">><<run setup.enableLightMode.toggle()>><<run Engine.play(passage())>><</link>>
 <</if>>\
-<div class="options-text">When this setting is ''ON'', all passages will have dark text on a light background.</div>\
+<div class="options-text">When this setting is ''ON'', all passages will have a light background and dark text.</div>\
 <div class="options-text">''OFF'' by default.</div>
 
 :: content_warning_text [scene-11-cont] {"position":"475,150"}
