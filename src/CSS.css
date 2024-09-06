@@ -345,7 +345,7 @@ a {
   border: none;
   font-weight: bold;
   cursor: pointer;
-  transition: color 0.25s ease-out 0.05s;
+  transition: color 0.2s ease-out;
 }
 
 a:hover {
