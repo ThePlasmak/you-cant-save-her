@@ -123,32 +123,6 @@ html {
 }
 
 :root {
-  /* Shadows */
-  /*Go to https://www.joshwcomeau.com/shadow-palette/ to generate the shadow palette */
-
-  --shadow-color: 360deg 100% 3%;
-  --shadow-elevation-low:
-    0px 0.1px 0.1px hsl(var(--shadow-color) / 1),
-    0px 0.1px 0.1px -2.5px hsl(var(--shadow-color) / 0.69),
-    0px 0.5px 0.4px -5px hsl(var(--shadow-color) / 0.35);
-  --shadow-elevation-medium:
-    0px 0.1px 0.1px hsl(var(--shadow-color) / 0.88),
-    0px 0.1px 0.1px -1.2px hsl(var(--shadow-color) / 0.7),
-    0px 0.4px 0.3px -2.5px hsl(var(--shadow-color) / 0.52),
-    0px 1.1px 0.8px -3.7px hsl(var(--shadow-color) / 0.35),
-    0px 2.4px 1.8px -5px hsl(var(--shadow-color) / 0.17);
-  --shadow-elevation-high:
-    0px 0.1px 0.1px hsl(var(--shadow-color) / 0.81),
-    0px 0.1px 0.1px -0.6px hsl(var(--shadow-color) / 0.73),
-    0px 0.3px 0.2px -1.1px hsl(var(--shadow-color) / 0.65),
-    0px 0.6px 0.5px -1.7px hsl(var(--shadow-color) / 0.57),
-    0px 1.4px 1px -2.2px hsl(var(--shadow-color) / 0.49),
-    0px 2.6px 2px -2.8px hsl(var(--shadow-color) / 0.41),
-    -0.1px 4.4px 3.3px -3.3px hsl(var(--shadow-color) / 0.33),
-    -0.1px 6.9px 5.2px -3.9px hsl(var(--shadow-color) / 0.24),
-    -0.1px 10.3px 7.7px -4.4px hsl(var(--shadow-color) / 0.16),
-    -0.2px 14.6px 11px -5px hsl(var(--shadow-color) / 0.08);
-
   --blue: #00BEFD;
   --blue-hover: rgb(165, 219, 241);
   --blue-fb: #0092DB;
@@ -206,6 +180,35 @@ html {
       hsl(30deg 1% 34%) 100%);
 
   --goddess-vision: 0px 0px 12px rgb(140 129 139), 0px 0px 20px rgb(255 255 255), 0px 0px 27px rgb(131 131 131);
+
+  --body-font: "Averia Serif Libre", Georgia, 'Times New Roman', Times, serif;
+  --header-font: "Inknut Antiqua", Georgia, 'Times New Roman', Times, serif;
+
+  /* Shadows */
+  /* Go to https://www.joshwcomeau.com/shadow-palette/ to generate the shadow palette */
+
+  --shadow-color: 360deg 100% 3%;
+  --shadow-elevation-low:
+    0px 0.1px 0.1px hsl(var(--shadow-color) / 1),
+    0px 0.1px 0.1px -2.5px hsl(var(--shadow-color) / 0.69),
+    0px 0.5px 0.4px -5px hsl(var(--shadow-color) / 0.35);
+  --shadow-elevation-medium:
+    0px 0.1px 0.1px hsl(var(--shadow-color) / 0.88),
+    0px 0.1px 0.1px -1.2px hsl(var(--shadow-color) / 0.7),
+    0px 0.4px 0.3px -2.5px hsl(var(--shadow-color) / 0.52),
+    0px 1.1px 0.8px -3.7px hsl(var(--shadow-color) / 0.35),
+    0px 2.4px 1.8px -5px hsl(var(--shadow-color) / 0.17);
+  --shadow-elevation-high:
+    0px 0.1px 0.1px hsl(var(--shadow-color) / 0.81),
+    0px 0.1px 0.1px -0.6px hsl(var(--shadow-color) / 0.73),
+    0px 0.3px 0.2px -1.1px hsl(var(--shadow-color) / 0.65),
+    0px 0.6px 0.5px -1.7px hsl(var(--shadow-color) / 0.57),
+    0px 1.4px 1px -2.2px hsl(var(--shadow-color) / 0.49),
+    0px 2.6px 2px -2.8px hsl(var(--shadow-color) / 0.41),
+    -0.1px 4.4px 3.3px -3.3px hsl(var(--shadow-color) / 0.33),
+    -0.1px 6.9px 5.2px -3.9px hsl(var(--shadow-color) / 0.24),
+    -0.1px 10.3px 7.7px -4.4px hsl(var(--shadow-color) / 0.16),
+    -0.2px 14.6px 11px -5px hsl(var(--shadow-color) / 0.08);
 }
 
 [data-theme="light"] {
@@ -315,7 +318,7 @@ body {
   background-attachment: fixed;
   margin: 0 auto;
   position: relative;
-  font-family: "Averia Serif Libre", serif;
+  font-family: var(--body-font);
   font-size: 14pt;
   max-width: 690px;
   min-width: 300px;
@@ -368,7 +371,7 @@ ul>ul {
 }
 
 li::marker {
-  font-family: "Inknut Antiqua", serif;
+  font-family: var(--header-font);
   font-size: 62%;
 }
 
@@ -386,7 +389,7 @@ p:first-of-type {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: "Inknut Antiqua", serif;
+  font-family: var(--header-font);
   transform: scaleX(0.94);
 }
 
@@ -413,7 +416,7 @@ p:first-of-type {
   -ms-user-select: none;
   user-select: none;
   line-height: 2;
-  font-family: "Inknut Antiqua", serif;
+  font-family: var(--header-font);
   transform: scaleX(0.92);
 }
 
@@ -428,7 +431,7 @@ p:first-of-type {
   -ms-user-select: none;
   user-select: none;
   line-height: 2;
-  font-family: "Inknut Antiqua", serif;
+  font-family: var(--header-font);
   transform: scaleX(0.92);
   padding-bottom: 2px;
 }
@@ -442,7 +445,7 @@ p:first-of-type {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: "Inknut Antiqua", serif;
+  font-family: var(--header-font);
   transform: scaleX(0.92);
   transform-origin: left center;
   padding-bottom: 0.5em;
@@ -461,7 +464,7 @@ p:first-of-type {
 .credit-title {
   font-size: 1.5em;
   font-weight: 700;
-  font-family: "Inknut Antiqua", serif;
+  font-family: var(--header-font);
   transform: scaleX(0.94);
   transform-origin: left center;
   -webkit-touch-callout: none;
@@ -514,7 +517,7 @@ p:first-of-type {
 h1 {
   font-size: 1.14em;
   font-weight: 800;
-  font-family: "Inknut Antiqua", serif;
+  font-family: var(--header-font);
   transform: scaleX(0.92);
   transform-origin: left center;
 }
@@ -639,7 +642,7 @@ body.no-t8n {
 }
 
 .ina-bullet {
-  font-family: "Inknut Antiqua", serif;
+  font-family: var(--header-font);
   font-style: normal;
   font-size: 62%;
   padding-left: 1.7em
