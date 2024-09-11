@@ -263,6 +263,9 @@ Your previous progress will not be loaded or overwritten.
 
 /* TRACK VISITS */
 
+/* OTHER FEATURES */
+<<set $credits_timed to true>>\
+
 /* OVERRIDE FOR TESTING */
 </nobr>\
 
@@ -1850,10 +1853,20 @@ Then, you walk over to a wall, and run your fingers through one of its gashes.
 [[This isn't your battle to fight, now->final_fight_20]].
 
 :: final_fight_20 [scene-11] {"position":"2650,4100"}
+<<set $credits_timed to true>>\
 <<linkappend "You walk away from the cathedral," t8n>> [[and you do not return to the monastery->credits]].<</linkappend>>
 
 :: credits [no-undo scene-11] {"position":"2875,400"}
-<<timed 5s t8n>>\
+<<if $credits_timed is true>>\
+  <<set $credits_timed to false>>\
+  <<timed 5s t8n>>\ 
+  <<include "credits_text">>
+  <</timed>>\
+<<else>>\
+  <<include "credits_text">>
+<</if>>\
+
+:: credits_text {"position":"2750,400"}
 <div class="credit-title">You Can't Save Her</div>\
 Written by <a href="https://www.sarahmakmq.com/" target="_blank">Sarah Mak</a>
 Scored by <a href="https://linktr.ee/fallingislands" target="_blank">Falling Islands</a>
@@ -1869,10 +1882,16 @@ Thank you to Gayle Goh for beta testing this story.
 Thank you to my friends in zer0sleep for their support!
 
 <h1>Notes</h1>\
-This piece contains a few lines from Porpentine's works: //With Those We Love Alive//, //The Sky in the Room//, and her notes on //Contrition// in her Twine collection, //Eczema Angel Orifice//.
+This piece adapts a few [[lines->lines]] from Porpentine.
 
 [[Return to the title screen->Start]]
-<</timed>>\
+
+:: lines {"position":"2825,250"}
+<span class='ina-bullet'>*</span> The line XXX is adapted from //With Those We Love Alive//.
+<span class='ina-bullet'>*</span> The line "You remember hugging her harder than the world was hurting <<include "cycling_final_fight_16c2">>" is adapted from the line "she holds you tighter than the world's hurting you" in //The Sky in the Room//.
+//Orifice Clique//, and Porpentine's notes on //Contrition// in her Twine collection, //Eczema Angel Orifice//
+
+[[Return to the credits->credits]]
 
 :: options_comment [scene-1] {"position":"625,1475"}
 /* UNUSED AT THE MOMENT */
