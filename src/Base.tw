@@ -1887,8 +1887,13 @@ This piece adapts a few [[lines->lines]] from Porpentine.
 [[Return to the title screen->Start]]
 
 :: lines {"position":"2825,250"}
+<div style="display: flex;">
+  <span class='ina-bullet'>*</span>
+  <span style="margin-left: 1em;">The line "You remember hugging her harder than the world was hurting <<include "cycling_final_fight_16c2">>" is adapted from "she holds you tighter than the world's hurting you" in //The Sky in the Room//.</span>
+</div>
+
 <span class='ina-bullet'>*</span> The line XXX is adapted from //With Those We Love Alive//.
-<span class='ina-bullet'>*</span> The line "You remember hugging her harder than the world was hurting <<include "cycling_final_fight_16c2">>" is adapted from the line "she holds you tighter than the world's hurting you" in //The Sky in the Room//.
+<span class='ina-bullet'>*</span> The line "You remember hugging her harder than the world was hurting <<include "cycling_final_fight_16c2">>" is adapted from "she holds you tighter than the world's hurting you" in //The Sky in the Room//.
 //Orifice Clique//, and Porpentine's notes on //Contrition// in her Twine collection, //Eczema Angel Orifice//
 
 [[Return to the credits->credits]]
