@@ -1882,20 +1882,23 @@ Thank you to Gayle Goh for beta testing this story.
 Thank you to my friends in zer0sleep for their support!
 
 <h1>Notes</h1>\
-This piece adapts a few [[lines->lines]] from Porpentine.
+This piece adapts a few [[lines->lines]] from Porpentine's works.
 
+<div style="margin-top:10px;"></div>\
 [[Return to the title screen->Start]]
 
 :: lines {"position":"2825,250"}
-<div style="display: flex;">
-  <span class='ina-bullet'>*</span>
-  <span style="margin-left: 1em;">The line "You remember hugging her harder than the world was hurting <<include "cycling_final_fight_16c2">>" is adapted from "she holds you tighter than the world's hurting you" in //The Sky in the Room//.</span>
-</div>
+<<set $credits_timed to false>>\
+<h1>Notes</h1>\
+The phrase "to the gods, you are only specks of dust, punctuation" is adapted from Porpentine's notes on //Ruiness// in her Twine collection, //Eczema Angel Orifice//.
 
-<span class='ina-bullet'>*</span> The line XXX is adapted from //With Those We Love Alive//.
-<span class='ina-bullet'>*</span> The line "You remember hugging her harder than the world was hurting <<include "cycling_final_fight_16c2">>" is adapted from "she holds you tighter than the world's hurting you" in //The Sky in the Room//.
-//Orifice Clique//, and Porpentine's notes on //Contrition// in her Twine collection, //Eczema Angel Orifice//
+"You avoid her gaze, as if it was the sun" is adapted from a line in //Orifice Clique//.
 
+"The words crawl up your throat, then fall down again" and "Nothing leaves the fortress of your mouth" are adapted from lines in //With Those We Love Alive//.
+
+"You remember hugging her harder than the world was hurting <<include "cycling_final_fight_16c2">>" is adapted from a line in //The Sky in the Room//.
+
+<div style="margin-top:10px;"></div>\
 [[Return to the credits->credits]]
 
 :: options_comment [scene-1] {"position":"625,1475"}
