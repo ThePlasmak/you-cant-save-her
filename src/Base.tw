@@ -1843,7 +1843,16 @@ Then, you walk over to a wall, and run your fingers through one of its gashes.
 <<linkappend "You walk away from the cathedral," t8n>> [[and you do not return to the monastery->credits]].<</linkappend>>
 
 :: credits [no-undo scene-11] {"position":"2875,400"}
-<<timed 5s t8n>>\
+<<if $credits_timed is true>>\
+  <<set $credits_timed to false>>\
+  <<timed 5s t8n>>\ 
+  <<include "credits_text">>
+  <</timed>>\
+<<else>>\
+  <<include "credits_text">>
+<</if>>\
+
+:: credits_text {"position":"2750,400"}
 <div class="credit-title">You Can't Save Her</div>\
 Written by <a href="https://www.sarahmakmq.com/" target="_blank">Sarah Mak</a>
 Scored by <a href="https://linktr.ee/fallingislands" target="_blank">Falling Islands</a>
