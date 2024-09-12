@@ -916,6 +916,20 @@ body.flashback #undobar a {
   line-height: 200%;
 }
 
+.multiline-bullet-div {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 0.5em;
+}
+
+.multiline-bullet {
+  margin-left: 0.5em;
+}
+
+.text-multiline-bullet {
+  margin-left: 2em;
+}
+
 #star {
   color: #44b43e;
 }
