@@ -253,6 +253,9 @@ Your previous progress will not be loaded or overwritten.
 
 /* TRACK VISITS */
 
+/* OTHER FEATURES */
+<<set $credits_timed to true>>\
+
 /* OVERRIDE FOR TESTING */
 </nobr>\
 
