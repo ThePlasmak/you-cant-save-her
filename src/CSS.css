@@ -345,12 +345,12 @@ a {
   border: none;
   font-weight: bold;
   cursor: pointer;
-  transition: color 0.2s ease-out;
 }
 
 a:hover {
   color: var(--blue-hover);
   text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
 a.link-external::after {
