@@ -6,7 +6,7 @@ You Can't Save Her
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
     "format-version": "2.36.1",
-    "start": "mc_fight_4",
+    "start": "Start",
     "tag-colors": {
         "blue-fb": "blue",
         "pink": "purple",
@@ -88,17 +88,17 @@ You Can't Save Her
   <</if>>
 <<elseif tags().includes('scene-4')>>
   <<if not isPlaying("scene-4")>>
-    <<audio ":playing" fadeoverto 1.5 0>>
+    <<audio ":playing" fadeoverto 1 0>>
     <<audio "scene-4" loop play>>
   <</if>>
 <<elseif tags().includes('scene-5')>>
   <<if not isPlaying("scene-5")>>
-    <<audio ":playing" fadeoverto 1.5 0>>
+    <<audio ":playing" fadeoverto 1 0>>
     <<audio "scene-5" loop play>>
   <</if>>
 <<elseif tags().includes('scene-6')>>
   <<if not isPlaying("scene-6")>>
-    <<audio ":playing" fadeoverto 1.5 0>>
+    <<audio ":playing" fadeoverto 1.9 0>>
     <<audio "scene-6" loop play>>
   <</if>>
 <<elseif tags().includes('scene-7')>>
@@ -108,7 +108,7 @@ You Can't Save Her
   <</if>>
 <<elseif tags().includes('scene-8')>>
   <<if not isPlaying("scene-8")>>
-    <<audio ":playing" fadeoverto 1.5 0>>
+    <<audio ":playing" fadeoverto 1.2 0>>
     <<audio "scene-8" loop play>>
   <</if>>
 <<elseif tags().includes('scene-9')>>
@@ -118,12 +118,12 @@ You Can't Save Her
   <</if>>
 <<elseif tags().includes('scene-10')>>
   <<if not isPlaying("scene-10")>>
-    <<audio ":playing" fadeoverto 1.5 0>>
+    <<audio ":playing" fadeoverto 1.25 0>>
     <<audio "scene-10" loop play>>
   <</if>>
 <<elseif tags().includes('scene-11')>>
   <<if not isPlaying("scene-11")>>
-    <<audio ":playing" fadeoverto 1.5 0>>
+    <<audio ":playing" fadeoverto 2 0>>
     <<audio "scene-11" loop play>>
   <</if>>
 <<elseif tags().includes('scene-12')>>
@@ -147,6 +147,8 @@ You Can't Save Her
     <<audio ":playing" fadeoverto 1.5 0>>
     <<audio "scene-12" loop play>>
   <</if>>
+<<elseif tags().includes('stop-audio')>>
+  <<audio ":playing" stop>>
 <<else>>
   <<audio ":playing" fadeoverto 1.5 0>>
 <</if>>
@@ -1186,7 +1188,7 @@ So, you keep reading.
 
 [[You turn over the page->teen_flashback_13]].
 
-:: teen_flashback_13 [pink] {"position":"2200,3200"}
+:: teen_flashback_13 [pink stop-audio] {"position":"2200,3200"}
 <<if setup.enableTimed.get()>>\
 <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <<linkappend "One second" t8n>>. <</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>><</linkappend>>.
 <<timed 7s>><<goto "teen_flashback_14">><</timed>>\
@@ -1878,7 +1880,7 @@ This piece adapts a few [[lines->lines]] from Porpentine's works.
 <div style="margin-top:10px;"></div>\
 [[Return to the title screen->Start]]
 
-:: lines {"position":"2825,250"}
+:: lines [no-undo scene-11] {"position":"2825,250"}
 <<set $credits_timed to false>>\
 <h1>Notes</h1>\
 The phrase "to the gods, you are only specks of dust, punctuation" is adapted from Porpentine's notes on //Ruiness// in her Twine collection, //Eczema Angel Orifice//.
