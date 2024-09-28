@@ -1481,6 +1481,10 @@ You are carrying a $weapon that you stole from the armory.
 
 :: teen_2_flashback_20 [flashback pink-fb scene-8] {"position":"450,3775"}
 You continue to wait. To stave off your boredom, you toss the $weapon up into the air, as if it were a knife.
+<<if $weapon is "greatsword">>\
+
+<<linkappend "Its weight" t8n>>The weight of the world<</linkappend>> doesn't matter to you anymore.
+<</if>>\
 
 [[Two seconds->teen_2_flashback_21]].
 
