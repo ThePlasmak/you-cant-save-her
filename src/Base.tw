@@ -16,7 +16,7 @@ You Can't Save Her
     "zoom": 1
 }
 
-:: Start [no-undo scene-11-cont] {"position":"200,400"}
+:: Start [no-undo title-screen] {"position":"200,400"}
 <div class="title-svg">\
 <svg id="title" data-name="title" width="400px" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" viewBox="0 0 1435 305"> <g>
     <path class="cls-1" d="M78.15,112.9l14.33,4.12-4.13,8.93h-44.94v-7.69l12.14-10.17v-18.27L20.82,31.99l-9.43-5.08,2.58-8.93h44.04v7.69l-9.69,7.97,23.12,38.33,23.12-35.58-18.85-9.62,4.13-8.93h41.71v7.69l-12.78,9.89-30.6,47.67v29.81Z"/>
@@ -53,6 +53,7 @@ You Can't Save Her
 :: StoryInit [] {"position":"75,125"}
 <<include "variable_setup">>
 
+<<cacheaudio "title-screen" "audio/title-screen-100.mp3">>
 <<cacheaudio "scene-1" "audio/scene-1.mp3">>
 <<cacheaudio "scene-2" "audio/scene-2.mp3">>
 <<cacheaudio "scene-3" "audio/scene-3.mp3">>
@@ -140,9 +141,12 @@ You Can't Save Her
       <<audio "scene-1" loop play>>
     <</if>>
   <</timed>>
-<<elseif tags().includes('scene-11-cont')>> /* Continue playing scene-11 in the title screen and menu after the credits */
-  <<if not isPlaying("scene-11")>>
+<<elseif tags().includes('title-screen')>>
+  <<if not isPlaying("scene-11")>> /* Continue playing scene-11 in the title screen and menu after the credits */
     <<audio ":playing" fadeoverto 1.5 0>>
+  <<elseif not isPlaying("title-screen")>>
+    <<audio ":playing" fadeoverto 1.5 0>>
+    <<audio "title-screen" loop play>>
   <</if>>
 <<elseif tags().includes('scene-12-post-credits')>>
   <<if isPlaying("scene-11") and not isPlaying("scene-12")>>
@@ -155,7 +159,7 @@ You Can't Save Her
   <<audio ":playing" fadeoverto 1.5 0>>
 <</if>>
 
-:: about [no-undo options scene-11-cont] {"position":"300,550"}
+:: about [no-undo options title-screen] {"position":"300,550"}
 <div class="options-header">''About''</div> <span class="close">[[✖->Start]]</span>\
 //You Can't Save Her// was written by <a href="https://www.sarahmakmq.com/" target="_blank">Sarah Mak</a> and scored by <a href="https://linktr.ee/fallingislands" target="_blank">Falling Islands</a>. The cover art was drawn by <a href="https://x.com/aishasoup" target="_blank">Aisha</a>.
 
@@ -165,7 +169,7 @@ It was made for the 2024 <a href="https://ifcomp.org/" target="_blank">Interacti
 
 Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and zer0sleep.
 
-:: options [no-undo options scene-11-cont] {"position":"75,400"}
+:: options [no-undo options title-screen] {"position":"75,400"}
 <div class="options-header">''Options''</div> <span class="close">[[✖->Start]]</span>\
 <<if setup.enableUndo.get()>>\
     ''Enable Undo'': <<link "ON">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>
@@ -188,20 +192,20 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <div class="options-text">When this setting is ''ON'', all passages will have a light background with dark text.</div>\
 <div class="options-text">''OFF'' by default.</div>
 
-:: content_warning_text [scene-11-cont] {"position":"475,150"}
+:: content_warning_text [title-screen] {"position":"475,150"}
 <div class="cw-header">''Content Warning''</div>\
 <div class="cw-text" style="margin-bottom:8px">This story contains descriptions of <<linkappend "violence" t8n>> <<linkreplace "[more details, with minor spoilers]" t8n>>(there are fight scenes, with several descriptions of the wounds inflicted)<</linkreplace>><</linkappend>> and blood.</div>\
 <div class="cw-text" style="margin-bottom:20px">Are you okay with continuing this story?</div>\
 
-:: content_warning [no-undo center options scene-11-cont] {"position":"425,475"}
+:: content_warning [no-undo center options title-screen] {"position":"425,475"}
 <<include "content_warning_text">>\
 [[Yes->headphones]]
 [[No->its_okay]]
 
-:: restart [no-undo center scene-11-cont] {"position":"350,150"}
+:: restart [no-undo center title-screen] {"position":"350,150"}
 <<link "It will always end the same way" "content_warning_restart">><</link>>.
 
-:: content_warning_restart [no-undo center options scene-11-cont] {"position":"475,275"}
+:: content_warning_restart [no-undo center options title-screen] {"position":"475,275"}
 <<include "content_warning_text">>\
 [[Yes->headphones_restart]]
 [[No->its_okay]]
@@ -220,7 +224,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <</link>>
 <</nobr>>.
 
-:: chapters [no-undo options center scene-11-cont] {"position":"175,550"}
+:: chapters [no-undo options center title-screen] {"position":"175,550"}
 <div class="chapter-selection-header">''Chapters''</div> <span class="close">[[✖->Start]]</span>\
 Your progress will not be saved.
 <<if Save.slots.has(1)>>\
@@ -277,7 +281,7 @@ Your previous progress will not be loaded or overwritten.
 <<set $chapter_select_active to false>>
 </nobr>\
 
-:: its_okay [no-undo center scene-11-cont] {"position":"350,275"}
+:: its_okay [no-undo center title-screen] {"position":"350,275"}
 [[It's okay->Start]].
 
 :: intro_1 [scene-1-2s no-undo] {"position":"425,775"}
