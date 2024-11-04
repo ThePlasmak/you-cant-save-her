@@ -158,6 +158,7 @@ $(document).on(":passagerender", function () {
       "chapters",
       "restart",
       "about",
+      "lines",
     ].includes(State.passage)
   ) {
     Save.slots.save(1); // Automatically save to slot 1

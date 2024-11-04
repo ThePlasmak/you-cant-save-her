@@ -351,6 +351,7 @@ a {
 a:hover {
   color: var(--blue-hover);
   text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
 a.link-external::after {
@@ -371,6 +372,7 @@ ul>ul {
 }
 
 li::marker {
+  font-family: var(--header-font);
   font-family: var(--header-font);
   font-size: 62%;
 }
