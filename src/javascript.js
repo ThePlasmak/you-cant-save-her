@@ -177,7 +177,7 @@ window.isPlaying = function (trackID) {
   return track !== null && track.isPlaying();
 };
 
-// GO TO START ON REFRESH
+// GO TO HEADPHONES ON REFRESH
 window.onbeforeunload = function () {
   window.sessionStorage.setItem("twine-reload-flag", "true");
 }; // Set the reload flag before the page unloads
@@ -189,8 +189,8 @@ $(document).on(":passagedisplay", function () {
   // Clear the flag immediately after retrieving it to prevent unintended behavior
   sessionStorage.removeItem("twine-reload-flag");
 
-  if (refresh === "true" && passage() !== "Start") {
-    // Ensure to only redirect if not on the 'Start' passage to avoid loops
-    Engine.play("Start");
+  if (refresh === "true" && passage() !== "headphones") {
+    // Ensure to only redirect if not on the 'headphones' passage to avoid loops
+    Engine.play("headphones");
   }
 });
