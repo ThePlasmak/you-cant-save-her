@@ -72,7 +72,7 @@ You Can't Save Her
 /* Use tags to play the current audio for each passage */
 <<if tags().includes('scene-1')>>
   <<if not isPlaying("scene-1")>>
-    <<audio ":playing" fadeoverto 1.5 0>>
+    <<audio ":playing" fadeoverto 0.2 0>>
     <<audio "scene-1" loop play>>
   <</if>>
 <<elseif tags().includes('scene-2')>>
@@ -155,7 +155,7 @@ You Can't Save Her
 <<elseif tags().includes('stop-audio')>>
   <<audio ":playing" stop>>
 <<else>>
-  <<audio ":playing" fadeoverto 1.5 0>>
+  <<audio ":playing" fadeoverto 1 0>>
 <</if>>
 
 :: about [no-undo options title-screen] {"position":"300,550"}
@@ -201,7 +201,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <<link "Yes" "intro_1">><<include "variable_setup_cs_false">><</link>>.
 [[No->its_okay]]
 
-:: restart [no-undo center title-screen] {"position":"350,150"}
+:: restart [no-undo center] {"position":"350,150"}
 <<link "It will always end the same way" "content_warning_restart">><</link>>.
 
 :: content_warning_restart [no-undo center options title-screen] {"position":"475,275"}
