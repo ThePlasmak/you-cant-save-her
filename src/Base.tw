@@ -53,7 +53,7 @@ You Can't Save Her
 :: StoryInit {"position":"125,125"}
 <<include "variable_setup">>
 
-<<cacheaudio "title-screen" "audio/title-screen-100.mp3">>
+<<cacheaudio "title-screen" "audio/title-screen.mp3">>
 <<cacheaudio "scene-1" "audio/scene-1.mp3">>
 <<cacheaudio "scene-2" "audio/scene-2.mp3">>
 <<cacheaudio "scene-3" "audio/scene-3.mp3">>
@@ -142,8 +142,7 @@ You Can't Save Her
     <</if>>
   <</timed>>
 <<elseif tags().includes('title-screen')>>
-  <<if not isPlaying("scene-11")>> /* Continue playing scene-11 in the title screen and menu after the credits */
-    <<audio ":playing" fadeoverto 1.5 0>>
+  <<if isPlaying("scene-11")>> /* Continue playing scene-11 in the title screen and menu after the credits */
   <<elseif not isPlaying("title-screen")>>
     <<audio ":playing" fadeoverto 1.5 0>>
     <<audio "title-screen" loop play>>
@@ -182,7 +181,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <<else>>\
     ''Timed Passages'': <<link "OFF">><<run setup.enableTimed.toggle()>><<run Engine.play(passage())>><</link>>
 <</if>>\
-<div class="options-text">When this setting is ''ON'', certain passages will automatically progress to the next one after a set amount of time.</div>\
+<div class="options-text">When this setting is ''ON'', certain passages will automatically progress to the next one after a certain amount of time.</div>\
 <div class="options-text">''ON'' by default.</div>
 <<if setup.enableLightMode.get()>>\
     ''Full Light Mode'': <<link "ON">><<run setup.enableLightMode.toggle()>><<run Engine.play(passage())>><</link>>
