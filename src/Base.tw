@@ -1419,7 +1419,7 @@ You don't want to eke out a life outside the monastery, outside <<include "cycli
 
 You don't want to believe in <<include "cycling_teen_2_flashback_17c2">>.
 
-When you read the book, you <<linkappend "realized" t8n>> that to the gods, you are only specks of dust, [[punctuation->teen_2_flashback_18]].<</linkappend>>
+When you read the book, you <<linkappend "realized" t8n>> that to the gods, you are only specks of ink, [[punctuation->teen_2_flashback_18]].<</linkappend>>
 
 :: cycling_teen_2_flashback_17 [scene-7] {"position":"2450,3550"}
 <<silently>>
@@ -1901,7 +1901,7 @@ This piece adapts a few [[lines->lines]] from Porpentine's works.
 :: lines [no-undo scene-11] {"position":"2825,250"}
 <<set $credits_timed to false>>\
 <h1>Notes</h1>\
-The phrase "to the gods, you are only specks of dust, punctuation" is adapted from Porpentine's notes on //Ruiness// in her Twine collection, //Eczema Angel Orifice//.
+The phrase "to the gods, you are only specks of ink, punctuation" is adapted from Porpentine's notes on //Ruiness// in her Twine collection, //Eczema Angel Orifice//.
 
 "You avoid her gaze, as if it was the sun" is adapted from a line in //Orifice Clique//.
 
