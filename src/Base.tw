@@ -1490,7 +1490,7 @@ You are carrying a $weapon that you stole from the armory.
 You continue to wait. To stave off your boredom, you toss the $weapon up into the air, as if it were a knife.
 <<if $weapon is "greatsword">>\
 
-<<linkappend "Its weight" t8n>>The weight of the world<</linkappend>> doesn't matter to you anymore.
+<<linkreplace "Its weight" t8n>>The weight of the world<</linkreplace>> doesn't matter to you anymore.
 <</if>>\
 
 [[Two seconds->teen_2_flashback_21]].
