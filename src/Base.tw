@@ -6,7 +6,7 @@ You Can't Save Her
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
     "format-version": "2.36.1",
-    "start": "headphones",
+    "start": "final_fight_14",
     "tag-colors": {
         "blue-fb": "blue",
         "pink": "purple",
@@ -1746,17 +1746,13 @@ You avoid her gaze, as if it was the sun.
 [[I don't think we can save each other->final_fight_14]].
 
 :: final_fight_14 [scene-10] {"position":"1900,4100"}
-<<timed 2s t8n>>\
-<<include "cycling_final_fight_14">>.
-<<timed 6s t8n>>\
+<<linkreplace "You want to argue with her, to win her back to your side" t8n>>\
+<<linkreplace "You want to apologize to her, to smooth over your guilt" t8n>>You want to apologize to her, to smooth over your guilt.
 
-The words crawl up your throat, then fall down again.
-<<timed 7s t8n>>\
+<<linkreplace "The words crawl up your throat, then fall down again" t8n>>The words crawl up your throat, then fall down again.
 
-Nothing leaves the [[fortress of your mouth->final_fight_15]].
-<</timed>>\
-<</timed>>\
-<</timed>>\
+Nothing leaves the [[fortress of your mouth->final_fight_15]]<</linkreplace>><</linkreplace>><</linkreplace>>.
+
 
 :: cycling_final_fight_14 [] {"position":"1900,4200"}
 <<silently>>
