@@ -25,14 +25,20 @@ $(document).on(":start", function () {
   State.variables.enableTimed = localStorage.getItem("enableTimed") === "true";
 
   // LIGHT MODE
-  // Check if 'enableLightMode' is stored in localStorage, set it to 'true' if not.
   if (localStorage.getItem("enableLightMode") === null) {
     localStorage.setItem("enableLightMode", "false"); // Set default to false if not present
   }
 
-  // Load the enableLightMode state from localStorage
   State.variables.enableLightMode =
     localStorage.getItem("enableLightMode") === "true";
+
+  // COLORBLIND MODE
+  if (localStorage.getItem("enableColorblindMode") === null) {
+    localStorage.setItem("enableColorblindMode", "false"); // Set default to false if not present
+  }
+
+  State.variables.enableColorblindMode =
+    localStorage.getItem("enableColorblindMode") === "true";
 });
 
 // UNDO BUTTON
@@ -85,7 +91,7 @@ function updateUndoButton() {
 // Initialize the undo button on passage render
 $(document).on(":passagerender", updateUndoButton);
 
-// TIMED PAGE TRANSITIONS OPTION
+// TIMED PAGE TRANSITIONS OPTION IMPLEMENTATION
 setup.enableTimed = {
   // Retrieves the current enableTimed state from localStorage, defaulting to true
   get: function () {
@@ -111,7 +117,7 @@ $(document).ready(function () {
   State.variables.enableTimed = localStorage.getItem("enableTimed") === "true";
 });
 
-// LIGHT MODE OPTION
+// LIGHT MODE OPTION IMPLEMENTATION
 setup.enableLightMode = {
   // Retrieves the current state from localStorage, defaulting to false
   get: function () {
@@ -138,6 +144,48 @@ $(document).on(":passagerender", function (ev) {
     document.documentElement.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark");
   }
+});
+
+// COLORBLIND MODE OPTION IMPLEMENTATION
+setup.enableColorblindMode = {
+  // Retrieves the current state from localStorage, defaulting to false
+  get: function () {
+    return localStorage.getItem("enableColorblindMode") === "true";
+  },
+
+  // Toggles the state and saves the new state to localStorage
+  toggle: function () {
+    var currentState = this.get();
+    localStorage.setItem("enableColorblindMode", !currentState);
+    State.variables.enableColorblindMode = !currentState;
+
+    // Refresh the current passage to reflect the change immediately
+    Engine.play(passage());
+  },
+};
+
+// Change the CSS if colourblind mode is active
+$(document).on(":passagerender", function (ev) {
+  $("#colorblind-styles").remove();
+  
+  if (setup.enableColorblindMode.get()) {
+    $("head").append(`
+      <style id="colorblind-styles">
+        .enchantment-link, tw-link, .visited, .select-item, a {
+          border: 1px solid #8b8989;
+          padding: 3px;
+        }
+      </style>
+    `);
+  }
+});
+
+// Initialize the enableColorblindMode state on document ready
+$(document).ready(function () {
+  if (localStorage.getItem("enableColorblindMode") === null) {
+    localStorage.setItem("enableColorblindMode", "true");
+  }
+  State.variables.enableColorblindMode = localStorage.getItem("enableColorblindMode") === "true";
 });
 
 // AUTOSAVE
@@ -178,19 +226,19 @@ window.isPlaying = function (trackID) {
 };
 
 // GO TO HEADPHONES ON REFRESH
-window.onbeforeunload = function () {
-  window.sessionStorage.setItem("twine-reload-flag", "true");
-}; // Set the reload flag before the page unloads
+// window.onbeforeunload = function () {
+//   window.sessionStorage.setItem("twine-reload-flag", "true");
+// }; // Set the reload flag before the page unloads
 
-// Use the :passagedisplay event to check the flag and redirect if necessary
-$(document).on(":passagedisplay", function () {
-  var refresh = sessionStorage.getItem("twine-reload-flag");
+// // Use the :passagedisplay event to check the flag and redirect if necessary
+// $(document).on(":passagedisplay", function () {
+//   var refresh = sessionStorage.getItem("twine-reload-flag");
 
-  // Clear the flag immediately after retrieving it to prevent unintended behavior
-  sessionStorage.removeItem("twine-reload-flag");
+//   // Clear the flag immediately after retrieving it to prevent unintended behavior
+//   sessionStorage.removeItem("twine-reload-flag");
 
-  if (refresh === "true" && passage() !== "headphones") {
-    // Ensure to only redirect if not on the 'headphones' passage to avoid loops
-    Engine.play("headphones");
-  }
-});
+//   if (refresh === "true" && passage() !== "headphones") {
+//     // Ensure to only redirect if not on the 'headphones' passage to avoid loops
+//     Engine.play("headphones");
+//   }
+// });

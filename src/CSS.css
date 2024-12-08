@@ -951,6 +951,12 @@ body.flashback #undobar a {
   opacity: 0.5;
 }
 
+.pov {
+  font-size: 18pt;
+  font-style: italic;
+  font-weight: 600;
+}
+
 /* Small desktop */
 @media screen and (max-width: 1200px) {
   #story {

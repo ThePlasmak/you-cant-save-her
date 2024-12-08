@@ -6,7 +6,7 @@ You Can't Save Her
     "ifid": "3831B6E9-E3BF-4D0B-9EB8-E35C776D54B4",
     "format": "SugarCube",
     "format-version": "2.36.1",
-    "start": "final_fight_14",
+    "start": "headphones",
     "tag-colors": {
         "blue-fb": "blue",
         "pink": "purple",
@@ -171,9 +171,9 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 :: options [no-undo options title-screen] {"position":"75,400"}
 <div class="options-header">''Options''</div> <span class="close">[[✖->Start]]</span>\
 <<if setup.enableUndo.get()>>\
-    ''Enable Undo'': <<link "ON">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>
+    ''Undo Button'': <<link "ON">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>
 <<else>>\
-    ''Enable Undo'': <<link "OFF">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>
+    ''Undo Button'': <<link "OFF">><<run setup.enableUndo.toggle()>><<run Engine.play(passage())>><</link>>
 <</if>>\
 <div class="options-text">Toggles the undo button.</div>
 <<if setup.enableTimed.get()>>\
@@ -182,16 +182,22 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
     ''Timed Passages'': <<link "OFF">><<run setup.enableTimed.toggle()>><<run Engine.play(passage())>><</link>>
 <</if>>\
 <div class="options-text">When this setting is ''ON'', certain passages will automatically progress to the next one after a certain amount of time.</div>\
-<div class="options-text">''ON'' by default.</div>
+
 <<if setup.enableLightMode.get()>>\
-    ''Full Light Mode'': <<link "ON">><<run setup.enableLightMode.toggle()>><<run Engine.play(passage())>><</link>>
+    ''Light Mode'': <<link "ON">><<run setup.enableLightMode.toggle()>><<run Engine.play(passage())>><</link>>
 <<else>>\
-    ''Full Light Mode'': <<link "OFF">><<run setup.enableLightMode.toggle()>><<run Engine.play(passage())>><</link>>
+    ''Light Mode'': <<link "OFF">><<run setup.enableLightMode.toggle()>><<run Engine.play(passage())>><</link>>
 <</if>>\
 <div class="options-text">When this setting is ''ON'', all passages will have a light background with dark text.</div>\
-<div class="options-text">''OFF'' by default.</div>
 
-:: content_warning_text [title-screen] {"position":"475,150"}
+<<if setup.enableColorblindMode.get()>>\
+    ''Colorblind Mode'': <<link "ON">><<run setup.enableColorblindMode.toggle()>><<run Engine.play(passage())>><</link>>
+<<else>>\
+    ''Colorblind Mode'': <<link "OFF">><<run setup.enableColorblindMode.toggle()>><<run Engine.play(passage())>><</link>>
+<</if>>\
+<div class="options-text">When this setting is ''ON'', links will have a rectangular border and there will be additional annotations.</div>\
+
+:: content_warning_text [title-screen] {"position":"500,150"}
 <div class="cw-header">''Content Warning''</div>\
 <div class="cw-text" style="margin-bottom:8px">This story contains descriptions of <<linkappend "violence" t8n>> <<linkreplace "(more details, with minor spoilers)" t8n>>(there are fight scenes, with several descriptions of the wounds inflicted)<</linkreplace>><</linkappend>> and blood.</div>\
 <div class="cw-text" style="margin-bottom:20px">Are you okay with continuing this story?</div>\
@@ -201,10 +207,10 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <<link "Yes" "intro_1">><<include "variable_setup_cs_false">><</link>>.
 [[No->its_okay]]
 
-:: restart [no-undo center] {"position":"350,150"}
+:: restart [no-undo center] {"position":"375,150"}
 <<link "It will always end the same way" "content_warning_restart">><</link>>.
 
-:: content_warning_restart [no-undo center options title-screen] {"position":"475,275"}
+:: content_warning_restart [no-undo center options title-screen] {"position":"500,275"}
 <<include "content_warning_text">>\
 <<nobr>>
 <<link "Yes" "intro_1">>
@@ -217,7 +223,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <</nobr>>
 [[No->its_okay]]
 
-:: headphones [no-undo center] {"position":"100,400"}
+:: headphones [no-undo center] {"position":"50,550"}
 [[Headphones recommended->Start]].
 
 :: headphones_restart [no-undo center] {"position":"100,725"}
@@ -288,11 +294,16 @@ Your previous progress will not be loaded or overwritten.
 <<set $chapter_select_active to false>>
 </nobr>\
 
-:: its_okay [no-undo center title-screen] {"position":"350,275"}
+:: its_okay [no-undo center title-screen] {"position":"375,275"}
 [[It's okay->Start]].
 
 :: intro_1 [scene-1-2s no-undo] {"position":"425,775"}
-<<timed 2s t8n>>[[You can't save her->intro_2]].<</timed>>
+<<timed 2s t8n>>\
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Hero</div>
+<</if>>\
+[[You can't save her->intro_2]].
+<</timed>>\
 
 :: intro_2 [scene-1] {"position":"550,775"}
 [[This is what they told you->intro_3]].
@@ -603,6 +614,9 @@ Your old friend starts laughing harder, laughing in the way that one would laugh
 
 :: flashback_1 [flashback blue-fb long-t8n scene-2] {"position":"750,1875"}
 <<timed 2.5s t8n>>\
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Hero - The Past</div>
+<</if>>\
 She smirks as she sidesteps your sword, again and again.
 
 You are children at the monastery, and you are training to fight. She was always better at anything physical—your form has always been far clumsier than hers.
@@ -675,6 +689,9 @@ She tells you no, it's okay, and laughs, maybe we should just practice later ins
 <span class="number-heading">[[II->friend_fight_1]]</span>
 
 :: friend_fight_1 [pink scene-3] {"position":"250,2200"}
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Heretic</div>
+<</if>>\
 [[Your goddess has granted you a vision->friend_fight_2]].
 
 :: friend_fight_2 [pink scene-3] {"position":"375,2200"}
@@ -889,6 +906,9 @@ You laugh again. This is the first time you have seen your friend [[in years->tw
 
 :: tween_flashback_1 [flashback long-t8n pink-fb scene-4] {"position":"150,2425"}
 <<timed 2.5s t8n>>\
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Heretic - The Past</div>
+<</if>>\
 Maybe she is still too scared.
 
 You are teenagers at the monastery, and you heard that the nuns are  <<linkreplace "burning books" t8n>>[[ritually destroying heretic texts->tween_flashback_1_1]]<</linkreplace>> today.
@@ -1023,6 +1043,9 @@ You wonder if reading the book broke her, somehow. You wonder if you are the rea
 <span class="number-heading">[[III->choiceless_fight_1]]</span>
 
 :: choiceless_fight_1 [scene-5] {"position":"500,2900"}
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Hero</div>
+<</if>>\
 [[The sacred algorithms have made their predictions->choiceless_fight_2]].
 
 :: choiceless_fight_2 [scene-5] {"position":"625,2900"}
@@ -1112,6 +1135,9 @@ You look away. You don't need to see her to follow the sacred algorithms' instru
 
 :: teen_flashback_1 [long-t8n flashback pink-fb scene-6] {"position":"575,3200"}
 <<timed 2.5s t8n>>\
+  <<if setup.enableColorblindMode.get()>>\
+  <div class="pov">The Heretic - The Past</div>
+  <</if>>\
   She deflects your question.
 
   You ask her again, what did you read from [[the book->teen_flashback_2]]?
@@ -1286,8 +1312,11 @@ Time slows down until all that exist are your thoughts, and her thoughts. Maybe 
 :: chapter_4 [center purple] {"position":"0,3525","size":"200,100"}
 <<link '<svg version="1.1" id="chapter_5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 	 height="180px" viewBox="0 0 189.5 189.4" style="enable-background:new 0 0 189.5 189.4;" xml:space="preserve"> <g> 	<path d="M11.7,0c1.2,1,1.9,2.3,2.2,3.8c0.3,1.5,0.4,3,0.4,4.4c0,2.1-0.2,4.3-0.7,6.5c-0.5,2.2-1,4.4-1.5,6.6 		c-0.6,2.2-1.1,4.4-1.5,6.5c-0.5,2.1-0.7,4.3-0.7,6.5c0,4.4,0.4,8.8,1.2,13.2c0.8,4.4,1.9,8.7,3.3,13.1c2.5,0,4.6-0.6,6.2-1.8 		c1.6-1.2,2.9-2.7,3.8-4.6c0.9-1.9,1.5-3.9,1.7-6.1s0.4-4.4,0.4-6.4c0-3.1-0.2-6.1-0.6-9.2c-0.4-3.1-1.1-6-2.2-8.9 		c0.6-0.6,1.2-1.4,1.9-2.2c0.7-0.8,1.5-1.3,2.6-1.3c1.8,0,3.1,1.2,4,3.6c0.9,2.4,1.5,5.2,1.9,8.3c0.4,3.1,0.6,6.2,0.7,9.1 		c0,2.9,0.1,4.8,0.1,5.8c0,5.1-1,9.8-2.8,14c-1.9,4.3-4.7,8.2-8.3,11.7c-0.9,7.7-1.4,15.4-1.4,23.1c0,0.6,0,3.2,0.1,7.7 		c0,4.5,0.1,11,0.1,19.4c0,7.6,0.2,15.1,0.5,22.5c0.3,7.4,0.6,14.9,0.8,22.5c1.9,0,3.6,0.1,5.2,0.3c1.6,0.2,3.3,0.4,5.1,0.6 		c3.7,0.2,8.3,0.4,13.7,0.7c5.4,0.3,11,0.7,16.7,1.3c5.7,0.6,11.3,1.3,16.6,2.3c5.3,1,9.8,2.3,13.5,4.1c4.8-2.3,10.3-3.9,16.5-4.8 		c6.2-0.9,12.5-1.5,19-1.9c6.5-0.4,12.9-0.7,19.2-1c6.3-0.3,11.9-0.8,16.9-1.5c0-11.1,0.1-22.2,0.4-33.3l0.3-9.4 		c0.3-11.1,0.4-22.2,0.4-33.3c0-6.5-0.4-12.8-1.1-19c-3.6-3.5-6.4-7.4-8.3-11.7c-1.9-4.3-2.8-8.9-2.8-14c0-0.9,0-2.8,0.1-5.8 		s0.3-6,0.7-9.1c0.4-3.1,1.1-5.9,1.9-8.3c0.9-2.4,2.2-3.6,4-3.6c1,0,1.9,0.4,2.6,1.3c0.7,0.8,1.3,1.6,1.9,2.2 		c-1,2.9-1.7,5.8-2.2,8.9c-0.4,3.1-0.6,6.1-0.6,9.2c0,2,0.1,4.2,0.4,6.4s0.9,4.3,1.7,6.1c0.9,1.9,2.1,3.4,3.6,4.6 		c1.5,1.2,3.6,1.8,6.3,1.8c1.4-4.2,2.5-8.5,3.3-12.9c0.8-4.4,1.2-8.8,1.2-13.3c0-2.3-0.2-4.5-0.7-6.7c-0.2-1.1-0.4-2.2-0.7-3.2 		l-1.7-6.5c-0.2-1.1-0.4-2.2-0.7-3.2c-0.5-2.1-0.7-4.4-0.7-6.7c0-1.4,0.2-2.8,0.6-4.3c0.4-1.5,1.1-2.8,2.1-3.9l3.5,2.1 		c2.4,5.7,4.4,11.6,5.8,17.4c1.5,5.9,2.2,11.9,2.2,18c0,6.6-0.8,13.1-2.3,19.5c-1.5,6.4-3.5,12.7-5.8,18.7c1.1,11.9,2.1,23.9,3,35.8 		c0.9,11.9,1.3,23.9,1.3,35.7c0,3.2-0.1,7.3-0.4,12.1c-0.3,4.8-1.1,9.4-2.4,13.9c-1.3,4.4-3.3,8.2-6,11.4c-2.7,3.1-6.3,4.7-11,4.7 		H23.6c-4.7,0-8.4-1.6-11-4.7c-2.6-3.1-4.6-6.9-5.9-11.4c-1.3-4.4-2.1-9.1-2.4-13.9c-0.3-4.8-0.5-8.8-0.5-12.1 		c0-11.9,0.5-23.8,1.4-35.7c0.9-11.9,1.9-23.9,3.1-35.8c-2.3-6-4.3-12.2-5.8-18.7C0.8,50.6,0,44.1,0,37.5c0-6.1,0.7-12.2,2.2-18.1 		c1.5-6,3.5-11.7,6-17.3L11.7,0z"/> </g> </svg>' "teen_2_flashback_1">><</link>>
 
-:: teen_2_flashback_1 [flashback blue-fb scene-7] {"position":"325,3525"}
+:: teen_2_flashback_1 [flashback blue-fb scene-7] {"position":"200,3650"}
 <<timed 2s t8n>>\
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Hero - The Past</div>
+<</if>>\
 [[You have been asked to check on your friend->teen_2_flashback_2]].
 <</timed>>\
 
@@ -1478,7 +1507,11 @@ So you can only hope that your friend is safe, and your future test will not inv
 Your hope is greater than your [[faith->teen_2_flashback_19]], these days.
 
 :: teen_2_flashback_19 [flashback pink-fb scene-8] {"position":"325,3775"}
-<<timed 2s t8n>>You are at the gates, waiting for your friend.
+<<timed 2s t8n>>\
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Heretic - The Past</div>
+<</if>>\
+You are at the gates, waiting for your friend.
 
 The garden is littered with the crumbled remains of golems, and the fountain water is a deep red.
 
@@ -1600,6 +1633,9 @@ You walk away from the monastery.
 <<link '<svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" id="chapter_5"	 height="198px" viewBox="0 0 189.5 234.3" style="enable-background:new 0 0 189.5 234.3;" xml:space="preserve"> <g > 	<path d="M47.6,234.1c-7.4-3.6-12.6-8.6-15.7-14.8c-3.1-6.2-4.6-13.2-4.6-21.1c0-4.4,0.7-8.5,2.2-12.3l-18-41.4 		c-2.8-6.7-5.3-13.8-7.4-21.1c-2.1-7.4-3.2-14.7-3.2-22.1c0-1.4,0.3-2.8,0.8-4.4s1.1-3.1,1.8-4.8C4.2,90.5,5,89,5.9,87.5 		c0.9-1.5,1.7-2.8,2.3-3.9l37.9-61.8c2.6-4.3,5.8-7.8,9.4-10.6c3.6-2.8,7.6-5,11.9-6.6C71.8,3,76.3,1.9,81,1.3c4.7-0.6,9.3-1,13.8-1 		c4.8,0,9.6,0.3,14.2,1c4.7,0.6,9.1,1.8,13.4,3.3s8.2,3.8,11.8,6.6s6.7,6.4,9.3,10.6l38.3,61.8c1.4,2.4,2.9,5.2,4.6,8.5 		c1.7,3.3,2.5,6.4,2.5,9.2c0,7.5-1.1,14.8-3.3,22c-2.2,7.2-4.7,14.3-7.6,21.2L160.2,186c1.4,3.8,2.2,7.9,2.2,12.1 		c0,7.9-1.6,15-4.7,21.2c-3.1,6.2-8.4,11.2-15.7,14.8l-3.7-1.9l0.7-4.1c3.6-3.6,6.9-7.8,9.9-12.3s4.4-9.6,4.4-14.9 		c0-3.2-0.8-6.2-2.3-9c-10,3.4-15,10.4-15,21.1c-0.6,0.6-1.3,1.3-2.2,1.9c-0.9,0.6-1.9,1-2.9,1c-0.5,0-0.7-0.4-0.8-1.2 		c-0.1-0.8-0.1-1.4-0.1-1.6c0-5.7,1.6-11.2,4.8-16.4c3.2-5.2,6.7-9.8,10.6-13.6c1.4-1.4,2.8-3.5,3.9-6.3c1.2-2.8,2.3-5.8,3.3-9 		c1-3.2,1.9-6.3,2.6-9.3c0.7-3,1.3-5.5,1.6-7.4c1.6-6.6,3.4-13.4,5.2-20.4c1.8-7,4.3-13.6,7.4-19.8c0-4.3-1.1-8.8-3.3-13.5 		c-2.2-4.7-5-9.6-8.5-14.7c-3.5-5-7.4-10.2-11.6-15.3S137.7,57,133.5,52c-4.2-5-8-9.8-11.6-14.5c-3.5-4.7-6.4-9.2-8.6-13.5H76.3 		c-2.1,4-5,8.4-8.7,13.1c-3.7,4.7-7.6,9.6-11.7,14.7c-4.1,5-8.3,10.2-12.5,15.4c-4.2,5.2-8,10.4-11.5,15.5c-3.4,5.1-6.2,10-8.5,14.7 		c-2.2,4.7-3.3,9.2-3.3,13.4c3.2,6.3,5.7,12.9,7.5,19.8c1.8,7,3.5,13.8,5,20.4c0.5,1.9,1,4.4,1.8,7.4c0.7,3,1.6,6.2,2.6,9.3 		c1,3.2,2.1,6.2,3.3,9s2.6,4.9,4,6.3c4,3.8,7.6,8.3,10.8,13.6s4.8,10.7,4.8,16.4c0,0.5-0.1,1.2-0.2,1.9c-0.1,0.7-0.6,1.1-1.3,1.1 		l-4.8-3c0-10.7-5-17.8-15-21.1c-1.5,2.8-2.2,5.8-2.2,9c0,5.4,1.4,10.3,4.4,14.9c2.9,4.6,6.2,8.7,9.8,12.3l0.8,4.1L47.6,234.1z"/> </g> </svg>' "final_fight_1">><</link>>
 
 :: final_fight_1 [scene-9] {"position":"275,4100"}
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Hero</div>
+<</if>>\
 [[You can save her->final_fight_2]].
 
 :: final_fight_2 [scene-9] {"position":"400,4100"}
@@ -1706,6 +1742,9 @@ No, [[she->final_fight_11]] says. We can't.
 
 :: final_fight_11 [pink scene-10] {"position":"1525,4100"}
 <<timed 1.7s t8n>>\
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Heretic</div>
+<</if>>\
 Your old friend had her chance, but you've waited for far too long.
 
 I'm here now, she says.
@@ -1746,6 +1785,9 @@ You avoid her gaze, as if it was the sun.
 [[I don't think we can save each other->final_fight_14]].
 
 :: final_fight_14 [scene-10] {"position":"1900,4100"}
+<<if setup.enableColorblindMode.get()>>\
+<div class="pov">The Hero</div>
+<</if>>\
 <<linkreplace "You want to argue with her, to win her back to your side" t8n>>\
 <<linkreplace "You want to apologize to her, to smooth over your guilt" t8n>>You want to apologize to her, to smooth over your guilt.
 
