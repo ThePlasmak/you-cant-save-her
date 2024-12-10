@@ -226,19 +226,19 @@ window.isPlaying = function (trackID) {
 };
 
 // GO TO HEADPHONES ON REFRESH
-// window.onbeforeunload = function () {
-//   window.sessionStorage.setItem("twine-reload-flag", "true");
-// }; // Set the reload flag before the page unloads
+window.onbeforeunload = function () {
+  window.sessionStorage.setItem("twine-reload-flag", "true");
+}; // Set the reload flag before the page unloads
 
-// // Use the :passagedisplay event to check the flag and redirect if necessary
-// $(document).on(":passagedisplay", function () {
-//   var refresh = sessionStorage.getItem("twine-reload-flag");
+// Use the :passagedisplay event to check the flag and redirect if necessary
+$(document).on(":passagedisplay", function () {
+  var refresh = sessionStorage.getItem("twine-reload-flag");
 
-//   // Clear the flag immediately after retrieving it to prevent unintended behavior
-//   sessionStorage.removeItem("twine-reload-flag");
+  // Clear the flag immediately after retrieving it to prevent unintended behavior
+  sessionStorage.removeItem("twine-reload-flag");
 
-//   if (refresh === "true" && passage() !== "headphones") {
-//     // Ensure to only redirect if not on the 'headphones' passage to avoid loops
-//     Engine.play("headphones");
-//   }
-// });
+  if (refresh === "true" && passage() !== "headphones") {
+    // Ensure to only redirect if not on the 'headphones' passage to avoid loops
+    Engine.play("headphones");
+  }
+});
