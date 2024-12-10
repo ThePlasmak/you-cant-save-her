@@ -183,7 +183,7 @@ $(document).on(":passagerender", function (ev) {
 // Initialize the enableColorblindMode state on document ready
 $(document).ready(function () {
   if (localStorage.getItem("enableColorblindMode") === null) {
-    localStorage.setItem("enableColorblindMode", "true");
+    localStorage.setItem("enableColorblindMode", "false");
   }
   State.variables.enableColorblindMode = localStorage.getItem("enableColorblindMode") === "true";
 });
