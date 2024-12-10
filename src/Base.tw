@@ -204,7 +204,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 
 :: content_warning [no-undo center options title-screen] {"position":"425,475"}
 <<include "content_warning_text">>\
-<<link "Yes" "intro_1">><<include "variable_setup_cs_false">><</link>>.
+<<link "Yes" "intro_1">><<include "variable_setup_cs_false">><</link>>
 [[No->its_okay]]
 
 :: restart [no-undo center] {"position":"375,150"}
