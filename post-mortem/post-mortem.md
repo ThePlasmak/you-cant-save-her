@@ -46,7 +46,7 @@ Some other notes:
 
 - The nuns and religious worldbuilding are inspired by Warhammer 40K, but particularly, I was inspired by this faction called the Sisters of Battle. They're basically militant soldier nuns with guns. The Catholic imagery of this faction, which has been amped up to eleven, is very funny to me—they have a [tank that is... also a giant church organ](https://www.reddit.com/r/Warhammer40k/comments/dqqypi/new_sisters_of_battle_tanks/)?! The idea of militant, "evil" nuns is also very funny to me. And isn't "nun" a funny word? Nun nun nun.
 
-- I didn't want to name the protagonists, as I didn't want to tie them to a specific culture or time—I wanted the only (obvious) cultural references to be Catholic. I like the idea that this story can take place in both the far future and distant past.
+- I didn't want to name the protagonists as I didn't want to tie them to a specific culture or time—I wanted the only (obvious) cultural references to be Catholic. I like the idea that this story can take place in both the far future and distant past.
 
 - This is probably the most indulgent thing I've made—I basically just bashed together things I liked.
 
