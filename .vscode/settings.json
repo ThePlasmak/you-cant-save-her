@@ -5,6 +5,10 @@
             "language": "twee3-sugarcube-2",
             "scheme": "file"
         },
+        {
+            "language": "markdown",
+            "scheme": "file"
+        }
     ],
     "multiCommand.commands": [
         {
