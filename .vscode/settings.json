@@ -32,7 +32,7 @@
     ],
     "twee3LanguageTools.passage.list": true,
     "gitlens.currentLine.enabled": false,
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": "off",
     "editor.quickSuggestions": {
         "other": false,
         "comments": false,
