@@ -42,9 +42,11 @@ Some other notes:
 
 - I also think it's interesting when pink represents "evil"—such as for Calamity Ganon in *Breath of the Wild* and Galarian Moltres in *Pokémon*, especially since it's a traditionally feminine colour.
 
-- The symbols denoting the fourth and fifth chapters are Egyptian hieroglyphs: 𓂓 and 𓂘 respectively. The former means "soul", representing how the goddess has stained the second protagonist's soul—and it also looks similar to anthers, like the ones she grows later. The latter symbol means "embrace", referencing the only plot choice you get to make—whether to hug your friend. I don't think most people would catch this, but I think it still works on a visual level.
+- The symbols denoting the fourth and fifth chapters are Egyptian hieroglyphs: 𓂓 and 𓂘 respectively. The former means "soul", representing how the goddess has "stained" the second protagonist's soul—and it also looks similar to anthers, like the ones she grows later. The latter symbol means "embrace", referencing the only plot choice you get to make—whether to hug your friend. I don't think most people would catch this, but I think it still works on a visual level.
 
 - The nuns and religious worldbuilding are inspired by Warhammer 40K, but particularly, I was inspired by this faction called the Sisters of Battle. They're basically militant soldier nuns with guns. The Catholic imagery of this faction is very funny to me—they have a [tank that is... also an organ](https://www.reddit.com/r/Warhammer40k/comments/dqqypi/new_sisters_of_battle_tanks/)?! The idea of militant, "evil" nuns is also very funny to me. And isn't "nun" a funny word? Nun nun nun.
+
+- I didn't want to name the protagonists, as I didn't want to tie them to a specific culture or time—I wanted the only (obvious) cultural references to be Catholic. I like the idea that this story can take place in both the far future and distant past.
 
 - This is probably the most indulgent thing I've made—I basically just bashed together things I liked.
 
