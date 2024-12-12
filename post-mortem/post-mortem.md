@@ -42,14 +42,14 @@ Some other notes:
 
 - I also think it's interesting when pink represents "evil"—such as for Calamity Ganon in Breath of the Wild and Galarian Moltres in Pokémon, especially since it's a traditionally feminine colour.
 
-- The nuns and religious worldbuilding are inspired by Warhammer 40K, but particularly, I was inspired by this faction called the Sisters of Battle. They're basically militant soldier nuns with guns. The Catholic imagery of this faction is very funny to me—they have a [tank that is... also an organ](https://www.reddit.com/r/Warhammer40k/comments/dqqypi/new_sisters_of_battle_tanks/)?! The idea of militant, "evil" nuns is very funny to me—and isn't "nun" a funny word? Nun nun nun.
+- The nuns and religious worldbuilding are inspired by Warhammer 40K, but particularly, I was inspired by this faction called the Sisters of Battle. They're basically militant soldier nuns with guns. The Catholic imagery of this faction is very funny to me—they have a [tank that is... also an organ](https://www.reddit.com/r/Warhammer40k/comments/dqqypi/new_sisters_of_battle_tanks/)?! The idea of militant, "evil" nuns is also very funny to me. And isn't "nun" a funny word? Nun nun nun.
 
 - This is probably the most indulgent thing I've made—I basically just bashed together things I liked.
 
 ## A Conclusion
 
-This is the first time I've competed in IFComp, but it's also the first time I've received so many reviews for my work. Thank you to everyone who played and reviewed my game! I don't respond to reviews on principle, but I just want to say that I'm really grateful for all the feedback.
+This is the first time I've competed in IFComp, but it's also the first time I've received so many reviews for my work. Thanks to everyone who played and reviewed my game! I don't respond to reviews on principle, but I just want to say that I'm really grateful for all the feedback.
 
 This post-mortem is a little late, as I wanted to finish the post-comp release first... and it's now available on Itch.io! I made minor changes to the writing, added a colorblind mode, and fixed some bugs. You can play it here!
 
-Thank you for reading this post-mortem!
+Thanks for reading this post-mortem!
