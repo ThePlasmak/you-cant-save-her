@@ -1,3 +1,5 @@
+<!-- Go to the Intfiction post (https://intfiction.org/t/you-cant-save-her-postmortem/72741) to edit the post-mortem -->
+
 # You Can't Save Her Postmortem
 
 ## A Confession
