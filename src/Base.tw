@@ -195,7 +195,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <<else>>\
     ''Colorblind Mode'': <<link "OFF">><<run setup.enableColorblindMode.toggle()>><<run Engine.play(passage())>><</link>>
 <</if>>\
-<div class="options-text">When this setting is ''ON'', links will have a rectangular border and there will be additional annotations.</div>\
+<div class="options-text">When this setting is ''ON'', there will be additional annotations and links will have a rectangular border.</div>\
 
 :: content_warning_text [title-screen] {"position":"500,150"}
 <div class="cw-header">''Content Warning''</div>\
