@@ -223,7 +223,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <</nobr>>
 [[No->its_okay]]
 
-:: headphones [no-undo center] {"position":"50,550"}
+:: headphones [no-undo center stop-audio] {"position":"50,550"}
 [[Headphones recommended->Start]].
 
 :: headphones_restart [no-undo center] {"position":"100,725"}
