@@ -460,6 +460,8 @@ p:first-of-type {
 
 .cw-text {
   margin-top: 3px;
+  margin-left: 85px;
+  margin-right: 85px;
   line-height: 1.45;
 }
 
