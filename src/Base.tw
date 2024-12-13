@@ -199,7 +199,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 
 :: content_warning_text [title-screen] {"position":"500,150"}
 <div class="cw-header">''Content Warning''</div>\
-<div class="cw-text" style="margin-bottom:8px">This story contains descriptions of <<linkappend "mild violence" t8n>> <<linkreplace "(more details, with minor spoilers)" t8n>>(there are fight scenes, with descriptions of the wounds inflicted, but it's "PG-13" at worst)<</linkreplace>><</linkappend>>.</div>\
+<div class="cw-text" style="margin-bottom:8px">This story contains descriptions of <<linkappend "mild violence" t8n>> <<linkreplace "(more details, with minor spoilers)" t8n>>(there are fight scenes, with descriptions of the wounds inflicted, but it's at a PG-13 level at worst)<</linkreplace>><</linkappend>>.</div>\
 <div class="cw-text" style="margin-bottom:20px">Are you okay with continuing this story?</div>\
 
 :: content_warning [no-undo center options title-screen] {"position":"425,475"}
