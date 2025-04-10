@@ -227,6 +227,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 [[Headphones recommended->Start]].
 
 :: headphones_restart [no-undo center] {"position":"100,725"}
+/* NOT IN USE */
 <<nobr>>
 <<link "Headphones recommended" "intro_1">>
   <<for _key, _val range State.variables>>
