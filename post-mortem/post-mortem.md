@@ -1,4 +1,6 @@
-# You Can't Save Her Post-Mortem
+<!-- Go to the Intfiction post (https://intfiction.org/t/you-cant-save-her-postmortem/72741) to edit the post-mortem -->
+
+# You Can't Save Her Postmortem
 
 ## A Confession
 
@@ -54,6 +56,6 @@ Some other notes:
 
 This is the first time I've competed in IFComp, but it's also the first time I've received so many reviews for my work. Thanks to everyone who played and reviewed my game! I don't respond to reviews on principle, but I just want to say that I'm really grateful for all the feedback.
 
-This post-mortem is a little late, as I wanted to finish the post-comp release first... and it's now available on Itch.io! I made minor changes to the writing and visuals, added a colorblind mode, and fixed some bugs. You can play it [here](https://plasmak.itch.io/you-cant-save-her)!
+This postmortem is a little late, as I wanted to finish the post-comp release first... and it's now available on Itch.io! I made minor changes to the writing and visuals, added a colorblind mode, and fixed some bugs. You can play it [here](https://plasmak.itch.io/you-cant-save-her)!
 
-Thanks for reading this post-mortem!
+Thanks for reading this postmortem!

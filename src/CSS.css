@@ -460,6 +460,8 @@ p:first-of-type {
 
 .cw-text {
   margin-top: 3px;
+  margin-left: 60px;
+  margin-right: 60px;
   line-height: 1.45;
 }
 
@@ -1057,6 +1059,11 @@ body.flashback #undobar a {
 
   .subtitle {
     line-height: 2;
+  }
+
+  .cw-text {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
 

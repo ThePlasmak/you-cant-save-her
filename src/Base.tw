@@ -195,11 +195,11 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <<else>>\
     ''Colorblind Mode'': <<link "OFF">><<run setup.enableColorblindMode.toggle()>><<run Engine.play(passage())>><</link>>
 <</if>>\
-<div class="options-text">When this setting is ''ON'', links will have a rectangular border and there will be additional annotations.</div>\
+<div class="options-text">When this setting is ''ON'', there will be additional annotations and links will have a rectangular border.</div>\
 
 :: content_warning_text [title-screen] {"position":"500,150"}
 <div class="cw-header">''Content Warning''</div>\
-<div class="cw-text" style="margin-bottom:8px">This story contains descriptions of <<linkappend "violence" t8n>> <<linkreplace "(more details, with minor spoilers)" t8n>>(there are fight scenes, with several descriptions of the wounds inflicted)<</linkreplace>><</linkappend>> and blood.</div>\
+<div class="cw-text" style="margin-bottom:8px">This story contains descriptions of <<linkappend "mild violence" t8n>> <<linkreplace "(more details, with minor spoilers)" t8n>>(there are fight scenes, with descriptions of the wounds inflicted, but it's at a PG-13 level at worst)<</linkreplace>><</linkappend>>.</div>\
 <div class="cw-text" style="margin-bottom:20px">Are you okay with continuing this story?</div>\
 
 :: content_warning [no-undo center options title-screen] {"position":"425,475"}
@@ -223,7 +223,7 @@ Special thanks to Kok Wei Liang, Pooja Nansi, Gayle Goh, the Twine Discord, and 
 <</nobr>>
 [[No->its_okay]]
 
-:: headphones [no-undo center] {"position":"50,550"}
+:: headphones [no-undo center stop-audio] {"position":"50,550"}
 [[Headphones recommended->Start]].
 
 :: headphones_restart [no-undo center] {"position":"100,725"}
