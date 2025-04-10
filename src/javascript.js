@@ -242,3 +242,16 @@ $(document).on(":passagedisplay", function () {
     Engine.play("headphones");
   }
 });
+
+// CLICK ANYWHERE ON HEADPHONES PAGE TO GO TO START
+$(document).on(":passagerender", function () {
+  if (passage() === "headphones") {
+    $(document).one("click", function(event) {
+      // Only proceed if the click wasn't on a link or its children
+      if (!$(event.target).closest("a, tw-link").length) {
+        event.preventDefault();
+        Engine.play("Start");
+      }
+    });
+  }
+});
