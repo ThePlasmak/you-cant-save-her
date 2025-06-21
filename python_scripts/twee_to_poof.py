@@ -1,3 +1,7 @@
+"""
+Replaces the SugarCube format with your target format in a Twee file and exports it.
+"""
+
 import shutil
 import os
 import re

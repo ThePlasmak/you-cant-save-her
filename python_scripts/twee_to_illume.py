@@ -1,3 +1,7 @@
+"""
+Replaces the SugarCube format with your target format in a Twee file and exports it.
+"""
+
 import shutil
 import os
 import re
@@ -32,30 +36,6 @@ base_content = re.sub(
     base_content,
     flags=re.DOTALL,
 )
-
-# Add additional text below the specified point
-# base_content = re.sub(
-#     r'("zoom": 1\n})',
-#     r"""\1
-
-# :: poof.config
-# {
-#     "nightMode": true,
-#     "codeHeightLimit": false,
-#     "ignoreTag": "widget",
-#     "format": {
-#         "name": "SugarCube",
-#         "version": "2.36.1"
-#     },
-#     "pdf" : {
-#         "lineHeight": 1.2,
-#         "font": "serif"
-#     },
-#     "parse": true
-# }
-# """,
-#     base_content,
-# )
 
 # Write the modified content back to Base.tw
 with open(base_tw_path, "w", encoding="utf-8") as file:
