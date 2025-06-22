@@ -13,6 +13,7 @@ python python_scripts/html_editor.py "testing\index.html"
 @REM ZIP for IFComp
 @REM powershell -Command "New-Item -ItemType Directory -Force -Path 'temp_dir'; Copy-Item 'testing\*' 'temp_dir' -Recurse; Compress-Archive -Path 'temp_dir\*' -DestinationPath 'export/you-cant-save-her.zip' -Force; Remove-Item 'temp_dir' -Recurse"
 
+@REM Proofing formats
 @REM python python_scripts/twee_to_poof.py
 
 @REM python python_scripts/twee_to_illume.py
